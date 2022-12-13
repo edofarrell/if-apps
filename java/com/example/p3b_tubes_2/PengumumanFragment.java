@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentPengumumanBinding;
 
-public class PengumumanFragment extends Fragment {
+public class PengumumanFragment extends Fragment{
 
     private FragmentPengumumanBinding binding;
 
