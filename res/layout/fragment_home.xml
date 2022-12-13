@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ini hone"
+        ></TextView>
+    <Button
+        android:id="@+id/btn_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"></Button>
+    <Button
+        android:id="@+id/btn_pertemuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pertamuan"></Button>
+    <Button
+        android:id="@+id/btn_frs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FRS"></Button>
+    <Button
+        android:id="@+id/btn_keluar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Keluar"></Button>
+</LinearLayout>
