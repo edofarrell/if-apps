@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">P3B_TUBES_2</string>
+    <string name="judulFRS">FRS</string>
+    <string name="judulTambahFRS">Tambah</string>
 </resources>
