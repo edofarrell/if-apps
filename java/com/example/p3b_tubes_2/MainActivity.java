@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         this.fragments = new HashMap<>();
         this.fragments.put("login", LoginFragment.newInstance());
         this.fragments.put("home", HomeFragment.newInstance());
+        this.fragments.put("pengumuman",PengumumanFragment.newInstance());
+        this.fragments.put("pertemuan",PertemuanFragment.newInstance());
+        this.fragments.put("frs",FRSFragment.newInstance());
         this.fm = getSupportFragmentManager();
 
         FragmentTransaction ft = this.fm.beginTransaction();

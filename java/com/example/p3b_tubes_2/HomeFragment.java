@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
         this.fragmentHomeBinding.btnHome.setOnClickListener(this::onClick);
         this.fragmentHomeBinding.btnFrs.setOnClickListener(this::onClick);
         this.fragmentHomeBinding.btnPertemuan.setOnClickListener(this::onClick);
+        this.fragmentHomeBinding.btnPengumuman.setOnClickListener(this::onClick);
         this.fragmentHomeBinding.btnKeluar.setOnClickListener(this::onClick);
 
         return fragmentHomeBinding.getRoot();
@@ -46,10 +47,12 @@ public class HomeFragment extends Fragment {
             page = "frs";
         } else if (view == this.fragmentHomeBinding.btnPertemuan) {
             page = "pertemuan";
+        } else if (view == this.fragmentHomeBinding.btnPengumuman) {
+            page = "pengumuman";
         } else {
             page = "exit";
         }
-
+        result.putString("page",page);
         getParentFragmentManager().setFragmentResult("changePage", result);
     }
 }
