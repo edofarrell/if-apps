@@ -4,5 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Semester Ganjil 2022/2023"
+        android:id="@+id/tv_semester">
+
+    </TextView>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_lv_matkul"
+        android:layout_below="@id/tv_semester">
+
+    </ListView>
+
     
 </RelativeLayout>

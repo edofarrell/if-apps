@@ -8,7 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/judulFRS"
-        android:layout_alignParentStart="true"></TextView>
+        android:layout_alignParentStart="true"
+        android:id="@+id/tv_frs"></TextView>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lv_daftar_semester"
+        android:layout_below="@id/tv_frs">
+
+    </ListView>
 
 
 </RelativeLayout>

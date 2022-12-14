@@ -2,4 +2,11 @@
     <string name="app_name">P3B_TUBES_2</string>
     <string name="judulFRS">FRS</string>
     <string name="judulTambahFRS">Tambah</string>
+    <string name="prasyarat">Prasyarat</string>
+    <string name="ambil">ambil</string>
+    <string name="home">Home</string>
+    <string name="frs">FRS</string>
+    <string name="pertemuan">Pertemuan</string>
+    <string name="logout">Logout</string>
+    <string name="pengumuman">Pengumuman</string>
 </resources>
