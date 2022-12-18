@@ -15,7 +15,7 @@ public class MainPresenter {
         this.pengumumanPresenter = new PengumumanPresenter();
         this.pertemuanPresenter = new PertemuanPresenter();
         this.frsPresenter = new FRSPresenter();
-        this.apiClient = new APIClient(this.pengumumanPresenter, this.pertemuanPresenter, this.frsPresenter, context);
+        this.apiClient = new APIClient(this, this.pengumumanPresenter, this.pertemuanPresenter, this.frsPresenter, context);
     }
 
     public void login(String email, String password, String role) throws JSONException {

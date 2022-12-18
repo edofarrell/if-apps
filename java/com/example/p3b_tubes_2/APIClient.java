@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 public class APIClient {
     private final String BASE_URL = "http://ifportal.labftis.net/api/v1";
+    private MainPresenter presenter;
     private PengumumanPresenter pengumumanPresenter;
     private PertemuanPresenter pertemuanPresenter;
     private FRSPresenter frsPresenter;
@@ -26,7 +27,8 @@ public class APIClient {
     private Gson gson;
     private String token;
 
-    public APIClient(PengumumanPresenter pengumumanPresenter, PertemuanPresenter pertemuanPresenter, FRSPresenter frsPresenter, Context context) {
+    public APIClient(MainPresenter presenter, PengumumanPresenter pengumumanPresenter, PertemuanPresenter pertemuanPresenter, FRSPresenter frsPresenter, Context context) {
+        this.presenter = presenter;
         this.pengumumanPresenter = pengumumanPresenter;
         this.pertemuanPresenter = pertemuanPresenter;
         this.frsPresenter = frsPresenter;
@@ -43,7 +45,6 @@ public class APIClient {
         json.addProperty("password", password);
         json.addProperty("role", role);
         JSONObject jsonObject = new JSONObject(json.toString());
-        Log.d("DEBUG", jsonObject.toString());
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
@@ -57,15 +58,16 @@ public class APIClient {
                             //pindah halaman
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            //handle error
                         }
                     }
                 }, new Response.ErrorListener() {
-                @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("DEBUG", error.toString());
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG", error.toString());
 
-                    }
-                }
+            }
+        }
         );
 
         this.queue.add(request);
