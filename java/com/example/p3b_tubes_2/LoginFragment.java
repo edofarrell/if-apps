@@ -11,13 +11,16 @@ import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentLoginBinding;
 
+import org.json.JSONException;
+
 public class LoginFragment extends Fragment {
     private FragmentLoginBinding fragmentLoginBinding;
+    private MainPresenter presenter;
 
-    public static LoginFragment newInstance() {
+    public static LoginFragment newInstance(MainActivity activity) {
         Bundle args = new Bundle();
-
         LoginFragment loginFragment = new LoginFragment();
+        loginFragment.presenter = new MainPresenter(activity);
         loginFragment.setArguments(args);
         return loginFragment;
     }
@@ -26,13 +29,22 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.fragmentLoginBinding = FragmentLoginBinding.inflate(inflater);
-
         this.fragmentLoginBinding.btnLogin.setOnClickListener(this::onClick);
 
         return this.fragmentLoginBinding.getRoot();
     }
 
     private void onClick(View view) {
+        String email = this.fragmentLoginBinding.etEmail.getText().toString();
+        String password = this.fragmentLoginBinding.etPassword.getText().toString();
+        String role = this.fragmentLoginBinding.etRole.getText().toString();
+
+        try {
+            this.presenter.login(email, password, role);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         Bundle result = new Bundle();
         result.putString("page", "home");
         getParentFragmentManager().setFragmentResult("changePage", result);

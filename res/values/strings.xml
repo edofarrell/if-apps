@@ -9,4 +9,7 @@
     <string name="pertemuan">Pertemuan</string>
     <string name="logout">Logout</string>
     <string name="pengumuman">Pengumuman</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="role">Role</string>
 </resources>
