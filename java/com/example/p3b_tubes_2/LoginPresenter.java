@@ -8,11 +8,11 @@ import javax.security.auth.login.LoginException;
 
 public class LoginPresenter implements LoginContract{
 
-    private APIClient apiClient;
+    private User user;
     private LoginContract.View loginUI;
 
     public LoginPresenter(LoginContract.View loginUI){
-        this.apiClient = new APIClient(this, this.pengumumanPresenter, this.pertemuanPresenter, this.frsPresenter, context);
+        this.user = new User();
         this.loginUI = loginUI;
     }
 
