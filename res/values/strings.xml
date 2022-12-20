@@ -6,4 +6,14 @@
     <string name="textfield_label_password">Email</string>
     <string name="textfield_label_login">Masuk</string>
     <string name="tv_title_masuk">Masuk</string>
+    <string name="prasyarat">Prasyarat</string>
+    <string name="ambil">ambil</string>
+    <string name="home">Home</string>
+    <string name="frs">FRS</string>
+    <string name="pertemuan">Pertemuan</string>
+    <string name="logout">Logout</string>
+    <string name="pengumuman">Pengumuman</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="role">Role</string>
 </resources>
