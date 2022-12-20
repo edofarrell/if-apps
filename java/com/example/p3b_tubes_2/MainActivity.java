@@ -13,7 +13,7 @@ import com.example.p3b_tubes_2.databinding.ActivityMainBinding;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoginContract.View{
 
     private ActivityMainBinding binding;
     private HashMap<String, Fragment> fragments;
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(this.binding.getRoot());
 
         this.fragments = new HashMap<>();
-        this.fragments.put("login", LoginFragment.newInstance(this));
+        this.fragments.put("login", LoginFragment.newInstance(this, this));
         this.fragments.put("home", HomeFragment.newInstance());
         this.fragments.put("pengumuman",PengumumanFragment.newInstance());
         this.fragments.put("pertemuan",PertemuanFragment.newInstance());
@@ -44,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
                 changePage(page);
             }
         });
+
+        LoginPresenter loginPresenter = new LoginPresenter(((LoginFragment) this.fragments.get("login").pre);
+        PertemuanPresenter pertemuanPresenter = new PertemuanPresenter();
+        PengumumanPresenter pengumumanPresenter = new PengumumanPresenter();
+        FRSPresenter frsPresenter = new FRSPresenter();
+        APIClient apiClient;
     }
 
     private void changePage(String page) {
@@ -60,5 +66,11 @@ public class MainActivity extends AppCompatActivity {
     private void closeApplication() {
         this.moveTaskToBack(true);
         this.finish();
+    }
+
+    @Override
+    public void updateLoginView(boolean status) {
+        LoginFragment fragment = (LoginFragment) this.fragments.get("login");
+        fragment.updateLoginView(status);
     }
 }

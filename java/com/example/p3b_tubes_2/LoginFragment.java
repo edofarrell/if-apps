@@ -13,14 +13,14 @@ import com.example.p3b_tubes_2.databinding.FragmentLoginBinding;
 
 import org.json.JSONException;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements LoginContract.View{
     private FragmentLoginBinding fragmentLoginBinding;
-    private MainPresenter presenter;
+    private LoginPresenter presenter;
 
-    public static LoginFragment newInstance(MainActivity activity) {
+    public static LoginFragment newInstance(LoginContract.View loginUI) {
         Bundle args = new Bundle();
         LoginFragment loginFragment = new LoginFragment();
-        loginFragment.presenter = new MainPresenter(activity);
+        loginFragment.presenter = new LoginPresenter(loginUI);
         loginFragment.setArguments(args);
         return loginFragment;
     }
@@ -44,9 +44,17 @@ public class LoginFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
 
-        Bundle result = new Bundle();
-        result.putString("page", "home");
-        getParentFragmentManager().setFragmentResult("changePage", result);
+
+    @Override
+    public void updateLoginView(boolean status) {
+        if(!status){
+            this.fragmentLoginBinding.error.setText("Login gagal, periksa kemabli username/password/role");
+        }else{
+            Bundle result = new Bundle();
+            result.putString("page", "home");
+            getParentFragmentManager().setFragmentResult("changePage", result);
+        }
     }
 }
