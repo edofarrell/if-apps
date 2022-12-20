@@ -12,4 +12,6 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="role">Role</string>
+    <string name="openDrawer">Open Drawer</string>
+    <string name="closeDrawer">Close Drawer</string>
 </resources>

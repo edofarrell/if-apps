@@ -1,7 +1,10 @@
 package com.example.p3b_tubes_2;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private HashMap<String, Fragment> fragments;
     private FragmentManager fm;
+    Toolbar toolbar;
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +36,35 @@ public class MainActivity extends AppCompatActivity {
         this.fragments.put("pengumuman",PengumumanFragment.newInstance());
         this.fragments.put("pertemuan",PertemuanFragment.newInstance());
         this.fragments.put("frs",FRSFragment.newInstance());
+        this.fragments.put("left",LeftFragment.newInstance());
         this.fm = getSupportFragmentManager();
+        this.drawer = binding.drawerLayout;
+        this.toolbar = binding.toolbar;
+
+
+        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, this.drawer, toolbar,R.string.openDrawer,R.string.closeDrawer);
+        binding.drawerLayout.addDrawerListener(abdt);
+        abdt.syncState();
 
         FragmentTransaction ft = this.fm.beginTransaction();
         ft.add(binding.fragmentContainer.getId(), fragments.get("login"))
                 .commit();
 
+        //getSupportActionBar().hide();
+
         this.fm.setFragmentResultListener("changePage", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 String page = result.getString("page");
+                if(page.equals("login")) getSupportActionBar().hide();
+                else getSupportActionBar().show();
                 changePage(page);
             }
         });
+
+
+
+
     }
 
     private void changePage(String page) {
@@ -60,5 +81,17 @@ public class MainActivity extends AppCompatActivity {
     private void closeApplication() {
         this.moveTaskToBack(true);
         this.finish();
+    }
+
+    public void setDrawer_locked(){
+
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        toolbar.setNavigationIcon(null);
+    }
+
+    public void setDrawer_unlocked(){
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
+
+
     }
 }
