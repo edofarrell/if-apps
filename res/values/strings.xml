@@ -2,8 +2,8 @@
     <string name="app_name">P3B_TUBES_2</string>
     <string name="judulFRS">FRS</string>
     <string name="judulTambahFRS">Tambah</string>
-    <string name="textfield_label_email">Password</string>
-    <string name="textfield_label_password">Email</string>
+    <string name="textfield_label_email">Email</string>
+    <string name="textfield_label_password">Password</string>
     <string name="textfield_label_login">Masuk</string>
     <string name="tv_title_masuk">Masuk</string>
     <string name="prasyarat">Prasyarat</string>
@@ -16,4 +16,9 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="role">Role</string>
+    <string-array name="dropdownRole">
+        <item>Mahasiswa</item>
+        <item>Dosen</item>
+        <item>Admin</item>
+    </string-array>
 </resources>

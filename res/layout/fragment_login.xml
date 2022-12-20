@@ -6,76 +6,108 @@
     android:paddingHorizontal="24dp"
     android:background="@color/blue_primary">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src=""
-        ></ImageView>
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="12dp"
-        android:layout_centerInParent="true"
-        >
-        <LinearLayout
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+
+            android:padding="@dimen/_8dp"
+            android:layout_marginBottom="@dimen/_20dp"
+
+            android:background="@drawable/border"
+            android:elevation="@dimen/_12dp"
+
+            android:src="@drawable/logo"
+            ></ImageView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_login_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical"
-            android:background="@drawable/border_custom"
-            android:padding="24dp"
+            app:cardCornerRadius="@dimen/_16dp"
+            app:cardElevation="@dimen/_12dp"
             >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_title_masuk"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                ></TextView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:padding="@dimen/_24dp"
+                android:layout_marginBottom="@dimen/_8dp"
                 >
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/_8dp"
-                    android:layout_marginBottom="@dimen/_4dp"
-                    android:hint="@string/textfield_label_email"
-                    size>
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
+                    android:text="@string/tv_title_masuk"
+                    android:textSize="@dimen/_20sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    ></TextView>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/_4dp"
-                    android:layout_marginBottom="8dp"
-                    android:hint="@string/textfield_label_password"
+                    android:layout_marginBottom="@dimen/_16dp"
+                    android:orientation="vertical"
                     >
-
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:paddingTop="@dimen/_8dp"
+                        android:layout_marginBottom="@dimen/_4dp"
+                        android:hint="@string/textfield_label_email"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/_4dp"
+                        android:layout_marginBottom="@dimen/_8dp"
+                        android:hint="@string/textfield_label_password"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/role">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/et_role"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"></AutoCompleteTextView>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="@dimen/_8dp"
+                    android:text="@string/textfield_label_login"></Button>
             </LinearLayout>
-            <Button
-                android:id="@+id/btn_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/_8dp"
-                android:text="@string/textfield_label_login"></Button>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-
+    </LinearLayout>
 </RelativeLayout>

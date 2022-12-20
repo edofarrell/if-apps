@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,10 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.fragmentLoginBinding = FragmentLoginBinding.inflate(inflater);
         this.fragmentLoginBinding.btnLogin.setOnClickListener(this::onClick);
+
+        String[] roles = getResources().getStringArray(R.array.dropdownRole);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this.getContext(), R.layout.login_dropdown_item, roles);
+        fragmentLoginBinding.etRole.setAdapter(arrayAdapter);
 
         return this.fragmentLoginBinding.getRoot();
     }
