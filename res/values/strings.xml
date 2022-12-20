@@ -21,4 +21,6 @@
         <item>Dosen</item>
         <item>Admin</item>
     </string-array>
+    <string name="openDrawer">Open Drawer</string>
+    <string name="closeDrawer">Close Drawer</string>
 </resources>

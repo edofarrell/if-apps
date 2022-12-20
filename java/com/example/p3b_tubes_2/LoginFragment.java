@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentLoginBinding;
@@ -31,6 +32,8 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.fragmentLoginBinding = FragmentLoginBinding.inflate(inflater);
         this.fragmentLoginBinding.btnLogin.setOnClickListener(this::onClick);
+        //(getActivity()).getSupportActionBar().hide();
+        ((MainActivity)getActivity()).setDrawer_locked();
 
         String[] roles = getResources().getStringArray(R.array.dropdownRole);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this.getContext(), R.layout.login_dropdown_item, roles);
@@ -53,5 +56,12 @@ public class LoginFragment extends Fragment {
         Bundle result = new Bundle();
         result.putString("page", "home");
         getParentFragmentManager().setFragmentResult("changePage", result);
+    }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        ((MainActivity)getActivity()).setDrawer_unlocked();
+        //((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 }
