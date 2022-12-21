@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 
 public class APIClient {
     public static final String BASE_URL = "http://ifportal.labftis.net/api/v1";
+    public static String token;
     private LoginPresenter loginPresenter;
     private PengumumanPresenter pengumumanPresenter;
     private PertemuanPresenter pertemuanPresenter;
@@ -18,7 +19,7 @@ public class APIClient {
     private Context context;
     private RequestQueue queue;
     private Gson gson;
-    private String token;
+
 
     public void getPertemuan(String id, String start_date, String end_date) {
         String endPoint = "/appointments/" + id + "/" + start_date + "/" + end_date;
@@ -28,7 +29,7 @@ public class APIClient {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        pertemuanPresenter.onFinished();
+                        //pertemuanPresenter.onFinished();
                     }
                 },
                 new Response.ErrorListener() {

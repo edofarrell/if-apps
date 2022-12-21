@@ -1,6 +1,7 @@
 package com.example.p3b_tubes_2;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONException;
 
@@ -24,7 +25,8 @@ public class LoginPresenter implements LoginContract{
 
     @Override
     public void onSuccessLogin(String token) {
-        mainPresenter.setToken(token);
+        Log.d("DEBUG",token);
+        APIClient.token = token;
         loginUI.updateLoginView(true);
     }
 

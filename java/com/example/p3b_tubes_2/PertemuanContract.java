@@ -5,7 +5,7 @@ public interface PertemuanContract {
     interface Model {
 
         interface OnFinishedListener {
-            void onFinished();
+            void onFinished(String id);
 
             void onError();
         }
@@ -14,6 +14,6 @@ public interface PertemuanContract {
     }
 
     interface View {
-        void update();
+        void update(String id);
     }
 }
