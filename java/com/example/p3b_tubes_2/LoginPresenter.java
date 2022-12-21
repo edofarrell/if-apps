@@ -12,8 +12,8 @@ public class LoginPresenter implements LoginContract{
     private User user;
     private LoginContract.View loginUI;
 
-    public LoginPresenter(LoginContract.View loginUI, MainPresenter mainPresenter){
-        this.user = new User();
+    public LoginPresenter(LoginContract.View loginUI, Context context, MainPresenter mainPresenter){
+        this.user = new User(this, context);
         this.loginUI = loginUI;
         this.mainPresenter = mainPresenter;
     }
@@ -23,7 +23,8 @@ public class LoginPresenter implements LoginContract{
     }
 
     @Override
-    public void onSuccessLogin() {
+    public void onSuccessLogin(String token) {
+        mainPresenter.setToken(token);
         loginUI.updateLoginView(true);
     }
 

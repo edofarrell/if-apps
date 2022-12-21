@@ -16,7 +16,7 @@ import com.example.p3b_tubes_2.databinding.ActivityMainBinding;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private HashMap<String, Fragment> fragments;
@@ -34,17 +34,18 @@ public class MainActivity extends AppCompatActivity{
 
         this.fragments = new HashMap<>();
         this.fragments.put("home", HomeFragment.newInstance());
-        this.fragments.put("left",LeftFragment.newInstance());
-        this.fragments.put("login", LoginFragment.newInstance(mainPresenter));
-        this.fragments.put("pengumuman",PengumumanFragment.newInstance(mainPresenter));
-        this.fragments.put("pertemuan",PertemuanFragment.newInstance(mainPresenter));
-        this.fragments.put("frs",FRSFragment.newInstance(mainPresenter));
+        this.fragments.put("left", LeftFragment.newInstance());
+        this.fragments.put("login", LoginFragment.newInstance(mainPresenter, this));
+        this.fragments.put("pengumuman", PengumumanFragment.newInstance(mainPresenter));
+        this.fragments.put("pertemuan", PertemuanFragment.newInstance(mainPresenter));
+        this.fragments.put("frs", FRSFragment.newInstance(mainPresenter));
 
         this.fm = getSupportFragmentManager();
         this.drawer = binding.drawerLayout;
         this.toolbar = binding.toolbar;
-        
-        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, this.drawer, toolbar,R.string.openDrawer,R.string.closeDrawer);
+        setSupportActionBar(this.toolbar);
+
+        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, this.drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
         binding.drawerLayout.addDrawerListener(abdt);
         abdt.syncState();
 
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 String page = result.getString("page");
-                if(page.equals("login")) getSupportActionBar().hide();
+                if (page.equals("login")) getSupportActionBar().hide();
                 else getSupportActionBar().show();
                 changePage(page);
             }
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity{
 
     private void changePage(String page) {
         FragmentTransaction ft = this.fm.beginTransaction();
-        if(page.equals("exit")) {
+        if (page.equals("exit")) {
             closeApplication();
         } else {
             ft.replace(this.binding.fragmentContainer.getId(), fragments.get(page))
@@ -81,13 +82,13 @@ public class MainActivity extends AppCompatActivity{
         this.finish();
     }
 
-    public void setDrawer_locked(){
+    public void setDrawer_locked() {
 
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         toolbar.setNavigationIcon(null);
     }
 
-    public void setDrawer_unlocked(){
+    public void setDrawer_unlocked() {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
 
 

@@ -1,5 +1,6 @@
 package com.example.p3b_tubes_2;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +20,10 @@ public class LoginFragment extends Fragment implements LoginContract.View{
     private FragmentLoginBinding fragmentLoginBinding;
     private LoginPresenter presenter;
 
-    public static LoginFragment newInstance(MainPresenter mainPresenter) {
+    public static LoginFragment newInstance(MainPresenter mainPresenter, Context context) {
         Bundle args = new Bundle();
         LoginFragment fragment = new LoginFragment();
-        fragment.presenter = new LoginPresenter(fragment, mainPresenter);
+        fragment.presenter = new LoginPresenter(fragment, context, mainPresenter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -33,7 +34,7 @@ public class LoginFragment extends Fragment implements LoginContract.View{
         this.fragmentLoginBinding = FragmentLoginBinding.inflate(inflater);
         this.fragmentLoginBinding.btnLogin.setOnClickListener(this::onClick);
         //(getActivity()).getSupportActionBar().hide();
-        ((MainActivity)getActivity()).setDrawer_locked();
+//        ((MainActivity)getActivity()).setDrawer_locked();
 
         String[] roles = getResources().getStringArray(R.array.dropdownRole);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this.getContext(), R.layout.login_dropdown_item, roles);
@@ -45,7 +46,7 @@ public class LoginFragment extends Fragment implements LoginContract.View{
     private void onClick(View view) {
         String email = this.fragmentLoginBinding.etEmail.getText().toString();
         String password = this.fragmentLoginBinding.etPassword.getText().toString();
-        String role = this.fragmentLoginBinding.etRole.getText().toString();
+        String role = this.fragmentLoginBinding.etRole.getText().toString().toLowerCase();
 
         try {
             this.presenter.login(email, password, role);
@@ -66,10 +67,4 @@ public class LoginFragment extends Fragment implements LoginContract.View{
         }
     }
 
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-        ((MainActivity)getActivity()).setDrawer_unlocked();
-        //((AppCompatActivity)getActivity()).getSupportActionBar().show();
-    }
 }
