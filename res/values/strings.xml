@@ -23,4 +23,5 @@
     </string-array>
     <string name="openDrawer">Open Drawer</string>
     <string name="closeDrawer">Close Drawer</string>
+    <string name="hintPengumuman">Masukkan filter disini</string>
 </resources>

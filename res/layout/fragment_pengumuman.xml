@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -7,6 +7,43 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pengumuman Fragment"/>
+        android:text="@string/pengumuman"
+        android:textSize="45sp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_pengumuman"/>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_pengumuman"
+        android:orientation="horizontal"
+        android:id="@+id/ll_header_pengumuman"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_filter"
+            android:layout_marginLeft="15sp"></ImageView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_kotak_filter_pengumuman"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="15sp"
+            android:layout_marginTop="5sp"
+            android:hint="@string/hintPengumuman"
+            android:paddingLeft="10sp"></EditText>
+    </LinearLayout>
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll_header_pengumuman"
+        android:layout_marginTop="20sp">
+
+    </ListView>
+
+</RelativeLayout>

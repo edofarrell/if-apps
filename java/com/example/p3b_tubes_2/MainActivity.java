@@ -41,19 +41,21 @@ public class MainActivity extends AppCompatActivity {
         this.fragments.put("frs", FRSFragment.newInstance(mainPresenter));
 
         this.fm = getSupportFragmentManager();
-        this.drawer = binding.drawerLayout;
+        this.drawer = this.binding.getRoot();
         this.toolbar = binding.toolbar;
-        setSupportActionBar(this.toolbar);
+        setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, this.drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
-        binding.drawerLayout.addDrawerListener(abdt);
+        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, this.drawer, toolbar,R.string.openDrawer,R.string.closeDrawer);
+        this.drawer.addDrawerListener(abdt);
         abdt.syncState();
+
+        this.getSupportActionBar().hide();
 
         FragmentTransaction ft = this.fm.beginTransaction();
         ft.add(binding.fragmentContainer.getId(), fragments.get("login"))
                 .commit();
 
-        //getSupportActionBar().hide();
+        drawer.closeDrawers();
 
         this.fm.setFragmentResultListener("changePage", this, new FragmentResultListener() {
             @Override
@@ -61,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 String page = result.getString("page");
                 if (page.equals("login")) getSupportActionBar().hide();
                 else getSupportActionBar().show();
+
+
                 changePage(page);
             }
         });
@@ -74,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             ft.replace(this.binding.fragmentContainer.getId(), fragments.get(page))
                     .addToBackStack(null)
                     .commit();
+            this.drawer.closeDrawers();
         }
     }
 
@@ -85,12 +90,10 @@ public class MainActivity extends AppCompatActivity {
     public void setDrawer_locked() {
 
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        toolbar.setNavigationIcon(null);
+        //toolbar.setNavigationIcon(null);
     }
 
-    public void setDrawer_unlocked() {
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
-
-
+    public void setDrawer_unlocked(){
+        //drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
     }
 }
