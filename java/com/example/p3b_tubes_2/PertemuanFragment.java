@@ -37,12 +37,14 @@ public class PertemuanFragment extends Fragment implements PertemuanContract.Vie
     }
 
     private void tambah(View view) {
-        try {
+        presenter.getPertemuan("c549e314-73db-4adf-8ef7-82c1bf89a527",
+                    "2022-12-22","2022-12-29");
+        /*try {
             presenter.addPertemuan("Dearen Test Api","Test Api Android Studio",
                     "2022-12-24 10:00+0700","2022-12-24 12:00+0700");
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
