@@ -32,8 +32,8 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.fragmentLoginBinding = FragmentLoginBinding.inflate(inflater);
         this.fragmentLoginBinding.btnLogin.setOnClickListener(this::onClick);
-        //(getActivity()).getSupportActionBar().hide();
-        ((MainActivity)getActivity()).setDrawer_locked();
+
+
 
         String[] roles = getResources().getStringArray(R.array.dropdownRole);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this.getContext(), R.layout.login_dropdown_item, roles);
