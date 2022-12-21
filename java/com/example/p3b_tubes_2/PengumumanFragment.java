@@ -11,15 +11,17 @@ import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentPengumumanBinding;
 
-public class PengumumanFragment extends Fragment{
+public class PengumumanFragment extends Fragment implements PengumumanContract.View{
 
     private FragmentPengumumanBinding binding;
+    private PengumumanPresenter presenter;
 
     private PengumumanFragment(){}
 
-    public static PengumumanFragment newInstance() {
+    public static PengumumanFragment newInstance(MainPresenter mainPresenter) {
         Bundle args = new Bundle();
         PengumumanFragment fragment = new PengumumanFragment();
+        fragment.presenter = new PengumumanPresenter(fragment, mainPresenter);
         fragment.setArguments(args);
         return fragment;
     }

@@ -4,10 +4,12 @@ public class PertemuanPresenter implements PertemuanContract.Model.OnFinishedLis
 
     //private model
     private PertemuanContract.View ui;
+    private MainPresenter mainPresenter;
 
-//    public PertemuanPresenter(PertemuanContract.View ui) {
-//        this.ui = ui;
-//    }
+    public PertemuanPresenter(PertemuanContract.View ui, MainPresenter mainPresenter) {
+        this.ui = ui;
+        this.mainPresenter = mainPresenter;
+    }
 
     public void getPertemuan(){
         //model.getPertemuanList

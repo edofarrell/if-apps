@@ -16,7 +16,7 @@ import com.example.p3b_tubes_2.databinding.ActivityMainBinding;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private ActivityMainBinding binding;
     private HashMap<String, Fragment> fragments;
@@ -30,18 +30,20 @@ public class MainActivity extends AppCompatActivity {
         this.binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(this.binding.getRoot());
 
+        MainPresenter mainPresenter = new MainPresenter();
+
         this.fragments = new HashMap<>();
-        this.fragments.put("login", LoginFragment.newInstance(this));
         this.fragments.put("home", HomeFragment.newInstance());
-        this.fragments.put("pengumuman",PengumumanFragment.newInstance());
-        this.fragments.put("pertemuan",PertemuanFragment.newInstance());
-        this.fragments.put("frs",FRSFragment.newInstance());
         this.fragments.put("left",LeftFragment.newInstance());
+        this.fragments.put("login", LoginFragment.newInstance(mainPresenter));
+        this.fragments.put("pengumuman",PengumumanFragment.newInstance(mainPresenter));
+        this.fragments.put("pertemuan",PertemuanFragment.newInstance(mainPresenter));
+        this.fragments.put("frs",FRSFragment.newInstance(mainPresenter));
+
         this.fm = getSupportFragmentManager();
         this.drawer = binding.drawerLayout;
         this.toolbar = binding.toolbar;
-
-
+        
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, this.drawer, toolbar,R.string.openDrawer,R.string.closeDrawer);
         binding.drawerLayout.addDrawerListener(abdt);
         abdt.syncState();
@@ -61,10 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 changePage(page);
             }
         });
-
-
-
-
     }
 
     private void changePage(String page) {

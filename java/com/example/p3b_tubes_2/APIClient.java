@@ -18,7 +18,7 @@ import org.json.JSONObject;
 
 public class APIClient {
     private final String BASE_URL = "http://ifportal.labftis.net/api/v1";
-    private MainPresenter presenter;
+    private LoginPresenter loginPresenter;
     private PengumumanPresenter pengumumanPresenter;
     private PertemuanPresenter pertemuanPresenter;
     private FRSPresenter frsPresenter;
@@ -27,8 +27,8 @@ public class APIClient {
     private Gson gson;
     private String token;
 
-    public APIClient(MainPresenter presenter, PengumumanPresenter pengumumanPresenter, PertemuanPresenter pertemuanPresenter, FRSPresenter frsPresenter, Context context) {
-        this.presenter = presenter;
+    public APIClient(LoginPresenter presenter, PengumumanPresenter pengumumanPresenter, PertemuanPresenter pertemuanPresenter, FRSPresenter frsPresenter, Context context) {
+        this.loginPresenter = presenter;
         this.pengumumanPresenter = pengumumanPresenter;
         this.pertemuanPresenter = pertemuanPresenter;
         this.frsPresenter = frsPresenter;
@@ -55,19 +55,18 @@ public class APIClient {
                     public void onResponse(JSONObject response) {
                         try {
                             token = response.getString("token");
-                            //pindah halaman
+                            loginPresenter.onSuccessLogin();
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            //handle error
                         }
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("DEBUG", error.toString());
-
-            }
-        }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        loginPresenter.onFailedLogin();
+                    }
+                }
         );
 
         this.queue.add(request);

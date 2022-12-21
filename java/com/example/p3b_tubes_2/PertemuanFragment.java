@@ -11,12 +11,17 @@ import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanBinding;
 
-public class PertemuanFragment extends Fragment {
-    FragmentPertemuanBinding binding;
-    public PertemuanFragment(){}
+public class PertemuanFragment extends Fragment implements PertemuanContract.View{
+    private FragmentPertemuanBinding binding;
+    private PertemuanPresenter presenter;
 
-    public static PertemuanFragment newInstance(){
+    private PertemuanFragment(){}
+
+    public static PertemuanFragment newInstance(MainPresenter mainPresenter){
+        Bundle args = new Bundle();
         PertemuanFragment fragment = new PertemuanFragment();
+        fragment.presenter = new PertemuanPresenter(fragment, mainPresenter);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -25,5 +30,10 @@ public class PertemuanFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentPertemuanBinding.inflate(inflater);
         return binding.getRoot();
+    }
+
+    @Override
+    public void update() {
+
     }
 }
