@@ -17,12 +17,12 @@ public class LoginFragment extends Fragment implements LoginContract.View{
     private FragmentLoginBinding fragmentLoginBinding;
     private LoginPresenter presenter;
 
-    public static LoginFragment newInstance(LoginContract.View loginUI) {
+    public static LoginFragment newInstance(MainPresenter mainPresenter) {
         Bundle args = new Bundle();
-        LoginFragment loginFragment = new LoginFragment();
-        loginFragment.presenter = new LoginPresenter(loginUI);
-        loginFragment.setArguments(args);
-        return loginFragment;
+        LoginFragment fragment = new LoginFragment();
+        fragment.presenter = new LoginPresenter(fragment, mainPresenter);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Nullable

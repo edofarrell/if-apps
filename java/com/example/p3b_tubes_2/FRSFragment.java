@@ -11,14 +11,14 @@ import androidx.fragment.app.Fragment;
 import com.example.p3b_tubes_2.databinding.FragmentFrsBinding;
 import com.example.p3b_tubes_2.databinding.FragmentFrsDetailBinding;
 
-public class FRSFragment extends Fragment {
-    FragmentFrsBinding binding;
+public class FRSFragment extends Fragment implements FRSContract.View{
+    private FragmentFrsBinding binding;
+    private FRSPresenter presenter;
     private FRSFragment(){}
-    public static FRSFragment newInstance() {
-
+    public static FRSFragment newInstance(MainPresenter mainPresenter) {
         Bundle args = new Bundle();
-
         FRSFragment fragment = new FRSFragment();
+        fragment.presenter = new FRSPresenter(fragment, mainPresenter);
         fragment.setArguments(args);
         return fragment;
     }

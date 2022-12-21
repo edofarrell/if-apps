@@ -13,7 +13,7 @@ import com.example.p3b_tubes_2.databinding.ActivityMainBinding;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements LoginContract.View{
+public class MainActivity extends AppCompatActivity{
 
     private ActivityMainBinding binding;
     private HashMap<String, Fragment> fragments;
@@ -25,12 +25,14 @@ public class MainActivity extends AppCompatActivity implements LoginContract.Vie
         this.binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(this.binding.getRoot());
 
+        MainPresenter mainPresenter = new MainPresenter();
+
         this.fragments = new HashMap<>();
-        this.fragments.put("login", LoginFragment.newInstance(this, this));
         this.fragments.put("home", HomeFragment.newInstance());
-        this.fragments.put("pengumuman",PengumumanFragment.newInstance());
-        this.fragments.put("pertemuan",PertemuanFragment.newInstance());
-        this.fragments.put("frs",FRSFragment.newInstance());
+        this.fragments.put("login", LoginFragment.newInstance(mainPresenter));
+        this.fragments.put("pengumuman",PengumumanFragment.newInstance(mainPresenter));
+        this.fragments.put("pertemuan",PertemuanFragment.newInstance(mainPresenter));
+        this.fragments.put("frs",FRSFragment.newInstance(mainPresenter));
         this.fm = getSupportFragmentManager();
 
         FragmentTransaction ft = this.fm.beginTransaction();
@@ -45,11 +47,6 @@ public class MainActivity extends AppCompatActivity implements LoginContract.Vie
             }
         });
 
-        LoginPresenter loginPresenter = new LoginPresenter(((LoginFragment) this.fragments.get("login").pre);
-        PertemuanPresenter pertemuanPresenter = new PertemuanPresenter();
-        PengumumanPresenter pengumumanPresenter = new PengumumanPresenter();
-        FRSPresenter frsPresenter = new FRSPresenter();
-        APIClient apiClient;
     }
 
     private void changePage(String page) {
@@ -66,11 +63,5 @@ public class MainActivity extends AppCompatActivity implements LoginContract.Vie
     private void closeApplication() {
         this.moveTaskToBack(true);
         this.finish();
-    }
-
-    @Override
-    public void updateLoginView(boolean status) {
-        LoginFragment fragment = (LoginFragment) this.fragments.get("login");
-        fragment.updateLoginView(status);
     }
 }
