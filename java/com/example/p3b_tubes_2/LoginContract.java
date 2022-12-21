@@ -1,7 +1,7 @@
 package com.example.p3b_tubes_2;
 
 public interface LoginContract {
-    void onSuccessLogin(String token);
+    void onSuccessLogin();
     void onFailedLogin();
 
     interface View{

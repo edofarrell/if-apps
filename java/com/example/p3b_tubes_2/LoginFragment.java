@@ -18,12 +18,12 @@ import org.json.JSONException;
 
 public class LoginFragment extends Fragment implements LoginContract.View{
     private FragmentLoginBinding fragmentLoginBinding;
-    private LoginPresenter presenter;
+    private UserPresenter presenter;
 
     public static LoginFragment newInstance(MainPresenter mainPresenter, Context context) {
         Bundle args = new Bundle();
         LoginFragment fragment = new LoginFragment();
-        fragment.presenter = new LoginPresenter(fragment, context, mainPresenter);
+        fragment.presenter = new UserPresenter(fragment, context, mainPresenter);
         fragment.setArguments(args);
         return fragment;
     }

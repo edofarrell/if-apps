@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         this.fragments.put("left", LeftFragment.newInstance());
         this.fragments.put("login", LoginFragment.newInstance(mainPresenter, this));
         this.fragments.put("pengumuman", PengumumanFragment.newInstance(mainPresenter));
-        this.fragments.put("pertemuan", PertemuanFragment.newInstance(mainPresenter,this));
+        this.fragments.put("pertemuan", PertemuanFragment.newInstance(mainPresenter, this));
         this.fragments.put("frs", FRSFragment.newInstance(mainPresenter));
 
         this.fm = getSupportFragmentManager();
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         this.toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, this.drawer, toolbar,R.string.openDrawer,R.string.closeDrawer);
+        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, this.drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
         this.drawer.addDrawerListener(abdt);
         abdt.syncState();
 
@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 String page = result.getString("page");
                 if (page.equals("login")) getSupportActionBar().hide();
                 else getSupportActionBar().show();
-
-
                 changePage(page);
             }
         });
@@ -93,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         //toolbar.setNavigationIcon(null);
     }
 
-    public void setDrawer_unlocked(){
+    public void setDrawer_unlocked() {
         //drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
     }
 }

@@ -4,10 +4,14 @@ public interface PertemuanContract {
     
     interface Model {
 
-        interface OnFinishedListener {
-            void onFinished(String id);
+        interface AddOnSuccessListener {
+            void onSuccessAdd(PertemuanList.Pertemuan pertemuan);
+            void onErrorAdd();
+        }
 
-            void onError();
+        interface ChangeOnSuccessListener{
+            void onSuccessChange();
+            void onErrorChange();
         }
 
         void getPertemuanList();

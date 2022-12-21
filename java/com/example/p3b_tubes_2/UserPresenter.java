@@ -1,33 +1,35 @@
 package com.example.p3b_tubes_2;
 
 import android.content.Context;
-import android.util.Log;
 
 import org.json.JSONException;
 
-import javax.security.auth.login.LoginException;
-
-public class LoginPresenter implements LoginContract{
+public class UserPresenter implements LoginContract{
 
     private MainPresenter mainPresenter;
     private User user;
+    private Authorization auth;
     private LoginContract.View loginUI;
 
-    public LoginPresenter(LoginContract.View loginUI, Context context, MainPresenter mainPresenter){
+    public UserPresenter(LoginContract.View loginUI, Context context, MainPresenter mainPresenter){
         this.user = new User(this, context);
+        this.auth = new Authorization(this, context);
         this.loginUI = loginUI;
         this.mainPresenter = mainPresenter;
     }
 
     public void login(String email, String password, String role) throws JSONException {
-        this.user.login(email, password, role);
+        this.auth.login(email, password, role);
+    }
+
+    public void getUsers(){
+        this.user.getUsers();
     }
 
     @Override
-    public void onSuccessLogin(String token) {
-        Log.d("DEBUG",token);
-        APIClient.token = token;
+    public void onSuccessLogin() {
         loginUI.updateLoginView(true);
+        getUsers();
     }
 
     @Override
