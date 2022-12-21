@@ -110,12 +110,8 @@ public class User implements Response.Listener<String>, Response.ErrorListener{
 
     @Override
     public void onResponse(String response) {
-<<<<<<< HEAD
-        //User[] users = this.gson.fromJson(response, User.class);
-=======
         ArrayList<User> users = this.gson.fromJson(response, ArrayList.class);
 //        this.loginPresenter.something(users);
->>>>>>> origin/edo
     }
 
     @Override

@@ -9,14 +9,18 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.internal.LinkedTreeMap;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,19 +28,23 @@ import java.util.Map;
 public class PertemuanList {
     class Pertemuan{
         private String id;//uuidv4
-        private String organizerId;
+        private String organizer_id;
         private String title;//length:1-256
         private String description;//length:1-1000
-        private String startTime;//2022-04-12 19:00+0500
-        private String endTime;//2022-04-12 19:00+0500
+        private String start_datetime;//2022-04-12 19:00+0500
+        private String end_datetime;//2022-04-12 19:00+0500
 
         public Pertemuan(String id,String organizerId, String title, String description, String startTime, String endTime){
             this.id = id;
-            this.organizerId = organizerId;
+            this.organizer_id = organizerId;
             this.title = title;
             this.description = description;
-            this.startTime = startTime;
-            this.endTime = endTime;
+            this.start_datetime = startTime;
+            this.end_datetime = endTime;
+        }
+
+        public String getId(){
+            return id;
         }
 
         public String getTitle() {
@@ -48,11 +56,11 @@ public class PertemuanList {
         }
 
         public String getStartTime() {
-            return startTime;
+            return start_datetime;
         }
 
         public String getEndTime() {
-            return endTime;
+            return end_datetime;
         }
     }
 
@@ -69,6 +77,39 @@ public class PertemuanList {
         this.gson = new Gson();
         this.token = token;
     }
+    //id global = c549e314-73db-4adf-8ef7-82c1bf89a527
+    public void getPertemuan(String id, String startDate, String endDate){
+        String url = APIClient.BASE_URL+"/appointments"+"/"+id+"/"+startDate+"/"+endDate;
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("DEBUG",response);
+                Type listType = new TypeToken<ArrayList<Pertemuan>>(){}.getType();
+                arr = gson.fromJson(response,listType);
+                /*for(int i = 0;i<arr.size();i++){
+                    Log.d("DEBUG",arr.get(i).getId());
+                }*/
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                try{
+                    String responseBody = new String(error.networkResponse.data,"utf-8");
+                    Log.d("DEBUG",responseBody);
+                }catch (UnsupportedEncodingException e){
+                    e.printStackTrace();
+                }
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization",APIClient.token);
+                return params;
+            }
+        };
+        this.queue.add(request);
+    }
 
     public void addPertemuan(String title, String description, String startTime, String endTime) throws JSONException {
 //        Log.d("DEBUG","["+token+"]");
@@ -76,10 +117,9 @@ public class PertemuanList {
         JsonObject json = new JsonObject();
         json.addProperty("title",title);
         json.addProperty("description",description);
-        json.addProperty("start_time",startTime);
-        json.addProperty("end_time",endTime);
+        json.addProperty("start_datetime",startTime);
+        json.addProperty("end_datetime",endTime);
         JSONObject JSON = new JSONObject(json.toString());
-
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
                 url, JSON,

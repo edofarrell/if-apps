@@ -18,9 +18,8 @@ public class PertemuanPresenter implements PertemuanContract.Model.OnFinishedLis
         this.pertemuan = new PertemuanList(this,context,mainPresenter.getToken());
     }
 
-    public void getPertemuan(){
-        //model.getPertemuanList
-
+    public void getPertemuan(String id, String startDate, String endDate){
+        this.pertemuan.getPertemuan(id,startDate,endDate);
     }
 
     public void addPertemuan(String title, String description, String startTime, String endTime)throws JSONException {
