@@ -55,7 +55,7 @@ public class User implements Response.Listener<String>, Response.ErrorListener{
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            token = response.getString("token");
+                            token = "Bearer "+response.getString("token");
                             loginPresenter.onSuccessLogin(token);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -86,7 +86,7 @@ public class User implements Response.Listener<String>, Response.ErrorListener{
 
     @Override
     public void onResponse(String response) {
-        User[] users = this.gson.fromJson(response, User.class);
+        //User[] users = this.gson.fromJson(response, User.class);
     }
 
     @Override
