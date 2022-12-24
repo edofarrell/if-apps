@@ -1,14 +1,30 @@
 package com.example.p3b_tubes_2;
 
-import java.util.ArrayList;
+import android.content.Context;
 
-public class PengumumanPresenter {
+public class PengumumanPresenter implements PengumumanContract.Model.GetOnSuccessListener{
 
     private PengumumanContract.View ui;
     private MainPresenter mainPresenter;
+    private PengumumanList pengumuman;
 
-    public PengumumanPresenter(PengumumanContract.View ui, MainPresenter mainPresenter) {
+    public PengumumanPresenter(PengumumanContract.View ui, Context context, MainPresenter mainPresenter) {
         this.ui = ui;
         this.mainPresenter = mainPresenter;
+        this.pengumuman = new PengumumanList(this, context);
+    }
+
+    public void getPengumuman(){
+        this.pengumuman.getPengumuman();
+    }
+
+    @Override
+    public void OnSuccessGet() {
+
+    }
+
+    @Override
+    public void OnErrorGet() {
+
     }
 }

@@ -9,15 +9,10 @@ import com.android.volley.RequestQueue;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
@@ -26,7 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PertemuanList {
+public class PertemuanList implements Response.Listener<String>, Response.ErrorListener{
+
     class Pertemuan {
         private String id;//uuidv4
         private String title;//length:1-256
@@ -77,27 +73,13 @@ public class PertemuanList {
     //id global = c549e314-73db-4adf-8ef7-82c1bf89a527
     public void getPertemuan(String id, String startDate, String endDate){
         String url = APIClient.BASE_URL+"/appointments"+"/"+id+"/"+startDate+"/"+endDate;
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("DEBUG",response);
-                Type listType = new TypeToken<ArrayList<Pertemuan>>(){}.getType();
-                arr = gson.fromJson(response,listType);
-                /*for(int i = 0;i<arr.size();i++){
-                    Log.d("DEBUG",arr.get(i).getId());
-                }*/
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                try{
-                    String responseBody = new String(error.networkResponse.data,"utf-8");
-                    Log.d("DEBUG",responseBody);
-                }catch (UnsupportedEncodingException e){
-                    e.printStackTrace();
-                }
-            }
-        }){
+
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url,
+                this::onResponse,
+                this::onErrorResponse
+        ){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -105,7 +87,25 @@ public class PertemuanList {
                 return params;
             }
         };
+
         this.queue.add(request);
+    }
+
+    @Override
+    public void onResponse(String response) {
+        Type listType = new TypeToken<ArrayList<Pertemuan>>(){}.getType();
+        arr = gson.fromJson(response,listType);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        try{
+            String responseBody = new String(error.networkResponse.data,"utf-8");
+            Log.d("DEBUG", "PertemuanList: onErrorResponse(), Error=" + responseBody);
+        }catch (UnsupportedEncodingException e){
+            Log.d("DEBUG", "APIUbahPertemuan: onErrorResponse() catch UnsupportedEncodingException");
+        }
+        //handle error here
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.p3b_tubes_2;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,17 +12,18 @@ import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentPengumumanBinding;
 
-public class PengumumanFragment extends Fragment implements PengumumanContract.View{
+public class PengumumanFragment extends Fragment implements PengumumanContract.View {
 
     private FragmentPengumumanBinding binding;
     private PengumumanPresenter presenter;
 
-    private PengumumanFragment(){}
+    private PengumumanFragment() {
+    }
 
-    public static PengumumanFragment newInstance(MainPresenter mainPresenter) {
+    public static PengumumanFragment newInstance(MainPresenter mainPresenter, Context context) {
         Bundle args = new Bundle();
         PengumumanFragment fragment = new PengumumanFragment();
-        fragment.presenter = new PengumumanPresenter(fragment, mainPresenter);
+        fragment.presenter = new PengumumanPresenter(fragment, context, mainPresenter);
         fragment.setArguments(args);
         return fragment;
     }
