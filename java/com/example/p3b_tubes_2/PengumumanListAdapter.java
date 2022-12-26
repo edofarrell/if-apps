@@ -1,0 +1,81 @@
+package com.example.p3b_tubes_2;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.example.p3b_tubes_2.databinding.ItemListPengumumanBinding;
+
+public class PengumumanListAdapter extends BaseAdapter {
+    private PengumumanList pengumumanList;
+    private PengumumanPresenter presenter;
+
+    private class ViewHolder {
+        protected int i;
+        protected TextView tvJudul;
+        protected TextView tvTag;
+
+        public ViewHolder(ItemListPengumumanBinding binding, int i) {
+            this.i = i;
+            this.tvJudul = binding.tvJudul;
+            this.tvTag = binding.tvTag;
+
+            binding.llPengumuman.setOnClickListener(this::openDetail);
+        }
+
+        private void openDetail(View view) {
+           PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
+//            presenter.getPartisipan(pertemuan);
+        }
+
+        private void updateView(int i) {
+            PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
+            this.tvJudul.setText(pengumuman.getTitle());
+            this.tvTag.setText(pengumuman.getTags());
+        }
+    }
+
+    public PengumumanListAdapter(PengumumanPresenter presenter){
+        this.pengumumanList = new PengumumanList();
+        this.presenter = presenter;
+    }
+
+    @Override
+    public int getCount() {
+        return this.pengumumanList.getSize();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return this.pengumumanList.getPengumuman(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup parent) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        ItemListPengumumanBinding itemListPengumumanBinding = ItemListPengumumanBinding.inflate(inflater);
+        ViewHolder viewHolder;
+        if (view == null) {
+            view = itemListPengumumanBinding.getRoot();
+            viewHolder = new ViewHolder(itemListPengumumanBinding, i);
+            view.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) view.getTag();
+        }
+        viewHolder.updateView(i);
+
+        return view;
+    }
+
+    public void update(PengumumanList pengumumanList){
+        this.pengumumanList = pengumumanList;
+        notifyDataSetChanged();
+    }
+}

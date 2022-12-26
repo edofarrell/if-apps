@@ -4,12 +4,12 @@ public interface PengumumanContract {
 
     interface Model{
         interface GetOnSuccessListener{
-            void OnSuccessGet();
+            void OnSuccessGet(PengumumanList pengumumanList);
             void OnErrorGet();
         }
     }
 
     interface View {
-
+        void update(PengumumanList pengumumanList);
     }
 }

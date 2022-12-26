@@ -20,6 +20,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     private FragmentPengumumanBinding binding;
     private PengumumanPresenter presenter;
+    private PengumumanListAdapter adapter;
     private ChipGroup chipGroup;
 
     private PengumumanFragment() {
@@ -29,6 +30,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         Bundle args = new Bundle();
         PengumumanFragment fragment = new PengumumanFragment();
         fragment.presenter = new PengumumanPresenter(fragment, context, mainPresenter);
+        fragment.adapter = new PengumumanListAdapter(fragment.presenter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,6 +39,9 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = FragmentPengumumanBinding.inflate(inflater);
+
+        this.binding.lvPengumuman.setAdapter(this.adapter);
+        this.presenter.getPengumuman();
 
         binding.ivFilter.setOnClickListener(this::onClick);
         chipGroup = binding.chipGrup;
@@ -80,5 +85,10 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         Chip chip = (Chip) view;
         chipGroup.removeView(view);
         return true;
+    }
+
+    @Override
+    public void update(PengumumanList pengumumanList) {
+        this.adapter.update(pengumumanList);
     }
 }

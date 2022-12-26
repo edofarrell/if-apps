@@ -19,8 +19,8 @@ public class PengumumanPresenter implements PengumumanContract.Model.GetOnSucces
     }
 
     @Override
-    public void OnSuccessGet() {
-
+    public void OnSuccessGet(PengumumanList pengumumanList) {
+        this.ui.update(pengumumanList);
     }
 
     @Override

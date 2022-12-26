@@ -67,10 +67,10 @@
     </LinearLayout>
 
     <ListView
+        android:id="@+id/lv_pengumuman"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/ll_chip"
-        android:id="@+id/lv_pengumuman"
         android:layout_marginTop="@dimen/_20sp">
 
     </ListView>

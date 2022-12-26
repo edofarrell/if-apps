@@ -11,10 +11,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,23 +22,56 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
     class Pengumuman {
         private String id;
         private String title;
-        private Tag[] tags;
+        public ArrayList<Tag> tags;
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getTags() {
+            String res = "";
+            for (int i = 0; i < tags.size(); i++) {
+                if (i != 0) {
+                    res += ",";
+                }
+                res += tags.get(i).getName();
+            }
+            return res;
+        }
     }
 
     class Tag {
-        private String name;
-        private String id;
+        private String tag;
+        private String tag_id;
+
+        public String getName() {
+            return tag;
+        }
     }
 
-    private ArrayList<Pengumuman> arr;
+    private ArrayList<Pengumuman> data;
     private PengumumanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
+    private String cursor;
 
     public PengumumanList(PengumumanPresenter presenter, Context context) {
+        this.data = new ArrayList<>();
         this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
+    }
+
+    public PengumumanList(){
+        this.data = new ArrayList<>();
+    }
+
+    public int getSize() {
+        return this.data.size();
+    }
+
+    public Pengumuman getPengumuman(int i) {
+        return this.data.get(i);
     }
 
     public void getPengumuman() {
@@ -65,8 +96,9 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
 
     @Override
     public void onResponse(String response) {
-        Type listType = new TypeToken<ArrayList<Pengumuman>>(){}.getType();
-        this.arr = this.gson.fromJson(response,listType);
+        PengumumanList pengumumanList = this.gson.fromJson(response, PengumumanList.class);
+        Log.d("DEBUG", pengumumanList.data.get(0).tags.size()+"");
+        presenter.OnSuccessGet(pengumumanList);
     }
 
     @Override
