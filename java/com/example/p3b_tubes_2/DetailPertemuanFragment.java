@@ -13,10 +13,12 @@ import com.example.p3b_tubes_2.databinding.FragmentDetailPertemuanBinding;
 
 public class DetailPertemuanFragment extends Fragment {
     FragmentDetailPertemuanBinding binding;
+    private PertemuanList.Pertemuan pertemuan;
     public DetailPertemuanFragment(){}
 
-    public static DetailPertemuanFragment newInstance(){
+    public static DetailPertemuanFragment newInstance(PertemuanList.Pertemuan pertemuan){
         DetailPertemuanFragment fragment = new DetailPertemuanFragment();
+        fragment.pertemuan = pertemuan;
         return fragment;
     }
 
@@ -24,6 +26,24 @@ public class DetailPertemuanFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentDetailPertemuanBinding.inflate(inflater);
+
+        this.binding.tvTitle.setText(this.pertemuan.getTitle());
+        this.binding.tvOrganizer.setText(this.pertemuan.getOrganizerName());
+//        this.binding.tvTanggal.setText(this.pertemuan.getStartTime());
+//        this.binding.tvWaktu.setText(this.pertemuan.getStartTime());
+//        this.binding.tvPartisipan.setText();
+        this.binding.tvPartisipan.setText(this.pertemuan.getPartisipan());
+        this.binding.tvDeskripsi.setText(this.pertemuan.getDescription());
+        this.binding.btnKembali.setOnClickListener(this::onClickKembali);
+
         return binding.getRoot();
     }
+
+    private void onClickKembali(View view) {
+        Bundle result = new Bundle();
+        result.putString("page", "pertemuan");
+        getParentFragmentManager().setFragmentResult("changePage", result);
+    }
+
+
 }
