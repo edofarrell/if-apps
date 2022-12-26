@@ -4,10 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.TextView;
-
-import androidx.fragment.app.FragmentManager;
 
 import com.example.p3b_tubes_2.databinding.ItemListPertemuanBinding;
 
@@ -15,7 +12,7 @@ import java.util.ArrayList;
 
 public class PertemuanListAdapter extends BaseAdapter {
 
-    private ArrayList<PertemuanList.Pertemuan> pertemuanList;
+    private PertemuanList pertemuanList;
     private PertemuanPresenter presenter;
 
     private class ViewHolder {
@@ -36,12 +33,12 @@ public class PertemuanListAdapter extends BaseAdapter {
         }
 
         private void openDetail(View view) {
-            PertemuanList.Pertemuan pertemuan = pertemuanList.get(i);
+            PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
             presenter.getPartisipan(pertemuan);
         }
 
         private void updateView(int i) {
-            PertemuanList.Pertemuan pertemuan = pertemuanList.get(i);
+            PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
             this.tvTitle.setText(pertemuan.getTitle());
             this.tvDate.setText(pertemuan.getStartTime().substring(0, 10));
             this.tvStartTime.setText(pertemuan.getStartTime());
@@ -50,18 +47,18 @@ public class PertemuanListAdapter extends BaseAdapter {
     }
 
     public PertemuanListAdapter(PertemuanPresenter presenter) {
-        this.pertemuanList = new ArrayList<>();
+        this.pertemuanList = new PertemuanList();
         this.presenter = presenter;
     }
 
     @Override
     public int getCount() {
-        return this.pertemuanList.size();
+        return this.pertemuanList.getSize();
     }
 
     @Override
     public Object getItem(int position) {
-        return this.pertemuanList.get(position);
+        return this.pertemuanList.getPertemuan(position);
     }
 
     @Override
@@ -86,7 +83,7 @@ public class PertemuanListAdapter extends BaseAdapter {
         return view;
     }
 
-    public void update(ArrayList<PertemuanList.Pertemuan> pertemuanList) {
+    public void update(PertemuanList pertemuanList) {
         this.pertemuanList = pertemuanList;
         notifyDataSetChanged();
     }

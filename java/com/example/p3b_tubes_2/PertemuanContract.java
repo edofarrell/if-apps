@@ -17,7 +17,7 @@ public interface PertemuanContract {
         }
 
         interface GetOnSuccessListener{
-            void onSuccessGet(ArrayList<PertemuanList.Pertemuan> pertemuanList);
+            void onSuccessGet(PertemuanList pertemuanList);
             void onErrorGet();
         }
 
@@ -30,7 +30,7 @@ public interface PertemuanContract {
     }
 
     interface View {
-        void update(ArrayList<PertemuanList.Pertemuan> pertemuanList);
+        void update(PertemuanList pertemuanList);
         void openDetail(PertemuanList.Pertemuan pertemuan);
     }
 }

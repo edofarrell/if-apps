@@ -99,6 +99,12 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
         this.gson = new Gson();
     }
 
+    public PertemuanList(){}
+
+    public void addPertemuan(Pertemuan pertemuan){
+        this.arr.add(pertemuan);
+    }
+
     public int getSize() {
         return this.arr.size();
     }
@@ -133,7 +139,7 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
         Type listType = new TypeToken<ArrayList<Pertemuan>>() {
         }.getType();
         this.arr = this.gson.fromJson(response, listType);
-        this.pertemuanPresenter.onSuccessGet(this.arr);
+        this.pertemuanPresenter.onSuccessGet(this);
     }
 
     @Override

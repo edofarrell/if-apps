@@ -59,7 +59,7 @@ public class PertemuanFragment extends Fragment implements PertemuanContract.Vie
     }
 
     @Override
-    public void update(ArrayList<PertemuanList.Pertemuan> pertemuanList) {
+    public void update(PertemuanList pertemuanList) {
         this.adapter.update(pertemuanList);
     }
 

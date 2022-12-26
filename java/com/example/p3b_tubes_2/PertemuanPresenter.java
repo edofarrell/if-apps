@@ -46,7 +46,7 @@ public class PertemuanPresenter implements
     }
 
     @Override
-    public void onSuccessGet(ArrayList<PertemuanList.Pertemuan> pertemuanList) {
+    public void onSuccessGet(PertemuanList pertemuanList) {
         this.ui.update(pertemuanList);
     }
 
@@ -77,7 +77,8 @@ public class PertemuanPresenter implements
 
     @Override
     public void onSuccessAdd(PertemuanList.Pertemuan pertemuan) {
-//        this.ui.update(pertemuan.getId());
+        this.pertemuan.addPertemuan(pertemuan);
+        this.ui.update(this.pertemuan);
     }
 
     @Override
