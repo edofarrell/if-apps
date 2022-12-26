@@ -12,18 +12,18 @@ import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanBinding;
 
-import org.json.JSONException;
-
-public class PertemuanFragment extends Fragment implements PertemuanContract.View{
+public class PertemuanFragment extends Fragment implements PertemuanContract.View {
     private FragmentPertemuanBinding binding;
     private PertemuanPresenter presenter;
+    private PertemuanListAdapter adapter;
 
-    private PertemuanFragment(){}
+    private PertemuanFragment() {}
 
-    public static PertemuanFragment newInstance(MainPresenter mainPresenter, Context context){
+    public static PertemuanFragment newInstance(MainPresenter mainPresenter, Context context) {
         Bundle args = new Bundle();
         PertemuanFragment fragment = new PertemuanFragment();
-        fragment.presenter = new PertemuanPresenter(fragment,context,mainPresenter);
+        fragment.presenter = new PertemuanPresenter(fragment, context, mainPresenter);
+        fragment.adapter = new PertemuanListAdapter();
         fragment.setArguments(args);
         return fragment;
     }
@@ -32,13 +32,17 @@ public class PertemuanFragment extends Fragment implements PertemuanContract.Vie
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentPertemuanBinding.inflate(inflater);
+
+        this.binding.lstPertemuan.setAdapter(this.adapter);
+//        this.presenter.getPertemuan();
+    
         binding.btnTest.setOnClickListener(this::tambah);
         return binding.getRoot();
     }
 
     private void tambah(View view) {
         presenter.getPertemuan("c549e314-73db-4adf-8ef7-82c1bf89a527",
-                    "2022-12-22","2022-12-29");
+                "2022-12-22", "2022-12-29");
         /*try {
             presenter.addPertemuan("Dearen Test Api","Test Api Android Studio",
                     "2022-12-24 10:00+0700","2022-12-24 12:00+0700");
