@@ -5,7 +5,6 @@ import android.content.Context;
 import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,15 +12,21 @@ public class PertemuanPresenter implements
         PertemuanContract.Model.AddOnSuccessListener,
         PertemuanContract.Model.ChangeOnSuccessListener,
         PertemuanContract.Model.GetOnSuccessListener,
-        PertemuanContract.Model.GetPartisipanSuccessListener
-{
+        PertemuanContract.Model.GetPartisipanSuccessListener,
+        PertemuanContract.Model.AddParticipantsPertemuanOnSuccessListener,
+        PertemuanContract.Model.DeleteParticipantsPertemuanOnSuccessListener,
+        PertemuanContract.Model.DeleteOnSuccessListener
 
+{
     private PertemuanList pertemuan;
     private PertemuanContract.View ui;
     private MainPresenter mainPresenter;
     private APITambahPertemuan apiAddPertemuan;
     private APIUbahPertemuan apiUbahPertemuan;
     private APIGetPartisipan apiGetPartisipan;
+    private APIAddParticipantsPertemuan addParticipantsPertemuan;
+    private APIDeleteParticipantsPertemuan deleteParticipantsPertemuan;
+    private APIDeletePertemuan deletePertemuan;
 
     public PertemuanPresenter(PertemuanContract.View ui, Context context, MainPresenter mainPresenter) {
         this.ui = ui;
@@ -30,6 +35,9 @@ public class PertemuanPresenter implements
         this.apiAddPertemuan = new APITambahPertemuan(this, context);
         this.apiUbahPertemuan = new APIUbahPertemuan(this, context);
         this.apiGetPartisipan = new APIGetPartisipan(this, context);
+        this.addParticipantsPertemuan = new APIAddParticipantsPertemuan(this,context);
+        this.deleteParticipantsPertemuan = new APIDeleteParticipantsPertemuan(this,context);
+        this.deletePertemuan = new APIDeletePertemuan(this,context);
     }
 
     public void getPertemuan() {
@@ -75,6 +83,10 @@ public class PertemuanPresenter implements
         this.apiAddPertemuan.tambahPertemuan(title, description, startTime, endTime);
     }
 
+    public void deletePertemuan(String idPertemuan){
+        this.deletePertemuan.deletePertemuan(idPertemuan);
+    }
+
     @Override
     public void onSuccessAdd(PertemuanList.Pertemuan pertemuan) {
         this.pertemuan.addPertemuan(pertemuan);
@@ -90,6 +102,14 @@ public class PertemuanPresenter implements
         this.apiUbahPertemuan.ubahPertemuan(pertemuan);
     }
 
+    public void addParticipantsPertemuan(String[] arr) throws JSONException {
+        this.addParticipantsPertemuan.addParticipants(arr);
+    }
+
+    public void deleteParticipantsPertemuan(String[] arr) throws JSONException {
+        this.deleteParticipantsPertemuan.deleteParticipants(arr);
+    }
+
     @Override
     public void onSuccessChange() {
 
@@ -100,7 +120,35 @@ public class PertemuanPresenter implements
 
     }
 
+    @Override
+    public void onSuccessAddParticipants(String hasil) {
+//        this.ui.update(hasil);
+    }
 
+    @Override
+    public void onErrorAddParticipants() {
+
+    }
+
+    @Override
+    public void onSuccessDeleteParticipants(String hasil) {
+//        this.ui.update(hasil);
+    }
+
+    @Override
+    public void onErrorDeleteParticipants() {
+
+    }
+
+    @Override
+    public void onSuccessDelete(String hasil) {
+//        this.ui.update(hasil);
+    }
+
+    @Override
+    public void onErrorDelete() {
+
+    }
 }
 
 

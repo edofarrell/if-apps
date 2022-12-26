@@ -21,9 +21,24 @@ public interface PertemuanContract {
             void onErrorGet();
         }
 
-        interface GetPartisipanSuccessListener{
+        interface GetPartisipanSuccessListener {
             void onSuccessGetPartisipan(PertemuanList.Pertemuan pertemuan);
             void onErrorGetPartisipan();
+        }
+
+        interface DeleteOnSuccessListener{
+            void onSuccessDelete(String hasil);
+            void onErrorDelete();
+        }
+
+        interface AddParticipantsPertemuanOnSuccessListener{
+            void onSuccessAddParticipants(String hasil);
+            void onErrorAddParticipants();
+        }
+
+        interface DeleteParticipantsPertemuanOnSuccessListener{
+            void onSuccessDeleteParticipants(String hasil);
+            void onErrorDeleteParticipants();
         }
 
         void getPertemuanList();
