@@ -14,6 +14,21 @@ public interface PertemuanContract {
             void onErrorChange();
         }
 
+        interface DeleteOnSuccessListener{
+            void onSuccessDelete(String hasil);
+            void onErrorDelete();
+        }
+
+        interface AddParticipantsPertemuanOnSuccessListener{
+            void onSuccessAddParticipants(String hasil);
+            void onErrorAddParticipants();
+        }
+
+        interface DeleteParticipantsPertemuanOnSuccessListener{
+            void onSuccessDeleteParticipants(String hasil);
+            void onErrorDeleteParticipants();
+        }
+
         void getPertemuanList();
     }
 

@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanBinding;
 
+import org.json.JSONException;
+
 public class PertemuanFragment extends Fragment implements PertemuanContract.View {
     private FragmentPertemuanBinding binding;
     private PertemuanPresenter presenter;
@@ -33,7 +35,7 @@ public class PertemuanFragment extends Fragment implements PertemuanContract.Vie
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentPertemuanBinding.inflate(inflater);
 
-        this.binding.lstPertemuan.setAdapter(this.adapter);
+        //this.binding.lstPertemuan.setAdapter(this.adapter);
 //        this.presenter.getPertemuan();
     
         binding.btnTest.setOnClickListener(this::tambah);
@@ -41,8 +43,10 @@ public class PertemuanFragment extends Fragment implements PertemuanContract.Vie
     }
 
     private void tambah(View view) {
-        presenter.getPertemuan("c549e314-73db-4adf-8ef7-82c1bf89a527",
-                "2022-12-22", "2022-12-29");
+        //String[] arr = {"cdc143f6-3efe-4a9f-ad29-1be12e357fe9"};
+        presenter.deletePertemuan("13e633be-74ff-4c3c-b8be-35e868504fe6");
+        /*presenter.getPertemuan("c549e314-73db-4adf-8ef7-82c1bf89a527",
+                "2022-12-22", "2022-12-29");*/
         /*try {
             presenter.addPertemuan("Dearen Test Api","Test Api Android Studio",
                     "2022-12-24 10:00+0700","2022-12-24 12:00+0700");

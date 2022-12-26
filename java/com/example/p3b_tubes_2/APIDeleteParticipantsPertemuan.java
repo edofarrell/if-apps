@@ -22,19 +22,19 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class APIAddParticipantsPertemuan{
+public class APIDeleteParticipantsPertemuan {
     private PertemuanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
 
-    public APIAddParticipantsPertemuan(PertemuanPresenter presenter, Context context){
+    public APIDeleteParticipantsPertemuan(PertemuanPresenter presenter, Context context){
         this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
     }
 
-    public void addParticipants(String[] participantsId) throws JSONException {
-        String url = APIClient.BASE_URL+"/appointments"+"/26783a4f-9b00-4a35-ab44-da9214794efb"+"/participants";
+    public void deleteParticipants(String[] participantsId) throws JSONException {
+        String url = APIClient.BASE_URL+"/appointments"+"/26783a4f-9b00-4a35-ab44-da9214794efb"+"/participants"+"/delete";
         JsonObject json = new JsonObject();
         JsonArray array = new JsonArray();
         for(int i = 0;i<participantsId.length;i++){
@@ -42,25 +42,20 @@ public class APIAddParticipantsPertemuan{
         }
         json.addProperty("appointment_id","26783a4f-9b00-4a35-ab44-da9214794efb");
         json.add("participants",array);
-        Log.d("DEBUG",json.toString());
         JSONObject jsonObject = new JSONObject(json.toString());
-        //JSONArray JSON = new JSONArray();
-        //JSON.put(jsonObject);
-        //Log.d("DEBUG",JSON.toString());
-        Log.d("DEBUG","rjnjdnjkd");
         CustomJsonRequest request = new CustomJsonRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.d("DEBUG","SUCCESS");
+                presenter.onSuccessDeleteParticipants(response.toString());
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 try {
                     String responseBody = new String(error.networkResponse.data, "utf-8");
-                    Log.d("DEBUG", "APIAddParticipantsPertemuan: onErrorResponse(), Error=" + responseBody);
+                    Log.d("DEBUG", "APIDeleteParticipantsPertemuan: onErrorResponse(), Error=" + responseBody);
                 } catch (UnsupportedEncodingException e) {
-                    Log.d("DEBUG", "APIAddParticipantsPertemuan: onErrorResponse() catch UnsupportedEncodingException");
+                    Log.d("DEBUG", "APIDeleteParticipantsPertemuan: onErrorResponse() catch UnsupportedEncodingException");
                 }
             }
         }) {

@@ -16,7 +16,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
-public class Authorization implements Response.Listener<JSONObject>, Response.ErrorListener {
+    public class Authorization implements Response.Listener<JSONObject>, Response.ErrorListener {
 
     private UserPresenter userPresenter;
     private RequestQueue queue;
