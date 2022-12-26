@@ -93,13 +93,15 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
     private Gson gson;
 
     public PertemuanList(PertemuanPresenter presenter, Context context) {
-        arr = new ArrayList<>();
+        this.arr = new ArrayList<>();
         this.pertemuanPresenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
     }
 
-    public PertemuanList(){}
+    public PertemuanList(){
+        this.arr = new ArrayList<>();
+    }
 
     public void addPertemuan(Pertemuan pertemuan){
         this.arr.add(pertemuan);
