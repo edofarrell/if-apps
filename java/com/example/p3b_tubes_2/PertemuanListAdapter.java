@@ -8,34 +8,47 @@ import android.widget.TextView;
 
 import com.example.p3b_tubes_2.databinding.ItemListPertemuanBinding;
 
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class PertemuanListAdapter extends BaseAdapter {
 
     private PertemuanList pertemuanList;
+    private PertemuanPresenter presenter;
 
-    private class ViewHolder{
+    private class ViewHolder {
         protected int i;
         protected TextView tvTitle;
         protected TextView tvDate;
         protected TextView tvStartTime;
         protected TextView tvEndTime;
 
-        public ViewHolder(ItemListPertemuanBinding binding, int i){
+        public ViewHolder(ItemListPertemuanBinding binding, int i) {
             this.i = i;
             this.tvTitle = binding.title;
             this.tvDate = binding.date;
             this.tvStartTime = binding.startTime;
             this.tvEndTime = binding.endTime;
+
+            binding.llPertemuan.setOnClickListener(this::openDetail);
         }
 
-        private void updateView(int i){
+        private void openDetail(View view) {
+            PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
+            presenter.getPartisipan(pertemuan);
+        }
+
+        private void updateView(int i) {
             PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
             this.tvTitle.setText(pertemuan.getTitle());
-            this.tvDate.setText(new SimpleDateFormat("dd MMM yyy").format(pertemuan.getEndTime()));
+            this.tvDate.setText(pertemuan.getStartTime().substring(0, 10));
             this.tvStartTime.setText(pertemuan.getStartTime());
             this.tvEndTime.setText(pertemuan.getEndTime());
         }
+    }
+
+    public PertemuanListAdapter(PertemuanPresenter presenter) {
+        this.pertemuanList = new PertemuanList();
+        this.presenter = presenter;
     }
 
     @Override
@@ -68,5 +81,10 @@ public class PertemuanListAdapter extends BaseAdapter {
         viewHolder.updateView(i);
 
         return view;
+    }
+
+    public void update(PertemuanList pertemuanList) {
+        this.pertemuanList = pertemuanList;
+        notifyDataSetChanged();
     }
 }

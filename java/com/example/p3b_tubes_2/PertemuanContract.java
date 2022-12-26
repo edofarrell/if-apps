@@ -1,5 +1,7 @@
 package com.example.p3b_tubes_2;
 
+import java.util.ArrayList;
+
 public interface PertemuanContract {
     
     interface Model {
@@ -14,10 +16,21 @@ public interface PertemuanContract {
             void onErrorChange();
         }
 
+        interface GetOnSuccessListener{
+            void onSuccessGet(PertemuanList pertemuanList);
+            void onErrorGet();
+        }
+
+        interface GetPartisipanSuccessListener{
+            void onSuccessGetPartisipan(PertemuanList.Pertemuan pertemuan);
+            void onErrorGetPartisipan();
+        }
+
         void getPertemuanList();
     }
 
     interface View {
-        void update(String id);
+        void update(PertemuanList pertemuanList);
+        void openDetail(PertemuanList.Pertemuan pertemuan);
     }
 }
