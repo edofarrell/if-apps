@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -7,6 +7,30 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Detail Pengumuman Fragment"/>
+        android:id="@+id/tv_judul_pengumuman"
+        android:text="MBKM Magang"
+        android:textSize="@dimen/_20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_10sp"/>
 
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_judul_pengumuman"
+        android:layout_marginTop="@dimen/_10sp"
+        android:layout_marginLeft="@dimen/_20sp"
+        android:text="@string/tagsPengumuman"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tv_deskripsi_pengumuman"
+        android:layout_below="@id/tv_tags"
+        android:layout_marginTop="@dimen/_20dp"
+        android:text="Saya lampirkan tawaran program MBKM dari BCA. Segera mendaftar ya!"
+        android:layout_marginLeft="@dimen/_20dp"
+        android:layout_marginRight="20sp"></TextView>
+
+</RelativeLayout>

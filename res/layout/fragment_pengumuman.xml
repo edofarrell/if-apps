@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pengumuman"
-        android:textSize="45sp"
+        android:textSize="@dimen/_45sp"
         android:layout_centerHorizontal="true"
         android:id="@+id/tv_pengumuman"/>
 
@@ -18,32 +18,78 @@
         android:layout_below="@id/tv_pengumuman"
         android:orientation="horizontal"
         android:id="@+id/ll_header_pengumuman"
+        android:layout_marginTop="@dimen/_10sp"
         >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_filter"
-            android:layout_marginLeft="15sp"></ImageView>
+            android:id="@+id/iv_filter"
+            android:layout_marginLeft="@dimen/_15sp"></ImageView>
 
-        <EditText
+
+
+        <androidx.appcompat.widget.SearchView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/custom_kotak_filter_pengumuman"
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="15sp"
-            android:layout_marginTop="5sp"
-            android:hint="@string/hintPengumuman"
-            android:paddingLeft="10sp"></EditText>
+            android:layout_marginLeft="@dimen/_10sp"
+            android:layout_marginRight="@dimen/_15sp"
+            android:layout_marginTop="@dimen/_5sp"
+            app:queryHint="@string/hintPengumuman"
+
+            ></androidx.appcompat.widget.SearchView>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_header_pengumuman"
+        android:id="@+id/ll_chip"
+        android:layout_marginLeft="@dimen/_15sp"
+        android:layout_marginRight="@dimen/_15sp"
+        >
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chip_grup">
+
+
+
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+    </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ll_header_pengumuman"
-        android:layout_marginTop="20sp">
+        android:layout_below="@id/ll_chip"
+        android:id="@+id/lv_pengumuman"
+        android:layout_marginTop="@dimen/_20sp">
 
     </ListView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_pengumuman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/_16dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_tambah_fab"
+            />
+
+    </RelativeLayout>
 
 </RelativeLayout>

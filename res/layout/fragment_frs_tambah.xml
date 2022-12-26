@@ -8,67 +8,78 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/judulTambahFRS"
-        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:textSize="@dimen/_25sp"
         android:id="@+id/tv_tambah"></TextView>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tv_tambah"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_20sp"
+        android:paddingLeft="@dimen/_10sp"
+        android:paddingRight="@dimen/_10sp"
+        >
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Semester Ganjil 2022/2023"
-            android:id="@+id/tv_semester"></TextView>
+            android:id="@+id/tv_semester"
+            android:textSize="@dimen/_15sp"></TextView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            app:startIconDrawable="@drawable/ic_matkul"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            app:cardCornerRadius="18dp">
+            android:hint="@string/mataKuliah"
+            android:layout_below="@id/tv_semester"
+            android:id="@+id/dropdown"
+            android:layout_marginTop="@dimen/_10sp">
 
-            <androidx.appcompat.widget.AppCompatSpinner
+            <AutoCompleteTextView
+                android:id="@+id/matkul"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:id="@+id/dropDown"
-                />
-
-        </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                android:inputType="none"></AutoCompleteTextView>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/prasyarat">
+            android:text="@string/prasyarat"
+            android:id="@+id/tv_prasyarat"
+            android:layout_below="@id/dropdown"
+            android:layout_marginTop="@dimen/_15sp">
 
         </TextView>
 
         <ListView
+            android:id="@+id/lv_matkul_prasyarat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lv_matkul_prasyarat"></ListView>
-
-
-
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-       >
+            android:layout_below="@id/tv_prasyarat"
+            android:layout_above="@+id/btn_ambil"
+            android:layout_marginTop="@dimen/_10sp"></ListView>
 
         <Button
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ambil"
-            android:layout_centerHorizontal="true"
+            android:id="@+id/btn_ambil"
             ></Button>
+
+
+
     </RelativeLayout>
+
+
+
 
 
 
