@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="10sp"
-    android:paddingBottom="10sp"
+    android:paddingTop="@dimen/_10sp"
+    android:paddingBottom="@dimen/_10sp"
     android:background="@color/blue_background">
 
     <TextView
@@ -13,14 +13,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/judul_pegumuman"
         android:textStyle="bold"
-        android:layout_marginLeft="10sp"
+        android:layout_marginLeft="@dimen/_10sp"
         android:text="Pengumuman"></TextView>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tag_pengumuman"
-        android:layout_marginLeft="20sp"
+        android:layout_marginLeft="@dimen/_20sp"
         android:text="tag"></TextView>
 
 </LinearLayout>

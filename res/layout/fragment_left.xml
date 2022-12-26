@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="15sp"
+        android:layout_margin="@dimen/_15sp"
         android:id="@+id/ll_home"
         >
 
@@ -28,16 +28,16 @@
             android:layout_height="wrap_content"
             android:text="@string/home"
             android:id="@+id/tv_home"
-            android:layout_marginLeft="20sp"
+            android:layout_marginLeft="@dimen/_20sp"
             android:layout_gravity="center"
-            android:textSize="20sp"></TextView>
+            android:textSize="@dimen/_20sp"></TextView>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="10sp"
+        android:layout_margin="@dimen/_10sp"
         android:id="@+id/ll_pengumuman">
 
         <ImageView
@@ -53,9 +53,9 @@
             android:layout_height="wrap_content"
             android:text="@string/pengumuman"
             android:id="@+id/tv_pengumuman"
-            android:layout_marginLeft="15sp"
+            android:layout_marginLeft="@dimen/_15sp"
             android:layout_gravity="center"
-            android:textSize="20sp"></TextView>
+            android:textSize="@dimen/_20sp"></TextView>
     </LinearLayout>
 
 
@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="15sp"
+        android:layout_margin="@dimen/_15sp"
         android:id="@+id/ll_pertemuan">
 
         <ImageView
@@ -79,16 +79,16 @@
             android:layout_height="wrap_content"
             android:text="@string/pertemuan"
             android:id="@+id/tv_pertemuan"
-            android:layout_marginLeft="20sp"
+            android:layout_marginLeft="@dimen/_20sp"
             android:layout_gravity="center"
-            android:textSize="20sp"></TextView>
+            android:textSize="@dimen/_20sp"></TextView>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="15sp"
+        android:layout_margin="@dimen/_15sp"
         android:id="@+id/ll_frs">
 
         <ImageView
@@ -104,16 +104,16 @@
             android:layout_height="wrap_content"
             android:text="@string/frs"
             android:id="@+id/tv_frs"
-            android:layout_marginLeft="20sp"
+            android:layout_marginLeft="@dimen/_20sp"
             android:layout_gravity="center"
-            android:textSize="20sp"></TextView>
+            android:textSize="@dimen/_20sp"></TextView>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="15sp"
+        android:layout_margin="@dimen/_15sp"
         android:id="@+id/ll_logout">
 
         <ImageView
@@ -129,9 +129,9 @@
             android:layout_height="wrap_content"
             android:text="@string/logout"
             android:id="@+id/tv_logout"
-            android:layout_marginLeft="20sp"
+            android:layout_marginLeft="@dimen/_20sp"
             android:layout_gravity="center"
-            android:textSize="20sp"></TextView>
+            android:textSize="@dimen/_20sp"></TextView>
     </LinearLayout>
 
 
