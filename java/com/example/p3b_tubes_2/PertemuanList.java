@@ -70,6 +70,15 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
     }
+
+    public int getSize(){
+        return this.arr.size();
+    }
+
+    public Pertemuan getPertemuan(int i){
+        return this.arr.get(i);
+    }
+
     //id global = c549e314-73db-4adf-8ef7-82c1bf89a527
     public void getPertemuan(String id, String startDate, String endDate){
         String url = APIClient.BASE_URL+"/appointments"+"/"+id+"/"+startDate+"/"+endDate;
