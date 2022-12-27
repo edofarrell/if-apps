@@ -50,10 +50,13 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         }
     }
 
-    class Cursor{
+    class Cursor {
         String next;
 
-        public String getCursor(){
+        public String getCursor() {
+            if (this.next == null) {
+                return "none";
+            }
             return this.next;
         }
     }
@@ -69,6 +72,10 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
+    }
+
+    public String getCursor() {
+        return this.metadata.getCursor();
     }
 
     public PengumumanList() {
@@ -87,8 +94,25 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         this.data.add(pengumuman);
     }
 
+    public ArrayList<Pengumuman> getData() {
+        return data;
+    }
+
+    public void setData(ArrayList<Pengumuman> data) {
+        this.data = data;
+    }
+
+    public Cursor getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(Cursor metadata) {
+        this.metadata = metadata;
+    }
+
     public void getPengumumanAll() {
         String url = APIClient.BASE_URL + "/announcements";
+        Log.d("DEBUG", url);
 
         StringRequest request = new StringRequest(
                 Request.Method.GET,
@@ -107,14 +131,18 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         this.queue.add(request);
     }
 
-    public void getPengumumanAll(String title, List<String> tags) {
+    public void getPengumumanAll(String title, List<String> tags, String cursor) {
         String url = APIClient.BASE_URL + "/announcements?";
         if (title != null) {
             url += "filter[title]=" + title;
         }
-        for (String tag : tags) {
-            url += "&filter[tags][]=" + tag;
+        for (int i = 0; i < tags.size(); i++) {
+            url += "&filter[tags][]=" + tags.get(i);
         }
+        if (!cursor.equals("none")) {
+            url += "&cursor=" + cursor;
+        }
+        Log.d("DEBUG", url);
 
         StringRequest request = new StringRequest(
                 Request.Method.GET,

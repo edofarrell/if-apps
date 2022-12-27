@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,8 +32,10 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private FrameLayout frameLayout;
     private List<String> arrChipGroup;
     private ChipGroup chipGroup;
+    private String searchText;
 
-    private PengumumanFragment() {}
+    private PengumumanFragment() {
+    }
 
     public static PengumumanFragment newInstance(MainPresenter mainPresenter, Context context, FrameLayout frameLayout) {
         PengumumanFragment fragment = new PengumumanFragment();
@@ -52,10 +56,26 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
         this.binding.btnAddPengumuman.setOnClickListener(this::OnClickAddPengumuman);
 
-        binding.ivFilter.setOnClickListener(this::onClick);
-        binding.tvPengumuman.setOnClickListener(this::test);//dipake untuk test api saja
-        chipGroup = binding.chipGrup;
+        this.binding.ivFilter.setOnClickListener(this::onClick);
+        this.binding.tvPengumuman.setOnClickListener(this::test);//dipake untuk test api saja
+        this.chipGroup = binding.chipGrup;
 
+        this.searchText = "";
+        this.binding.btnNext.setOnClickListener(this::onClickNext);
+
+        
+
+        return this.binding.getRoot();
+    }
+
+    private void onClickNext(View view) {
+        List<String> tag = presenter.getTagsId(arrChipGroup);
+        this.presenter.getPengumuman(this.searchText, tag, "next");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         SearchView searchView = this.binding.searchBar;
         searchView.setActivated(true);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -66,14 +86,16 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                List<String> tag = new ArrayList<>();
-                tag.add("d78227d2-053e-4d57-8ef7-ba1560f412de");
-                presenter.getPengumuman(newText, tag);
+                searchText = newText;
+                filter();
                 return false;
             }
         });
+    }
 
-        return this.binding.getRoot();
+    public void filter() {
+        List<String> tag = presenter.getTagsId(arrChipGroup);
+        presenter.getPengumuman(this.searchText, tag, null);
     }
 
     private void OnClickAddPengumuman(View view) {
@@ -102,8 +124,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         chip.setOnCloseIconClickListener(this::OnCloseIconClick);
 
         boolean check = false;
-        for(int i = 0;i<arrChipGroup.size();i++){
-            if(arrChipGroup.contains(item.getTitle().toString())){
+        for (int i = 0; i < arrChipGroup.size(); i++) {
+            if (arrChipGroup.contains(item.getTitle().toString())) {
                 check = true;
                 break;
             }
@@ -112,6 +134,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
             chipGroup.addView(chip);
         }
         arrChipGroup.add(item.getTitle().toString());
+        filter();
         return super.onOptionsItemSelected(item);
     }
 
@@ -119,6 +142,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         Chip chip = (Chip) view;
         chipGroup.removeView(view);
         arrChipGroup.remove(chip.getText().toString());
+        filter();
         return true;
     }
 
