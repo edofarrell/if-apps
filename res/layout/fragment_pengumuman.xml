@@ -45,8 +45,7 @@
         android:layout_below="@id/ll_header_pengumuman"
         android:id="@+id/ll_chip"
         android:layout_marginLeft="@dimen/_15sp"
-        android:layout_marginRight="@dimen/_15sp"
-        >
+        android:layout_marginRight="@dimen/_15sp">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"

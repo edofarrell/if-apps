@@ -50,11 +50,19 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         }
     }
 
+    class Cursor{
+        String next;
+
+        public String getCursor(){
+            return this.next;
+        }
+    }
+
     private ArrayList<Pengumuman> data;
     private PengumumanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
-    private String cursor;
+    private Cursor metadata;
 
     public PengumumanList(PengumumanPresenter presenter, Context context) {
         this.data = new ArrayList<>();
