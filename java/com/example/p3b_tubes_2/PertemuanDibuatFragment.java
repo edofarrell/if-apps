@@ -17,10 +17,9 @@ public class PertemuanDibuatFragment extends Fragment {
 
     public PertemuanDibuatFragment(){};
 
-    public static PertemuanDibuatFragment newInstance() {
+    public static PertemuanDibuatFragment newInstance(PertemuanPresenter presenter) {
         PertemuanDibuatFragment fragment = new PertemuanDibuatFragment();
-        fragment.adapter = new PertemuanListAdapter();
-
+        fragment.adapter = new PertemuanListAdapter(presenter);
         return fragment;
     }
 

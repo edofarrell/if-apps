@@ -37,8 +37,8 @@ public class PertemuanFragment extends Fragment implements PertemuanContract.Vie
         fragment.adapter = new PertemuanListAdapter(fragment.presenter);
         fragment.frameLayout = frameLayout;
         fragment.fragments = new HashMap<>();
-        fragment.fragments.put("pertemuanDibuat", PertemuanDibuatFragment.newInstance());
-        fragment.fragments.put("pertemuanDiundang", PertemuanDiundangFragment.newInstance());
+        fragment.fragments.put("pertemuanDibuat", PertemuanDibuatFragment.newInstance(fragment.presenter));
+        fragment.fragments.put("pertemuanDiundang", PertemuanDiundangFragment.newInstance(fragment.presenter));
         fragment.setArguments(args);
         return fragment;
     }

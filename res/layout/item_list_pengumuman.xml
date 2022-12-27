@@ -3,7 +3,7 @@
     android:id="@+id/ll_pengumuman"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/blue_background"
+    android:backgroundTint="@color/primary"
     android:orientation="vertical"
     android:paddingTop="@dimen/_10sp"
     android:paddingBottom="@dimen/_10sp"
@@ -65,13 +65,8 @@
             android:layout_marginLeft="@dimen/_20sp"
             android:layout_marginRight="@dimen/_20sp"
             android:text="@string/lihatDetail"
-            android:textColor="@color/blue_primary" />
-
-
-
-
-
-
+            android:textColor="@color/primary" />
+        
     </LinearLayout>
 
 

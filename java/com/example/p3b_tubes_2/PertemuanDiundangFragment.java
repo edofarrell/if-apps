@@ -16,10 +16,9 @@ public class PertemuanDiundangFragment extends Fragment {
     private FragmentPertemuanDiundangBinding binding;
     private PertemuanListAdapter adapter;
 
-    public static PertemuanDiundangFragment newInstance() {
+    public static PertemuanDiundangFragment newInstance(PertemuanPresenter presenter) {
         PertemuanDiundangFragment fragment = new PertemuanDiundangFragment();
-        fragment.adapter = new PertemuanListAdapter();
-
+        fragment.adapter = new PertemuanListAdapter(presenter);
         return fragment;
     }
 

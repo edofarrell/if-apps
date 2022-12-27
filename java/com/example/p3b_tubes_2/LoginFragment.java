@@ -68,7 +68,7 @@ public class LoginFragment extends Fragment implements LoginContract.View{
             this.fragmentLoginBinding.error.setText("Login gagal, periksa kemabli username/password/role");
         }else{
             Bundle result = new Bundle();
-            result.putString("page", "home");
+            result.putString("page", "pengumuman");
             getParentFragmentManager().setFragmentResult("changePage", result);
         }
     }

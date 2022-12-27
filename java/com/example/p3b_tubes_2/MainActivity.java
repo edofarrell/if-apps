@@ -1,10 +1,7 @@
 package com.example.p3b_tubes_2;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
@@ -17,9 +14,7 @@ import android.view.View;
 import com.example.p3b_tubes_2.databinding.ActivityMainBinding;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.elevation.ElevationOverlayProvider;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         MainPresenter mainPresenter = new MainPresenter();
 
         this.fragments = new HashMap<>();
-        this.fragments.put("home", HomeFragment.newInstance());
 
         this.fragments.put("left", LeftFragment.newInstance());
         this.fragments.put("login", LoginFragment.newInstance(mainPresenter, this));
@@ -74,15 +68,13 @@ public class MainActivity extends AppCompatActivity {
 
         AppBarLayout topAppBar = binding.appbarTopAppBar;
 
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         topAppBar.setVisibility(View.GONE);
         bottomNavigation.setVisibility(View.GONE);
 
         FragmentTransaction ft = this.fm.beginTransaction();
         ft.add(binding.fragmentContainer.getId(), fragments.get("login"))
                 .commit();
-
-        getSupportActionBar().hide();
 
         this.fm.setFragmentResultListener("changePage", this, new FragmentResultListener() {
             @Override
