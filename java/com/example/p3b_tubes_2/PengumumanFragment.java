@@ -66,7 +66,9 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                presenter.getPengumuman(newText);
+                List<String> tag = new ArrayList<>();
+                tag.add("d78227d2-053e-4d57-8ef7-ba1560f412de");
+                presenter.getPengumuman(newText, tag);
                 return false;
             }
         });

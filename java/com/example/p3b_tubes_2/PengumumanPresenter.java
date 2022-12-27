@@ -3,6 +3,7 @@ package com.example.p3b_tubes_2;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PengumumanPresenter implements
         PengumumanContract.Model.GetOnSuccessListener,
@@ -66,8 +67,8 @@ public class PengumumanPresenter implements
         this.pengumuman.getPengumumanAll();
     }
 
-    public void getPengumuman(String text){
-        this.pengumuman.getPengumumanAll(text);
+    public void getPengumuman(String title, List<String> tags){
+        this.pengumuman.getPengumumanAll(title, tags);
     }
 
     @Override
