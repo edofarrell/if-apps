@@ -23,10 +23,16 @@ public class PengumumanListAdapter extends BaseAdapter {
             this.tvTag = binding.tvTag;
 
             binding.llPengumuman.setOnClickListener(this::openDetail);
+            binding.btnDelete.setOnClickListener(this::onClickDelete);
+        }
+
+        private void onClickDelete(View view) {
+            PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
+            presenter.deletePengumuman(pengumuman.getId());
         }
 
         private void openDetail(View view) {
-           PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
+            PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
             presenter.getPengumumanDetail(pengumuman);
         }
 

@@ -10,7 +10,8 @@ public class PengumumanPresenter implements
         PengumumanContract.Model.GetOnSuccessListener,
         PengumumanContract.Model.GetTagOnSuccessListener,
         PengumumanContract.Model.GetDetailOnSuccessListener,
-        PengumumanContract.Model.AddOnSuccessListener
+        PengumumanContract.Model.AddOnSuccessListener,
+        PengumumanContract.Model.DeleteOnSuccessListener
 {
 
     private PengumumanContract.View ui;
@@ -32,11 +33,6 @@ public class PengumumanPresenter implements
     }
 
 
-    public void deletePengumuman(String id) {
-        deletePengumuman.deletePengumuman(id);
-    }
-
-
     public void addPengumuman(String title, String content, String[] tags) {
         this.tambahPengumuman.addPengumuman(title, content, tags);
     }
@@ -49,6 +45,21 @@ public class PengumumanPresenter implements
 
     @Override
     public void AddOnError() {
+
+    }
+
+
+    public void deletePengumuman(String id) {
+        deletePengumuman.deletePengumuman(id);
+    }
+
+    @Override
+    public void deleteOnSuccess() {
+        this.getPengumuman();
+    }
+
+    @Override
+    public void deleteOnError() {
 
     }
 
@@ -96,5 +107,6 @@ public class PengumumanPresenter implements
     public void GetDetailOnError() {
 
     }
+
 
 }

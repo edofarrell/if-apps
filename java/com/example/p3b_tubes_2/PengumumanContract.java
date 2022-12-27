@@ -24,6 +24,11 @@ public interface PengumumanContract {
             void AddOnSuccess(PengumumanList.Pengumuman pengumuman);
             void AddOnError();
         }
+
+        interface DeleteOnSuccessListener{
+            void deleteOnSuccess();
+            void deleteOnError();
+        }
     }
 
     interface View {
