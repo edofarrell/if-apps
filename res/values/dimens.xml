@@ -17,4 +17,5 @@
     <dimen name="_40sp">40sp</dimen>
     <dimen name="_300sp">300sp</dimen>
     <dimen name="_25sp">25sp</dimen>
+    <dimen name="_50sp">50sp</dimen>
 </resources>
