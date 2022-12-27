@@ -36,8 +36,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private ChipGroup chipGroup;
     private String searchText;
 
-    private PengumumanFragment() {
-    }
+    private PengumumanFragment() {}
 
     public static PengumumanFragment newInstance(MainPresenter mainPresenter, Context context, FrameLayout frameLayout) {
         PengumumanFragment fragment = new PengumumanFragment();

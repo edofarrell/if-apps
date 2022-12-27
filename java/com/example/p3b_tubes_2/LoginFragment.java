@@ -2,6 +2,7 @@ package com.example.p3b_tubes_2;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,10 +56,7 @@ public class LoginFragment extends Fragment implements LoginContract.View{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Bundle result = new Bundle();
-        result.putString("page", "pengumuman");
 
-        getParentFragmentManager().setFragmentResult("changePage", result);
     }
 
 

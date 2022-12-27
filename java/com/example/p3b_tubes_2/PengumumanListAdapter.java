@@ -37,16 +37,16 @@ public class PengumumanListAdapter extends BaseAdapter {
         }
 
         private void openDetail(View view) {
-            this.isRead = true;
+//            this.isRead = true;
             this.llPengumuman.setBackgroundColor(Color.WHITE);
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
             presenter.getPengumumanDetail(pengumuman);
         }
 
         private void updateView(int i) {
-            if(this.isRead == true){
-                this.llPengumuman.setBackgroundColor(Color.WHITE);
-            }
+//            if(this.isRead == true){
+//                this.llPengumuman.setBackgroundColor(Color.WHITE);
+//            }
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
             this.tvJudul.setText(pengumuman.getTitle());
             this.tvTag.setText(pengumuman.getTags());

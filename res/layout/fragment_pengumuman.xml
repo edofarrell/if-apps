@@ -70,18 +70,7 @@
         android:layout_marginTop="@dimen/_20sp"
         android:padding="@dimen/_20sp"
         android:divider="@color/white"
-        android:dividerHeight="@dimen/_20sp"
-
-        >
-
-    </ListView>
-
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/next" />
+        android:dividerHeight="@dimen/_20sp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
