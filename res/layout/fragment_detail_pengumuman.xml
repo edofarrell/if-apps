@@ -43,7 +43,6 @@
         android:id="@+id/tv_content"
         android:layout_below="@id/ll_tags"
         android:layout_marginTop="@dimen/_20dp"
-        android:text="Saya lampirkan tawaran program MBKM dari BCA. Segera mendaftar ya!"
         android:layout_marginLeft="@dimen/_20dp"
         android:layout_marginRight="20sp"/>
 
