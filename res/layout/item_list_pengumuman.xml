@@ -16,11 +16,38 @@
         android:layout_marginLeft="@dimen/_10sp"
         android:text="Pengumuman"></TextView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_10sp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sp"
+            android:background="@drawable/ic_hashtag"
+            ></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tag_pengumuman"
+            android:layout_marginLeft="@dimen/_10sp"
+            ></TextView>
+
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tag_pengumuman"
-        android:layout_marginLeft="@dimen/_20sp"
-        android:text="tag"></TextView>
+        android:text="@string/lihatDetail"
+        android:gravity="right"
+        android:layout_marginRight="@dimen/_10sp"
+        android:layout_marginTop="@dimen/_5sp"
+        android:textColor="@color/blue_primary"></TextView>
+
 
 </LinearLayout>
