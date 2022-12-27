@@ -8,12 +8,19 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.example.p3b_tubes_2.databinding.ActivityMainBinding;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private ActivityMainBinding binding;
     private HashMap<String, Fragment> fragments;
@@ -33,14 +40,52 @@ public class MainActivity extends AppCompatActivity {
         this.fragments.put("frs",FRSFragment.newInstance());
         this.fm = getSupportFragmentManager();
 
+        BottomNavigationView bottomNavigation = binding.bottomNavigation;
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                String page = "";
+                switch (item.getItemId()) {
+                    case R.id.item_pengumuman:
+                        page = "pengumuman";
+                        break;
+                    case R.id.item_pertemuan:
+                        page = "pertemuan";
+                        break;
+                    case R.id.item_frs:
+                        page = "frs";
+                        break;
+                    case R.id.item_profil:
+                        page = "profil";
+                        break;
+                }
+                changePage(page);
+                return true;
+            }
+        });
+
+        AppBarLayout topAppBar = binding.appbarTopAppBar;
+
+        getSupportActionBar().hide();
+        topAppBar.setVisibility(View.GONE);
+        bottomNavigation.setVisibility(View.GONE);
+
         FragmentTransaction ft = this.fm.beginTransaction();
         ft.add(binding.fragmentContainer.getId(), fragments.get("login"))
                 .commit();
+
+        getSupportActionBar().hide();
 
         this.fm.setFragmentResultListener("changePage", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 String page = result.getString("page");
+                if(page.equals("login")) {
+                    bottomNavigation.setVisibility(View.GONE);
+                } else {
+                    topAppBar.setVisibility(View.VISIBLE);
+                    bottomNavigation.setVisibility(View.VISIBLE);
+                }
                 changePage(page);
             }
         });
@@ -51,9 +96,24 @@ public class MainActivity extends AppCompatActivity {
         if(page.equals("exit")) {
             closeApplication();
         } else {
-            ft.replace(this.binding.fragmentContainer.getId(), fragments.get(page))
+            Fragment intendedFragment = this.fragments.get(page);
+            if(intendedFragment.isAdded()) {
+                ft.show(intendedFragment);
+            } else {
+                ft.add(this.binding.fragmentContainer.getId(), intendedFragment);
+            }
+
+            for (Map.Entry<String, Fragment> set:this.fragments.entrySet()) {
+                String key = set.getKey();
+                if(!key.equals(page)) {
+                    ft.hide(this.fragments.get(key));
+                }
+            }
+            ft.commit();
+
+            /*ft.replace(this.binding.fragmentContainer.getId(), fragments.get(page))
                     .addToBackStack(null)
-                    .commit();
+                    .commit();*/
         }
     }
 

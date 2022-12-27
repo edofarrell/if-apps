@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_pertemuan"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_groups_24"
+        android:title="Pertemuan" />
+    <item
+        android:id="@+id/item_frs"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_assignment_24"
+        android:title="FRS" />
+    <item
+        android:id="@+id/item_pengumuman"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        android:title="Pengumuman" />
+    <item
+        android:id="@+id/item_profil"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="Profil" />
+</menu>

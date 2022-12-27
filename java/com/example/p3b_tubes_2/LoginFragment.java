@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentLoginBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONException;
 
@@ -51,7 +52,8 @@ public class LoginFragment extends Fragment {
         }
 
         Bundle result = new Bundle();
-        result.putString("page", "home");
+        result.putString("page", "pertemuan");
+
         getParentFragmentManager().setFragmentResult("changePage", result);
     }
 }
