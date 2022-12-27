@@ -10,8 +10,7 @@ public class PengumumanPresenter implements
         PengumumanContract.Model.GetTagOnSuccessListener,
         PengumumanContract.Model.GetDetailOnSuccessListener,
         PengumumanContract.Model.AddOnSuccessListener,
-        PengumumanContract.Model.DeleteOnSuccessListener
-{
+        PengumumanContract.Model.DeleteOnSuccessListener {
 
     private PengumumanContract.View ui;
     private MainPresenter mainPresenter;
@@ -67,13 +66,18 @@ public class PengumumanPresenter implements
         this.pengumuman.getPengumumanAll();
     }
 
-    public void getPengumuman(String title, List<String> tags){
-        this.pengumuman.getPengumumanAll(title, tags);
+    public void getPengumuman(String title, List<String> tags, String cursor) {
+        if (cursor == null)
+            this.pengumuman.getPengumumanAll(title, tags, "none");
+        else
+            this.pengumuman.getPengumumanAll(title, tags, this.pengumuman.getCursor());
     }
 
     @Override
     public void OnSuccessGet(PengumumanList pengumumanList) {
-        this.ui.update(pengumumanList);
+        this.pengumuman.setData(pengumumanList.getData());
+        this.pengumuman.setMetadata(pengumumanList.getMetadata());
+        this.ui.update(this.pengumuman);
     }
 
     @Override
@@ -111,5 +115,9 @@ public class PengumumanPresenter implements
 
     }
 
+
+    public List<String> getTagsId(List<String> tagName) {
+        return this.tag.getActiveTagFilter(tagName);
+    }
 
 }
