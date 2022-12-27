@@ -91,7 +91,7 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("APIAuthorization", APIClient.token);
+                params.put("Authorization", APIClient.token);
                 return params;
             }
         };
