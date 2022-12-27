@@ -28,7 +28,7 @@
             android:background="@drawable/ic_hashtag"/>
 
         <TextView
-            android:id="@+id/tag_pengumuman"
+            android:id="@+id/tv_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sp"/>
@@ -36,21 +36,34 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_tag"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_20sp"
-        android:layout_marginTop="@dimen/_5sp"
-        android:layout_marginRight="@dimen/_10sp"
-        android:gravity="right"
-        android:text="@string/lihatDetail"
-        android:textColor="@color/blue_primary" />
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_10sp">
 
-    <Button
-        android:id="@+id/btn_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/delete" />
+
+        <TextView
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:gravity="left"
+            android:textColor="@color/red"
+            android:layout_marginLeft="@dimen/_20sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sp"
+            android:layout_marginRight="@dimen/_10sp"
+            android:gravity="right"
+            android:text="@string/lihatDetail"
+            android:textColor="@color/blue_primary" />
+
+
+    </LinearLayout>
+
 
 </LinearLayout>
