@@ -11,26 +11,29 @@
         android:text="MBKM Magang"
         android:textSize="@dimen/_20sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_10sp"/>
+        android:layout_marginTop="@dimen/_10sp"
+        android:textStyle="bold"/>
 
     <LinearLayout
-        android:id="@+id/ll_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/tv_judul">
+        android:layout_below="@id/tv_judul"
+        android:id="@+id/ll_tags"
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sp"
+            android:background="@drawable/ic_hashtag"
             android:layout_marginLeft="@dimen/_20sp"
             android:text="@string/tagsPengumuman"/>
 
         <TextView
             android:id="@+id/tv_tags"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sp"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 

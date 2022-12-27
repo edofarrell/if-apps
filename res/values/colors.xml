@@ -10,4 +10,5 @@
     <color name="blue_primary">#1919AE</color>
     <color name="blue_primary_variant">#2222DD</color>
     <color name="blue_background">#6689CFF0</color>
+    <color name="red">#FF0000</color>
 </resources>
