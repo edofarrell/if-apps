@@ -128,7 +128,7 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("APIAuthorization", APIClient.token);
+                params.put("Authorization", APIClient.token);
                 return params;
             }
         };
