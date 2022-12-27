@@ -93,7 +93,6 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("DEBUG", item.getItemId() + "");
         String text = (String) item.getTitle();
         Chip chip = new Chip(getContext());
         chip.setText(text);
@@ -103,9 +102,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         chip.setOnCloseIconClickListener(this::OnCloseIconClick);
 
         boolean check = false;
-        for (int i = 0; i < arrChipGroup.size(); i++) {
-            Log.d("DEBUG", arrChipGroup.get(i) + "");
-            if (arrChipGroup.contains(item.getTitle().toString())) {
+        for(int i = 0;i<arrChipGroup.size();i++){
+            if(arrChipGroup.contains(item.getTitle().toString())){
                 check = true;
                 break;
             }
@@ -118,7 +116,9 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     public boolean OnCloseIconClick(View view) {
+        Chip chip = (Chip) view;
         chipGroup.removeView(view);
+        arrChipGroup.remove(chip.getText().toString());
         return true;
     }
 
