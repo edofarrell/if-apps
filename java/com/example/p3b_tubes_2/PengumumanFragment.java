@@ -28,6 +28,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private PengumumanPresenter presenter;
     private PengumumanListAdapter adapter;
     private ChipGroup chipGroup;
+    private List<String> arrChipGroup;
 
     private PengumumanFragment() {
     }
@@ -37,6 +38,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         PengumumanFragment fragment = new PengumumanFragment();
         fragment.presenter = new PengumumanPresenter(fragment, context, mainPresenter);
         fragment.adapter = new PengumumanListAdapter(fragment.presenter);
+        fragment.arrChipGroup = new ArrayList<>();
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,22 +64,11 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     public void onClick(View view) {
         presenter.getTag();
-        /*if (view == binding.ivFilter) {
-            PopupMenu popupMenu = new PopupMenu(getContext(), binding.ivFilter);
-
-            //nambah pop up menu (nanti diisi dari yg api tag tag nya)
-            popupMenu.getMenu().add(1, 1, 1, "slot1");
-            popupMenu.getMenu().add(1, 2, 2, "slot2");
-            popupMenu.getMenu().add(1, 3, 3, "slot3");
-            popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
-            popupMenu.show();
-
-            popupMenu.setOnMenuItemClickListener(this::onOptionsItemSelected);
-        }*/
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("DEBUG",item.getItemId()+"");
         int id = item.getItemId();
         CharSequence idS = item.getTitle();
         String text = (String) item.getTitle();
@@ -88,11 +79,10 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         chip.setTextColor(getResources().getColor(R.color.black));
         chip.setOnCloseIconClickListener(this::OnCloseIconClick);
 
-        List<Integer> list = chipGroup.getCheckedChipIds();
         boolean check = false;
-        for(int i = 0;i<list.size();i++){
-            Log.d("DEBUG",list.get(i)+"");
-            if(list.get(i)==id){
+        for(int i = 0;i<arrChipGroup.size();i++){
+            Log.d("DEBUG",arrChipGroup.get(i)+"");
+            if(arrChipGroup.contains(item.getTitle().toString())){
                 check = true;
                 break;
             }
@@ -100,6 +90,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         if(!check){
             chipGroup.addView(chip);
         }
+        arrChipGroup.add(item.getTitle().toString());
         return super.onOptionsItemSelected(item);
     }
 
@@ -119,13 +110,12 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         PopupMenu popupMenu = new PopupMenu(getContext(), binding.ivFilter);
 
         //nambah pop up menu (nanti diisi dari yg api tag tag nya)
-        popupMenu.getMenu().add(1, 1, 1, listTag.get(0).getName());
-        //popupMenu.getMenu().add(1, 2, 2, listTag.get(1).getNama());
-        //popupMenu.getMenu().add(1, 3, 3, listTag.get(2).getNama());
+        for(int i = 0;i< listTag.size();i++){
+            popupMenu.getMenu().add(1, i+1, i+1, listTag.get(i).getName());
+        }
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
         popupMenu.show();
 
         popupMenu.setOnMenuItemClickListener(this::onOptionsItemSelected);
-
     }
 }

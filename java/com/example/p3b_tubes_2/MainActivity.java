@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         this.fragments.put("login", LoginFragment.newInstance(mainPresenter, this));
         this.fragments.put("pengumuman", PengumumanFragment.newInstance(mainPresenter, this));
         this.fragments.put("pertemuan", PertemuanFragment.newInstance(mainPresenter, this, getSupportFragmentManager(), this.binding.fragmentContainer));
-        this.fragments.put("frs", FRSFragment.newInstance(mainPresenter));
+        this.fragments.put("frs", FRSFragment.newInstance(mainPresenter,this));
 
         this.fm = getSupportFragmentManager();
         this.drawer = this.binding.getRoot();
