@@ -72,7 +72,7 @@ public class APIPertemuanGetPartisipan implements Response.Listener<String>, Res
         }
 
         this.pertemuan.setPartisipan(attending);
-        this.presenter.onSuccessGetPartisipan(this.pertemuan);
+        this.presenter.onSuccessGetPartisipanDibuat(this.pertemuan);
     }
 
     @Override

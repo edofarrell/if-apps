@@ -139,7 +139,7 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
     public void onResponse(String response) {
         Type listType = new TypeToken<ArrayList<Pertemuan>>() {}.getType();
         this.arr = this.gson.fromJson(response, listType);
-        this.pertemuanPresenter.onSuccessGet(this);
+        this.pertemuanPresenter.onSuccessGetDibuat(this);
     }
 
     @Override

@@ -20,35 +20,34 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PertemuanFragment extends Fragment implements PertemuanContract.View {
+public class PertemuanFragment extends Fragment implements
+        PertemuanContract.View,
+        PertemuanContract.View.PertemuanDibuat,
+        PertemuanContract.View.PertemuanDiundang
+{
     private FragmentPertemuanBinding binding;
     private PertemuanPresenter presenter;
-    private PertemuanListAdapter adapter;
-    private FrameLayout frameLayout;
     private HashMap<String, Fragment> fragments;
     private FragmentManager fm;
 
     private PertemuanFragment() {}
 
     public static PertemuanFragment newInstance(MainPresenter mainPresenter, Context context, FrameLayout frameLayout) {
-        Bundle args = new Bundle();
         PertemuanFragment fragment = new PertemuanFragment();
         fragment.presenter = new PertemuanPresenter(fragment, context, mainPresenter);
-        fragment.adapter = new PertemuanListAdapter(fragment.presenter);
-        fragment.frameLayout = frameLayout;
         fragment.fragments = new HashMap<>();
-        fragment.fragments.put("pertemuanDibuat", PertemuanDibuatFragment.newInstance(fragment.presenter));
-        fragment.fragments.put("pertemuanDiundang", PertemuanDiundangFragment.newInstance(fragment.presenter));
-        fragment.setArguments(args);
+        PertemuanDibuatFragment dibuatFragment = PertemuanDibuatFragment.newInstance(fragment.presenter, frameLayout);
+        PertemuanDiundangFragment diundangFragment = PertemuanDiundangFragment.newInstance(fragment.presenter, frameLayout);
+        fragment.fragments.put("pertemuanDibuat", dibuatFragment);
+        fragment.fragments.put("pertemuanDiundang", diundangFragment);
+        fragment.presenter.setUiDibuat(dibuatFragment);
+        fragment.presenter.setUiDiundang(diundangFragment);
         return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-//        this.binding.lstPertemuan.setAdapter(this.adapter);
-        this.presenter.getPertemuan();
         this.binding = FragmentPertemuanBinding.inflate(inflater);
 
         this.fm = getChildFragmentManager();
@@ -111,31 +110,33 @@ public class PertemuanFragment extends Fragment implements PertemuanContract.Vie
         ft.commit();
     }
 
-    private void tambah(View view) {
-        //String[] arr = {"cdc143f6-3efe-4a9f-ad29-1be12e357fe9"};
-        presenter.deletePertemuan("13e633be-74ff-4c3c-b8be-35e868504fe6");
-        /*presenter.getPertemuan("c549e314-73db-4adf-8ef7-82c1bf89a527",
-                "2022-12-22", "2022-12-29");*/
+    @Override
+    public void updatePertemuanDibuat(PertemuanList pertemuanList) {
+        PertemuanDibuatFragment fragment = (PertemuanDibuatFragment) this.fragments.get("pertemuanDibuat");
+        fragment.updatePertemuanDibuat(pertemuanList);
+    }
 
-        /*try {
-            presenter.addPertemuan("Dearen Test Api","Test Api Android Studio",
-                    "2022-12-24 10:00+0700","2022-12-24 12:00+0700");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
+    @Override
+    public void openDetailPertemuanDibuat(PertemuanList.Pertemuan pertemuan) {
+        PertemuanDibuatFragment fragment = (PertemuanDibuatFragment) this.fragments.get("pertemuanDibuat");
+        fragment.openDetailPertemuanDibuat(pertemuan);
+    }
+
+
+    @Override
+    public void updatePertemuanDiundang(PertemuanList pertemuanList) {
+        PertemuanDibuatFragment fragment = (PertemuanDibuatFragment) this.fragments.get("pertemuanDiundang");
+        fragment.updatePertemuanDibuat(pertemuanList);
+    }
+
+    @Override
+    public void openDetailPertemuanDiundang(PertemuanList.Pertemuan pertemuan) {
+        PertemuanDibuatFragment fragment = (PertemuanDibuatFragment) this.fragments.get("pertemuanDiundang");
+        fragment.openDetailPertemuanDibuat(pertemuan);
     }
 
     @Override
     public void update(PertemuanList pertemuanList) {
-        this.adapter.update(pertemuanList);
+        this.updatePertemuanDibuat(pertemuanList);
     }
-
-    @Override
-    public void openDetail(PertemuanList.Pertemuan pertemuan){
-        PertemuanDetailFragment pertemuanDetailFragment = PertemuanDetailFragment.newInstance(pertemuan);
-        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pertemuanDetailFragment)
-                .addToBackStack(null)
-                .commit();
-    }
-
 }

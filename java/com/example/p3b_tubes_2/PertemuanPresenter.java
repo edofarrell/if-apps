@@ -19,6 +19,8 @@ public class PertemuanPresenter implements
 {
     private PertemuanList pertemuan;
     private PertemuanContract.View ui;
+    private PertemuanContract.View.PertemuanDibuat uiDibuat;
+    private PertemuanContract.View.PertemuanDiundang uiDiundang;
     private MainPresenter mainPresenter;
     private APIPertemuanAdd apiPertemuanAdd;
     private APIPertemuanChange apiPertemuanChange;
@@ -39,7 +41,16 @@ public class PertemuanPresenter implements
         this.deletePertemuan = new APIPertemuanDelete(this,context);
     }
 
-    public void getPertemuan() {
+    public void setUiDibuat(PertemuanContract.View.PertemuanDibuat ui){
+        this.uiDibuat = ui;
+    }
+
+    public void setUiDiundang(PertemuanContract.View.PertemuanDiundang ui){
+        this.uiDiundang = ui;
+    }
+
+
+    public void getPertemuanDibuat() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -48,32 +59,32 @@ public class PertemuanPresenter implements
         this.pertemuan.getPertemuan(formatter.format(new Date()), formatter.format(calendar.getTime()));
     }
 
-    public void getPertemuan(String startDate, String endDate) {
+    public void getPertemuanDibuat(String startDate, String endDate) {
         this.pertemuan.getPertemuan(startDate, endDate);
     }
 
     @Override
-    public void onSuccessGet(PertemuanList pertemuanList) {
-        this.ui.update(pertemuanList);
+    public void onSuccessGetDibuat(PertemuanList pertemuanList) {
+        this.uiDibuat.updatePertemuanDibuat(pertemuanList);
     }
 
     @Override
-    public void onErrorGet() {
+    public void onErrorGetDibuat() {
 
     }
 
 
-    public void getPartisipan(PertemuanList.Pertemuan pertemuan){
+    public void getPartisipanDibuat(PertemuanList.Pertemuan pertemuan){
         this.apiPertemuanGetPartisipan.getPartisipan(pertemuan);
     }
 
     @Override
-    public void onSuccessGetPartisipan(PertemuanList.Pertemuan pertemuan) {
-        this.ui.openDetail(pertemuan);
+    public void onSuccessGetPartisipanDibuat(PertemuanList.Pertemuan pertemuan) {
+        this.uiDibuat.openDetailPertemuanDibuat(pertemuan);
     }
 
     @Override
-    public void onErrorGetPartisipan() {
+    public void onErrorGetPartisipanDibuat() {
 
     }
 

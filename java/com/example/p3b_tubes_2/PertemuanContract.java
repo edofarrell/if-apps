@@ -17,13 +17,13 @@ public interface PertemuanContract {
         }
 
         interface GetOnSuccessListener{
-            void onSuccessGet(PertemuanList pertemuanList);
-            void onErrorGet();
+            void onSuccessGetDibuat(PertemuanList pertemuanList);
+            void onErrorGetDibuat();
         }
 
         interface GetPartisipanSuccessListener {
-            void onSuccessGetPartisipan(PertemuanList.Pertemuan pertemuan);
-            void onErrorGetPartisipan();
+            void onSuccessGetPartisipanDibuat(PertemuanList.Pertemuan pertemuan);
+            void onErrorGetPartisipanDibuat();
         }
 
         interface DeleteOnSuccessListener{
@@ -45,7 +45,16 @@ public interface PertemuanContract {
     }
 
     interface View {
-        void update(PertemuanList pertemuanList);
-        void openDetail(PertemuanList.Pertemuan pertemuan);
+        interface PertemuanDibuat{
+            void updatePertemuanDibuat(PertemuanList pertemuanList);
+            void openDetailPertemuanDibuat(PertemuanList.Pertemuan pertemuan);
+        }
+
+        interface PertemuanDiundang{
+            void updatePertemuanDiundang(PertemuanList pertemuanList);
+            void openDetailPertemuanDiundang(PertemuanList.Pertemuan pertemuan);
+        }
+
+       void update(PertemuanList pertemuanList);
     }
 }

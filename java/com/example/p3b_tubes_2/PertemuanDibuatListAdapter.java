@@ -9,9 +9,7 @@ import android.widget.TextView;
 
 import com.example.p3b_tubes_2.databinding.ItemListPertemuanDibuatBinding;
 
-import java.util.ArrayList;
-
-public class PertemuanListAdapter extends BaseAdapter {
+public class PertemuanDibuatListAdapter extends BaseAdapter {
 
     private PertemuanList pertemuanList;
     private PertemuanPresenter presenter;
@@ -37,7 +35,7 @@ public class PertemuanListAdapter extends BaseAdapter {
 
         private void openDetail(View view) {
             PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
-            presenter.getPartisipan(pertemuan);
+            presenter.getPartisipanDibuat(pertemuan);
         }
 
         private void updateView(int i) {
@@ -49,7 +47,7 @@ public class PertemuanListAdapter extends BaseAdapter {
         }
     }
 
-    public PertemuanListAdapter(PertemuanPresenter presenter) {
+    public PertemuanDibuatListAdapter(PertemuanPresenter presenter) {
         this.pertemuanList = new PertemuanList();
         this.presenter = presenter;
     }
