@@ -16,13 +16,13 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
-    public class Authorization implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class APIAuthorization implements Response.Listener<JSONObject>, Response.ErrorListener {
 
-    private UserPresenter userPresenter;
+    private UserPresenter presenter;
     private RequestQueue queue;
 
-    public Authorization(UserPresenter userPresenter, Context context) {
-        this.userPresenter = userPresenter;
+    public APIAuthorization(UserPresenter presenter, Context context) {
+        this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
     }
 
@@ -52,9 +52,9 @@ import java.io.UnsupportedEncodingException;
         try {
             token = "Bearer " + response.getString("token");
             APIClient.token = token;
-            userPresenter.onSuccessLogin();
+            this.presenter.onSuccessLogin();
         } catch (JSONException e) {
-            Log.d("DEBUG", "Authorization: onResponse() catch JSONException");
+            Log.d("DEBUG", "APIAuthorization: onResponse() catch JSONException");
         }
     }
 
@@ -62,11 +62,10 @@ import java.io.UnsupportedEncodingException;
     public void onErrorResponse(VolleyError error) {
         try {
             String responseBody = new String(error.networkResponse.data, "utf-8");
-            Log.d("DEBUG", "Authorization: onErrorResponse(), Error=" + responseBody);
+            Log.d("DEBUG", "APIAuthorization: onErrorResponse(), Error=" + responseBody);
         } catch (UnsupportedEncodingException e) {
-            Log.d("DEBUG", "Authorization: onErrorResponse() catch UnsupportedEncodingException");
+            Log.d("DEBUG", "APIAuthorization: onErrorResponse() catch UnsupportedEncodingException");
         }
-        userPresenter.onFailedLogin();
+        presenter.onFailedLogin();
     }
-
 }

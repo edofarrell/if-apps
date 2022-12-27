@@ -12,62 +12,56 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class APIUbahPertemuan implements Response.Listener<JSONObject>, Response.ErrorListener {
-    private PertemuanPresenter presenter;
+public class APIPengumumanDelete implements Response.Listener<JSONObject>, Response.ErrorListener {
+    private PengumumanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
 
-    public APIUbahPertemuan(PertemuanPresenter presenter, Context context) {
+    public APIPengumumanDelete(PengumumanPresenter presenter, Context context) {
         this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
     }
 
-    public void ubahPertemuan(PertemuanList.Pertemuan pertemuan) throws JSONException {
-        String url = APIClient.BASE_URL + "/appointments/" + pertemuan.getId();
-        JSONObject JSON = new JSONObject(this.gson.toJson(pertemuan));
+    public void deletePengumuman(String idPengumuman) {
+        String url = APIClient.BASE_URL + "/announcements" + "/" + idPengumuman;
 
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.PATCH,
+                Request.Method.DELETE,
                 url,
-                JSON,
+                null,
                 this::onResponse,
                 this::onErrorResponse
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("Authorization", APIClient.token);
+                params.put("APIAuthorization", APIClient.token);
                 return params;
             }
         };
 
-        this.queue.add(request);
+        queue.add(request);
     }
 
     @Override
     public void onResponse(JSONObject response) {
-        PertemuanList.Pertemuan newPertemuan = this.gson.fromJson(response.toString(), PertemuanList.Pertemuan.class);
-        this.presenter.onSuccessChange();
+        this.presenter.deleteOnSuccess();
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
         try {
             String responseBody = new String(error.networkResponse.data, "utf-8");
-            Log.d("DEBUG", "APIUbahPertemuan: onErrorResponse(), Error=" + responseBody);
+            Log.d("DEBUG", "APIPengumumanDelete: onErrorResponse(), Error=" + responseBody);
         } catch (UnsupportedEncodingException e) {
-            Log.d("DEBUG", "APIUbahPertemuan: onErrorResponse() catch UnsupportedEncodingException");
+            Log.d("DEBUG", "APIPengumumanDelete: onErrorResponse() catch UnsupportedEncodingException");
         }
-        //handle error here
     }
-
-
 }

@@ -8,12 +8,12 @@ public class UserPresenter implements LoginContract{
 
     private MainPresenter mainPresenter;
     private User user;
-    private Authorization auth;
+    private APIAuthorization auth;
     private LoginContract.View loginUI;
 
     public UserPresenter(LoginContract.View loginUI, Context context, MainPresenter mainPresenter){
         this.user = new User(this, context);
-        this.auth = new Authorization(this, context);
+        this.auth = new APIAuthorization(this, context);
         this.loginUI = loginUI;
         this.mainPresenter = mainPresenter;
     }

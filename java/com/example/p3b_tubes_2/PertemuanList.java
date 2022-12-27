@@ -128,7 +128,7 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("Authorization", APIClient.token);
+                params.put("APIAuthorization", APIClient.token);
                 return params;
             }
         };
@@ -150,7 +150,7 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
             String responseBody = new String(error.networkResponse.data, "utf-8");
             Log.d("DEBUG", "PertemuanList: onErrorResponse(), Error=" + responseBody);
         } catch (UnsupportedEncodingException e) {
-            Log.d("DEBUG", "APIUbahPertemuan: onErrorResponse() catch UnsupportedEncodingException");
+            Log.d("DEBUG", "APIPertemuanChange: onErrorResponse() catch UnsupportedEncodingException");
         }
         //handle error here
     }

@@ -8,11 +8,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,58 +22,59 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class APITambahPertemuan implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class APIPertemuanDeleteParticipants implements Response.Listener<JSONArray>, Response.ErrorListener {
     private PertemuanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
 
-    public APITambahPertemuan(PertemuanPresenter presenter, Context context) {
+    public APIPertemuanDeleteParticipants(PertemuanPresenter presenter, Context context) {
         this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
     }
 
-    public void tambahPertemuan(String title, String description, String startTime, String endTime) throws JSONException {
-        String url = APIClient.BASE_URL + "/appointments";
+    public void deleteParticipants(String[] participantsId) throws JSONException {
+        String url = APIClient.BASE_URL + "/appointments" + "/26783a4f-9b00-4a35-ab44-da9214794efb" + "/participants" + "/delete";
 
         JsonObject json = new JsonObject();
-        json.addProperty("title", title);
-        json.addProperty("description", description);
-        json.addProperty("start_datetime", startTime);
-        json.addProperty("end_datetime", endTime);
-        JSONObject JSON = new JSONObject(json.toString());
+        JsonArray array = new JsonArray();
+        for (int i = 0; i < participantsId.length; i++) {
+            array.add(participantsId[i]);
+        }
+        json.addProperty("appointment_id", "26783a4f-9b00-4a35-ab44-da9214794efb");
+        json.add("participants", array);
+        JSONObject jsonObject = new JSONObject(json.toString());
 
-        JsonObjectRequest request = new JsonObjectRequest(
+        CustomJsonRequest request = new CustomJsonRequest(
                 Request.Method.POST,
                 url,
-                JSON,
+                jsonObject,
                 this::onResponse,
                 this::onErrorResponse
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("Authorization", APIClient.token);
+                params.put("APIAuthorization", APIClient.token);
                 return params;
             }
         };
-        this.queue.add(request);
+
+        queue.add(request);
     }
 
     @Override
-    public void onResponse(JSONObject response) {
-        PertemuanList.Pertemuan newPertemuan = this.gson.fromJson(response.toString(), PertemuanList.Pertemuan.class);
-        this.presenter.onSuccessAdd(newPertemuan);
+    public void onResponse(JSONArray response) {
+        presenter.onSuccessDeleteParticipants(response.toString());
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
         try {
             String responseBody = new String(error.networkResponse.data, "utf-8");
-            Log.d("DEBUG", "APIAddPertemuan: onErrorResponse(), Error=" + responseBody);
+            Log.d("DEBUG", "APIPertemuanDeleteParticipants: onErrorResponse(), Error=" + responseBody);
         } catch (UnsupportedEncodingException e) {
-            Log.d("DEBUG", "APIAddPertemuan: onErrorResponse() catch UnsupportedEncodingException");
+            Log.d("DEBUG", "APIPertemuanDeleteParticipants: onErrorResponse() catch UnsupportedEncodingException");
         }
-        //handle error here
     }
 }

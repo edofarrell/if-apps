@@ -11,18 +11,16 @@ import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentDetailPengumumanBinding;
 
-public class DetailPengumumanFragment extends Fragment {
+public class PengumumanDetailFragment extends Fragment {
 
     private FragmentDetailPengumumanBinding binding;
     private PengumumanList.Pengumuman pengumuman;
 
-    private DetailPengumumanFragment(){}
+    private PengumumanDetailFragment() {}
 
-    public static DetailPengumumanFragment newInstance(PengumumanList.Pengumuman pengumuman) {
-        Bundle args = new Bundle();
-        DetailPengumumanFragment fragment = new DetailPengumumanFragment();
+    public static PengumumanDetailFragment newInstance(PengumumanList.Pengumuman pengumuman) {
+        PengumumanDetailFragment fragment = new PengumumanDetailFragment();
         fragment.pengumuman = pengumuman;
-        fragment.setArguments(args);
         return fragment;
     }
 

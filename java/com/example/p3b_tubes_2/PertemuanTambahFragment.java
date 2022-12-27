@@ -11,12 +11,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentTambahPertemuanBinding;
 
-public class TambahPertemuanFragment extends Fragment {
-    FragmentTambahPertemuanBinding binding;
-    public TambahPertemuanFragment(){}
+public class PertemuanTambahFragment extends Fragment {
+    private FragmentTambahPertemuanBinding binding;
+    public PertemuanTambahFragment(){}
 
-    public static TambahPertemuanFragment newInstance(){
-        TambahPertemuanFragment fragment = new TambahPertemuanFragment();
+    public static PertemuanTambahFragment newInstance(){
+        PertemuanTambahFragment fragment = new PertemuanTambahFragment();
         return fragment;
     }
 

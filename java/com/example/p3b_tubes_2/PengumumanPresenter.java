@@ -2,8 +2,6 @@ package com.example.p3b_tubes_2;
 
 import android.content.Context;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
 
 public class PengumumanPresenter implements
@@ -18,18 +16,18 @@ public class PengumumanPresenter implements
     private MainPresenter mainPresenter;
     private PengumumanList pengumuman;
     private TagList tag;
-    private APITambahPengumuman tambahPengumuman;
-    private APIDeletePengumuman deletePengumuman;
-    private APIGetPengumumanDetail detailPengumuman;
+    private APIPengumumanAdd tambahPengumuman;
+    private APIPengumumanDelete deletePengumuman;
+    private APIPengumumanDetail detailPengumuman;
 
     public PengumumanPresenter(PengumumanContract.View ui, Context context, MainPresenter mainPresenter) {
         this.ui = ui;
         this.mainPresenter = mainPresenter;
         this.pengumuman = new PengumumanList(this, context);
         this.tag = new TagList(this, context);
-        this.tambahPengumuman = new APITambahPengumuman(this, context);
-        this.deletePengumuman = new APIDeletePengumuman(this, context);
-        this.detailPengumuman = new APIGetPengumumanDetail(this, context);
+        this.tambahPengumuman = new APIPengumumanAdd(this, context);
+        this.deletePengumuman = new APIPengumumanDelete(this, context);
+        this.detailPengumuman = new APIPengumumanDetail(this, context);
     }
 
 

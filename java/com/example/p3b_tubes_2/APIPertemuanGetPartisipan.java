@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class APIGetPartisipan implements Response.Listener<String>, Response.ErrorListener {
+public class APIPertemuanGetPartisipan implements Response.Listener<String>, Response.ErrorListener {
 
     class Partisipan {
         private String id;
@@ -32,7 +32,7 @@ public class APIGetPartisipan implements Response.Listener<String>, Response.Err
     private Gson gson;
     private PertemuanList.Pertemuan pertemuan;
 
-    public APIGetPartisipan(PertemuanPresenter presenter, Context context) {
+    public APIPertemuanGetPartisipan(PertemuanPresenter presenter, Context context) {
         this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
@@ -51,7 +51,7 @@ public class APIGetPartisipan implements Response.Listener<String>, Response.Err
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorization", APIClient.token);
+                params.put("APIAuthorization", APIClient.token);
                 return params;
             }
         };
@@ -63,12 +63,14 @@ public class APIGetPartisipan implements Response.Listener<String>, Response.Err
     public void onResponse(String response) {
         Type listType = new TypeToken<ArrayList<Partisipan>>() {}.getType();
         ArrayList<Partisipan> partisipans = this.gson.fromJson(response, listType);
+
         ArrayList<String> attending = new ArrayList<>();
         for (int i = 0; i < partisipans.size(); i++) {
             if (partisipans.get(i).attending) {
                 attending.add(partisipans.get(i).name);
             }
         }
+
         this.pertemuan.setPartisipan(attending);
         this.presenter.onSuccessGetPartisipan(this.pertemuan);
     }
@@ -77,9 +79,9 @@ public class APIGetPartisipan implements Response.Listener<String>, Response.Err
     public void onErrorResponse(VolleyError error) {
         try {
             String responseBody = new String(error.networkResponse.data, "utf-8");
-            Log.d("DEBUG", "APIGetPartisipan: onErrorResponse(), Error=" + responseBody);
+            Log.d("DEBUG", "APIPertemuanGetPartisipan: onErrorResponse(), Error=" + responseBody);
         } catch (UnsupportedEncodingException e) {
-            Log.d("DEBUG", "APIGetPartisipan: onErrorResponse() catch UnsupportedEncodingException");
+            Log.d("DEBUG", "APIPertemuanGetPartisipan: onErrorResponse() catch UnsupportedEncodingException");
         }
         //handle error here
     }

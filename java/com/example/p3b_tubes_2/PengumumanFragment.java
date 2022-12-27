@@ -58,8 +58,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     private void OnClickAddPengumuman(View view) {
-        TambahPengumumanFragment tambahPengumumanFragment = TambahPengumumanFragment.newInstance(this.presenter);
-        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), tambahPengumumanFragment)
+        PengumumanTambahFragment pengumumanTambahFragment = PengumumanTambahFragment.newInstance(this.presenter);
+        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pengumumanTambahFragment)
                 .addToBackStack(null)
                 .commit();
     }
@@ -140,8 +140,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     @Override
     public void openDetail(PengumumanList.Pengumuman pengumuman) {
-        DetailPengumumanFragment detailPengumumanFragment = DetailPengumumanFragment.newInstance(pengumuman);
-        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), detailPengumumanFragment)
+        PengumumanDetailFragment pengumumanDetailFragment = PengumumanDetailFragment.newInstance(pengumuman);
+        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pengumumanDetailFragment)
                 .addToBackStack(null)
                 .commit();
     }

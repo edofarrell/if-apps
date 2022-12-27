@@ -10,7 +10,6 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanBinding;
 
@@ -65,8 +64,8 @@ public class PertemuanFragment extends Fragment implements PertemuanContract.Vie
 
     @Override
     public void openDetail(PertemuanList.Pertemuan pertemuan){
-        DetailPertemuanFragment detailPertemuanFragment = DetailPertemuanFragment.newInstance(pertemuan);
-        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), detailPertemuanFragment)
+        PertemuanDetailFragment pertemuanDetailFragment = PertemuanDetailFragment.newInstance(pertemuan);
+        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pertemuanDetailFragment)
                 .addToBackStack(null)
                 .commit();
     }

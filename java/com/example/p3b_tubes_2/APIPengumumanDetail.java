@@ -16,14 +16,13 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class APIGetPengumumanDetail implements Response.Listener<String>, Response.ErrorListener {
-
+public class APIPengumumanDetail implements Response.Listener<String>, Response.ErrorListener {
     private PengumumanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
     private PengumumanList.Pengumuman pengumuman;
 
-    public APIGetPengumumanDetail(PengumumanPresenter presenter, Context context) {
+    public APIPengumumanDetail(PengumumanPresenter presenter, Context context) {
         this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
@@ -42,7 +41,7 @@ public class APIGetPengumumanDetail implements Response.Listener<String>, Respon
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorization", APIClient.token);
+                params.put("APIAuthorization", APIClient.token);
                 return params;
             }
         };
@@ -60,11 +59,10 @@ public class APIGetPengumumanDetail implements Response.Listener<String>, Respon
     public void onErrorResponse(VolleyError error) {
         try {
             String responseBody = new String(error.networkResponse.data, "utf-8");
-            Log.d("DEBUG", "APIGetPengumumanDetail: onErrorResponse(), Error=" + responseBody);
+            Log.d("DEBUG", "APIPengumumanDetail: onErrorResponse(), Error=" + responseBody);
         } catch (UnsupportedEncodingException e) {
-            Log.d("DEBUG", "APIGetPengumumanDetail: onErrorResponse() catch UnsupportedEncodingException");
+            Log.d("DEBUG", "APIPengumumanDetail: onErrorResponse() catch UnsupportedEncodingException");
         }
         //handle error here
     }
-
 }

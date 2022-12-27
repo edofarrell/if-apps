@@ -16,28 +16,27 @@ public class PertemuanPresenter implements
         PertemuanContract.Model.AddParticipantsPertemuanOnSuccessListener,
         PertemuanContract.Model.DeleteParticipantsPertemuanOnSuccessListener,
         PertemuanContract.Model.DeleteOnSuccessListener
-
 {
     private PertemuanList pertemuan;
     private PertemuanContract.View ui;
     private MainPresenter mainPresenter;
-    private APITambahPertemuan apiAddPertemuan;
-    private APIUbahPertemuan apiUbahPertemuan;
-    private APIGetPartisipan apiGetPartisipan;
-    private APIAddParticipantsPertemuan addParticipantsPertemuan;
-    private APIDeleteParticipantsPertemuan deleteParticipantsPertemuan;
-    private APIDeletePertemuan deletePertemuan;
+    private APIPertemuanAdd apiPertemuanAdd;
+    private APIPertemuanChange apiPertemuanChange;
+    private APIPertemuanGetPartisipan apiPertemuanGetPartisipan;
+    private APIPertemuanAddParticipants apiAddParticipantsPertemuan;
+    private APIPertemuanDeleteParticipants apiDeleteParticipantsPertemuan;
+    private APIPertemuanDelete deletePertemuan;
 
     public PertemuanPresenter(PertemuanContract.View ui, Context context, MainPresenter mainPresenter) {
+        this.pertemuan = new PertemuanList(this, context);
         this.ui = ui;
         this.mainPresenter = mainPresenter;
-        this.pertemuan = new PertemuanList(this, context);
-        this.apiAddPertemuan = new APITambahPertemuan(this, context);
-        this.apiUbahPertemuan = new APIUbahPertemuan(this, context);
-        this.apiGetPartisipan = new APIGetPartisipan(this, context);
-        this.addParticipantsPertemuan = new APIAddParticipantsPertemuan(this,context);
-        this.deleteParticipantsPertemuan = new APIDeleteParticipantsPertemuan(this,context);
-        this.deletePertemuan = new APIDeletePertemuan(this,context);
+        this.apiPertemuanAdd = new APIPertemuanAdd(this, context);
+        this.apiPertemuanChange = new APIPertemuanChange(this, context);
+        this.apiPertemuanGetPartisipan = new APIPertemuanGetPartisipan(this, context);
+        this.apiAddParticipantsPertemuan = new APIPertemuanAddParticipants(this,context);
+        this.apiDeleteParticipantsPertemuan = new APIPertemuanDeleteParticipants(this,context);
+        this.deletePertemuan = new APIPertemuanDelete(this,context);
     }
 
     public void getPertemuan() {
@@ -65,7 +64,7 @@ public class PertemuanPresenter implements
 
 
     public void getPartisipan(PertemuanList.Pertemuan pertemuan){
-        this.apiGetPartisipan.getPartisipan(pertemuan);
+        this.apiPertemuanGetPartisipan.getPartisipan(pertemuan);
     }
 
     @Override
@@ -80,11 +79,7 @@ public class PertemuanPresenter implements
 
 
     public void addPertemuan(String title, String description, String startTime, String endTime) throws JSONException {
-        this.apiAddPertemuan.tambahPertemuan(title, description, startTime, endTime);
-    }
-
-    public void deletePertemuan(String idPertemuan){
-        this.deletePertemuan.deletePertemuan(idPertemuan);
+        this.apiPertemuanAdd.tambahPertemuan(title, description, startTime, endTime);
     }
 
     @Override
@@ -98,16 +93,9 @@ public class PertemuanPresenter implements
 
     }
 
+
     public void ubahPertemuan(PertemuanList.Pertemuan pertemuan) throws JSONException {
-        this.apiUbahPertemuan.ubahPertemuan(pertemuan);
-    }
-
-    public void addParticipantsPertemuan(String[] arr) throws JSONException {
-        this.addParticipantsPertemuan.addParticipants(arr);
-    }
-
-    public void deleteParticipantsPertemuan(String[] arr) throws JSONException {
-        this.deleteParticipantsPertemuan.deleteParticipants(arr);
+        this.apiPertemuanChange.ubahPertemuan(pertemuan);
     }
 
     @Override
@@ -120,6 +108,11 @@ public class PertemuanPresenter implements
 
     }
 
+
+    public void addParticipantsPertemuan(String[] arr) throws JSONException {
+        this.apiAddParticipantsPertemuan.addParticipants(arr);
+    }
+
     @Override
     public void onSuccessAddParticipants(String hasil) {
 //        this.ui.update(hasil);
@@ -130,6 +123,11 @@ public class PertemuanPresenter implements
 
     }
 
+
+    public void deleteParticipantsPertemuan(String[] arr) throws JSONException {
+        this.apiDeleteParticipantsPertemuan.deleteParticipants(arr);
+    }
+
     @Override
     public void onSuccessDeleteParticipants(String hasil) {
 //        this.ui.update(hasil);
@@ -138,6 +136,11 @@ public class PertemuanPresenter implements
     @Override
     public void onErrorDeleteParticipants() {
 
+    }
+
+
+    public void deletePertemuan(String idPertemuan){
+        this.deletePertemuan.deletePertemuan(idPertemuan);
     }
 
     @Override
