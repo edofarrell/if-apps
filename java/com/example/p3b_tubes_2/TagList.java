@@ -75,4 +75,16 @@ public class TagList {
         };
         queue.add(request);
     }
+
+    public ArrayList<String> getActiveTagFilter(ArrayList<String> arr){
+        ArrayList<String> result = new ArrayList<>();
+        for(int i = 0;i<arr.size();i++){
+            for(int j = 0;j<listTag.size();j++){
+                if(arr.get(i).equals(listTag.get(j).getName())){
+                    result.add(listTag.get(j).getId());
+                }
+            }
+        }
+        return result;
+    }
 }
