@@ -1,49 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/drawer_layout"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_topAppBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <!--Toolbar-->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></FrameLayout>
-    </LinearLayout>
-
-    <!-- Left Drawer -->
-    <RelativeLayout
-        android:id="@+id/left_drawer"
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/white">
-
-        <fragment
-            android:id="@+id/Fragment_Left"
-            android:name="com.example.p3b_tubes_2.LeftFragment"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        style="@style/Widget.MaterialComponents.Toolbar.Surface">
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="IF Apps"
+            android:textSize="27sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="16dp"
+                android:src="@drawable/logo_kata1"
+                android:layout_marginRight="2dp"
+                />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="16dp"
+                android:src="@drawable/logo_kata2"
+                />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation"
+        android:background="@color/background"
+        android:layout_below="@+id/appbar_topAppBar"
+        />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        app:labelVisibilityMode="labeled"
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
 
-            />
-
-    </RelativeLayout>
-
-</androidx.drawerlayout.widget.DrawerLayout>
+        app:menu="@menu/bottom_navigation_menu"
+        />
+</RelativeLayout>

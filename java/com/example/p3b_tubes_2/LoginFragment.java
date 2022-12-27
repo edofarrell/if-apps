@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentLoginBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONException;
 
@@ -54,6 +55,10 @@ public class LoginFragment extends Fragment implements LoginContract.View{
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Bundle result = new Bundle();
+        result.putString("page", "pengumuman");
+
+        getParentFragmentManager().setFragmentResult("changePage", result);
     }
 
 

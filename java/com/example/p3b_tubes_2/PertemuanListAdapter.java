@@ -4,9 +4,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.p3b_tubes_2.databinding.ItemListPertemuanBinding;
+import com.example.p3b_tubes_2.databinding.ItemListPertemuanDibuatBinding;
 
 import java.util.ArrayList;
 
@@ -21,15 +22,17 @@ public class PertemuanListAdapter extends BaseAdapter {
         protected TextView tvDate;
         protected TextView tvStartTime;
         protected TextView tvEndTime;
+        protected Button btnSeeDetails;
 
-        public ViewHolder(ItemListPertemuanBinding binding, int i) {
+        public ViewHolder(ItemListPertemuanDibuatBinding binding, int i) {
             this.i = i;
-            this.tvTitle = binding.title;
-            this.tvDate = binding.date;
-            this.tvStartTime = binding.startTime;
-            this.tvEndTime = binding.endTime;
+            this.tvTitle = binding.tvTitle;
+            this.tvDate = binding.tvDate;
+            this.tvStartTime = binding.tvStartTime;
+            this.tvEndTime = binding.tvEndTime;
+            this.btnSeeDetails = binding.btnSeeDetails;
 
-            binding.llPertemuan.setOnClickListener(this::openDetail);
+            this.btnSeeDetails.setOnClickListener(this::openDetail);
         }
 
         private void openDetail(View view) {
@@ -69,11 +72,11 @@ public class PertemuanListAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        ItemListPertemuanBinding itemListPertemuanBinding = ItemListPertemuanBinding.inflate(inflater);
+        ItemListPertemuanDibuatBinding binding = ItemListPertemuanDibuatBinding.inflate(inflater);
         ViewHolder viewHolder;
         if (view == null) {
-            view = itemListPertemuanBinding.getRoot();
-            viewHolder = new ViewHolder(itemListPertemuanBinding, i);
+            view = binding.getRoot();
+            viewHolder = new ViewHolder(binding, i);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();

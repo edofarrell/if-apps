@@ -3,111 +3,95 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="24dp"
-    android:background="@color/blue_primary">
+    android:background="@color/background"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/ll_login_form"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/logo"></ImageView>
 
     <LinearLayout
+        android:id="@+id/ll_login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_logo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-
-            android:padding="@dimen/_8dp"
-            android:layout_marginBottom="@dimen/_20dp"
-
-            android:background="@drawable/border"
-            android:elevation="@dimen/_12dp"
-
-            android:src="@drawable/logo"
-            ></ImageView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_login_card"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/_16dp"
-            app:cardElevation="@dimen/_12dp"
+            android:layout_marginBottom="16dp"
+
+            android:text="@string/tv_title_masuk"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="27sp"></TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:orientation="vertical"
             >
-            <LinearLayout
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/ic_baseline_email_24"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/_24dp"
-                android:layout_marginBottom="@dimen/_8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/textfield_label_email"
                 >
-                <TextView
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                app:endIconMode="password_toggle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/textfield_label_password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/tv_title_masuk"
-                    android:textSize="@dimen/_20sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    ></TextView>
-                <LinearLayout
+                    android:inputType="textPassword"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                app:startIconDrawable="@drawable/ic_baseline_person_24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/role">
+
+                <AutoCompleteTextView
+                    android:id="@+id/et_role"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_16dp"
-                    android:orientation="vertical"
-                    >
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/_8dp"
-                        android:layout_marginBottom="@dimen/_4dp"
-                        android:hint="@string/textfield_label_email"
-                        >
+                    android:inputType="none"></AutoCompleteTextView>
+            </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_email"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-                    </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/_4dp"
-                        android:layout_marginBottom="@dimen/_8dp"
-                        android:hint="@string/textfield_label_password"
-                        >
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_password"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/role">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/et_role"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="none"></AutoCompleteTextView>
-                    </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
-                <Button
-                    android:id="@+id/btn_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/_8dp"
-                    android:text="@string/textfield_label_login"></Button>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textfield_label_login"></Button>
 
         <TextView
             android:id="@+id/error"
