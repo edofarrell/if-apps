@@ -1,9 +1,11 @@
 package com.example.p3b_tubes_2;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.p3b_tubes_2.databinding.ItemListPengumumanBinding;
@@ -14,13 +16,16 @@ public class PengumumanListAdapter extends BaseAdapter {
 
     private class ViewHolder {
         protected int i;
+        protected boolean isRead;
         protected TextView tvJudul;
         protected TextView tvTag;
+        protected LinearLayout llPengumuman;
 
         public ViewHolder(ItemListPengumumanBinding binding, int i) {
             this.i = i;
             this.tvJudul = binding.tvJudul;
             this.tvTag = binding.tvTag;
+            this.llPengumuman = binding.llPengumuman;
 
             binding.llPengumuman.setOnClickListener(this::openDetail);
             binding.btnDelete.setOnClickListener(this::onClickDelete);
@@ -32,11 +37,16 @@ public class PengumumanListAdapter extends BaseAdapter {
         }
 
         private void openDetail(View view) {
+            this.isRead = true;
+            this.llPengumuman.setBackgroundColor(Color.WHITE);
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
             presenter.getPengumumanDetail(pengumuman);
         }
 
         private void updateView(int i) {
+            if(this.isRead == true){
+                this.llPengumuman.setBackgroundColor(Color.WHITE);
+            }
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
             this.tvJudul.setText(pengumuman.getTitle());
             this.tvTag.setText(pengumuman.getTags());
