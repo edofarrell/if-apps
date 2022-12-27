@@ -63,7 +63,11 @@ public class PengumumanPresenter implements
 
 
     public void getPengumuman() {
-        this.pengumuman.getPengumuman();
+        this.pengumuman.getPengumumanAll();
+    }
+
+    public void getPengumuman(String text){
+        this.pengumuman.getPengumumanAll(text);
     }
 
     @Override

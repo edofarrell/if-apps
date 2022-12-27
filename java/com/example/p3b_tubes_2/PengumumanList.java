@@ -79,8 +79,28 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         this.data.add(pengumuman);
     }
 
-    public void getPengumuman() {
+    public void getPengumumanAll() {
         String url = APIClient.BASE_URL + "/announcements";
+
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url,
+                this::onResponse,
+                this::onErrorResponse
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", APIClient.token);
+                return params;
+            }
+        };
+
+        this.queue.add(request);
+    }
+
+    public void getPengumumanAll(String text) {
+        String url = APIClient.BASE_URL + "/announcements?filter[title]="+text;
 
         StringRequest request = new StringRequest(
                 Request.Method.GET,

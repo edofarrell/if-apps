@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentPengumumanBinding;
@@ -26,20 +27,18 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private FragmentPengumumanBinding binding;
     private PengumumanPresenter presenter;
     private PengumumanListAdapter adapter;
-    private ChipGroup chipGroup;
     private FrameLayout frameLayout;
     private List<String> arrChipGroup;
+    private ChipGroup chipGroup;
 
     private PengumumanFragment() {}
 
     public static PengumumanFragment newInstance(MainPresenter mainPresenter, Context context, FrameLayout frameLayout) {
-        Bundle args = new Bundle();
         PengumumanFragment fragment = new PengumumanFragment();
         fragment.presenter = new PengumumanPresenter(fragment, context, mainPresenter);
         fragment.adapter = new PengumumanListAdapter(fragment.presenter);
         fragment.frameLayout = frameLayout;
         fragment.arrChipGroup = new ArrayList<>();
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -56,6 +55,22 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         binding.ivFilter.setOnClickListener(this::onClick);
         binding.tvPengumuman.setOnClickListener(this::test);//dipake untuk test api saja
         chipGroup = binding.chipGrup;
+
+        SearchView searchView = this.binding.searchBar;
+        searchView.setActivated(true);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                presenter.getPengumuman(newText);
+                return false;
+            }
+        });
+
         return this.binding.getRoot();
     }
 
@@ -70,16 +85,13 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.presenter.deletePengumuman("b90bce6d-a8d7-4777-a49b-0a63d6bfef02");
     }
 
-
     public void onClick(View view) {
         presenter.getTag();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("DEBUG",item.getItemId()+"");
-        int id = item.getItemId();
-        CharSequence idS = item.getTitle();
+        Log.d("DEBUG", item.getItemId() + "");
         String text = (String) item.getTitle();
         Chip chip = new Chip(getContext());
         chip.setText(text);
@@ -89,28 +101,26 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         chip.setOnCloseIconClickListener(this::OnCloseIconClick);
 
         boolean check = false;
-        for(int i = 0;i<arrChipGroup.size();i++){
-            Log.d("DEBUG",arrChipGroup.get(i)+"");
-            if(arrChipGroup.contains(item.getTitle().toString())){
+        for (int i = 0; i < arrChipGroup.size(); i++) {
+            Log.d("DEBUG", arrChipGroup.get(i) + "");
+            if (arrChipGroup.contains(item.getTitle().toString())) {
                 check = true;
                 break;
             }
         }
-        if(!check){
+        if (!check) {
             chipGroup.addView(chip);
         }
         arrChipGroup.add(item.getTitle().toString());
         return super.onOptionsItemSelected(item);
     }
 
-    public boolean OnCloseIconClick(View view){
-        Chip chip = (Chip) view;
+    public boolean OnCloseIconClick(View view) {
         chipGroup.removeView(view);
         return true;
     }
 
     @Override
-
     public void update(PengumumanList pengumumanList) {
         this.adapter.update(pengumumanList);
     }
@@ -119,9 +129,10 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         PopupMenu popupMenu = new PopupMenu(getContext(), binding.ivFilter);
 
         //nambah pop up menu (nanti diisi dari yg api tag tag nya)
-        for(int i = 0;i< listTag.size();i++){
-            popupMenu.getMenu().add(1, i+1, i+1, listTag.get(i).getName());
+        for (int i = 0; i < listTag.size(); i++) {
+            popupMenu.getMenu().add(1, i + 1, i + 1, listTag.get(i).getName());
         }
+
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
         popupMenu.show();
 

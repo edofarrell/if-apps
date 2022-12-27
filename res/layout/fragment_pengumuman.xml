@@ -18,28 +18,25 @@
         android:layout_below="@id/tv_pengumuman"
         android:orientation="horizontal"
         android:id="@+id/ll_header_pengumuman"
-        android:layout_marginTop="@dimen/_10sp"
-        >
+        android:layout_marginTop="@dimen/_10sp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_filter"
             android:id="@+id/iv_filter"
-            android:layout_marginLeft="@dimen/_15sp"></ImageView>
-
-
+            android:layout_marginLeft="@dimen/_15sp"/>
 
         <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/custom_kotak_filter_pengumuman"
             android:layout_marginLeft="@dimen/_10sp"
             android:layout_marginRight="@dimen/_15sp"
             android:layout_marginTop="@dimen/_5sp"
-            app:queryHint="@string/hintPengumuman"
+            app:queryHint="@string/hintPengumuman"/>
 
-            ></androidx.appcompat.widget.SearchView>
     </LinearLayout>
 
     <LinearLayout
