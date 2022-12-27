@@ -71,7 +71,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/ll_chip"
-        android:layout_marginTop="@dimen/_20sp">
+        android:layout_marginTop="@dimen/_20sp"
+        android:padding="@dimen/_20sp"
+        android:divider="@color/white"
+        android:dividerHeight="@dimen/_20sp"
+
+        >
 
     </ListView>
 
@@ -79,6 +84,33 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_16dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ic_next" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_16dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ic_back" />
+
+        </LinearLayout>
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_add_pengumuman"
@@ -94,5 +126,7 @@
             android:src="@drawable/ic_tambah_fab" />
 
     </RelativeLayout>
+
+
 
 </RelativeLayout>
