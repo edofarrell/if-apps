@@ -19,11 +19,17 @@ public interface PengumumanContract {
             void GetDetailOnSuccess(PengumumanList.Pengumuman pengumuman);
             void GetDetailOnError();
         }
+
+        interface AddOnSuccessListener{
+            void AddOnSuccess(PengumumanList.Pengumuman pengumuman);
+            void AddOnError();
+        }
     }
 
     interface View {
         void update(PengumumanList pengumumanList);
         void updateListTag(ArrayList<TagList.Tag> listTag);
         void openDetail(PengumumanList.Pengumuman pengumuman);
+        void closeAddPage();
     }
 }

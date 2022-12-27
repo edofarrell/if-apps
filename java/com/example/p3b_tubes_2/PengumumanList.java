@@ -75,6 +75,10 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         return this.data.get(i);
     }
 
+    public void addPengumuman(Pengumuman pengumuman){
+        this.data.add(pengumuman);
+    }
+
     public void getPengumuman() {
         String url = APIClient.BASE_URL + "/announcements";
 

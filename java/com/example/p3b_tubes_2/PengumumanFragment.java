@@ -49,10 +49,19 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.binding.lvPengumuman.setAdapter(this.adapter);
         this.presenter.getPengumuman();
 
+        this.binding.btnAddPengumuman.setOnClickListener(this::OnClickAddPengumuman);
+
         binding.ivFilter.setOnClickListener(this::onClick);
         binding.tvPengumuman.setOnClickListener(this::test);//dipake untuk test api saja
         chipGroup = binding.chipGrup;
         return this.binding.getRoot();
+    }
+
+    private void OnClickAddPengumuman(View view) {
+        TambahPengumumanFragment tambahPengumumanFragment = TambahPengumumanFragment.newInstance(this.presenter);
+        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), tambahPengumumanFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void test(View view) {
@@ -135,5 +144,12 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), detailPengumumanFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void closeAddPage() {
+        Bundle result = new Bundle();
+        result.putString("page", "pengumuman");
+        getParentFragmentManager().setFragmentResult("changePage", result);
     }
 }

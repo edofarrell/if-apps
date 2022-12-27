@@ -3,7 +3,6 @@ package com.example.p3b_tubes_2;
 import android.content.Context;
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,51 +20,70 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class APITambahPengumuman {
+public class APITambahPengumuman implements Response.Listener<JSONObject>, Response.ErrorListener {
     private PengumumanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
 
-    public APITambahPengumuman(PengumumanPresenter presenter, Context context){
+    public APITambahPengumuman(PengumumanPresenter presenter, Context context) {
         this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
     }
 
-    public void addPengumuman(String title, String content, String[] idTags) throws JSONException {
-        String url = APIClient.BASE_URL+"/announcements";
+    public void addPengumuman(String title, String content, String[] idTags){
+        String url = APIClient.BASE_URL + "/announcements";
+
         JsonObject json = new JsonObject();
         JsonArray array = new JsonArray();
-        for(int i = 0;i<idTags.length;i++){
+        for (int i = 0; i < idTags.length; i++) {
             array.add(idTags[i]);
         }
-        json.addProperty("title",title);
-        json.addProperty("content",content);
-        json.add("tags",array);
-        JSONObject JSON = new JSONObject(json.toString());
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, JSON, new Response.Listener<JSONObject>() {
+        json.addProperty("title", title);
+        json.addProperty("content", content);
+        json.add("tags", array);
+
+        JSONObject JSON = null;
+        try {
+            JSON = new JSONObject(json.toString());
+        } catch (JSONException e) {
+            Log.d("DEBUG", "APITambahPengumuman: addPengumuman() catch JSONException");;
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                JSON,
+                this::onResponse,
+                this::onErrorResponse
+        ) {
             @Override
-            public void onResponse(JSONObject response) {
-                Log.d("DEBUG","Tambah Pengumuman");
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                try {
-                    String responseBody = new String(error.networkResponse.data, "utf-8");
-                    Log.d("DEBUG", "APITambahPengumuman: onErrorResponse(), Error=" + responseBody);
-                } catch (UnsupportedEncodingException e) {
-                    Log.d("DEBUG", "APITambahPengumuman: onErrorResponse() catch UnsupportedEncodingException");
-                }
-            }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<>();
                 params.put("Authorization", APIClient.token);
                 return params;
             }
         };
+
         queue.add(request);
     }
+
+
+    @Override
+    public void onResponse(JSONObject response) {
+        PengumumanList.Pengumuman pengumuman = this.gson.fromJson(response.toString(), PengumumanList.Pengumuman.class);
+        Log.d("DEBUG", "Tambah Pengumuman");
+        this.presenter.AddOnSuccess(pengumuman);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        try {
+            String responseBody = new String(error.networkResponse.data, "utf-8");
+            Log.d("DEBUG", "APITambahPengumuman: onErrorResponse(), Error=" + responseBody);
+        } catch (UnsupportedEncodingException e) {
+            Log.d("DEBUG", "APITambahPengumuman: onErrorResponse() catch UnsupportedEncodingException");
+        }
+    }
+
 }

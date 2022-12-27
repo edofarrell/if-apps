@@ -14,12 +14,14 @@ import com.example.p3b_tubes_2.databinding.FragmentTambahPengumumanBinding;
 public class TambahPengumumanFragment extends Fragment {
 
     private FragmentTambahPengumumanBinding binding;
+    private PengumumanPresenter presenter;
 
     private TambahPengumumanFragment () {}
 
-    public static TambahPengumumanFragment newInstance() {
+    public static TambahPengumumanFragment newInstance(PengumumanPresenter presenter) {
         Bundle args = new Bundle();
         TambahPengumumanFragment fragment = new TambahPengumumanFragment();
+        fragment.presenter = presenter;
         fragment.setArguments(args);
         return fragment;
     }
@@ -28,6 +30,16 @@ public class TambahPengumumanFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = FragmentTambahPengumumanBinding.inflate(inflater);
+
+        this.binding.btnSimpan.setOnClickListener(this::OnClickSimpan);
+
         return this.binding.getRoot();
+    }
+
+    private void OnClickSimpan(View view) {
+        String title = this.binding.etJudul.getText().toString();
+        String content = this.binding.etDeskripsi.getText().toString();
+        String[] tags = {"d78227d2-053e-4d57-8ef7-ba1560f412de"};
+        this.presenter.addPengumuman(title, content, tags);
     }
 }

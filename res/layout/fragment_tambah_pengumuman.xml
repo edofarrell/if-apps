@@ -25,21 +25,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/judul">
-
-        </TextView>
+            android:text="@string/judul"/>
 
         <EditText
+            android:id="@+id/et_judul"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sp"
-            android:id="@+id/et_judul"
             android:hint="Masukkan judul pengumuman disini"
             android:background="@drawable/custom_kotak_filter_pengumuman"
             android:layout_marginTop="@dimen/_10sp"
-            android:paddingLeft="@dimen/_10sp">
-
-        </EditText>
-
+            android:paddingLeft="@dimen/_10sp"/>
 
     </LinearLayout>
 
@@ -57,21 +52,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tags">
-
-        </TextView>
+            android:text="@string/tags"/>
 
         <EditText
+            android:id="@+id/et_tag"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sp"
-            android:id="@+id/et_tag"
             android:hint="Masukkan tag pengumuman disini"
             android:background="@drawable/custom_kotak_filter_pengumuman"
             android:layout_marginTop="@dimen/_10sp"
-            android:paddingLeft="@dimen/_10sp">
-
-        </EditText>
-
+            android:paddingLeft="@dimen/_10sp"/>
 
     </LinearLayout>
 
@@ -88,35 +78,28 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/deskripsi">
-
-        </TextView>
+            android:text="@string/deskripsi"/>
 
         <EditText
+            android:id="@+id/et_deskripsi"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_300sp"
-            android:id="@+id/et_deskripsi"
             android:hint="Masukkan deskripsi pengumuman disini"
             android:background="@drawable/custom_kotak_filter_pengumuman"
             android:paddingTop="@dimen/_10sp"
             android:gravity="top"
             android:layout_marginTop="@dimen/_10sp"
-            android:paddingLeft="@dimen/_10sp">
-
-        </EditText>
-
+            android:paddingLeft="@dimen/_10sp"/>
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_simpan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_Simpan"
         android:text="@string/simpan"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="@dimen/_20sp"
-        android:layout_marginLeft="@dimen/_20sp"></Button>
-
-
+        android:layout_marginLeft="@dimen/_20sp"/>
 
 </RelativeLayout>

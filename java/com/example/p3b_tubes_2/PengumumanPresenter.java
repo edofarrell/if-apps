@@ -9,7 +9,9 @@ import java.util.ArrayList;
 public class PengumumanPresenter implements
         PengumumanContract.Model.GetOnSuccessListener,
         PengumumanContract.Model.GetTagOnSuccessListener,
-        PengumumanContract.Model.GetDetailOnSuccessListener {
+        PengumumanContract.Model.GetDetailOnSuccessListener,
+        PengumumanContract.Model.AddOnSuccessListener
+{
 
     private PengumumanContract.View ui;
     private MainPresenter mainPresenter;
@@ -34,9 +36,20 @@ public class PengumumanPresenter implements
         deletePengumuman.deletePengumuman(id);
     }
 
-    public void addPengumuman() throws JSONException {
-        String[] arr = {"d78227d2-053e-4d57-8ef7-ba1560f412de"};
-        this.tambahPengumuman.addPengumuman("Hello Dearen", "Pengumumanya Dearen", arr);
+
+    public void addPengumuman(String title, String content, String[] tags) {
+        this.tambahPengumuman.addPengumuman(title, content, tags);
+    }
+
+    @Override
+    public void AddOnSuccess(PengumumanList.Pengumuman pengumuman) {
+        this.pengumuman.addPengumuman(pengumuman);
+        this.ui.closeAddPage();
+    }
+
+    @Override
+    public void AddOnError() {
+
     }
 
 
@@ -83,4 +96,5 @@ public class PengumumanPresenter implements
     public void GetDetailOnError() {
 
     }
+
 }
