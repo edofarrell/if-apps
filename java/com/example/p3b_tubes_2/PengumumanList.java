@@ -23,9 +23,19 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         private String id;
         private String title;
         private TagList.Tag[] tags;
+        private String content;
 
         public String getTitle() {
             return title;
+        }
+
+        public String getId()
+        {
+            return this.id;
+        }
+
+        public String getContent(){
+            return this.content;
         }
 
         public String getTags() {

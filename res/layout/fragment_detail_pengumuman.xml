@@ -5,32 +5,50 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tv_judul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_judul_pengumuman"
         android:text="MBKM Magang"
         android:textSize="@dimen/_20sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_10sp"/>
 
-
-    <TextView
-        android:id="@+id/tv_tags"
+    <LinearLayout
+        android:id="@+id/ll_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_judul_pengumuman"
-        android:layout_marginTop="@dimen/_10sp"
-        android:layout_marginLeft="@dimen/_20sp"
-        android:text="@string/tagsPengumuman"></TextView>
+        android:orientation="vertical"
+        android:layout_below="@id/tv_judul">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sp"
+            android:layout_marginLeft="@dimen/_20sp"
+            android:text="@string/tagsPengumuman"/>
+
+        <TextView
+            android:id="@+id/tv_tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/tv_deskripsi_pengumuman"
-        android:layout_below="@id/tv_tags"
+        android:id="@+id/tv_content"
+        android:layout_below="@id/ll_tags"
         android:layout_marginTop="@dimen/_20dp"
         android:text="Saya lampirkan tawaran program MBKM dari BCA. Segera mendaftar ya!"
         android:layout_marginLeft="@dimen/_20dp"
-        android:layout_marginRight="20sp"></TextView>
+        android:layout_marginRight="20sp"/>
+
+    <Button
+        android:id="@+id/btn_kembali"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/kembali"/>
 
 </RelativeLayout>

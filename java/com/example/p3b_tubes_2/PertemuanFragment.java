@@ -23,7 +23,7 @@ public class PertemuanFragment extends Fragment implements PertemuanContract.Vie
     private PertemuanFragment() {
     }
 
-    public static PertemuanFragment newInstance(MainPresenter mainPresenter, Context context, FragmentManager fm, FrameLayout frameLayout) {
+    public static PertemuanFragment newInstance(MainPresenter mainPresenter, Context context, FrameLayout frameLayout) {
         Bundle args = new Bundle();
         PertemuanFragment fragment = new PertemuanFragment();
         fragment.presenter = new PertemuanPresenter(fragment, context, mainPresenter);

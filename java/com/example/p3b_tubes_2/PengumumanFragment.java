@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,8 +18,6 @@ import com.example.p3b_tubes_2.databinding.FragmentPengumumanBinding;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,15 +27,16 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private PengumumanPresenter presenter;
     private PengumumanListAdapter adapter;
     private ChipGroup chipGroup;
+    private FrameLayout frameLayout;
 
-    private PengumumanFragment() {
-    }
+    private PengumumanFragment() {}
 
-    public static PengumumanFragment newInstance(MainPresenter mainPresenter, Context context) {
+    public static PengumumanFragment newInstance(MainPresenter mainPresenter, Context context, FrameLayout frameLayout) {
         Bundle args = new Bundle();
         PengumumanFragment fragment = new PengumumanFragment();
         fragment.presenter = new PengumumanPresenter(fragment, context, mainPresenter);
         fragment.adapter = new PengumumanListAdapter(fragment.presenter);
+        fragment.frameLayout = frameLayout;
         fragment.setArguments(args);
         return fragment;
     }
@@ -127,5 +127,13 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
         popupMenu.setOnMenuItemClickListener(this::onOptionsItemSelected);
 
+    }
+
+    @Override
+    public void openDetail(PengumumanList.Pengumuman pengumuman) {
+        DetailPengumumanFragment detailPengumumanFragment = DetailPengumumanFragment.newInstance(pengumuman);
+        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), detailPengumumanFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

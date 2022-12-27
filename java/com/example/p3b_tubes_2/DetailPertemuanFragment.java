@@ -12,11 +12,13 @@ import androidx.fragment.app.Fragment;
 import com.example.p3b_tubes_2.databinding.FragmentDetailPertemuanBinding;
 
 public class DetailPertemuanFragment extends Fragment {
-    FragmentDetailPertemuanBinding binding;
-    private PertemuanList.Pertemuan pertemuan;
-    public DetailPertemuanFragment(){}
 
-    public static DetailPertemuanFragment newInstance(PertemuanList.Pertemuan pertemuan){
+    private FragmentDetailPertemuanBinding binding;
+    private PertemuanList.Pertemuan pertemuan;
+
+    public DetailPertemuanFragment() {}
+
+    public static DetailPertemuanFragment newInstance(PertemuanList.Pertemuan pertemuan) {
         DetailPertemuanFragment fragment = new DetailPertemuanFragment();
         fragment.pertemuan = pertemuan;
         return fragment;
@@ -25,7 +27,7 @@ public class DetailPertemuanFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentDetailPertemuanBinding.inflate(inflater);
+        this.binding = FragmentDetailPertemuanBinding.inflate(inflater);
 
         this.binding.tvTitle.setText(this.pertemuan.getTitle());
         this.binding.tvOrganizer.setText(this.pertemuan.getOrganizerName());
@@ -44,6 +46,4 @@ public class DetailPertemuanFragment extends Fragment {
         result.putString("page", "pertemuan");
         getParentFragmentManager().setFragmentResult("changePage", result);
     }
-
-
 }

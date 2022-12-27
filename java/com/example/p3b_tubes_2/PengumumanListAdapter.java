@@ -27,7 +27,7 @@ public class PengumumanListAdapter extends BaseAdapter {
 
         private void openDetail(View view) {
            PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
-//            presenter.getPartisipan(pertemuan);
+            presenter.getPengumumanDetail(pengumuman);
         }
 
         private void updateView(int i) {

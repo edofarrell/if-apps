@@ -6,8 +6,10 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class PengumumanPresenter implements PengumumanContract.Model.GetOnSuccessListener,
-PengumumanContract.Model.GetTagOnSuccessListener{
+public class PengumumanPresenter implements
+        PengumumanContract.Model.GetOnSuccessListener,
+        PengumumanContract.Model.GetTagOnSuccessListener,
+        PengumumanContract.Model.GetDetailOnSuccessListener {
 
     private PengumumanContract.View ui;
     private MainPresenter mainPresenter;
@@ -15,29 +17,31 @@ PengumumanContract.Model.GetTagOnSuccessListener{
     private TagList tag;
     private APITambahPengumuman tambahPengumuman;
     private APIDeletePengumuman deletePengumuman;
+    private APIGetPengumumanDetail detailPengumuman;
 
     public PengumumanPresenter(PengumumanContract.View ui, Context context, MainPresenter mainPresenter) {
         this.ui = ui;
         this.mainPresenter = mainPresenter;
         this.pengumuman = new PengumumanList(this, context);
-        this.tag = new TagList(this,context);
-        this.tambahPengumuman = new APITambahPengumuman(this,context);
-        this.deletePengumuman = new APIDeletePengumuman(this,context);
+        this.tag = new TagList(this, context);
+        this.tambahPengumuman = new APITambahPengumuman(this, context);
+        this.deletePengumuman = new APIDeletePengumuman(this, context);
+        this.detailPengumuman = new APIGetPengumumanDetail(this, context);
     }
 
-    public void getTag(){this.tag.getTag();}
 
-    public void getPengumuman(){
-        this.pengumuman.getPengumuman();
-    }
-
-    public void deletePengumuman(String id){
+    public void deletePengumuman(String id) {
         deletePengumuman.deletePengumuman(id);
     }
 
     public void addPengumuman() throws JSONException {
         String[] arr = {"d78227d2-053e-4d57-8ef7-ba1560f412de"};
-        this.tambahPengumuman.addPengumuman("Hello Dearen","Pengumumanya Dearen",arr);
+        this.tambahPengumuman.addPengumuman("Hello Dearen", "Pengumumanya Dearen", arr);
+    }
+
+
+    public void getPengumuman() {
+        this.pengumuman.getPengumuman();
     }
 
     @Override
@@ -50,6 +54,11 @@ PengumumanContract.Model.GetTagOnSuccessListener{
 
     }
 
+
+    public void getTag() {
+        this.tag.getTag();
+    }
+
     @Override
     public void GetTagOnSuccess(ArrayList<TagList.Tag> listTag) {
         this.ui.updateListTag(listTag);
@@ -57,6 +66,21 @@ PengumumanContract.Model.GetTagOnSuccessListener{
 
     @Override
     public void GetTagOnError() {
+
+    }
+
+
+    public void getPengumumanDetail(PengumumanList.Pengumuman pengumuman) {
+        this.detailPengumuman.getDetail(pengumuman);
+    }
+
+    @Override
+    public void GetDetailOnSuccess(PengumumanList.Pengumuman pengumuman) {
+        this.ui.openDetail(pengumuman);
+    }
+
+    @Override
+    public void GetDetailOnError() {
 
     }
 }

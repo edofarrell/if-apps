@@ -14,10 +14,16 @@ public interface PengumumanContract {
             void GetTagOnSuccess(ArrayList<TagList.Tag> listTag);
             void GetTagOnError();
         }
+
+        interface GetDetailOnSuccessListener{
+            void GetDetailOnSuccess(PengumumanList.Pengumuman pengumuman);
+            void GetDetailOnError();
+        }
     }
 
     interface View {
         void update(PengumumanList pengumumanList);
         void updateListTag(ArrayList<TagList.Tag> listTag);
+        void openDetail(PengumumanList.Pengumuman pengumuman);
     }
 }
