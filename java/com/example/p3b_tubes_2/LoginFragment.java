@@ -52,7 +52,7 @@ public class LoginFragment extends Fragment {
         }
 
         Bundle result = new Bundle();
-        result.putString("page", "pertemuan");
+        result.putString("page", "pengumuman");
 
         getParentFragmentManager().setFragmentResult("changePage", result);
     }

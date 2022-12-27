@@ -12,7 +12,7 @@
         android:gravity="center"
         style="@style/Widget.MaterialComponents.Toolbar.Surface"
         >
-        <TextView
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="IF Apps"
@@ -20,8 +20,26 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textStyle="bold"
-            ></TextView>
+            />-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="16dp"
+                android:src="@drawable/logo_kata1"
+                android:layout_marginRight="2dp"
+                />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="16dp"
+                android:src="@drawable/logo_kata2"
+                />
+        </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
@@ -29,7 +47,7 @@
         android:layout_above="@+id/bottom_navigation"
         android:background="@color/background"
         android:layout_below="@+id/appbar_topAppBar"
-        ></FrameLayout>
+        />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         app:labelVisibilityMode="labeled"
         android:id="@+id/bottom_navigation"
@@ -37,5 +55,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
 
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu"
+        />
 </RelativeLayout>

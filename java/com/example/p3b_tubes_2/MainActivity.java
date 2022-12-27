@@ -14,13 +14,14 @@ import android.view.View;
 import com.example.p3b_tubes_2.databinding.ActivityMainBinding;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.elevation.ElevationOverlayProvider;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private HashMap<String, Fragment> fragments;
@@ -35,9 +36,9 @@ public class MainActivity extends AppCompatActivity{
         this.fragments = new HashMap<>();
         this.fragments.put("login", LoginFragment.newInstance(this));
         this.fragments.put("home", HomeFragment.newInstance());
-        this.fragments.put("pengumuman",PengumumanFragment.newInstance());
-        this.fragments.put("pertemuan",PertemuanFragment.newInstance());
-        this.fragments.put("frs",FRSFragment.newInstance());
+        this.fragments.put("pengumuman", PengumumanFragment.newInstance());
+        this.fragments.put("pertemuan", PertemuanFragment.newInstance());
+        this.fragments.put("frs", FRSFragment.newInstance());
         this.fm = getSupportFragmentManager();
 
         BottomNavigationView bottomNavigation = binding.bottomNavigation;
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 String page = result.getString("page");
-                if(page.equals("login")) {
+                if (page.equals("login")) {
                     bottomNavigation.setVisibility(View.GONE);
                 } else {
                     topAppBar.setVisibility(View.VISIBLE);
@@ -93,27 +94,38 @@ public class MainActivity extends AppCompatActivity{
 
     private void changePage(String page) {
         FragmentTransaction ft = this.fm.beginTransaction();
-        if(page.equals("exit")) {
+        if (page.equals("exit")) {
             closeApplication();
         } else {
+            changeAppBarElevation(page);
+
             Fragment intendedFragment = this.fragments.get(page);
-            if(intendedFragment.isAdded()) {
+            if (intendedFragment.isAdded()) {
                 ft.show(intendedFragment);
             } else {
                 ft.add(this.binding.fragmentContainer.getId(), intendedFragment);
             }
 
-            for (Map.Entry<String, Fragment> set:this.fragments.entrySet()) {
-                String key = set.getKey();
-                if(!key.equals(page)) {
-                    ft.hide(this.fragments.get(key));
+            String key;
+            Fragment unintendedFragment;
+            for (Map.Entry<String, Fragment> set : this.fragments.entrySet()) {
+                key = set.getKey();
+                if (!key.equals(page)) {
+                    unintendedFragment = this.fragments.get(key);
+                    if (unintendedFragment.isAdded()) {
+                        ft.hide(unintendedFragment);
+                    }
                 }
             }
             ft.commit();
+        }
+    }
 
-            /*ft.replace(this.binding.fragmentContainer.getId(), fragments.get(page))
-                    .addToBackStack(null)
-                    .commit();*/
+    private void changeAppBarElevation(String page) {
+        if(page.equals("pertemuan")) {
+            this.binding.appbarTopAppBar.setElevation(0f);
+        } else {
+            this.binding.appbarTopAppBar.setElevation(8.0f);
         }
     }
 

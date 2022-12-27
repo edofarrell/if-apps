@@ -87,10 +87,15 @@ public class PertemuanFragment extends Fragment {
             ft.add(this.binding.fragmentContainer.getId(), intendedFragment);
         }
 
+        String key;
+        Fragment unintendedFragment;
         for (Map.Entry<String, Fragment> set : this.fragments.entrySet()) {
-            String key = set.getKey();
+            key = set.getKey();
             if (!key.equals(page)) {
-                ft.hide(this.fragments.get(key));
+                unintendedFragment = this.fragments.get(key);
+                if (unintendedFragment.isAdded()) {
+                    ft.hide(unintendedFragment);
+                }
             }
         }
         ft.commit();

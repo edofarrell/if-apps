@@ -13,11 +13,13 @@ import com.example.p3b_tubes_2.databinding.FragmentPertemuanDibuatBinding;
 
 public class PertemuanDibuatFragment extends Fragment {
     private FragmentPertemuanDibuatBinding binding;
+    private PertemuanListAdapter adapter;
 
     public PertemuanDibuatFragment(){};
 
     public static PertemuanDibuatFragment newInstance() {
         PertemuanDibuatFragment fragment = new PertemuanDibuatFragment();
+        fragment.adapter = new PertemuanListAdapter();
 
         return fragment;
     }
@@ -27,6 +29,13 @@ public class PertemuanDibuatFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = FragmentPertemuanDibuatBinding.inflate(inflater);
 
+        this.binding.lstAppointments.setAdapter(this.adapter);
+        this.binding.btnAddAppointment.setOnClickListener(this::onClick);
+
         return binding.getRoot();
+    }
+
+    private void onClick(View view) {
+        TambahAppointmentFragment.display(getChildFragmentManager());
     }
 }
