@@ -24,12 +24,7 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
     class Pengumuman {
         private String id;
         private String title;
-        private Tag[] tags;
-    }
-
-    class Tag {
-        private String name;
-        private String id;
+        private TagList.Tag[] tags;
     }
 
     private ArrayList<Pengumuman> arr;
