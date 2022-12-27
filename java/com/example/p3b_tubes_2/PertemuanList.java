@@ -115,7 +115,6 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
         return this.arr.get(i);
     }
 
-    //id global = c549e314-73db-4adf-8ef7-82c1bf89a527
     public void getPertemuan(String startDate, String endDate) {
         String url = APIClient.BASE_URL + "/appointments" + "/start-date" + "/" + startDate + "/end-date" + "/" + endDate;
 
@@ -138,8 +137,7 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
 
     @Override
     public void onResponse(String response) {
-        Type listType = new TypeToken<ArrayList<Pertemuan>>() {
-        }.getType();
+        Type listType = new TypeToken<ArrayList<Pertemuan>>() {}.getType();
         this.arr = this.gson.fromJson(response, listType);
         this.pertemuanPresenter.onSuccessGet(this);
     }

@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PengumumanList implements Response.Listener<String>, Response.ErrorListener {
@@ -29,12 +30,11 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
             return title;
         }
 
-        public String getId()
-        {
+        public String getId() {
             return this.id;
         }
 
-        public String getContent(){
+        public String getContent() {
             return this.content;
         }
 
@@ -50,11 +50,19 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         }
     }
 
+    class Cursor{
+        String next;
+
+        public String getCursor(){
+            return this.next;
+        }
+    }
+
     private ArrayList<Pengumuman> data;
     private PengumumanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
-    private String cursor;
+    private Cursor metadata;
 
     public PengumumanList(PengumumanPresenter presenter, Context context) {
         this.data = new ArrayList<>();
@@ -63,7 +71,7 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         this.gson = new Gson();
     }
 
-    public PengumumanList(){
+    public PengumumanList() {
         this.data = new ArrayList<>();
     }
 
@@ -75,12 +83,38 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         return this.data.get(i);
     }
 
-    public void addPengumuman(Pengumuman pengumuman){
+    public void addPengumuman(Pengumuman pengumuman) {
         this.data.add(pengumuman);
     }
 
-    public void getPengumuman() {
+    public void getPengumumanAll() {
         String url = APIClient.BASE_URL + "/announcements";
+
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url,
+                this::onResponse,
+                this::onErrorResponse
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", APIClient.token);
+                return params;
+            }
+        };
+
+        this.queue.add(request);
+    }
+
+    public void getPengumumanAll(String title, List<String> tags) {
+        String url = APIClient.BASE_URL + "/announcements?";
+        if (title != null) {
+            url += "filter[title]=" + title;
+        }
+        for (String tag : tags) {
+            url += "&filter[tags][]=" + tag;
+        }
 
         StringRequest request = new StringRequest(
                 Request.Method.GET,
