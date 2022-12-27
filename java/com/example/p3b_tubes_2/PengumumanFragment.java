@@ -8,7 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.AbsListView;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
@@ -63,7 +65,21 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.searchText = "";
         this.binding.btnNext.setOnClickListener(this::onClickNext);
 
-        
+        ListView listView = this.binding.lvPengumuman;
+        this.binding.lvPengumuman.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if(scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && (listView.getLastVisiblePosition() - listView.getHeaderViewsCount() -
+                        listView.getFooterViewsCount()) >= (adapter.getCount() - 1)){
+                    Log.d("DEBUG", "BOTTOM");
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
 
         return this.binding.getRoot();
     }
