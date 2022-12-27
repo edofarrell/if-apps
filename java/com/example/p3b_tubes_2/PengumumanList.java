@@ -22,7 +22,7 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
     class Pengumuman {
         private String id;
         private String title;
-        public ArrayList<Tag> tags;
+        private TagList.Tag[] tags;
 
         public String getTitle() {
             return title;
@@ -30,22 +30,13 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
 
         public String getTags() {
             String res = "";
-            for (int i = 0; i < tags.size(); i++) {
+            for (int i = 0; i < tags.length; i++) {
                 if (i != 0) {
                     res += ",";
                 }
-                res += tags.get(i).getName();
+                res += tags[i].getName();
             }
             return res;
-        }
-    }
-
-    class Tag {
-        private String tag;
-        private String tag_id;
-
-        public String getName() {
-            return tag;
         }
     }
 
@@ -97,7 +88,6 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
     @Override
     public void onResponse(String response) {
         PengumumanList pengumumanList = this.gson.fromJson(response, PengumumanList.class);
-        Log.d("DEBUG", pengumumanList.data.get(0).tags.size()+"");
         presenter.OnSuccessGet(pengumumanList);
     }
 

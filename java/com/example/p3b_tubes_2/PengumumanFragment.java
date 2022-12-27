@@ -2,6 +2,7 @@ package com.example.p3b_tubes_2;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,11 @@ import androidx.fragment.app.Fragment;
 import com.example.p3b_tubes_2.databinding.FragmentPengumumanBinding;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PengumumanFragment extends Fragment implements PengumumanContract.View {
 
@@ -44,13 +50,19 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.presenter.getPengumuman();
 
         binding.ivFilter.setOnClickListener(this::onClick);
+        binding.tvPengumuman.setOnClickListener(this::test);//dipake untuk test api saja
         chipGroup = binding.chipGrup;
         return this.binding.getRoot();
     }
 
+    private void test(View view) {
+        this.presenter.deletePengumuman("b90bce6d-a8d7-4777-a49b-0a63d6bfef02");
+    }
+
 
     public void onClick(View view) {
-        if (view == binding.ivFilter) {
+        presenter.getTag();
+        /*if (view == binding.ivFilter) {
             PopupMenu popupMenu = new PopupMenu(getContext(), binding.ivFilter);
 
             //nambah pop up menu (nanti diisi dari yg api tag tag nya)
@@ -61,7 +73,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
             popupMenu.show();
 
             popupMenu.setOnMenuItemClickListener(this::onOptionsItemSelected);
-        }
+        }*/
     }
 
     @Override
@@ -76,8 +88,18 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         chip.setTextColor(getResources().getColor(R.color.black));
         chip.setOnCloseIconClickListener(this::OnCloseIconClick);
 
-
-        chipGroup.addView(chip);
+        List<Integer> list = chipGroup.getCheckedChipIds();
+        boolean check = false;
+        for(int i = 0;i<list.size();i++){
+            Log.d("DEBUG",list.get(i)+"");
+            if(list.get(i)==id){
+                check = true;
+                break;
+            }
+        }
+        if(!check){
+            chipGroup.addView(chip);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -88,7 +110,22 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     @Override
+
     public void update(PengumumanList pengumumanList) {
         this.adapter.update(pengumumanList);
+    }
+
+    public void updateListTag(ArrayList<TagList.Tag> listTag) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), binding.ivFilter);
+
+        //nambah pop up menu (nanti diisi dari yg api tag tag nya)
+        popupMenu.getMenu().add(1, 1, 1, listTag.get(0).getName());
+        //popupMenu.getMenu().add(1, 2, 2, listTag.get(1).getNama());
+        //popupMenu.getMenu().add(1, 3, 3, listTag.get(2).getNama());
+        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+        popupMenu.show();
+
+        popupMenu.setOnMenuItemClickListener(this::onOptionsItemSelected);
+
     }
 }
