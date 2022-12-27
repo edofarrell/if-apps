@@ -15,10 +15,10 @@ public class FRSFragment extends Fragment implements FRSContract.View{
     private FragmentFrsBinding binding;
     private FRSPresenter presenter;
     private FRSFragment(){}
-    public static FRSFragment newInstance(MainPresenter mainPresenter) {
+    public static FRSFragment newInstance(MainPresenter mainPresenter,Context context) {
         Bundle args = new Bundle();
         FRSFragment fragment = new FRSFragment();
-        fragment.presenter = new FRSPresenter(fragment, mainPresenter);
+        fragment.presenter = new FRSPresenter(fragment,context, mainPresenter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -27,6 +27,11 @@ public class FRSFragment extends Fragment implements FRSContract.View{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.binding = FragmentFrsBinding.inflate(inflater);
+        this.binding.tvFrs.setOnClickListener(this::test);//dipake buat tes api saja
         return binding.getRoot();
+    }
+
+    private void test(View view) {
+        this.presenter.getAcademicYears();
     }
 }
