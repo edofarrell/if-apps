@@ -54,14 +54,15 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
         this.binding.btnAddPengumuman.setOnClickListener(this::OnClickAddPengumuman);
 
-        this.binding.ivFilter.setOnClickListener(this::onClick);
+        this.binding.ivFilter.setOnClickListener(this::openFilter);
 
-        this.chipGroup = binding.chipGrup;
+        this.chipGroup = this.binding.chipGrup;
 
         this.searchText = "";
         this.binding.btnNext.setOnClickListener(this::onClickNext);
         this.binding.btnBack.setOnClickListener(this::onClickBack);
 
+        //infinite scroll
 //        ListView listView = this.binding.lvPengumuman;
 //        this.binding.lvPengumuman.setOnScrollListener(new AbsListView.OnScrollListener() {
 //            @Override
@@ -80,15 +81,6 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 //        });
 
         return this.binding.getRoot();
-    }
-
-    private void onClickBack(View view) {
-        filter();
-    }
-
-    private void onClickNext(View view) {
-        List<String> tag = presenter.getTagsId(arrChipGroup);
-        this.presenter.getPengumuman(this.searchText, tag, true);
     }
 
     @Override
@@ -111,17 +103,26 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         });
     }
 
-    public void filter() {
-        List<String> tag = presenter.getTagsId(arrChipGroup);
-        presenter.getPengumuman(this.searchText, tag, false);
+    private void onClickBack(View view) {
+        filter();
+    }
+
+    private void onClickNext(View view) {
+        List<String> tag = this.presenter.getTagsId(this.arrChipGroup);
+        this.presenter.getPengumuman(this.searchText, tag, true);
     }
 
     private void OnClickAddPengumuman(View view) {
-        tambahFragment = PengumumanTambahFragment.newInstance(getParentFragmentManager(), this.presenter);
+        this.tambahFragment = PengumumanTambahFragment.newInstance(getParentFragmentManager(), this.presenter);
     }
 
-    public void onClick(View view) {
+    public void openFilter(View view) {
         presenter.getTag();
+    }
+
+    public void filter() {
+        List<String> tag = this.presenter.getTagsId(this.arrChipGroup);
+        this.presenter.getPengumuman(this.searchText, tag, false);
     }
 
     @Override
@@ -142,31 +143,34 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
             }
         }
         if (!check) {
-            chipGroup.addView(chip);
+            this.chipGroup.addView(chip);
         }
-        arrChipGroup.add(item.getTitle().toString());
+        this.arrChipGroup.add(item.getTitle().toString());
         filter();
         return super.onOptionsItemSelected(item);
     }
 
     public boolean OnCloseIconClick(View view) {
         Chip chip = (Chip) view;
-        chipGroup.removeView(view);
-        arrChipGroup.remove(chip.getText().toString());
+        this.chipGroup.removeView(view);
+        this.arrChipGroup.remove(chip.getText().toString());
         filter();
         return true;
     }
 
     @Override
-    public void update(PengumumanList pengumumanList) {
+    public void updatePengumumanList(PengumumanList pengumumanList) {
         this.adapter.update(pengumumanList);
     }
 
+    @Override
     public void updateListTag(ArrayList<TagList.Tag> listTag) {
-        PopupMenu popupMenu = new PopupMenu(getContext(), binding.ivFilter);
-        if (tambahFragment != null)
-            tambahFragment.updateTag(listTag);
-        //nambah pop up menu (nanti diisi dari yg api tag tag nya)
+        PopupMenu popupMenu = new PopupMenu(getContext(), this.binding.ivFilter);
+
+        if (this.tambahFragment != null) {
+            this.tambahFragment.updateTag(listTag);
+        }
+
         for (int i = 0; i < listTag.size(); i++) {
             popupMenu.getMenu().add(1, i + 1, i + 1, listTag.get(i).getName());
         }
@@ -184,8 +188,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     @Override
     public void closeAddPage() {
-        Bundle result = new Bundle();
-        result.putString("page", "pengumuman");
-        getParentFragmentManager().setFragmentResult("changePage", result);
+//        Bundle result = new Bundle();
+//        result.putString("page", "pengumuman");
+//        getParentFragmentManager().setFragmentResult("changePage", result);
     }
 }

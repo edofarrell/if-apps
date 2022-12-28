@@ -32,7 +32,7 @@ public interface PengumumanContract {
     }
 
     interface View {
-        void update(PengumumanList pengumumanList);
+        void updatePengumumanList(PengumumanList pengumumanList);
         void updateListTag(ArrayList<TagList.Tag> listTag);
         void openDetail(PengumumanList.Pengumuman pengumuman);
         void closeAddPage();
