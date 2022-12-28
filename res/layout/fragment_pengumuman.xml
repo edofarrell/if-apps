@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+<<<<<<< Updated upstream
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,13 +13,20 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/tv_pengumuman"/>
 
+=======
+>>>>>>> Stashed changes
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< Updated upstream
         android:layout_below="@id/tv_pengumuman"
         android:orientation="horizontal"
         android:id="@+id/ll_header_pengumuman"
         android:layout_marginTop="@dimen/_10sp">
+=======
+        android:layout_marginTop="@dimen/_20sp"
+        android:orientation="horizontal">
+>>>>>>> Stashed changes
 
         <ImageView
             android:layout_width="wrap_content"
@@ -68,7 +76,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/ll_chip"
         android:layout_marginTop="@dimen/_20sp"
-        android:padding="@dimen/_20sp"
+        android:padding="@dimen/_15sp"
         android:divider="@color/white"
         android:dividerHeight="@dimen/_20sp"
 
@@ -89,21 +97,19 @@
             android:orientation="vertical">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_16dp"
-                android:backgroundTint="@color/white"
-                android:src="@drawable/ic_next" />
-
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_16dp"
-                android:backgroundTint="@color/white"
                 android:src="@drawable/ic_back" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_16dp"
+                android:src="@drawable/ic_next" />
 
         </LinearLayout>
 
@@ -118,7 +124,6 @@
             android:layout_marginTop="@dimen/_16dp"
             android:layout_marginEnd="@dimen/_16dp"
             android:layout_marginBottom="@dimen/_16dp"
-            android:backgroundTint="@color/white"
             android:src="@drawable/ic_tambah_fab" />
 
     </RelativeLayout>

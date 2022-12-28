@@ -11,4 +11,13 @@
     <color name="blue_primary_variant">#2222DD</color>
     <color name="blue_background">#6689CFF0</color>
     <color name="red">#FF0000</color>
+<<<<<<< Updated upstream
+=======
+    <color name="primary">#1976d2</color>
+    <color name="primary_variant">#115293</color>
+    <color name="secondary">#EC407A</color>
+    <color name="secondary_variant">#A52C55</color>
+    <color name="background">#fafafa</color>
+    <color name="bluePengumuman">#CC4791DB</color>
+>>>>>>> Stashed changes
 </resources>

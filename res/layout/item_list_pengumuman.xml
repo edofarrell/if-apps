@@ -3,7 +3,11 @@
     android:id="@+id/ll_pengumuman"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< Updated upstream
     android:backgroundTint="@color/blue_background"
+=======
+    android:backgroundTint="@color/bluePengumuman"
+>>>>>>> Stashed changes
     android:orientation="vertical"
     android:paddingTop="@dimen/_10sp"
     android:paddingBottom="@dimen/_10sp"

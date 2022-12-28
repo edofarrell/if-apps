@@ -52,9 +52,15 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
         this.binding.btnAddPengumuman.setOnClickListener(this::OnClickAddPengumuman);
 
+<<<<<<< Updated upstream
         binding.ivFilter.setOnClickListener(this::onClick);
         binding.tvPengumuman.setOnClickListener(this::test);//dipake untuk test api saja
         chipGroup = binding.chipGrup;
+=======
+        this.binding.ivFilter.setOnClickListener(this::onClick);
+
+        this.chipGroup = binding.chipGrup;
+>>>>>>> Stashed changes
 
         SearchView searchView = this.binding.searchBar;
         searchView.setActivated(true);
@@ -77,10 +83,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     private void OnClickAddPengumuman(View view) {
-        PengumumanTambahFragment pengumumanTambahFragment = PengumumanTambahFragment.newInstance(this.presenter);
-        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pengumumanTambahFragment)
-                .addToBackStack(null)
-                .commit();
+        PengumumanTambahFragment.newInstance(this.getParentFragmentManager(), this.presenter);
     }
 
     private void test(View view) {

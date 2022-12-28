@@ -4,79 +4,106 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/judulTambahFRS"
-        android:gravity="center"
-        android:textSize="@dimen/_25sp"
-        android:id="@+id/tv_tambah"></TextView>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tv_tambah"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/_20sp"
-        android:paddingLeft="@dimen/_10sp"
-        android:paddingRight="@dimen/_10sp"
+        android:background="@color/white"
+        app:elevation="@dimen/_4dp"
         >
 
-
-        <TextView
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Semester Ganjil 2022/2023"
-            android:id="@+id/tv_semester"
-            android:textSize="@dimen/_15sp"></TextView>
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_baseline_close_24"
+            app:title="@string/judulTambahFRS"
+            app:titleCentered="true"
+            />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            app:startIconDrawable="@drawable/ic_matkul"
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbar_layout"
+        android:paddingLeft="@dimen/_16dp"
+        android:paddingRight="@dimen/_16dp">
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/mataKuliah"
-            android:layout_below="@id/tv_semester"
-            android:id="@+id/dropdown"
-            android:layout_marginTop="@dimen/_10sp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_20sp"
+            android:paddingLeft="@dimen/_10sp"
+            android:paddingRight="@dimen/_10sp"
+            android:orientation="vertical">
 
-            <AutoCompleteTextView
-                android:id="@+id/matkul"
+            <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_above="@id/btn_ambil">
+
+                <TextView
+                    android:id="@+id/tv_semester"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Semester Ganjil 2022/2023"
+                    android:textSize="@dimen/_15sp"></TextView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/dropdown"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_semester"
+                    android:layout_marginTop="@dimen/_10sp"
+                    android:hint="@string/mataKuliah"
+                    app:startIconDrawable="@drawable/ic_matkul">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/matkul"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"></AutoCompleteTextView>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_prasyarat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dropdown"
+                    android:layout_marginTop="@dimen/_15sp"
+                    android:text="@string/prasyarat">
+
+                </TextView>
+
+                <ListView
+                    android:id="@+id/lv_matkul_prasyarat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_prasyarat"
+                    android:layout_marginTop="@dimen/_10sp"></ListView>
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_ambil"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="none"></AutoCompleteTextView>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/prasyarat"
-            android:id="@+id/tv_prasyarat"
-            android:layout_below="@id/dropdown"
-            android:layout_marginTop="@dimen/_15sp">
-
-        </TextView>
-
-        <ListView
-            android:id="@+id/lv_matkul_prasyarat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/btn_ambil"
-            android:layout_below="@id/tv_prasyarat"
-            android:layout_marginTop="@dimen/_10sp"></ListView>
-
-        <Button
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ambil"
-            android:id="@+id/btn_ambil"
-            ></Button>
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/ambil"></Button>
 
 
+        </RelativeLayout>
 
-    </RelativeLayout>
+
+    </LinearLayout>
+
+
 
 
 

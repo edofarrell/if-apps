@@ -40,6 +40,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+<<<<<<< Updated upstream
         android:id="@+id/tv_content"
         android:layout_below="@id/ll_tags"
         android:layout_marginTop="@dimen/_20dp"
@@ -52,5 +53,55 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="@string/kembali"/>
+=======
+        android:layout_below="@id/appbar_layout"
+        android:paddingLeft="@dimen/_16dp"
+        android:paddingRight="@dimen/_16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_judul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_24sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/tv_tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_hashtag"
+                android:gravity="center_vertical"
+                android:text="@string/tags"
+                android:textSize="@dimen/_16sp"
+                android:layout_marginTop="@dimen/_15sp"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sp"
+                android:text="Content"
+                android:textSize="@dimen/_16sp"
+                android:textColor="@color/black"
+                />
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+>>>>>>> Stashed changes
 
 </RelativeLayout>
