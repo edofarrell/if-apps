@@ -49,4 +49,6 @@
     <string name="lihatDetail">LIHAT DETAIL</string>
     <string name="next">Next</string>
     <string name="detail_pengumuman">Detail Pengumuman</string>
+    <string name="detail_pertemuan">Detail Pertemuan</string>
+    <string name="penyelenggara">Penyelenggara</string>
 </resources>

@@ -1,11 +1,14 @@
 package com.example.p3b_tubes_2;
 
+import android.app.Activity;
 import android.content.Context;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
@@ -34,16 +37,29 @@ public class LoginFragment extends Fragment implements LoginContract.View{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.fragmentLoginBinding = FragmentLoginBinding.inflate(inflater);
-        this.fragmentLoginBinding.btnLogin.setOnClickListener(this::onClick);
-
-        //(getActivity()).getSupportActionBar().hide();
-//        ((MainActivity)getActivity()).setDrawer_locked();
 
         String[] roles = getResources().getStringArray(R.array.dropdownRole);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this.getContext(), R.layout.login_dropdown_item, roles);
         fragmentLoginBinding.etRole.setAdapter(arrayAdapter);
 
         return this.fragmentLoginBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        this.fragmentLoginBinding.btnLogin.setOnClickListener(this::onClick);
+        this.fragmentLoginBinding.etRole.setOnClickListener(this::closeSoftKeyboard);
+    }
+
+    private void closeSoftKeyboard(View view) {
+        Activity activity = this.getActivity();
+        InputMethodManager imm = (InputMethodManager) this.getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     private void onClick(View view) {

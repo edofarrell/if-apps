@@ -53,9 +53,6 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
 
     @Override
     public void openDetailPertemuanDibuat(PertemuanList.Pertemuan pertemuan) {
-        PertemuanDetailFragment pertemuanDetailFragment = PertemuanDetailFragment.newInstance(pertemuan);
-        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pertemuanDetailFragment)
-                .addToBackStack(null)
-                .commit();
+        PertemuanDetailFragment.newInstance(this.getParentFragmentManager(), pertemuan);
     }
 }

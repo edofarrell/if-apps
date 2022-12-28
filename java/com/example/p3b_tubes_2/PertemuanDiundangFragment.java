@@ -43,7 +43,7 @@ public class PertemuanDiundangFragment extends Fragment implements PertemuanCont
 
     @Override
     public void openDetailPertemuanDiundang(PertemuanList.Pertemuan pertemuan) {
-        PertemuanDetailFragment pertemuanDetailFragment = PertemuanDetailFragment.newInstance(pertemuan);
+        PertemuanDetailFragment pertemuanDetailFragment = PertemuanDetailFragment.newInstance(getParentFragmentManager(), pertemuan);
         getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pertemuanDetailFragment)
                 .addToBackStack(null)
                 .commit();
