@@ -2,6 +2,7 @@ package com.example.p3b_tubes_2;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -86,6 +87,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("DEBUG", "onResume: ");
         SearchView searchView = this.binding.searchBar;
         searchView.setActivated(true);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -188,8 +190,6 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     @Override
     public void closeAddPage() {
-//        Bundle result = new Bundle();
-//        result.putString("page", "pengumuman");
-//        getParentFragmentManager().setFragmentResult("changePage", result);
+        this.tambahFragment.dismiss();
     }
 }

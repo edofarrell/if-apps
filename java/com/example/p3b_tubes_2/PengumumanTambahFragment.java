@@ -64,7 +64,6 @@ public class PengumumanTambahFragment extends DialogFragment {
             tags[i] = listTag.get(i);
         }
         this.presenter.addPengumuman(title, content, tags);
-        this.dismiss();
     }
 
     @Override
