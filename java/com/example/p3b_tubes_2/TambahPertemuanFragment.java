@@ -12,14 +12,14 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 
-import com.example.p3b_tubes_2.databinding.FragmentAddAppointmentBinding;
+import com.example.p3b_tubes_2.databinding.FragmentAddPertemuanBinding;
 
-public class TambahAppointmentFragment extends DialogFragment {
-    FragmentAddAppointmentBinding binding;
+public class TambahPertemuanFragment extends DialogFragment {
+    FragmentAddPertemuanBinding binding;
 
-    public static TambahAppointmentFragment newInstance(FragmentManager fm) {
-        TambahAppointmentFragment fragment = new TambahAppointmentFragment();
-        fragment.show(fm, "addAppointment");
+    public static TambahPertemuanFragment newInstance(FragmentManager fm) {
+        TambahPertemuanFragment fragment = new TambahPertemuanFragment();
+        fragment.show(fm, "tambahPertemuan");
         return fragment;
     }
 
@@ -46,7 +46,7 @@ public class TambahAppointmentFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        binding = FragmentAddAppointmentBinding.inflate(inflater);
+        binding = FragmentAddPertemuanBinding.inflate(inflater);
 
         setDate();
         setTime();
@@ -61,6 +61,7 @@ public class TambahAppointmentFragment extends DialogFragment {
 
         binding.appbar.setNavigationOnClickListener(this::closeDialogFragment);
         binding.btnCancel.setOnClickListener(this::closeDialogFragment);
+        binding.btnTambahPartisipan.setOnClickListener(this::openTambahPartisipanDialog);
 
         binding.etDate.setOnClickListener(this::showDatePicker);
         binding.etStartTime.setOnClickListener(this::showTimePicker);
@@ -68,6 +69,7 @@ public class TambahAppointmentFragment extends DialogFragment {
 
         binding.btnAddAppointment.setOnClickListener(this::addAppointment);
     }
+
 
 
     private void showTimePicker(View view) {
@@ -107,6 +109,10 @@ public class TambahAppointmentFragment extends DialogFragment {
                 }
             }
         });
+    }
+
+    private void openTambahPartisipanDialog(View view) {
+        TambahPartisipanFragment.newInstance(this.getParentFragmentManager());
     }
 
     private void closeDialogFragment(View view) {
