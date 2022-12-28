@@ -4,7 +4,7 @@
     android:id="@+id/ll_pengumuman"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/primary"
+    android:backgroundTint="@color/bluePengumuman"
     android:orientation="vertical"
     android:paddingTop="@dimen/_10sp"
     android:paddingBottom="@dimen/_10sp"

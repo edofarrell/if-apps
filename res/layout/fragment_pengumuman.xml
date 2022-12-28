@@ -104,7 +104,8 @@
             android:layout_marginTop="@dimen/_16dp"
             android:layout_marginEnd="@dimen/_16dp"
             android:layout_marginBottom="@dimen/_16dp"
-            android:src="@drawable/ic_tambah_fab" />
+            android:src="@android:drawable/ic_input_add"
+            />
 
     </RelativeLayout>
 
