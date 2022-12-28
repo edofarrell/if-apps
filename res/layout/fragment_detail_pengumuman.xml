@@ -51,16 +51,6 @@
                 />
 
             <TextView
-                android:id="@+id/tv_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_32dp"
-                android:text="Content"
-                android:textSize="@dimen/_16sp"
-                android:textColor="@color/black"
-                />
-
-            <TextView
                 android:id="@+id/tv_tags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,6 +60,19 @@
                 android:textSize="@dimen/_16sp"
                 android:textColor="@color/black"
                 />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sp"
+                android:layout_marginLeft="@dimen/_5sp"
+                android:text="Content"
+                android:textSize="@dimen/_16sp"
+                android:textColor="@color/black"
+                />
+
+
 
         </LinearLayout>
 
