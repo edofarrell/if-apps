@@ -32,16 +32,16 @@ public class APIPertemuanTambahTimeSlot implements Response.Listener<JSONObject>
 
     public void getTimeSlot(String lecturerId){
         String url = APIClient.BASE_URL+"/lecturer-time-slots"+"/lecturers"+"/"+lecturerId;
-        CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET,url,null,
-                this::onResponse,this::onErrorResponse){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorization", APIClient.token);
-                return params;
-            }
-        };
-        queue.add(request);
+//        CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET,url,null,
+//                this::onResponse,this::onErrorResponse){
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("Authorization", APIClient.token);
+//                return params;
+//            }
+//        };
+//        queue.add(request);
     }
 
     @Override

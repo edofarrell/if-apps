@@ -1,5 +1,7 @@
 package com.example.p3b_tubes_2;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,7 +36,25 @@ public class PengumumanListAdapter extends BaseAdapter {
 
         private void onClickDelete(View view) {
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
-            presenter.deletePengumuman(pengumuman.getId());
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            builder.setMessage("Hapus Pengumuman \n\"" + pengumuman.getTitle() + "\" ?");
+            builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    presenter.deletePengumuman(pengumuman.getId());
+                    notifyDataSetChanged();
+                }
+            });
+            builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog deleteAlert = builder.create();
+            deleteAlert.show();
         }
 
         private void openDetail(View view) {
@@ -54,7 +74,7 @@ public class PengumumanListAdapter extends BaseAdapter {
         }
     }
 
-    public PengumumanListAdapter(PengumumanPresenter presenter){
+    public PengumumanListAdapter(PengumumanPresenter presenter) {
         this.pengumumanList = new PengumumanList();
         this.presenter = presenter;
     }
@@ -91,7 +111,7 @@ public class PengumumanListAdapter extends BaseAdapter {
         return view;
     }
 
-    public void update(PengumumanList pengumumanList){
+    public void update(PengumumanList pengumumanList) {
         this.pengumumanList = pengumumanList;
         notifyDataSetChanged();
     }
