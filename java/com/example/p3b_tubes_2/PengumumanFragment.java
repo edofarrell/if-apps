@@ -169,7 +169,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     public void updateListTag(ArrayList<TagList.Tag> listTag) {
         PopupMenu popupMenu = new PopupMenu(getContext(), this.binding.ivFilter);
 
-        if (this.tambahFragment != null) {
+        if (this.tambahFragment != null && this.tambahFragment.isVisible()) {
             this.tambahFragment.updateTag(listTag);
         }
 
