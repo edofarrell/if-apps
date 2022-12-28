@@ -183,10 +183,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     @Override
     public void openDetail(PengumumanList.Pengumuman pengumuman) {
-        PengumumanDetailFragment pengumumanDetailFragment = PengumumanDetailFragment.newInstance(pengumuman);
-        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pengumumanDetailFragment)
-                .addToBackStack(null)
-                .commit();
+        PengumumanDetailFragment.newInstance(getParentFragmentManager(), pengumuman);
     }
 
     @Override
