@@ -28,6 +28,7 @@ public class PertemuanPresenter implements
     private APIPertemuanAddParticipants apiAddParticipantsPertemuan;
     private APIPertemuanDeleteParticipants apiDeleteParticipantsPertemuan;
     private APIPertemuanDelete deletePertemuan;
+    private APIPertemuanGetTimeSlot getTimeSlot;
 
     public PertemuanPresenter(PertemuanContract.View ui, Context context, MainPresenter mainPresenter) {
         this.pertemuan = new PertemuanList(this, context);
@@ -39,6 +40,11 @@ public class PertemuanPresenter implements
         this.apiAddParticipantsPertemuan = new APIPertemuanAddParticipants(this,context);
         this.apiDeleteParticipantsPertemuan = new APIPertemuanDeleteParticipants(this,context);
         this.deletePertemuan = new APIPertemuanDelete(this,context);
+        this.getTimeSlot = new APIPertemuanGetTimeSlot(this,context);
+    }
+
+    public void getTimeSlot(String lecturerId){
+        getTimeSlot.getTimeSlot(lecturerId);
     }
 
     public void setUiDibuat(PertemuanContract.View.PertemuanDibuat ui){
