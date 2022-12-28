@@ -75,6 +75,32 @@ public class TambahAppointmentFragment extends DialogFragment {
         binding.etEndTime.setOnClickListener(this::showTimePicker);
 
         binding.btnAddAppointment.setOnClickListener(this::addAppointment);
+        binding.btnAddParticipant.setOnClickListener(this::addParticipant);
+    }
+
+    private void addAppointment(View view) {
+        String title = this.binding.etTitle.getText().toString();
+        String inputDate = this.binding.etDate.getEditableText().toString();
+        String startTime = this.binding.etStartTime.getEditableText().toString();
+        String endTime = this.binding.etEndTime.getEditableText().toString();
+        String description = this.binding.etDescription.getEditableText().toString();
+
+        SimpleDateFormat inputformatter = new SimpleDateFormat("E,dd MMM yyyyHH:mm");
+        SimpleDateFormat outputformatter = new SimpleDateFormat("yyyy-MM-dd HH:mmZ");
+        String startDateTime = null;
+        String endDateTime = null;
+        try {
+            startDateTime = outputformatter.format(inputformatter.parse(inputDate+startTime));
+            endDateTime = outputformatter.format(inputformatter.parse(inputDate+endTime));
+        } catch (ParseException e) {
+            Log.d("DEBUG", "TambahAppointmentFragment: addAppointment() catch ParseException");
+        }
+
+
+    }
+
+    private void addParticipant(View view) {
+
     }
 
 
@@ -121,27 +147,4 @@ public class TambahAppointmentFragment extends DialogFragment {
         dismiss();
     }
 
-    private void addAppointment(View view) {
-        String title = this.binding.etTitle.getText().toString();
-        String inputDate = this.binding.etDate.getEditableText().toString();
-        String startTime = this.binding.etStartTime.getEditableText().toString();
-        String endTime = this.binding.etEndTime.getEditableText().toString();
-
-        SimpleDateFormat inputformatter = new SimpleDateFormat("E,dd MMM yyyyhh:mm");
-        SimpleDateFormat outputformatter = new SimpleDateFormat("yyyy-MM-dd hh:mmZ");
-        String startDateTime = null;
-        String endDateTime = null;
-        try {
-            startDateTime = outputformatter.format(inputformatter.parse(inputDate+startTime));
-            endDateTime = outputformatter.format(inputformatter.parse(inputDate+endTime));
-        } catch (ParseException e) {
-            Log.d("DEBUG", "ERROR "+e.getMessage());
-            e.printStackTrace();
-        }
-
-//        Log.d("DEBUG", date);
-
-
-
-    }
 }
