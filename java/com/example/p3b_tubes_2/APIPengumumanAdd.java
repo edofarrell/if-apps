@@ -49,7 +49,6 @@ public class APIPengumumanAdd implements Response.Listener<JSONObject>, Response
             JSON = new JSONObject(json.toString());
         } catch (JSONException e) {
             Log.d("DEBUG", "APIPengumumanAdd: addPengumuman() catch JSONException");
-            ;
         }
 
         JsonObjectRequest request = new JsonObjectRequest(
@@ -87,7 +86,7 @@ public class APIPengumumanAdd implements Response.Listener<JSONObject>, Response
 
             String errMessage = "";
             for (int i = 0; i < errField.size(); i++) {
-                if(i!=0){
+                if (i != 0) {
                     errMessage += "\n";
                 }
                 errMessage += errField.get(i) + " perlu diisi";
