@@ -22,7 +22,7 @@ public interface PengumumanContract {
 
         interface AddOnSuccessListener{
             void AddOnSuccess(PengumumanList.Pengumuman pengumuman);
-            void AddOnError();
+            void AddOnError(String msg);
         }
 
         interface DeleteOnSuccessListener{
@@ -36,5 +36,6 @@ public interface PengumumanContract {
         void updateListTag(ArrayList<TagList.Tag> listTag);
         void openDetail(PengumumanList.Pengumuman pengumuman);
         void closeAddPage();
+        void showErrorAddPengumuman(String msg);
     }
 }

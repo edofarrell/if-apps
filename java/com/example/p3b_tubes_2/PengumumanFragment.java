@@ -196,4 +196,9 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     public void closeAddPage() {
         this.tambahFragment.dismiss();
     }
+
+    @Override
+    public void showErrorAddPengumuman(String msg) {
+        this.tambahFragment.showError(msg);
+    }
 }

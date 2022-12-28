@@ -136,4 +136,8 @@ public class PengumumanTambahFragment extends DialogFragment {
         arrChipGroup.remove(chip.getText().toString());
         return true;
     }
+
+    public void showError(String msg){
+        this.binding.tvError.setText(msg);
+    }
 }

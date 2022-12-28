@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class APIPengumumanAdd implements Response.Listener<JSONObject>, Response.ErrorListener {
@@ -31,7 +32,7 @@ public class APIPengumumanAdd implements Response.Listener<JSONObject>, Response
         this.gson = new Gson();
     }
 
-    public void addPengumuman(String title, String content, String[] idTags){
+    public void addPengumuman(String title, String content, String[] idTags) {
         String url = APIClient.BASE_URL + "/announcements";
 
         JsonObject json = new JsonObject();
@@ -47,7 +48,8 @@ public class APIPengumumanAdd implements Response.Listener<JSONObject>, Response
         try {
             JSON = new JSONObject(json.toString());
         } catch (JSONException e) {
-            Log.d("DEBUG", "APIPengumumanAdd: addPengumuman() catch JSONException");;
+            Log.d("DEBUG", "APIPengumumanAdd: addPengumuman() catch JSONException");
+            ;
         }
 
         JsonObjectRequest request = new JsonObjectRequest(
@@ -79,6 +81,19 @@ public class APIPengumumanAdd implements Response.Listener<JSONObject>, Response
         try {
             String responseBody = new String(error.networkResponse.data, "utf-8");
             Log.d("DEBUG", "APIPengumumanAdd: onErrorResponse(), Error=" + responseBody);
+
+            APIError err = this.gson.fromJson(responseBody, APIError.class);
+            List<String> errField = err.getField();
+
+            String errMessage = "";
+            for (int i = 0; i < errField.size(); i++) {
+                if(i!=0){
+                    errMessage += "\n";
+                }
+                errMessage += errField.get(i) + " perlu diisi";
+            }
+
+            this.presenter.AddOnError(errMessage);
         } catch (UnsupportedEncodingException e) {
             Log.d("DEBUG", "APIPengumumanAdd: onErrorResponse() catch UnsupportedEncodingException");
         }

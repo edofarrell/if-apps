@@ -44,8 +44,8 @@ public class PengumumanPresenter implements
     }
 
     @Override
-    public void AddOnError() {
-
+    public void AddOnError(String msg) {
+        this.ui.showErrorAddPengumuman(msg);
     }
 
 
