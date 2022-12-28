@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanBinding;
@@ -81,6 +82,14 @@ public class PertemuanFragment extends Fragment implements
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+
+        this.fm.setFragmentResultListener("backPertemuan", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                String page = result.getString("page");
+                changePage(page);
             }
         });
 

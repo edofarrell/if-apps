@@ -1,6 +1,7 @@
 package com.example.p3b_tubes_2;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,16 +67,18 @@ public class PengumumanPresenter implements
         this.pengumuman.getPengumumanAll();
     }
 
-    public void getPengumuman(String title, List<String> tags, String cursor) {
-        if (cursor == null)
+    public void getPengumuman(String title, List<String> tags, boolean next) {
+        if (!next) {
             this.pengumuman.getPengumumanAll(title, tags, "none");
-        else
-            this.pengumuman.getPengumumanAll(title, tags, this.pengumuman.getCursor());
+        } else {
+            if (!this.pengumuman.getCursor().equals("none"))
+                this.pengumuman.getPengumumanAll(title, tags, this.pengumuman.getCursor());
+        }
     }
 
     @Override
     public void OnSuccessGet(PengumumanList pengumumanList) {
-        this.pengumuman.setData(pengumumanList.getData());
+        this.pengumuman.addData(pengumumanList.getData());
         this.pengumuman.setMetadata(pengumumanList.getMetadata());
         this.ui.update(this.pengumuman);
     }

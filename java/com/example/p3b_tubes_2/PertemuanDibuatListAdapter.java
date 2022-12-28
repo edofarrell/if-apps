@@ -1,5 +1,6 @@
 package com.example.p3b_tubes_2;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,7 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
     }
 
     public void update(PertemuanList pertemuanList) {
+        Log.d("DEBUG", pertemuanList.getSize()+"");
         this.pertemuanList = pertemuanList;
         notifyDataSetChanged();
     }

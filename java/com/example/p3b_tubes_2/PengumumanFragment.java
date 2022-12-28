@@ -62,7 +62,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.chipGroup = binding.chipGrup;
 
         this.searchText = "";
-        this.binding.btnNext.setOnClickListener(this::onClickNext);
+//        this.binding.btnNext.setOnClickListener(this::onClickNext);
 
         ListView listView = this.binding.lvPengumuman;
         this.binding.lvPengumuman.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -71,6 +71,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
                 if(scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && (listView.getLastVisiblePosition() - listView.getHeaderViewsCount() -
                         listView.getFooterViewsCount()) >= (adapter.getCount() - 1)){
                     Log.d("DEBUG", "BOTTOM");
+                    onClickNext();
                 }
             }
 
@@ -83,9 +84,9 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         return this.binding.getRoot();
     }
 
-    private void onClickNext(View view) {
+    private void onClickNext() {
         List<String> tag = presenter.getTagsId(arrChipGroup);
-        this.presenter.getPengumuman(this.searchText, tag, "next");
+        this.presenter.getPengumuman(this.searchText, tag, true);
     }
 
     @Override
@@ -110,7 +111,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     public void filter() {
         List<String> tag = presenter.getTagsId(arrChipGroup);
-        presenter.getPengumuman(this.searchText, tag, null);
+        presenter.getPengumuman(this.searchText, tag, false);
     }
 
     private void OnClickAddPengumuman(View view) {

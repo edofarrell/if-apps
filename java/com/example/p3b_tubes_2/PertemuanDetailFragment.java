@@ -43,7 +43,7 @@ public class PertemuanDetailFragment extends Fragment {
 
     private void onClickKembali(View view) {
         Bundle result = new Bundle();
-        result.putString("page", "pertemuan");
-        getParentFragmentManager().setFragmentResult("changePage", result);
+        result.putString("page", "pertemuanDibuat");
+        getParentFragmentManager().setFragmentResult("backPertemuan", result);
     }
 }
