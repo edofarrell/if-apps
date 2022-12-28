@@ -2,6 +2,7 @@ package com.example.p3b_tubes_2;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,10 +17,11 @@ import com.example.p3b_tubes_2.databinding.ItemListPengumumanBinding;
 public class PengumumanListAdapter extends BaseAdapter {
     private PengumumanList pengumumanList;
     private PengumumanPresenter presenter;
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
 
     private class ViewHolder {
         protected int i;
-        protected boolean isRead;
         protected TextView tvJudul;
         protected TextView tvTag;
         protected LinearLayout llPengumuman;
@@ -32,6 +34,10 @@ public class PengumumanListAdapter extends BaseAdapter {
 
             binding.btnDetail.setOnClickListener(this::openDetail);
             binding.btnDelete.setOnClickListener(this::onClickDelete);
+
+            if(APIClient.role.equals("student")){
+                binding.btnDelete.setVisibility(View.GONE);
+            }
         }
 
         private void onClickDelete(View view) {
@@ -58,25 +64,31 @@ public class PengumumanListAdapter extends BaseAdapter {
         }
 
         private void openDetail(View view) {
-//            this.isRead = true;
-            this.llPengumuman.setBackgroundColor(Color.WHITE);
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
+            if(!sp.getBoolean(pengumuman.getId(), false)){
+                editor.putBoolean(pengumuman.getId(), true);
+                editor.commit();
+                this.llPengumuman.getBackground().setTint(Color.WHITE);
+            }
             presenter.getPengumumanDetail(pengumuman);
         }
 
         private void updateView(int i) {
-//            if(this.isRead == true){
-//                this.llPengumuman.setBackgroundColor(Color.WHITE);
-//            }
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
+            if(sp.getBoolean(pengumuman.getId(), false)){
+                this.llPengumuman.getBackground().setTint(Color.WHITE);
+            }
+
             this.tvJudul.setText(pengumuman.getTitle());
             this.tvTag.setText(pengumuman.getTags());
         }
     }
 
-    public PengumumanListAdapter(PengumumanPresenter presenter) {
+    public PengumumanListAdapter(PengumumanPresenter presenter, SharedPreferences sp) {
         this.pengumumanList = new PengumumanList();
         this.presenter = presenter;
+        this.sp = sp;
+        this.editor = this.sp.edit();
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.example.p3b_tubes_2;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.p3b_tubes_2.databinding.FragmentTambahPengumumanBinding;
@@ -96,10 +94,8 @@ public class PengumumanTambahFragment extends DialogFragment {
     }
 
     public void updateTag(ArrayList<TagList.Tag> listTag) {
-        Log.d("DEBUG","updatelisttag");
         PopupMenu popupMenu = new PopupMenu(getContext(), binding.btnPilih);
-        //Log.d("DEBUG","updatelisttag");
-        //nambah pop up menu (nanti diisi dari yg api tag tag nya)
+
         for (int i = 0; i < listTag.size(); i++) {
             popupMenu.getMenu().add(1, i + 1, i + 1, listTag.get(i).getName());
         }

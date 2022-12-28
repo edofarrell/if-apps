@@ -47,6 +47,8 @@ public class APIAuthorization implements Response.Listener<JSONObject>, Response
         );
 
         this.queue.add(request);
+
+        APIClient.role = role;
     }
 
     @Override

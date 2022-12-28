@@ -39,7 +39,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     public static PengumumanFragment newInstance(MainPresenter mainPresenter, Context context, FrameLayout frameLayout) {
         PengumumanFragment fragment = new PengumumanFragment();
         fragment.presenter = new PengumumanPresenter(fragment, context, mainPresenter);
-        fragment.adapter = new PengumumanListAdapter(fragment.presenter);
+        fragment.adapter = new PengumumanListAdapter(fragment.presenter, context.getSharedPreferences("sp_read_status", 0));
         fragment.frameLayout = frameLayout;
         fragment.arrChipGroup = new ArrayList<>();
         return fragment;
@@ -62,6 +62,10 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.searchText = "";
         this.binding.btnNext.setOnClickListener(this::onClickNext);
         this.binding.btnBack.setOnClickListener(this::onClickBack);
+
+        if(APIClient.role.equals("student")){
+            this.binding.btnAddPengumuman.setVisibility(View.GONE);
+        }
 
         //infinite scroll
 //        ListView listView = this.binding.lvPengumuman;
@@ -87,7 +91,6 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("DEBUG", "onResume: ");
         SearchView searchView = this.binding.searchBar;
         searchView.setActivated(true);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

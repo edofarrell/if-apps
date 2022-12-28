@@ -97,7 +97,6 @@ public class PengumumanPresenter implements
     @Override
     public void GetTagOnSuccess(ArrayList<TagList.Tag> listTag) {
         this.ui.updateListTag(listTag);
-        Log.d("DEBUG","presenter");
     }
 
     @Override

@@ -119,7 +119,6 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
 
     public void getPengumumanAll() {
         String url = APIClient.BASE_URL + "/announcements";
-        Log.d("DEBUG", url);
 
         StringRequest request = new StringRequest(
                 Request.Method.GET,
@@ -140,6 +139,7 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
 
     public void getPengumumanAll(String title, List<String> tags, String cursor) {
         String url = APIClient.BASE_URL + "/announcements?";
+
         if (title != null) {
             url += "filter[title]=" + title;
         }
@@ -149,7 +149,6 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         if (!cursor.equals("none")) {
             url += "&cursor=" + cursor;
         }
-        Log.d("DEBUG", url);
 
         StringRequest request = new StringRequest(
                 Request.Method.GET,

@@ -29,7 +29,7 @@
     <string name="tambah">Tambah</string>
     <string name="batal">Batal</string>
     <string-array name="dropdownRole">
-        <item>Mahasiswa</item>
+        <item>Student</item>
         <item>Dosen</item>
         <item>Admin</item>
     </string-array>
