@@ -35,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
 
         this.fragments = new HashMap<>();
 
-        this.fragments.put("left", LeftFragment.newInstance());
         this.fragments.put("login", LoginFragment.newInstance(mainPresenter, this));
         this.fragments.put("pengumuman", PengumumanFragment.newInstance(mainPresenter, this, this.binding.fragmentContainer));
         this.fragments.put("pertemuan", PertemuanFragment.newInstance(mainPresenter, this, this.binding.fragmentContainer));
         this.fragments.put("frs", FRSFragment.newInstance(mainPresenter,this));
+        this.fragments.put("profil", ProfilFragment.newInstance());
         this.fm = getSupportFragmentManager();
 
         BottomNavigationView bottomNavigation = binding.bottomNavigation;
@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 String page = result.getString("page");
                 if (page.equals("login")) {
+                    topAppBar.setVisibility(View.GONE);
                     bottomNavigation.setVisibility(View.GONE);
                 } else {
                     topAppBar.setVisibility(View.VISIBLE);

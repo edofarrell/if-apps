@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_16dp"
+    android:paddingHorizontal="@dimen/_16dp">
+
+    <LinearLayout
+        android:id="@+id/ll_greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_24dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Halo, "
+            android:textColor="@color/black"
+            android:textSize="@dimen/_24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_name_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nama"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="!"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_account_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_greeting"
+        android:padding="@dimen/_16dp"
+        android:layout_marginBottom="@dimen/_32dp"
+        android:background="@drawable/border_grey"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_16dp"
+            android:text="Detail Akun"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_20sp"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Nama"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sp"
+                />
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Nama"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sp"
+                android:textAlignment="viewEnd"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sp"
+                />
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="email@mail.to"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sp"
+                android:textAlignment="viewEnd"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Role"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sp"
+                />
+            <TextView
+                android:id="@+id/tv_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Role"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sp"
+                android:textAlignment="viewEnd"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_account_detail"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:icon="@drawable/ic_logout"
+        app:iconGravity="textStart"
+        app:strokeColor="@color/primary"
+        android:text="@string/logout"
+        />
+</RelativeLayout>
