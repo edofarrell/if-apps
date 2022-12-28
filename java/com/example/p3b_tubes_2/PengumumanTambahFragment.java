@@ -10,11 +10,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-<<<<<<< HEAD
 import androidx.fragment.app.DialogFragment;
-=======
 import androidx.appcompat.widget.PopupMenu;
->>>>>>> origin/Dearen
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -91,7 +88,7 @@ public class PengumumanTambahFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.binding.appbar.setNavigationOnClickListener(this::onClickKembali);
+//        this.binding.appbar.setNavigationOnClickListener(this::onClickKembali);
     }
 
     private void onClickKembali(View view) {
