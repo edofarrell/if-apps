@@ -38,8 +38,9 @@ public class PengumumanPresenter implements
 
     @Override
     public void AddOnSuccess(PengumumanList.Pengumuman pengumuman) {
-        this.pengumuman.addPengumuman(pengumuman);
+//        this.pengumuman.addPengumuman(pengumuman);
         this.ui.closeAddPage();
+        this.getPengumuman();
     }
 
     @Override
@@ -80,7 +81,7 @@ public class PengumumanPresenter implements
     public void OnSuccessGet(PengumumanList pengumumanList) {
         this.pengumuman.setData(pengumumanList.getData());
         this.pengumuman.setMetadata(pengumumanList.getMetadata());
-        this.ui.update(this.pengumuman);
+        this.ui.updatePengumumanList(this.pengumuman);
     }
 
     @Override
