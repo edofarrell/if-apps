@@ -2,16 +2,11 @@ package com.example.p3b_tubes_2;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.AbsListView;
 import android.widget.FrameLayout;
-import android.widget.ListView;
-import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,7 +32,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private String searchText;
     private PengumumanTambahFragment tambahFragment;
 
-    private PengumumanFragment() {}
+    private PengumumanFragment() {
+    }
 
     public static PengumumanFragment newInstance(MainPresenter mainPresenter, Context context, FrameLayout frameLayout) {
         PengumumanFragment fragment = new PengumumanFragment();
@@ -64,6 +60,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
         this.searchText = "";
         this.binding.btnNext.setOnClickListener(this::onClickNext);
+        this.binding.btnBack.setOnClickListener(this::onClickBack);
 
 //        ListView listView = this.binding.lvPengumuman;
 //        this.binding.lvPengumuman.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -83,6 +80,10 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 //        });
 
         return this.binding.getRoot();
+    }
+
+    private void onClickBack(View view) {
+        filter();
     }
 
     private void onClickNext(View view) {
@@ -116,7 +117,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     private void OnClickAddPengumuman(View view) {
-       tambahFragment = PengumumanTambahFragment.newInstance(getParentFragmentManager(), this.presenter);
+        tambahFragment = PengumumanTambahFragment.newInstance(getParentFragmentManager(), this.presenter);
         getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), tambahFragment)
                 .addToBackStack(null)
                 .commit();
@@ -166,7 +167,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     public void updateListTag(ArrayList<TagList.Tag> listTag) {
         PopupMenu popupMenu = new PopupMenu(getContext(), binding.ivFilter);
-        tambahFragment.updateTag(listTag);
+        if (tambahFragment != null)
+            tambahFragment.updateTag(listTag);
         //nambah pop up menu (nanti diisi dari yg api tag tag nya)
         for (int i = 0; i < listTag.size(); i++) {
             popupMenu.getMenu().add(1, i + 1, i + 1, listTag.get(i).getName());
