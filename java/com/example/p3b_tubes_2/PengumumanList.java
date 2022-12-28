@@ -98,13 +98,12 @@ public class PengumumanList implements Response.Listener<String>, Response.Error
         return data;
     }
 
-//    public void setData(ArrayList<Pengumuman> data) {
-//        this.data = data;
-//    }
+    public void setData(ArrayList<Pengumuman> data) {
+        this.data = data;
+    }
 
-
-    public void addData(ArrayList<Pengumuman> pengumumanList){
-        for(int i=0; i<pengumumanList.size(); i++){
+    public void addData(ArrayList<Pengumuman> pengumumanList) {
+        for (int i = 0; i < pengumumanList.size(); i++) {
             this.data.add(pengumumanList.get(i));
         }
     }

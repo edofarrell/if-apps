@@ -78,7 +78,7 @@ public class PengumumanPresenter implements
 
     @Override
     public void OnSuccessGet(PengumumanList pengumumanList) {
-        this.pengumuman.addData(pengumumanList.getData());
+        this.pengumuman.setData(pengumumanList.getData());
         this.pengumuman.setMetadata(pengumumanList.getMetadata());
         this.ui.update(this.pengumuman);
     }

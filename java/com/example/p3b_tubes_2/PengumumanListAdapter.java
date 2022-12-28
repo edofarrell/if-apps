@@ -1,6 +1,7 @@
 package com.example.p3b_tubes_2;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class PengumumanListAdapter extends BaseAdapter {
             this.tvTag = binding.tvTag;
             this.llPengumuman = binding.llPengumuman;
 
-            binding.llPengumuman.setOnClickListener(this::openDetail);
+            binding.btnDetail.setOnClickListener(this::openDetail);
             binding.btnDelete.setOnClickListener(this::onClickDelete);
         }
 

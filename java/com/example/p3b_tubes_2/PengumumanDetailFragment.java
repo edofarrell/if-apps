@@ -24,9 +24,7 @@ public class PengumumanDetailFragment extends DialogFragment {
     public static PengumumanDetailFragment newInstance(FragmentManager fm, PengumumanList.Pengumuman pengumuman) {
         PengumumanDetailFragment fragment = new PengumumanDetailFragment();
         fragment.pengumuman = pengumuman;
-
         fragment.show(fm, "openPengumumanDetail");
-
         return fragment;
     }
 

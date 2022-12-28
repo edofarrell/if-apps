@@ -58,33 +58,32 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.binding.btnAddPengumuman.setOnClickListener(this::OnClickAddPengumuman);
 
         this.binding.ivFilter.setOnClickListener(this::onClick);
-        this.binding.tvPengumuman.setOnClickListener(this::test);//dipake untuk test api saja
         this.chipGroup = binding.chipGrup;
 
         this.searchText = "";
-//        this.binding.btnNext.setOnClickListener(this::onClickNext);
+        this.binding.btnNext.setOnClickListener(this::onClickNext);
 
-        ListView listView = this.binding.lvPengumuman;
-        this.binding.lvPengumuman.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if(scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && (listView.getLastVisiblePosition() - listView.getHeaderViewsCount() -
-                        listView.getFooterViewsCount()) >= (adapter.getCount() - 1)){
-                    Log.d("DEBUG", "BOTTOM");
-                    onClickNext();
-                }
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-            }
-        });
+//        ListView listView = this.binding.lvPengumuman;
+//        this.binding.lvPengumuman.setOnScrollListener(new AbsListView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(AbsListView view, int scrollState) {
+//                if(scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && (listView.getLastVisiblePosition() - listView.getHeaderViewsCount() -
+//                        listView.getFooterViewsCount()) >= (adapter.getCount() - 1)){
+//                    Log.d("DEBUG", "BOTTOM");
+//                    onClickNext();
+//                }
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//
+//            }
+//        });
 
         return this.binding.getRoot();
     }
 
-    private void onClickNext() {
+    private void onClickNext(View view) {
         List<String> tag = presenter.getTagsId(arrChipGroup);
         this.presenter.getPengumuman(this.searchText, tag, true);
     }
@@ -119,10 +118,6 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pengumumanTambahFragment)
                 .addToBackStack(null)
                 .commit();
-    }
-
-    private void test(View view) {
-        this.presenter.deletePengumuman("b90bce6d-a8d7-4777-a49b-0a63d6bfef02");
     }
 
     public void onClick(View view) {
