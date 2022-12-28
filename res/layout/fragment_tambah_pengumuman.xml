@@ -48,7 +48,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/judul" />
+                    android:text="@string/judul"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp"/>
 
                 <EditText
                     android:id="@+id/et_judul"
@@ -72,25 +74,40 @@
                 android:layout_marginRight="@dimen/_20sp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_tags"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tags" />
+                    android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/btn_pilih"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="pilih tag">
+                    <TextView
+                        android:id="@+id/tv_tags"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/tags"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp"/>
 
-                </Button>
+                    <TextView
+                        android:id="@+id/btn_pilih"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/tambah_tag"
+                        android:textColor="@color/primary"
+                        android:textSize="@dimen/_16sp">
+
+                    </TextView>
+
+                </RelativeLayout>
+
 
                 <HorizontalScrollView
                     android:id="@+id/scrl_view"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="@drawable/border_black">
+                    android:layout_height="@dimen/_40dp"
+                    android:background="@drawable/border_black"
+                    android:paddingLeft="@dimen/_10sp"
+                    android:layout_marginTop="@dimen/_10sp">
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/chip_grup"
@@ -114,7 +131,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/deskripsi" />
+                    android:text="@string/deskripsi"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp"/>
 
                 <EditText
                     android:id="@+id/et_deskripsi"
@@ -135,15 +154,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="@dimen/_20sp"
-                android:layout_marginRight="@dimen/_20sp"
                 android:layout_marginTop="@dimen/_15sp"
+                android:layout_marginRight="@dimen/_20sp"
                 android:text="@string/simpan" />
         </LinearLayout>
 
     </ScrollView>
-
-
-
 
 
 </RelativeLayout>
