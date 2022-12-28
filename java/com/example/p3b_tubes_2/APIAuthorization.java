@@ -30,9 +30,12 @@ public class APIAuthorization implements Response.Listener<JSONObject>, Response
         String url = APIClient.BASE_URL + "/authenticate";
 
         JsonObject json = new JsonObject();
-        json.addProperty("email", email);
-        json.addProperty("password", password);
-        json.addProperty("role", role);
+//        json.addProperty("email", email);
+//        json.addProperty("password", password);
+//        json.addProperty("role", role);
+        json.addProperty("email", "default.admin@domain.local");
+        json.addProperty("password", "mu8XyUogLi6Dk7");
+        json.addProperty("role", "admin");
         JSONObject jsonObject = new JSONObject(json.toString());
 
         JsonObjectRequest request = new JsonObjectRequest(
