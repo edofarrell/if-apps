@@ -96,7 +96,7 @@ public class TambahAppointmentFragment extends DialogFragment {
             Log.d("DEBUG", "TambahAppointmentFragment: addAppointment() catch ParseException");
         }
 
-
+//        this.presenter.addPertemuan(title, description, startDateTime, endDateTime);
     }
 
     private void addParticipant(View view) {
