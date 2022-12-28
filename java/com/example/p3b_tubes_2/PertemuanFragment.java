@@ -93,7 +93,13 @@ public class PertemuanFragment extends Fragment implements
             }
         });
 
+        binding.getRoot().setOnClickListener(this::test);//hanya untuk test api saja
+
         return this.binding.getRoot();
+    }
+
+    private void test(View view) {
+        presenter.getTimeSlot("068c0d4c-877c-488b-90ec-93c3a5ce9ced");
     }
 
     private void changePage(String page) {
