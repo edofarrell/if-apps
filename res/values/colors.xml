@@ -14,4 +14,5 @@
     <color name="secondary_variant">#A52C55</color>
     <color name="background">#fafafa</color>
     <color name="bluePengumuman">#CC4791DB</color>
+    <color name="grey">#808080</color>
 </resources>
