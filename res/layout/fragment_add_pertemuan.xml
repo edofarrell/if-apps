@@ -230,10 +230,10 @@
                     android:layout_toRightOf="@+id/title_participant"
                     android:text="*"
                     android:textColor="@color/design_default_color_error"
-                    android:textSize="@dimen/_16sp" />
+                    />
 
                 <Button
-                    android:id="@+id/btn_add_participant"
+                    android:id="@+id/btn_tambah_partisipan"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

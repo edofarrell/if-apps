@@ -1,7 +1,6 @@
 package com.example.p3b_tubes_2;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +42,7 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     }
 
     private void onClick(View view) {
-        TambahAppointmentFragment.newInstance(getParentFragmentManager(), presenter);
+        TambahPertemuanFragment.newInstance(getParentFragmentManager());
     }
 
     @Override
