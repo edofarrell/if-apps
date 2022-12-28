@@ -164,17 +164,20 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     public void updateListTag(ArrayList<TagList.Tag> listTag) {
         PopupMenu popupMenu = new PopupMenu(getContext(), binding.ivFilter);
-        if (tambahFragment != null)
+        if (tambahFragment != null && tambahFragment.isVisible()) {
             tambahFragment.updateTag(listTag);
-        //nambah pop up menu (nanti diisi dari yg api tag tag nya)
-        for (int i = 0; i < listTag.size(); i++) {
-            popupMenu.getMenu().add(1, i + 1, i + 1, listTag.get(i).getName());
         }
-        
-        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
-        popupMenu.show();
+        else {
+            //nambah pop up menu (nanti diisi dari yg api tag tag nya)
+            for (int i = 0; i < listTag.size(); i++) {
+                popupMenu.getMenu().add(1, i + 1, i + 1, listTag.get(i).getName());
+            }
 
-        popupMenu.setOnMenuItemClickListener(this::onOptionsItemSelected);
+            popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+            popupMenu.show();
+
+            popupMenu.setOnMenuItemClickListener(this::onOptionsItemSelected);
+        }
     }
 
     @Override

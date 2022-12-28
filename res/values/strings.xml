@@ -30,7 +30,7 @@
     <string name="batal">Batal</string>
     <string-array name="dropdownRole">
         <item>Mahasiswa</item>
-        <item>Dosen</item>
+        <item>Lecturer</item>
         <item>Admin</item>
     </string-array>
     <string name="openDrawer">Open Drawer</string>

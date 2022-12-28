@@ -29,6 +29,7 @@ public class PertemuanPresenter implements
     private APIPertemuanDeleteParticipants apiDeleteParticipantsPertemuan;
     private APIPertemuanDelete deletePertemuan;
     private APIPertemuanGetTimeSlot getTimeSlot;
+    private APIPertemuanTambahTimeSlot tambahTimeSlot;
 
     public PertemuanPresenter(PertemuanContract.View ui, Context context, MainPresenter mainPresenter) {
         this.pertemuan = new PertemuanList(this, context);
@@ -41,10 +42,15 @@ public class PertemuanPresenter implements
         this.apiDeleteParticipantsPertemuan = new APIPertemuanDeleteParticipants(this,context);
         this.deletePertemuan = new APIPertemuanDelete(this,context);
         this.getTimeSlot = new APIPertemuanGetTimeSlot(this,context);
+        this.tambahTimeSlot = new APIPertemuanTambahTimeSlot(this,context);
     }
 
     public void getTimeSlot(String lecturerId){
         getTimeSlot.getTimeSlot(lecturerId);
+    }
+
+    public void addTimeSlot(String day, String startTime, String endTime) throws JSONException {
+        tambahTimeSlot.addTimeSlot(day,startTime,endTime);
     }
 
     public void setUiDibuat(PertemuanContract.View.PertemuanDibuat ui){
