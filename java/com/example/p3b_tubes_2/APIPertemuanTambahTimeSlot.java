@@ -8,10 +8,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
@@ -30,18 +33,25 @@ public class APIPertemuanTambahTimeSlot implements Response.Listener<JSONObject>
         this.gson = new Gson();
     }
 
-    public void getTimeSlot(String lecturerId){
-        String url = APIClient.BASE_URL+"/lecturer-time-slots"+"/lecturers"+"/"+lecturerId;
-//        CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET,url,null,
-//                this::onResponse,this::onErrorResponse){
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("Authorization", APIClient.token);
-//                return params;
-//            }
-//        };
-//        queue.add(request);
+    public void addTimeSlot(String day, String startTime, String endTime) throws JSONException {
+        String url = APIClient.BASE_URL+"/lecturer-time-slots";
+
+        JsonObject json = new JsonObject();
+        json.addProperty("day",day);
+        json.addProperty("start_time",startTime);
+        json.addProperty("end_time",endTime);
+        JSONObject JSON = new JSONObject(json.toString());
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,JSON,
+                this::onResponse,this::onErrorResponse){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", APIClient.token);
+                return params;
+            }
+        };
+        queue.add(request);
     }
 
     @Override

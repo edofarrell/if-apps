@@ -170,6 +170,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     @Override
     public void updateListTag(ArrayList<TagList.Tag> listTag) {
+
         PopupMenu popupMenu = new PopupMenu(getContext(), this.binding.ivFilter);
 
         if (this.tambahFragment != null && this.tambahFragment.isVisible()) {

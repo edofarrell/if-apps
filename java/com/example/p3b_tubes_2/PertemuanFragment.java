@@ -18,6 +18,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanBinding;
 import com.google.android.material.tabs.TabLayout;
 
+import org.json.JSONException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -99,7 +101,11 @@ public class PertemuanFragment extends Fragment implements
     }
 
     private void test(View view) {
-        presenter.getTimeSlot("068c0d4c-877c-488b-90ec-93c3a5ce9ced");
+        try {
+            presenter.addTimeSlot("wed","07:00+0700","09:00+0700");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void changePage(String page) {

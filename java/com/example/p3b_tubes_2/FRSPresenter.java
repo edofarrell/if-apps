@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-public class FRSPresenter {
+public class FRSPresenter implements FRSContract.Model.GetOnSuccessListener{
 
     private FRSContract.View ui;
     private MainPresenter mainPresenter;
@@ -20,5 +20,15 @@ public class FRSPresenter {
 
     public void getAcademicYears(){
         this.tahunAjaran.getAcademicYears();
+    }
+
+    @Override
+    public void OnSuccessGet(ArrayList<TahunAjaran.TahunAjar> tahunAjaran) {
+        this.ui.update(tahunAjaran);
+    }
+
+    @Override
+    public void OnErrorGet() {
+
     }
 }
