@@ -2,117 +2,147 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/tv_tambah_pengumuman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/tambahPengumuman"
-        android:textSize="@dimen/_30sp" />
-
-    <LinearLayout
-        android:id="@+id/ll_judul"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_tambah_pengumuman"
-        android:layout_marginLeft="@dimen/_20sp"
-        android:layout_marginTop="@dimen/_20sp"
-        android:layout_marginRight="@dimen/_20sp"
-        android:orientation="vertical">
+        android:background="@color/white"
+        app:elevation="@dimen/_4dp"
+        >
 
-        <TextView
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/judul" />
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_baseline_close_24"
+            app:title="@string/tambahPengumuman"
+            app:titleCentered="true"
+            />
 
-        <EditText
-            android:id="@+id/et_judul"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sp"
-            android:layout_marginTop="@dimen/_10sp"
-            android:background="@drawable/custom_kotak_filter_pengumuman"
-            android:hint="Masukkan judul pengumuman disini"
-            android:paddingLeft="@dimen/_10sp" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/ll_tag"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_judul"
-        android:layout_marginLeft="@dimen/_20sp"
-        android:layout_marginTop="@dimen/_20sp"
-        android:layout_marginRight="@dimen/_20sp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbar_layout"
+        android:paddingLeft="@dimen/_16dp"
+        android:paddingRight="@dimen/_16dp">
 
-        <TextView
-            android:id="@+id/tv_tags"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tags" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_pilih"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="pilih tag">
+            <LinearLayout
+                android:id="@+id/ll_judul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sp"
+                android:layout_marginTop="@dimen/_20sp"
+                android:layout_marginRight="@dimen/_20sp"
+                android:orientation="vertical">
 
-        </Button>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/judul" />
 
-        <HorizontalScrollView
-            android:id="@+id/scrl_view"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@drawable/border_black">
+                <EditText
+                    android:id="@+id/et_judul"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sp"
+                    android:layout_marginTop="@dimen/_10sp"
+                    android:background="@drawable/custom_kotak_filter_pengumuman"
+                    android:hint="Masukkan judul pengumuman disini"
+                    android:paddingLeft="@dimen/_10sp" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_grup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></com.google.android.material.chip.ChipGroup>
-
-        </HorizontalScrollView>
-
-    </LinearLayout>
+            </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_tag"
-        android:layout_marginLeft="@dimen/_20sp"
-        android:layout_marginTop="@dimen/_20sp"
-        android:layout_marginRight="@dimen/_20sp"
-        android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/ll_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_judul"
+                android:layout_marginLeft="@dimen/_20sp"
+                android:layout_marginTop="@dimen/_20sp"
+                android:layout_marginRight="@dimen/_20sp"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/deskripsi" />
+                <TextView
+                    android:id="@+id/tv_tags"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tags" />
 
-        <EditText
-            android:id="@+id/et_deskripsi"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_300sp"
-            android:layout_marginTop="@dimen/_10sp"
-            android:background="@drawable/custom_kotak_filter_pengumuman"
-            android:gravity="top"
-            android:hint="Masukkan deskripsi pengumuman disini"
-            android:paddingLeft="@dimen/_10sp"
-            android:paddingTop="@dimen/_10sp" />
+                <Button
+                    android:id="@+id/btn_pilih"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="pilih tag">
 
-    </LinearLayout>
+                </Button>
 
-    <Button
-        android:id="@+id/btn_simpan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/_20sp"
-        android:layout_marginRight="@dimen/_20sp"
-        android:text="@string/simpan" />
+                <HorizontalScrollView
+                    android:id="@+id/scrl_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border_black">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_grup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"></com.google.android.material.chip.ChipGroup>
+
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_tag"
+                android:layout_marginLeft="@dimen/_20sp"
+                android:layout_marginTop="@dimen/_20sp"
+                android:layout_marginRight="@dimen/_20sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/deskripsi" />
+
+                <EditText
+                    android:id="@+id/et_deskripsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_300sp"
+                    android:layout_marginTop="@dimen/_10sp"
+                    android:background="@drawable/custom_kotak_filter_pengumuman"
+                    android:gravity="top"
+                    android:hint="Masukkan deskripsi pengumuman disini"
+                    android:paddingLeft="@dimen/_10sp"
+                    android:paddingTop="@dimen/_10sp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_simpan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/_20sp"
+                android:layout_marginRight="@dimen/_20sp"
+                android:text="@string/simpan" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
 
 </RelativeLayout>

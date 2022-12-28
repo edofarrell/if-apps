@@ -88,7 +88,7 @@ public class PengumumanTambahFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        this.binding.appbar.setNavigationOnClickListener(this::onClickKembali);
+        this.binding.appbar.setNavigationOnClickListener(this::onClickKembali);
     }
 
     private void onClickKembali(View view) {

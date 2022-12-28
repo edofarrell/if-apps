@@ -116,10 +116,11 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     private void OnClickAddPengumuman(View view) {
-       tambahFragment = PengumumanTambahFragment.newInstance(getParentFragmentManager(), this.presenter);
-        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), tambahFragment)
-                .addToBackStack(null)
-                .commit();
+        PengumumanTambahFragment.newInstance(getParentFragmentManager(), this.presenter);
+//       tambahFragment = PengumumanTambahFragment.newInstance(getParentFragmentManager(), this.presenter);
+//        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), tambahFragment)
+//                .addToBackStack(null)
+//                .commit();
     }
 
     public void onClick(View view) {
