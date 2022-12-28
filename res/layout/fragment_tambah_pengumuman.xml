@@ -136,6 +136,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="@dimen/_20sp"
                 android:layout_marginRight="@dimen/_20sp"
+                android:layout_marginTop="@dimen/_15sp"
                 android:text="@string/simpan" />
         </LinearLayout>
 
