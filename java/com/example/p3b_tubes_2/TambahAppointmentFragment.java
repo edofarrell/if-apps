@@ -12,15 +12,26 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 
-import com.example.p3b_tubes_2.databinding.DialogFragmentAddAppointmentBinding;
+import com.example.p3b_tubes_2.databinding.FragmentAddAppointmentBinding;
 
 public class TambahAppointmentFragment extends DialogFragment {
-    DialogFragmentAddAppointmentBinding binding;
+    FragmentAddAppointmentBinding binding;
 
-    public static TambahAppointmentFragment display(FragmentManager fm) {
-        TambahAppointmentFragment tambahAppointmentDialogFragment = new TambahAppointmentFragment();
-        tambahAppointmentDialogFragment.show(fm, "addAppointment");
-        return tambahAppointmentDialogFragment;
+    public static TambahAppointmentFragment newInstance(FragmentManager fm) {
+        TambahAppointmentFragment fragment = new TambahAppointmentFragment();
+        fragment.show(fm, "addAppointment");
+        return fragment;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.MATCH_PARENT;
+            dialog.getWindow().setLayout(width, height);
+        }
     }
 
     @Override
@@ -35,7 +46,7 @@ public class TambahAppointmentFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        binding = DialogFragmentAddAppointmentBinding.inflate(inflater);
+        binding = FragmentAddAppointmentBinding.inflate(inflater);
 
         setDate();
         setTime();
@@ -58,16 +69,6 @@ public class TambahAppointmentFragment extends DialogFragment {
         binding.btnAddAppointment.setOnClickListener(this::addAppointment);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Dialog dialog = getDialog();
-        if (dialog != null) {
-            int width = ViewGroup.LayoutParams.MATCH_PARENT;
-            int height = ViewGroup.LayoutParams.MATCH_PARENT;
-            dialog.getWindow().setLayout(width, height);
-        }
-    }
 
     private void showTimePicker(View view) {
         String type = "start";
