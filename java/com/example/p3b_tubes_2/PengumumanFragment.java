@@ -35,6 +35,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private List<String> arrChipGroup;
     private ChipGroup chipGroup;
     private String searchText;
+    private PengumumanTambahFragment tambahFragment;
 
     private PengumumanFragment() {}
 
@@ -114,8 +115,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     private void OnClickAddPengumuman(View view) {
-        PengumumanTambahFragment pengumumanTambahFragment = PengumumanTambahFragment.newInstance(this.presenter);
-        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pengumumanTambahFragment)
+       tambahFragment = PengumumanTambahFragment.newInstance(this.presenter);
+        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), tambahFragment)
                 .addToBackStack(null)
                 .commit();
     }
@@ -164,7 +165,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     public void updateListTag(ArrayList<TagList.Tag> listTag) {
         PopupMenu popupMenu = new PopupMenu(getContext(), binding.ivFilter);
-
+        tambahFragment.updateTag(listTag);
         //nambah pop up menu (nanti diisi dari yg api tag tag nya)
         for (int i = 0; i < listTag.size(); i++) {
             popupMenu.getMenu().add(1, i + 1, i + 1, listTag.get(i).getName());

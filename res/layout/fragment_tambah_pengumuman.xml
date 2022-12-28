@@ -51,18 +51,31 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tags"/>
 
-        <EditText
-            android:id="@+id/et_tag"
+        <Button
+            android:id="@+id/btn_pilih"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pilih tag">
+
+        </Button>
+
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sp"
-            android:hint="Masukkan tag pengumuman disini"
-            android:background="@drawable/custom_kotak_filter_pengumuman"
-            android:layout_marginTop="@dimen/_10sp"
-            android:paddingLeft="@dimen/_10sp"/>
+            android:layout_height="30dp"
+            android:background="@drawable/border_black"
+            android:id="@+id/scrl_view">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_grup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></com.google.android.material.chip.ChipGroup>
+
+        </HorizontalScrollView>
 
     </LinearLayout>
 
