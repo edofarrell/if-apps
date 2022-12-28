@@ -7,4 +7,8 @@
         android:bottomRightRadius="@dimen/_5sp"
         android:bottomLeftRadius="@dimen/_5sp" />
 
+    <solid android:color="@color/bluePengumuman"/>
+    <stroke android:width="@dimen/_2sp" android:color="@color/grey" />
+
 </shape>
+

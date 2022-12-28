@@ -1,9 +1,12 @@
 package com.example.p3b_tubes_2;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.example.p3b_tubes_2.databinding.ItemListPengumumanBinding;
 
@@ -25,12 +32,16 @@ public class PengumumanListAdapter extends BaseAdapter {
         protected TextView tvJudul;
         protected TextView tvTag;
         protected LinearLayout llPengumuman;
+        protected TextView tvLihatDetail;
+        protected Context context;
 
-        public ViewHolder(ItemListPengumumanBinding binding, int i) {
+        public ViewHolder(ItemListPengumumanBinding binding, int i, ViewGroup parent) {
             this.i = i;
             this.tvJudul = binding.tvJudul;
             this.tvTag = binding.tvTag;
             this.llPengumuman = binding.llPengumuman;
+            this.tvLihatDetail = binding.btnDetail;
+            this.context = parent.getContext();
 
             binding.btnDetail.setOnClickListener(this::openDetail);
             binding.btnDelete.setOnClickListener(this::onClickDelete);
@@ -69,6 +80,11 @@ public class PengumumanListAdapter extends BaseAdapter {
                 editor.putBoolean(pengumuman.getId(), true);
                 editor.commit();
                 this.llPengumuman.getBackground().setTint(Color.WHITE);
+                this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_black));
+                this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));
+            }
+            else{
+                this.llPengumuman.getBackground().setTint(ContextCompat.getColor(this.context, R.color.bluePengumuman));
             }
             presenter.getPengumumanDetail(pengumuman);
         }
@@ -76,7 +92,16 @@ public class PengumumanListAdapter extends BaseAdapter {
         private void updateView(int i) {
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
             if(sp.getBoolean(pengumuman.getId(), false)){
+
                 this.llPengumuman.getBackground().setTint(Color.WHITE);
+                this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_black));
+
+
+                this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));
+            }
+            else{
+                this.llPengumuman.getBackground().setTint(ContextCompat.getColor(this.context, R.color.bluePengumuman));
+
             }
 
             this.tvJudul.setText(pengumuman.getTitle());
@@ -113,7 +138,7 @@ public class PengumumanListAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (view == null) {
             view = itemListPengumumanBinding.getRoot();
-            viewHolder = new ViewHolder(itemListPengumumanBinding, i);
+            viewHolder = new ViewHolder(itemListPengumumanBinding, i, parent);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
