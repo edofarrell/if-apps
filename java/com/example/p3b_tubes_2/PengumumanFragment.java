@@ -58,6 +58,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.binding.btnAddPengumuman.setOnClickListener(this::OnClickAddPengumuman);
 
         this.binding.ivFilter.setOnClickListener(this::onClick);
+
         this.chipGroup = binding.chipGrup;
 
         this.searchText = "";
@@ -114,10 +115,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     private void OnClickAddPengumuman(View view) {
-        PengumumanTambahFragment pengumumanTambahFragment = PengumumanTambahFragment.newInstance(this.presenter);
-        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pengumumanTambahFragment)
-                .addToBackStack(null)
-                .commit();
+        PengumumanTambahFragment.newInstance(this.getParentFragmentManager(), this.presenter);
     }
 
     public void onClick(View view) {

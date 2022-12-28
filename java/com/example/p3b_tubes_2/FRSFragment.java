@@ -27,7 +27,6 @@ public class FRSFragment extends Fragment implements FRSContract.View{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.binding = FragmentFrsBinding.inflate(inflater);
-        this.binding.tvFrs.setOnClickListener(this::test);//dipake buat tes api saja
         return binding.getRoot();
     }
 
