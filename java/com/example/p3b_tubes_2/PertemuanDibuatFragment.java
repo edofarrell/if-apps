@@ -43,7 +43,7 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     }
 
     private void onClick(View view) {
-        TambahAppointmentFragment.newInstance(getParentFragmentManager());
+        TambahAppointmentFragment.newInstance(getParentFragmentManager(), presenter);
     }
 
     @Override

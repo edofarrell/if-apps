@@ -2,6 +2,7 @@ package com.example.p3b_tubes_2;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,19 @@ import androidx.fragment.app.FragmentResultListener;
 
 import com.example.p3b_tubes_2.databinding.FragmentAddAppointmentBinding;
 
-public class TambahAppointmentFragment extends DialogFragment {
-    FragmentAddAppointmentBinding binding;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-    public static TambahAppointmentFragment newInstance(FragmentManager fm) {
+public class TambahAppointmentFragment extends DialogFragment {
+    private FragmentAddAppointmentBinding binding;
+    private PertemuanPresenter presenter;
+
+    public static TambahAppointmentFragment newInstance(FragmentManager fm, PertemuanPresenter presenter) {
         TambahAppointmentFragment fragment = new TambahAppointmentFragment();
         fragment.show(fm, "addAppointment");
+        fragment.presenter = presenter;
         return fragment;
     }
 
@@ -72,7 +80,7 @@ public class TambahAppointmentFragment extends DialogFragment {
 
     private void showTimePicker(View view) {
         String type = "start";
-        if(view == binding.etEndTime) {
+        if (view == binding.etEndTime) {
             type = "end";
         }
         DialogFragment timePicker = TimePickerFragment.newInstance(type);
@@ -100,7 +108,7 @@ public class TambahAppointmentFragment extends DialogFragment {
                 String time = result.getString("time");
                 String type = result.getString("type");
 
-                if(type.equals("start")) {
+                if (type.equals("start")) {
                     binding.etStartTime.setText(time);
                 } else {
                     binding.etEndTime.setText(time);
@@ -114,5 +122,26 @@ public class TambahAppointmentFragment extends DialogFragment {
     }
 
     private void addAppointment(View view) {
+        String title = this.binding.etTitle.getText().toString();
+        String inputDate = this.binding.etDate.getEditableText().toString();
+        String startTime = this.binding.etStartTime.getEditableText().toString();
+        String endTime = this.binding.etEndTime.getEditableText().toString();
+
+        SimpleDateFormat inputformatter = new SimpleDateFormat("E,dd MMM yyyyhh:mm");
+        SimpleDateFormat outputformatter = new SimpleDateFormat("yyyy-MM-dd hh:mmZ");
+        String startDateTime = null;
+        String endDateTime = null;
+        try {
+            startDateTime = outputformatter.format(inputformatter.parse(inputDate+startTime));
+            endDateTime = outputformatter.format(inputformatter.parse(inputDate+endTime));
+        } catch (ParseException e) {
+            Log.d("DEBUG", "ERROR "+e.getMessage());
+            e.printStackTrace();
+        }
+
+//        Log.d("DEBUG", date);
+
+
+
     }
 }
