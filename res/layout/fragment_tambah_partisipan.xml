@@ -59,11 +59,11 @@
             android:layout_marginBottom="@dimen/_16dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             >
-            <AutoCompleteTextView
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/actv_choose_participant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:dropDownHeight="160dp"
+                android:inputType="text"
                 android:hint="@string/pilih_partisipan"
                 />
         </com.google.android.material.textfield.TextInputLayout>

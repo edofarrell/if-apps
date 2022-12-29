@@ -1,13 +1,20 @@
 package com.example.p3b_tubes_2;
 
+import android.accessibilityservice.AccessibilityService;
+import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,7 +50,7 @@ public class TambahPartisipanFragment extends DialogFragment {
         this.binding.lstTimeSlot.setAdapter(partisipanListAdapter);
 
         LinearLayout layoutJadwal = binding.llJadwalDosen;
-        ((ViewGroup) layoutJadwal.getParent()).removeView(layoutJadwal);
+        layoutJadwal.setVisibility(View.GONE);
 
         AutocompleteAdapter autocompleteAdapter = new AutocompleteAdapter(getContext(), 0);
         autocompleteAdapter.getFilter().filter("");
@@ -59,9 +66,27 @@ public class TambahPartisipanFragment extends DialogFragment {
 
         binding.appbar.setNavigationOnClickListener(this::closeDialogFragment);
         binding.btnCancel.setOnClickListener(this::closeDialogFragment);
+        binding.actvChooseParticipant.setOnItemClickListener(onItemClick());
     }
 
     private void closeDialogFragment(View view) {
         this.dismiss();
+    }
+
+    private AdapterView.OnItemClickListener onItemClick() {
+        return new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                /*Toast.makeText(getContext(), parent.getItemAtPosition(position)+" selected", Toast.LENGTH_LONG)
+                        .show();*/
+                if(selectedItemIsDosen(parent.getItemAtPosition(position))) {
+                    binding.llJadwalDosen.setVisibility(View.VISIBLE);
+                }
+            }
+        };
+    }
+
+    private boolean selectedItemIsDosen(Object itemAtPosition) {
+        return true;
     }
 }

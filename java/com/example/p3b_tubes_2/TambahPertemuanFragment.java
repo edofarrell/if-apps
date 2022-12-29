@@ -98,7 +98,7 @@ public class TambahPertemuanFragment extends DialogFragment {
     }
 
     private void addParticipant(View view) {
-
+        TambahPartisipanFragment.newInstance(this.getParentFragmentManager());
     }
 
 
