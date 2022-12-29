@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_baseline_close_24"
-            app:title="@string/buat_pertemuan"
+            app:title="@string/tambah_pertemuan"
             app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -60,13 +60,17 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_16dp">
+                app:counterEnabled="true"
+                app:counterMaxLength="256"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/judul" />
+                    android:hint="@string/judul"
+                    android:maxLength="256"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -290,14 +294,19 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_16dp">
+                android:layout_marginBottom="@dimen/_16dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="5000"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/deskripsi"
-                    android:inputType="textMultiLine" />
+                    android:inputType="textMultiLine"
+                    android:maxLength="5000"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout

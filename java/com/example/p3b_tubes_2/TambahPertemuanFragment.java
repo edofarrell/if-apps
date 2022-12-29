@@ -30,7 +30,7 @@ public class TambahPertemuanFragment extends DialogFragment {
     private MainPresenter mainPresenter;
     private TambahPartisipanFragment tambahPartisipanFragment;
     private ChipGroup chipGroup;
-    private ArrayList<Chip> arrChipGroup;
+    private ArrayList<User> arrChipGroup;
 
     public static TambahPertemuanFragment newInstance(FragmentManager fm, PertemuanPresenter pertemuanPresenter, MainPresenter mainPresenter) {
         TambahPertemuanFragment fragment = new TambahPertemuanFragment();
@@ -115,41 +115,49 @@ public class TambahPertemuanFragment extends DialogFragment {
     }
 
     public void addSelecteduser(User user) {
-        String name = user.getName();
+        String nama = user.getName();
         Chip chip = new Chip(this.getContext());
-        chip.setText(name);
+        chip.setText(nama);
 
         chip.setCloseIconVisible(true);
         chip.setTextColor(getResources().getColor(R.color.black));
-        chip.setOnCloseIconClickListener(this::removeChip);
         chip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        chip.setOnCloseIconClickListener(this::removeChip);
 
         if (arrChipGroup.size() == 0) {
-            addChip(chip);
+            addChip(chip, user);
         }
 
         boolean isChipAdded = false;
-        for (Chip item : arrChipGroup) {
-            if (item.getText().toString().contains(name)) {
+        for (User item : arrChipGroup) {
+            if (item.getName().contains(nama)) {
                 isChipAdded = true;
                 break;
             }
         }
 
         if(!isChipAdded) {
-            addChip(chip);
+            addChip(chip, user);
         }
     }
 
-    private void addChip(Chip chip) {
+    private void addChip(Chip chip, User user) {
         chipGroup.addView(chip);
-        arrChipGroup.add(chip);
+        arrChipGroup.add(user);
     }
 
     private void removeChip(View view) {
         Chip chip = (Chip) view;
+
+        String nama = chip.getText().toString();
+        for(User item : arrChipGroup) {
+            if(item.getName().contains(nama)) {
+                arrChipGroup.remove(item);
+                break;
+            }
+        }
+
         this.chipGroup.removeView(view);
-        this.arrChipGroup.remove(chip);
     }
 
     public void updateTimeSlot(List<TimeSlot> timeSlot){
@@ -198,5 +206,4 @@ public class TambahPertemuanFragment extends DialogFragment {
     private void closeDialogFragment(View view) {
         dismiss();
     }
-
 }
