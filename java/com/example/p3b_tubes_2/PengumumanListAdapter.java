@@ -49,6 +49,7 @@ public class PengumumanListAdapter extends BaseAdapter {
             if(APIClient.role.equals("student")){
                 binding.btnDelete.setVisibility(View.GONE);
             }
+
         }
 
         private void onClickDelete(View view) {
@@ -79,27 +80,21 @@ public class PengumumanListAdapter extends BaseAdapter {
             if(!sp.getBoolean(pengumuman.getId(), false)){
                 editor.putBoolean(pengumuman.getId(), true);
                 editor.commit();
-                this.llPengumuman.getBackground().setTint(Color.WHITE);
-                this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_black));
+
+                this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_grey));
                 this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));
             }
-
             presenter.getPengumumanDetail(pengumuman);
         }
 
         private void updateView(int i) {
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
             if(sp.getBoolean(pengumuman.getId(), false)){
-
-                this.llPengumuman.getBackground().setTint(Color.WHITE);
-                this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_black));
-
-
+                this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_grey));
                 this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));
             }
             else{
-                this.llPengumuman.getBackground().setTint(ContextCompat.getColor(this.context, R.color.bluePengumuman));
-
+                this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.rounded_pengumuman));
             }
 
             this.tvJudul.setText(pengumuman.getTitle());
