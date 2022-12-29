@@ -27,7 +27,8 @@ public class PengumumanTambahFragment extends DialogFragment {
     private ChipGroup chipGroup;
     private ArrayList<String> arrChipGroup;
 
-    private PengumumanTambahFragment() {}
+    private PengumumanTambahFragment() {
+    }
 
     public static PengumumanTambahFragment newInstance(FragmentManager fm, PengumumanPresenter presenter) {
         PengumumanTambahFragment fragment = new PengumumanTambahFragment();
@@ -58,10 +59,19 @@ public class PengumumanTambahFragment extends DialogFragment {
         String content = this.binding.etDeskripsi.getText().toString();
         List<String> listTag = presenter.getTagsId(arrChipGroup);
         String[] tags = new String[arrChipGroup.size()];
-        for(int i = 0;i<listTag.size();i++){
+        for (int i = 0; i < listTag.size(); i++) {
             tags[i] = listTag.get(i);
         }
-        this.presenter.addPengumuman(title, content, tags);
+
+        if (title.trim().equals("")) {
+            this.showError("Judul pengumuman harus diisi");
+        } else if (tags.length == 0) {
+            this.showError("Tag pengumuman harus diisi");
+        } else if (content.trim().equals("")) {
+            this.showError("Deskripsi pengumuman harus diisi");
+        } else {
+            this.presenter.addPengumuman(title, content, tags);
+        }
     }
 
     @Override
@@ -137,7 +147,7 @@ public class PengumumanTambahFragment extends DialogFragment {
         return true;
     }
 
-    public void showError(String msg){
+    public void showError(String msg) {
         this.binding.tvError.setText(msg);
     }
 }

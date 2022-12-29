@@ -84,13 +84,7 @@ public class APIPengumumanAdd implements Response.Listener<JSONObject>, Response
             APIError err = this.gson.fromJson(responseBody, APIError.class);
             List<String> errField = err.getField();
 
-            String errMessage = "";
-            for (int i = 0; i < errField.size(); i++) {
-                if (i != 0) {
-                    errMessage += "\n";
-                }
-                errMessage += errField.get(i) + " perlu diisi";
-            }
+            String errMessage = errField.get(0) + " " + err.getMessage();
 
             this.presenter.AddOnError(errMessage);
         } catch (UnsupportedEncodingException e) {
