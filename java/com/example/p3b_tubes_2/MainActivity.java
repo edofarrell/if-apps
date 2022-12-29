@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         this.fragments.put("profil", ProfilFragment.newInstance());
         this.fm = getSupportFragmentManager();
 
+        LoginFragment loginFragment = (LoginFragment) this.fragments.get("login");
+        mainPresenter.setUserPresenter(loginFragment.getPresenter());
+
         BottomNavigationView bottomNavigation = binding.bottomNavigation;
         bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

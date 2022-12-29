@@ -15,15 +15,17 @@ import com.example.p3b_tubes_2.databinding.FragmentPertemuanDibuatBinding;
 public class PertemuanDibuatFragment extends Fragment implements PertemuanContract.View.PertemuanDibuat {
     private FragmentPertemuanDibuatBinding binding;
     private PertemuanDibuatListAdapter adapter;
-    private PertemuanPresenter presenter;
+    private PertemuanPresenter pertemuanPresenter;
+    private MainPresenter mainPresenter;
     private FrameLayout frameLayout;
 
     public PertemuanDibuatFragment(){};
 
-    public static PertemuanDibuatFragment newInstance(PertemuanPresenter presenter, FrameLayout frameLayout) {
+    public static PertemuanDibuatFragment newInstance(PertemuanPresenter pertemuanPresenter, FrameLayout frameLayout, MainPresenter mainPresenter) {
         PertemuanDibuatFragment fragment = new PertemuanDibuatFragment();
-        fragment.adapter = new PertemuanDibuatListAdapter(presenter);
-        fragment.presenter = presenter;
+        fragment.adapter = new PertemuanDibuatListAdapter(pertemuanPresenter);
+        fragment.pertemuanPresenter = pertemuanPresenter;
+        fragment.mainPresenter = mainPresenter;
         fragment.frameLayout = frameLayout;
         return fragment;
     }
@@ -33,7 +35,7 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = FragmentPertemuanDibuatBinding.inflate(inflater);
 
-        this.presenter.getPertemuanDibuat();
+        this.pertemuanPresenter.getPertemuanDibuat();
 
         this.binding.lstAppointments.setAdapter(this.adapter);
         this.binding.btnAddAppointment.setOnClickListener(this::onClick);
@@ -42,7 +44,7 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     }
 
     private void onClick(View view) {
-        TambahPertemuanFragment.newInstance(getParentFragmentManager());
+        TambahPertemuanFragment.newInstance(getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
     }
 
     @Override

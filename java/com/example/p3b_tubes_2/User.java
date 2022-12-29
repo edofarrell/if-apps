@@ -17,6 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class User implements Response.Listener<String>, Response.ErrorListener {
@@ -34,6 +35,22 @@ public class User implements Response.Listener<String>, Response.ErrorListener {
         this.loginPresenter = loginPresenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isDosen(){
+        for(int i=0; i<roles.length; i++){
+            if(roles[i].equals("lecturer"))
+                return true;
+        }
+        return false;
     }
 
     public void getUsers() {
@@ -58,9 +75,9 @@ public class User implements Response.Listener<String>, Response.ErrorListener {
 
     @Override
     public void onResponse(String response) {
-        Type listType = new TypeToken<ArrayList<User>>(){}.getType();
-        ArrayList<User> users = this.gson.fromJson(response, listType);
-//        this.loginPresenter.something(users);
+        Type listType = new TypeToken<List<User>>(){}.getType();
+        List<User> users = this.gson.fromJson(response, listType);
+        this.loginPresenter.onSuccessGet(users);
     }
 
     @Override

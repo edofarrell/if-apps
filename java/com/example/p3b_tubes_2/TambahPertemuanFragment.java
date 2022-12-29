@@ -22,13 +22,13 @@ import java.text.SimpleDateFormat;
 public class TambahPertemuanFragment extends DialogFragment {
     private FragmentAddPertemuanBinding binding;
     private PertemuanPresenter pertemuanPresenter;
-    private UserPresenter userPresenter;
+    private MainPresenter mainPresenter;
 
-    public static TambahPertemuanFragment newInstance(FragmentManager fm, PertemuanPresenter pertemuanPresenter, UserPresenter userPresenter) {
+    public static TambahPertemuanFragment newInstance(FragmentManager fm, PertemuanPresenter pertemuanPresenter, MainPresenter mainPresenter) {
         TambahPertemuanFragment fragment = new TambahPertemuanFragment();
         fragment.show(fm, "tambahPertemuan");
         fragment.pertemuanPresenter = pertemuanPresenter;
-        fragment.userPresenter = userPresenter;
+        fragment.mainPresenter = mainPresenter;
         return fragment;
     }
 
@@ -101,7 +101,7 @@ public class TambahPertemuanFragment extends DialogFragment {
     }
 
     private void addParticipant(View view) {
-        TambahPartisipanFragment.newInstance(this.getParentFragmentManager(), this.pertemuanPresenter, this.userPresenter);
+        TambahPartisipanFragment.newInstance(this.getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
     }
 
 
