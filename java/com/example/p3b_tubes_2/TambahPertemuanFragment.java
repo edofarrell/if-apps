@@ -104,7 +104,9 @@ public class TambahPertemuanFragment extends DialogFragment {
         TambahPartisipanFragment.newInstance(this.getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
     }
 
-    
+    public void addSelecteduser(User user){
+        this.binding.tvPartisipan.setText(user.getName());
+    }
 
     private void showTimePicker(View view) {
         String type = "start";

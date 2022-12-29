@@ -176,6 +176,10 @@ public class PertemuanPresenter implements
     public void onErrorDelete() {
 
     }
+
+    public void addSelecteduser(User user){
+        this.uiDibuat.addSelectedUserOnTambahPertemuan(user);
+    }
 }
 
 

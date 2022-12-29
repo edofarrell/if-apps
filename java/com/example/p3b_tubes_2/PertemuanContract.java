@@ -47,6 +47,7 @@ public interface PertemuanContract {
         interface PertemuanDibuat{
             void updatePertemuanDibuat(PertemuanList pertemuanList);
             void openDetailPertemuanDibuat(PertemuanList.Pertemuan pertemuan);
+            void addSelectedUserOnTambahPertemuan(User user);
         }
 
         interface PertemuanDiundang{

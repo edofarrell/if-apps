@@ -143,6 +143,11 @@ public class PertemuanFragment extends Fragment implements
         fragment.openDetailPertemuanDibuat(pertemuan);
     }
 
+    @Override
+    public void addSelectedUserOnTambahPertemuan(User user) {
+
+    }
+
 
     @Override
     public void updatePertemuanDiundang(PertemuanList pertemuanList) {

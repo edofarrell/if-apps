@@ -63,6 +63,7 @@ public class TambahPartisipanFragment extends DialogFragment implements
 
     private void simpanPartisipan(View view) {
         dismiss();
+        this.pertemuanPresenter.addSelecteduser(this.selectedUser);
     }
 
     @Override

@@ -54,4 +54,9 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     public void openDetailPertemuanDibuat(PertemuanList.Pertemuan pertemuan) {
         PertemuanDetailFragment.newInstance(this.getParentFragmentManager(), pertemuan);
     }
+
+    @Override
+    public void addSelectedUserOnTambahPertemuan(User user) {
+        this.tambahPertemuanFragment.addSelecteduser(user);
+    }
 }

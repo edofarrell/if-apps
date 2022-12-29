@@ -254,6 +254,7 @@
                 android:layout_marginBottom="@dimen/_16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tv_partisipan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
