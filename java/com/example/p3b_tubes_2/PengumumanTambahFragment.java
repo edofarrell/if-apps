@@ -41,7 +41,7 @@ public class PengumumanTambahFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = FragmentTambahPengumumanBinding.inflate(inflater);
-        this.chipGroup = binding.chipGrup;
+        this.chipGroup = binding.chipGroup;
 
         this.binding.btnSimpan.setOnClickListener(this::OnClickSimpan);
         this.binding.btnPilih.setOnClickListener(this::tags);
