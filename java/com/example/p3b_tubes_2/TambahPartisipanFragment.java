@@ -1,20 +1,12 @@
 package com.example.p3b_tubes_2;
 
-import android.accessibilityservice.AccessibilityService;
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,11 +16,15 @@ import androidx.fragment.app.FragmentManager;
 import com.example.p3b_tubes_2.databinding.FragmentTambahPartisipanBinding;
 
 public class TambahPartisipanFragment extends DialogFragment {
-    FragmentTambahPartisipanBinding binding;
+    private FragmentTambahPartisipanBinding binding;
+    private PertemuanPresenter pertemuanPresenter;
+    private UserPresenter userPresenter;
 
-    public static TambahPartisipanFragment newInstance(FragmentManager fm) {
+    public static TambahPartisipanFragment newInstance(FragmentManager fm, PertemuanPresenter pertemuanPresenter, UserPresenter userPresenter) {
         TambahPartisipanFragment fragment = new TambahPartisipanFragment();
         fragment.show(fm, "tambahPartisipan");
+        fragment.pertemuanPresenter = pertemuanPresenter;
+        fragment.userPresenter = userPresenter;
 
         return fragment;
     }

@@ -20,11 +20,15 @@ import java.text.SimpleDateFormat;
 
 
 public class TambahPertemuanFragment extends DialogFragment {
-    FragmentAddPertemuanBinding binding;
+    private FragmentAddPertemuanBinding binding;
+    private PertemuanPresenter pertemuanPresenter;
+    private UserPresenter userPresenter;
 
-    public static TambahPertemuanFragment newInstance(FragmentManager fm) {
+    public static TambahPertemuanFragment newInstance(FragmentManager fm, PertemuanPresenter pertemuanPresenter, UserPresenter userPresenter) {
         TambahPertemuanFragment fragment = new TambahPertemuanFragment();
         fragment.show(fm, "tambahPertemuan");
+        fragment.pertemuanPresenter = pertemuanPresenter;
+        fragment.userPresenter = userPresenter;
         return fragment;
     }
 
@@ -66,7 +70,6 @@ public class TambahPertemuanFragment extends DialogFragment {
 
         binding.appbar.setNavigationOnClickListener(this::closeDialogFragment);
         binding.btnCancel.setOnClickListener(this::closeDialogFragment);
-        binding.btnTambahPartisipan.setOnClickListener(this::openTambahPartisipanDialog);
 
         binding.etDate.setOnClickListener(this::showDatePicker);
         binding.etStartTime.setOnClickListener(this::showTimePicker);
@@ -98,7 +101,7 @@ public class TambahPertemuanFragment extends DialogFragment {
     }
 
     private void addParticipant(View view) {
-        TambahPartisipanFragment.newInstance(this.getParentFragmentManager());
+        TambahPartisipanFragment.newInstance(this.getParentFragmentManager(), this.pertemuanPresenter, this.userPresenter);
     }
 
 
@@ -140,10 +143,6 @@ public class TambahPertemuanFragment extends DialogFragment {
                 }
             }
         });
-    }
-
-    private void openTambahPartisipanDialog(View view) {
-        TambahPartisipanFragment.newInstance(this.getParentFragmentManager());
     }
 
     private void closeDialogFragment(View view) {
