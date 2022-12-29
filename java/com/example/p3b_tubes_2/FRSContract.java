@@ -6,12 +6,18 @@ public interface FRSContract {
 
    interface Model{
        interface GetOnSuccessListener{
-           void OnSuccessGet(ArrayList<TahunAjaran.TahunAjar> tahunAjar);
+           void OnSuccessGet(TahunAjaran tahunAjar);
            void OnErrorGet();
+       }
+
+       interface GetDetailOnSuccessListener{
+           void OnSuccessGetDetail(ArrayList<MataKuliahList.MataKuliah> listMataKuliah, String tahunAjar);
+           void OnErrorGetDetail();
        }
    }
 
     interface View{
-        void update(ArrayList<TahunAjaran.TahunAjar> tahunAjaran);
+        void update(TahunAjaran tahunAjaran);
+        void openDetail(String tahunAjar,ArrayList<MataKuliahList.MataKuliah> listMataKuliah);
     }
 }

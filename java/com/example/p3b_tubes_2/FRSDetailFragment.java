@@ -15,15 +15,28 @@ import androidx.fragment.app.FragmentManager;
 import com.example.p3b_tubes_2.databinding.FragmentFrsDetailBinding;
 import com.example.p3b_tubes_2.databinding.FragmentFrsTambahBinding;
 
+import java.util.ArrayList;
+
 public class FRSDetailFragment extends DialogFragment {
-    FragmentFrsDetailBinding binding;
-    public static FRSDetailFragment newInstance(FragmentManager fm) {
+    private FragmentFrsDetailBinding binding;
+    private String tahunAjar;
+    private ArrayList<MataKuliahList.MataKuliah> listMataKuliah;
+    private FRSDetailListAdapter adapter;
+    private FRSPresenter presenter;
+
+    public static FRSDetailFragment newInstance(FragmentManager fm, String tahunAjar,
+                                                ArrayList<MataKuliahList.MataKuliah> listMataKuliah,
+                                                FRSPresenter presenter) {
 
         Bundle args = new Bundle();
 
         FRSDetailFragment fragment = new FRSDetailFragment();
         fragment.setArguments(args);
         fragment.show(fm, "detailFRS");
+        fragment.tahunAjar = tahunAjar;
+        fragment.listMataKuliah = listMataKuliah;
+        fragment.presenter = presenter;
+        fragment.adapter = new FRSDetailListAdapter(presenter);
         return fragment;
     }
 
@@ -31,6 +44,9 @@ public class FRSDetailFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.binding = FragmentFrsDetailBinding.inflate(inflater);
+        this.binding.tvSemester.setText(tahunAjar);
+        this.binding.tvLvMatkul.setAdapter(adapter);
+        this.adapter.update(listMataKuliah);
         return binding.getRoot();
     }
 

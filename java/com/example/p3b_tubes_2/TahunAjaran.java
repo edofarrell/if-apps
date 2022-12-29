@@ -100,7 +100,7 @@ public class TahunAjaran implements Response.Listener<JSONObject>, Response.Erro
                 }
                 listAcademicYears.add(new TahunAjar(tahun,sem));
             }
-            presenter.OnSuccessGet(listAcademicYears);
+            presenter.OnSuccessGet(this);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -122,6 +122,12 @@ public class TahunAjaran implements Response.Listener<JSONObject>, Response.Erro
 
         public String getSemester() {
             return semester;
+        }
+
+        public String toString(){
+            String tahun = this.tahun+"/"+(Integer.parseInt(this.tahun)+1)+"";
+            String result = "Semester "+this.semester+" "+tahun;
+            return result;
         }
     }
 }
