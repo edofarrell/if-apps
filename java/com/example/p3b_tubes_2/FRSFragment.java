@@ -41,7 +41,12 @@ public class FRSFragment extends Fragment implements FRSContract.View{
     }
 
     @Override
-    public void update(ArrayList<TahunAjaran.TahunAjar> tahunAjaran) {
+    public void update(TahunAjaran tahunAjaran) {
         this.adapter.update(tahunAjaran);
+    }
+
+    @Override
+    public void openDetail(String tahunAjar, ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
+        FRSDetailFragment.newInstance(getParentFragmentManager(),tahunAjar,listMataKuliah,presenter);
     }
 }

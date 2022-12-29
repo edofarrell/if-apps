@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class FRSListAdapter extends BaseAdapter {
     private FRSPresenter presenter;
-    private ArrayList<TahunAjaran.TahunAjar> tahunAjaran;
+    private TahunAjaran tahunAjaran;
     private class ViewHolder{
         protected int i;
         private TextView academicYears;
@@ -21,28 +21,65 @@ public class FRSListAdapter extends BaseAdapter {
         public ViewHolder(ItemListFrsBinding binding,int i){
             this.i = i;
             this.academicYears = binding.tvAcademicYear;
+            this.academicYears.setOnClickListener(this::openDetail);
         }
 
         private void updateView(int i) {
-            String tahun = "Tahun "+tahunAjaran.get(i).getTahun();
-            String semester = "Semester "+tahunAjaran.get(i).getSemester();
-            this.academicYears.setText(tahun+" "+semester);
+            this.academicYears.setText(tahunAjaran.getListAcademicYears().get(i).toString());
+        }
+
+        private void openDetail(View view){
+            presenter.getMataKuliah(getSemesterNow(),academicYears.getText().toString());
+        }
+
+        private int getSemesterNow(){
+            String semesterSkrg = tahunAjaran.getListAcademicYears().get(i).getSemester();
+            int tahunSkrg = Integer.parseInt(tahunAjaran.getListAcademicYears().get(i).getTahun());
+            int tahunMasuk = Integer.parseInt(tahunAjaran.getListAcademicYears().get(0).getTahun());
+            if(semesterSkrg.equals("Genap")){
+                if(tahunSkrg-tahunMasuk==0){
+                    return 2;
+                }
+                else if(tahunSkrg-tahunMasuk==1){
+                    return 4;
+                }
+                else if(tahunSkrg-tahunMasuk==2){
+                    return 6;
+                }
+                else{
+                    return 8;
+                }
+            }
+            else{
+                if(tahunSkrg-tahunMasuk==0){
+                    return 1;
+                }
+                else if(tahunSkrg-tahunMasuk==1){
+                    return 3;
+                }
+                else if(tahunSkrg-tahunMasuk==2){
+                    return 5;
+                }
+                else{
+                    return 7;
+                }
+            }
         }
     }
 
     public FRSListAdapter(FRSPresenter presenter){
         this.presenter = presenter;
-        this.tahunAjaran = new ArrayList<>();
+        this.tahunAjaran = new TahunAjaran();
     }
 
     @Override
     public int getCount() {
-        return tahunAjaran.size();
+        return tahunAjaran.getListAcademicYears().size();
     }
 
     @Override
     public Object getItem(int i) {
-        return tahunAjaran.get(i);
+        return tahunAjaran.getListAcademicYears().get(i);
     }
 
     @Override
@@ -67,7 +104,7 @@ public class FRSListAdapter extends BaseAdapter {
         return view;
     }
 
-    public void update(ArrayList<TahunAjaran.TahunAjar> tahunAjaran){
+    public void update(TahunAjaran tahunAjaran){
         this.tahunAjaran = tahunAjaran;
         notifyDataSetChanged();
     }
