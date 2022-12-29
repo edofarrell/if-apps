@@ -2,6 +2,7 @@ package com.example.p3b_tubes_2;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.p3b_tubes_2.databinding.FragmentDetailPertemuanBinding;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class PertemuanDetailFragment extends DialogFragment {
 
@@ -56,9 +60,9 @@ public class PertemuanDetailFragment extends DialogFragment {
 
         this.binding.tvTitle.setText(this.pertemuan.getTitle());
         this.binding.tvOrganizer.setText(this.pertemuan.getOrganizerName());
-//        this.binding.tvTanggal.setText(this.pertemuan.getStartTime());
-//        this.binding.tvWaktu.setText(this.pertemuan.getStartTime());
-//        this.binding.tvPartisipan.setText();
+        this.binding.tvTanggal.setText(this.pertemuan.getDate());
+        this.binding.tvWaktuMulai.setText(this.pertemuan.getStartTime());
+        this.binding.tvWaktuSelesai.setText(this.pertemuan.getEndTime());
         this.binding.tvPartisipan.setText(this.pertemuan.getPartisipan());
         this.binding.tvDeskripsi.setText(this.pertemuan.getDescription());
 

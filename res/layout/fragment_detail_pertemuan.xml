@@ -174,7 +174,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         >
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tv_waktu"
+                            android:id="@+id/tv_waktu_mulai"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/waktu_mulai"
@@ -213,7 +213,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         >
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_end_time"
+                            android:id="@+id/tv_waktu_selesai"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="time"

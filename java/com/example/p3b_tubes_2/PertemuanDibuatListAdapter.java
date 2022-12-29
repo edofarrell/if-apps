@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.example.p3b_tubes_2.databinding.ItemListPertemuanDibuatBinding;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class PertemuanDibuatListAdapter extends BaseAdapter {
 
     private PertemuanList pertemuanList;
@@ -42,7 +45,7 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
         private void updateView(int i) {
             PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
             this.tvTitle.setText(pertemuan.getTitle());
-            this.tvDate.setText(pertemuan.getStartTime().substring(0, 10));
+            this.tvDate.setText(pertemuan.getDate());
             this.tvStartTime.setText(pertemuan.getStartTime());
             this.tvEndTime.setText(pertemuan.getEndTime());
         }
@@ -86,7 +89,6 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
     }
 
     public void update(PertemuanList pertemuanList) {
-        Log.d("DEBUG", pertemuanList.getSize()+"");
         this.pertemuanList = pertemuanList;
         notifyDataSetChanged();
     }

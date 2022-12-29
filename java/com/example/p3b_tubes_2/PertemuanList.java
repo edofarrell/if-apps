@@ -17,6 +17,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,11 +57,31 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
         }
 
         public String getStartTime() {
-            return start_datetime;
+            SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH.mm");
+
+            String startTime = "";
+            try {
+                startTime = timeFormatter.format(inputformatter.parse(this.start_datetime));
+            } catch (ParseException e) {
+                Log.d("DEBUG", "PertemuanList, getStartTime() catch ParseException");
+            }
+
+            return startTime;
         }
 
         public String getEndTime() {
-            return end_datetime;
+            SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH.mm");
+
+            String endTime = "";
+            try {
+                endTime = timeFormatter.format(inputformatter.parse(this.end_datetime));
+            } catch (ParseException e) {
+                Log.d("DEBUG", "PertemuanList, getEndTime() catch ParseException");
+            }
+
+            return endTime;
         }
 
         public String getId() {
@@ -71,7 +93,17 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
         }
 
         public String getDate() {
-            return "";
+            SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("E, dd MMM yyyy");
+
+            String date = "";
+            try {
+                date = dateFormatter.format(inputformatter.parse(this.start_datetime));
+            } catch (ParseException e) {
+                Log.d("DEBUG", "PertemuanList, getDate() catch ParseException");
+            }
+
+            return date;
         }
 
         public String getPartisipan() {
@@ -99,11 +131,11 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
         this.gson = new Gson();
     }
 
-    public PertemuanList(){
+    public PertemuanList() {
         this.arr = new ArrayList<>();
     }
 
-    public void addPertemuan(Pertemuan pertemuan){
+    public void addPertemuan(Pertemuan pertemuan) {
         this.arr.add(pertemuan);
     }
 
@@ -137,7 +169,8 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
 
     @Override
     public void onResponse(String response) {
-        Type listType = new TypeToken<ArrayList<Pertemuan>>() {}.getType();
+        Type listType = new TypeToken<ArrayList<Pertemuan>>() {
+        }.getType();
         this.arr = this.gson.fromJson(response, listType);
         this.pertemuanPresenter.onSuccessGetDibuat(this);
     }
