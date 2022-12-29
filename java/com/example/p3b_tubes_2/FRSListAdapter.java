@@ -1,5 +1,6 @@
 package com.example.p3b_tubes_2;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class FRSListAdapter extends BaseAdapter {
         }
 
         private void openDetail(View view){
+            Log.d("DEBUG",getSemesterNow()+"");
             presenter.getMataKuliah(getSemesterNow(),academicYears.getText().toString());
         }
 

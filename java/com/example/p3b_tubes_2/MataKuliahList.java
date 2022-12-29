@@ -66,6 +66,7 @@ public class MataKuliahList implements Response.Listener<JSONArray>, Response.Er
     }
 
     public void getMataKuliah(int semester, String tahunAjar){
+        listMataKuliah.clear();
         String url = APIClient.BASE_URL+"/courses";
         this.tempSemester = semester;
         this.tempTahunAjar = tahunAjar;
