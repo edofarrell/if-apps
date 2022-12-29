@@ -15,6 +15,9 @@ import androidx.fragment.app.FragmentResultListener;
 
 import com.example.p3b_tubes_2.databinding.FragmentAddPertemuanBinding;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 public class TambahPertemuanFragment extends DialogFragment {
     FragmentAddPertemuanBinding binding;
@@ -70,7 +73,7 @@ public class TambahPertemuanFragment extends DialogFragment {
         binding.etEndTime.setOnClickListener(this::showTimePicker);
 
         binding.btnAddAppointment.setOnClickListener(this::addAppointment);
-        binding.btnAddParticipant.setOnClickListener(this::addParticipant);
+        binding.btnTambahPartisipan.setOnClickListener(this::addParticipant);
     }
 
     private void addAppointment(View view) {
@@ -95,7 +98,7 @@ public class TambahPertemuanFragment extends DialogFragment {
     }
 
     private void addParticipant(View view) {
-
+        TambahPartisipanFragment.newInstance(this.getParentFragmentManager());
     }
 
 
