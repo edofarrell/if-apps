@@ -9,7 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/lv_daftar_semester"
-        android:layout_marginTop="@dimen/_20sp">
+        android:layout_marginTop="@dimen/_20sp"
+        android:padding="@dimen/_15sp"
+        android:divider="@color/white"
+        android:dividerHeight="@dimen/_20sp">
 
     </ListView>
 

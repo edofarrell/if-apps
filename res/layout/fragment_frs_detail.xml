@@ -36,16 +36,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Semester Ganjil 2022/2023"
-                android:id="@+id/tv_semester"
-                android:gravity="center"
-                android:textSize="@dimen/_20sp"
-                android:textColor="@color/black">
-
-            </TextView>
 
             <ListView
                 android:layout_width="match_parent"

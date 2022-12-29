@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:paddingTop="@dimen/_10sp"
+    android:paddingTop="@dimen/_15sp"
+    android:background="@drawable/border_grey"
+    android:paddingBottom="@dimen/_15sp"
 
     >
     <ImageView
@@ -20,6 +22,7 @@
         android:layout_marginLeft="@dimen/_10sp"
         android:layout_marginTop="@dimen/_5sp"
         android:text="Semester Ganjil 2022/2023"
-        android:textSize="@dimen/_20sp"></TextView>
+        android:textSize="@dimen/_20sp"
+        android:textColor="@color/black"></TextView>
 
 </LinearLayout>

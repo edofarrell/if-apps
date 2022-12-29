@@ -44,7 +44,7 @@ public class FRSDetailFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.binding = FragmentFrsDetailBinding.inflate(inflater);
-        this.binding.tvSemester.setText(tahunAjar);
+        this.binding.appbar.setTitle(tahunAjar);
         this.binding.tvLvMatkul.setAdapter(adapter);
         this.adapter.update(listMataKuliah);
         return binding.getRoot();
