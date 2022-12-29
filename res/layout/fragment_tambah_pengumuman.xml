@@ -58,12 +58,16 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="256"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_judul"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLength="256"
                     android:hint="@string/judul" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/filter"
+                    android:text="Tag"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sp" />
 
@@ -101,7 +105,7 @@
                     android:layout_marginBottom="0dp"
                     android:drawableLeft="@drawable/ic_baseline_add_24"
                     android:drawableTint="@color/primary"
-                    android:text="Tambah Filter" />
+                    android:text="@string/tambah_tag" />
             </RelativeLayout>
 
             <com.google.android.material.card.MaterialCardView
@@ -146,14 +150,19 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_16dp">
+                android:layout_marginBottom="@dimen/_16dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="5000"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_deskripsi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:hint="@string/deskripsi" />
+                    android:hint="@string/deskripsi"
+                    android:maxLength="5000"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout

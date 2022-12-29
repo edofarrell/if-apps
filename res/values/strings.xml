@@ -51,6 +51,6 @@
     <string name="detail_pengumuman">Detail Pengumuman</string>
     <string name="detail_pertemuan">Detail Pertemuan</string>
     <string name="penyelenggara">Penyelenggara</string>
-    <string name="tambah_tag">+ TAMBAH TAG</string>
+    <string name="tambah_tag">TAMBAH TAG</string>
     <string name="filter">Filter</string>
 </resources>
