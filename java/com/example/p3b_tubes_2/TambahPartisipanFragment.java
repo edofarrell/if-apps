@@ -56,7 +56,13 @@ public class TambahPartisipanFragment extends DialogFragment implements
 
         this.mainPresenter.getAllUser(this);
 
+        this.binding.btnAdd.setOnClickListener(this::simpanPartisipan);
+
         return this.binding.getRoot();
+    }
+
+    private void simpanPartisipan(View view) {
+        dismiss();
     }
 
     @Override
@@ -76,8 +82,6 @@ public class TambahPartisipanFragment extends DialogFragment implements
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*Toast.makeText(getContext(), parent.getItemAtPosition(position)+" selected", Toast.LENGTH_LONG)
-                        .show();*/
                 selectedUser = (User) parent.getItemAtPosition(position);
                 if(selectedItemIsDosen(selectedUser)){
                     binding.llJadwalDosen.setVisibility(View.VISIBLE);

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,16 +16,15 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     private PertemuanDibuatListAdapter adapter;
     private PertemuanPresenter pertemuanPresenter;
     private MainPresenter mainPresenter;
-    private FrameLayout frameLayout;
+    private TambahPertemuanFragment tambahPertemuanFragment;
 
     public PertemuanDibuatFragment(){};
 
-    public static PertemuanDibuatFragment newInstance(PertemuanPresenter pertemuanPresenter, FrameLayout frameLayout, MainPresenter mainPresenter) {
+    public static PertemuanDibuatFragment newInstance(PertemuanPresenter pertemuanPresenter,  MainPresenter mainPresenter) {
         PertemuanDibuatFragment fragment = new PertemuanDibuatFragment();
         fragment.adapter = new PertemuanDibuatListAdapter(pertemuanPresenter);
         fragment.pertemuanPresenter = pertemuanPresenter;
         fragment.mainPresenter = mainPresenter;
-        fragment.frameLayout = frameLayout;
         return fragment;
     }
 
@@ -44,7 +42,7 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     }
 
     private void onClick(View view) {
-        TambahPertemuanFragment.newInstance(getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
+        this.tambahPertemuanFragment = TambahPertemuanFragment.newInstance(getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
     }
 
     @Override
