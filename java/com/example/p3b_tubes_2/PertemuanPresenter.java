@@ -7,6 +7,7 @@ import org.json.JSONException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class PertemuanPresenter implements
         PertemuanContract.Model.AddOnSuccessListener,
@@ -15,7 +16,8 @@ public class PertemuanPresenter implements
         PertemuanContract.Model.GetPartisipanSuccessListener,
         PertemuanContract.Model.AddParticipantsPertemuanOnSuccessListener,
         PertemuanContract.Model.DeleteParticipantsPertemuanOnSuccessListener,
-        PertemuanContract.Model.DeleteOnSuccessListener
+        PertemuanContract.Model.DeleteOnSuccessListener,
+        PertemuanContract.Model.GetTimeSlotOnSuccessListener
 {
     private PertemuanList pertemuan;
     private PertemuanContract.View ui;
@@ -43,10 +45,6 @@ public class PertemuanPresenter implements
         this.deletePertemuan = new APIPertemuanDelete(this,context);
         this.getTimeSlot = new APIPertemuanGetTimeSlot(this,context);
         this.tambahTimeSlot = new APIPertemuanTambahTimeSlot(this,context);
-    }
-
-    public void getTimeSlot(String lecturerId){
-        getTimeSlot.getTimeSlot(lecturerId);
     }
 
     public void addTimeSlot(String day, String startTime, String endTime) throws JSONException {
@@ -109,7 +107,7 @@ public class PertemuanPresenter implements
     @Override
     public void onSuccessAdd(PertemuanList.Pertemuan pertemuan) {
         this.pertemuan.addPertemuan(pertemuan);
-        this.ui.update(this.pertemuan);
+        this.ui.updateDibuat(this.pertemuan);
     }
 
     @Override
@@ -179,6 +177,21 @@ public class PertemuanPresenter implements
 
     public void addSelecteduser(User user){
         this.uiDibuat.addSelectedUserOnTambahPertemuan(user);
+    }
+
+
+    public void getTimeSlot(String lecturerId){
+        this.getTimeSlot.getTimeSlot(lecturerId);
+    }
+
+    @Override
+    public void onSuccessGetTimeSlot(List<TimeSlot> timeSlot) {
+        this.ui.updateTimeSlot(timeSlot);
+    }
+
+    @Override
+    public void onErrorGetTimeSlot() {
+
     }
 }
 

@@ -1,60 +1,83 @@
 package com.example.p3b_tubes_2;
 
 
+import java.util.List;
+
 public interface PertemuanContract {
-    
+
     interface Model {
 
         interface AddOnSuccessListener {
             void onSuccessAdd(PertemuanList.Pertemuan pertemuan);
+
             void onErrorAdd();
         }
 
-        interface ChangeOnSuccessListener{
+        interface ChangeOnSuccessListener {
             void onSuccessChange();
+
             void onErrorChange();
         }
 
-        interface GetOnSuccessListener{
+        interface GetOnSuccessListener {
             void onSuccessGetDibuat(PertemuanList pertemuanList);
+
             void onErrorGetDibuat();
         }
 
         interface GetPartisipanSuccessListener {
             void onSuccessGetPartisipanDibuat(PertemuanList.Pertemuan pertemuan);
+
             void onErrorGetPartisipanDibuat();
         }
 
-        interface DeleteOnSuccessListener{
+        interface DeleteOnSuccessListener {
             void onSuccessDelete(String hasil);
+
             void onErrorDelete();
         }
 
-        interface AddParticipantsPertemuanOnSuccessListener{
+        interface AddParticipantsPertemuanOnSuccessListener {
             void onSuccessAddParticipants(String hasil);
+
             void onErrorAddParticipants();
         }
 
-        interface DeleteParticipantsPertemuanOnSuccessListener{
+        interface DeleteParticipantsPertemuanOnSuccessListener {
             void onSuccessDeleteParticipants(String hasil);
+
             void onErrorDeleteParticipants();
+        }
+
+        interface GetTimeSlotOnSuccessListener {
+            void onSuccessGetTimeSlot(List<TimeSlot> timeSlot);
+
+            void onErrorGetTimeSlot();
         }
 
         void getPertemuanList();
     }
 
     interface View {
-        interface PertemuanDibuat{
+        interface PertemuanDibuat {
             void updatePertemuanDibuat(PertemuanList pertemuanList);
+
             void openDetailPertemuanDibuat(PertemuanList.Pertemuan pertemuan);
+
             void addSelectedUserOnTambahPertemuan(User user);
+
+            void updateTimeSlot(List<TimeSlot> timeSlot);
         }
 
-        interface PertemuanDiundang{
+        interface PertemuanDiundang {
             void updatePertemuanDiundang(PertemuanList pertemuanList);
+
             void openDetailPertemuanDiundang(PertemuanList.Pertemuan pertemuan);
         }
 
-       void update(PertemuanList pertemuanList);
+        void updateDibuat(PertemuanList pertemuanList);
+
+        void updateDiundang(PertemuanList pertemuanList);
+        void updateTimeSlot(List<TimeSlot> timeSlot);
     }
 }

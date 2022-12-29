@@ -1,5 +1,6 @@
 package com.example.p3b_tubes_2;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,10 @@ import android.widget.TextView;
 import com.example.p3b_tubes_2.databinding.ItemListTimeslotBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PartisipanListAdapter extends BaseAdapter {
-        ArrayList<TimeSlot> arrayList;
+        List<TimeSlot> arrayList;
 
         public PartisipanListAdapter() {
             this.arrayList = new ArrayList<>();
@@ -32,8 +34,8 @@ public class PartisipanListAdapter extends BaseAdapter {
 
             private void updateView(int i) {
                 TimeSlot timeSlot = arrayList.get(i);
-                String hari = timeSlot.getHari();
-                String waktu = timeSlot.getWaktuKosong();
+                String hari = timeSlot.getDay();
+                String waktu = timeSlot.getStart_time() + "-" + timeSlot.getEnd_time();
                 this.tvDay.setText(hari);
                 this.tvTimeSlot.setText(waktu);
             }
@@ -70,5 +72,10 @@ public class PartisipanListAdapter extends BaseAdapter {
             viewHolder.updateView(position);
 
             return convertView;
+        }
+
+        public void update(List<TimeSlot> timeSlot){
+            this.arrayList = timeSlot;
+            Log.d("DEBUG", timeSlot.size()+"");
         }
 }

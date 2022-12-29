@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanDibuatBinding;
 
+import java.util.List;
+
 public class PertemuanDibuatFragment extends Fragment implements PertemuanContract.View.PertemuanDibuat {
     private FragmentPertemuanDibuatBinding binding;
     private PertemuanDibuatListAdapter adapter;
@@ -58,5 +60,10 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     @Override
     public void addSelectedUserOnTambahPertemuan(User user) {
         this.tambahPertemuanFragment.addSelecteduser(user);
+    }
+
+    @Override
+    public void updateTimeSlot(List<TimeSlot> timeSlot) {
+        this.tambahPertemuanFragment.updateTimeSlot(timeSlot);
     }
 }

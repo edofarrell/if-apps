@@ -21,17 +21,18 @@ import com.google.android.material.tabs.TabLayout;
 import org.json.JSONException;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PertemuanFragment extends Fragment implements
-        PertemuanContract.View,
-        PertemuanContract.View.PertemuanDibuat,
-        PertemuanContract.View.PertemuanDiundang
+        PertemuanContract.View
 {
     private FragmentPertemuanBinding binding;
     private PertemuanPresenter presenter;
     private HashMap<String, Fragment> fragments;
     private FragmentManager fm;
+    private PertemuanDibuatFragment pertemuanDibuatFragment;
+    private PertemuanDiundangFragment pertemuanDiundangFragment;
 
     private PertemuanFragment() {}
 
@@ -39,12 +40,12 @@ public class PertemuanFragment extends Fragment implements
         PertemuanFragment fragment = new PertemuanFragment();
         fragment.presenter = new PertemuanPresenter(fragment, context, mainPresenter);
         fragment.fragments = new HashMap<>();
-        PertemuanDibuatFragment dibuatFragment = PertemuanDibuatFragment.newInstance(fragment.presenter, mainPresenter);
-        PertemuanDiundangFragment diundangFragment = PertemuanDiundangFragment.newInstance(fragment.presenter, frameLayout);
-        fragment.fragments.put("pertemuanDibuat", dibuatFragment);
-        fragment.fragments.put("pertemuanDiundang", diundangFragment);
-        fragment.presenter.setUiDibuat(dibuatFragment);
-        fragment.presenter.setUiDiundang(diundangFragment);
+        fragment.pertemuanDibuatFragment = PertemuanDibuatFragment.newInstance(fragment.presenter, mainPresenter);
+        fragment.pertemuanDiundangFragment = PertemuanDiundangFragment.newInstance(fragment.presenter, frameLayout);
+        fragment.fragments.put("pertemuanDibuat", fragment.pertemuanDibuatFragment);
+        fragment.fragments.put("pertemuanDiundang", fragment.pertemuanDiundangFragment);
+        fragment.presenter.setUiDibuat(fragment.pertemuanDibuatFragment);
+        fragment.presenter.setUiDiundang(fragment.pertemuanDiundangFragment);
         return fragment;
     }
 
@@ -95,17 +96,7 @@ public class PertemuanFragment extends Fragment implements
             }
         });
 
-        binding.getRoot().setOnClickListener(this::test);//hanya untuk test api saja
-
         return this.binding.getRoot();
-    }
-
-    private void test(View view) {
-        try {
-            presenter.addTimeSlot("wed","07:00+0700","09:00+0700");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
     private void changePage(String page) {
@@ -132,37 +123,17 @@ public class PertemuanFragment extends Fragment implements
     }
 
     @Override
-    public void updatePertemuanDibuat(PertemuanList pertemuanList) {
-        PertemuanDibuatFragment fragment = (PertemuanDibuatFragment) this.fragments.get("pertemuanDibuat");
-        fragment.updatePertemuanDibuat(pertemuanList);
+    public void updateDibuat(PertemuanList pertemuanList) {
+        this.pertemuanDibuatFragment.updatePertemuanDibuat(pertemuanList);
     }
 
     @Override
-    public void openDetailPertemuanDibuat(PertemuanList.Pertemuan pertemuan) {
-        PertemuanDibuatFragment fragment = (PertemuanDibuatFragment) this.fragments.get("pertemuanDibuat");
-        fragment.openDetailPertemuanDibuat(pertemuan);
+    public void updateDiundang(PertemuanList pertemuanList) {
+        this.pertemuanDiundangFragment.updatePertemuanDiundang(pertemuanList);
     }
 
     @Override
-    public void addSelectedUserOnTambahPertemuan(User user) {
-
-    }
-
-
-    @Override
-    public void updatePertemuanDiundang(PertemuanList pertemuanList) {
-        PertemuanDibuatFragment fragment = (PertemuanDibuatFragment) this.fragments.get("pertemuanDiundang");
-        fragment.updatePertemuanDibuat(pertemuanList);
-    }
-
-    @Override
-    public void openDetailPertemuanDiundang(PertemuanList.Pertemuan pertemuan) {
-        PertemuanDibuatFragment fragment = (PertemuanDibuatFragment) this.fragments.get("pertemuanDiundang");
-        fragment.openDetailPertemuanDibuat(pertemuan);
-    }
-
-    @Override
-    public void update(PertemuanList pertemuanList) {
-        this.updatePertemuanDibuat(pertemuanList);
+    public void updateTimeSlot(List<TimeSlot> timeSlot) {
+        this.pertemuanDibuatFragment.updateTimeSlot(timeSlot);
     }
 }

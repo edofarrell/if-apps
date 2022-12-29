@@ -1,10 +1,12 @@
 package com.example.p3b_tubes_2;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
@@ -25,6 +27,7 @@ public class TambahPartisipanFragment extends DialogFragment implements
     private PertemuanPresenter pertemuanPresenter;
     private MainPresenter mainPresenter;
     private User selectedUser;
+    private PartisipanListAdapter timeSlotAdapter;
 
     public static TambahPartisipanFragment newInstance(FragmentManager fm, PertemuanPresenter pertemuanPresenter, MainPresenter mainPresenter) {
         TambahPartisipanFragment fragment = new TambahPartisipanFragment();
@@ -48,8 +51,8 @@ public class TambahPartisipanFragment extends DialogFragment implements
         super.onCreateView(inflater, container, savedInstanceState);
 
         this.binding = FragmentTambahPartisipanBinding.inflate(inflater);
-        PartisipanListAdapter partisipanListAdapter = new PartisipanListAdapter();
-        this.binding.lstTimeSlot.setAdapter(partisipanListAdapter);
+        this.timeSlotAdapter = new PartisipanListAdapter();
+        this.binding.lstTimeSlot.setAdapter(this.timeSlotAdapter);
 
         LinearLayout layoutJadwal = binding.llJadwalDosen;
         layoutJadwal.setVisibility(View.GONE);
@@ -86,6 +89,7 @@ public class TambahPartisipanFragment extends DialogFragment implements
                 selectedUser = (User) parent.getItemAtPosition(position);
                 if(selectedItemIsDosen(selectedUser)){
                     binding.llJadwalDosen.setVisibility(View.VISIBLE);
+                    pertemuanPresenter.getTimeSlot(selectedUser.getId());
                 }else{
                     binding.llJadwalDosen.setVisibility(View.GONE);
                 }
@@ -103,5 +107,9 @@ public class TambahPartisipanFragment extends DialogFragment implements
         autocompleteAdapter.getFilter().filter("");
         AutoCompleteTextView autoCompleteTextView = binding.actvChooseParticipant;
         autoCompleteTextView.setAdapter(autocompleteAdapter);
+    }
+
+    public void updateTimeSlot(List<TimeSlot> timeSlot){
+        this.timeSlotAdapter.update(timeSlot);
     }
 }

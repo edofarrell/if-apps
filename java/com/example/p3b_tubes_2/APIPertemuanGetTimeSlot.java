@@ -8,18 +8,21 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class APIPertemuanGetTimeSlot implements Response.Listener<JSONArray>, Response.ErrorListener{
+public class APIPertemuanGetTimeSlot implements Response.Listener<JSONArray>, Response.ErrorListener {
     private PertemuanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
@@ -31,10 +34,16 @@ public class APIPertemuanGetTimeSlot implements Response.Listener<JSONArray>, Re
         this.gson = new Gson();
     }
 
-    public void getTimeSlot(String lecturerId){
-        String url = APIClient.BASE_URL+"/lecturer-time-slots"+"/lecturers"+"/"+lecturerId;
-        CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET,url,null,
-                this::onResponse,this::onErrorResponse){
+    public void getTimeSlot(String lecturerId) {
+        String url = APIClient.BASE_URL + "/lecturer-time-slots" + "/lecturers" + "/" + lecturerId;
+
+        CustomJsonRequest request = new CustomJsonRequest(
+                Request.Method.GET,
+                url,
+                null,
+                this::onResponse,
+                this::onErrorResponse)
+        {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
@@ -42,7 +51,16 @@ public class APIPertemuanGetTimeSlot implements Response.Listener<JSONArray>, Re
                 return params;
             }
         };
+
         queue.add(request);
+    }
+
+    @Override
+    public void onResponse(JSONArray response) {
+        Log.d("DEBUG", "SUCCESS");
+        Type listType = new TypeToken<ArrayList<TimeSlot>>() {}.getType();
+        List<TimeSlot> timeSlot = this.gson.fromJson(response.toString(), listType);
+        this.presenter.onSuccessGetTimeSlot(timeSlot);
     }
 
     @Override
@@ -53,10 +71,5 @@ public class APIPertemuanGetTimeSlot implements Response.Listener<JSONArray>, Re
         } catch (UnsupportedEncodingException e) {
             Log.d("DEBUG", "APIPertemuanGetTimeSlot: onErrorResponse() catch UnsupportedEncodingException");
         }
-    }
-
-    @Override
-    public void onResponse(JSONArray response) {
-        Log.d("DEBUG","SUCCESS");
     }
 }

@@ -17,12 +17,14 @@ import com.example.p3b_tubes_2.databinding.FragmentAddPertemuanBinding;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 
 public class TambahPertemuanFragment extends DialogFragment {
     private FragmentAddPertemuanBinding binding;
     private PertemuanPresenter pertemuanPresenter;
     private MainPresenter mainPresenter;
+    private TambahPartisipanFragment tambahPartisipanFragment;
 
     public static TambahPertemuanFragment newInstance(FragmentManager fm, PertemuanPresenter pertemuanPresenter, MainPresenter mainPresenter) {
         TambahPertemuanFragment fragment = new TambahPertemuanFragment();
@@ -101,11 +103,15 @@ public class TambahPertemuanFragment extends DialogFragment {
     }
 
     private void addParticipant(View view) {
-        TambahPartisipanFragment.newInstance(this.getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
+        this.tambahPartisipanFragment = TambahPartisipanFragment.newInstance(this.getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
     }
 
     public void addSelecteduser(User user){
         this.binding.tvPartisipan.setText(user.getName());
+    }
+
+    public void updateTimeSlot(List<TimeSlot> timeSlot){
+        this.tambahPartisipanFragment.updateTimeSlot(timeSlot);
     }
 
     private void showTimePicker(View view) {
