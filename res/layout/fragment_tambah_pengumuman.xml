@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
@@ -115,6 +117,7 @@
                 app:strokeColor="#9e9e9e"
                 app:strokeWidth="1dp"
                 android:layout_marginBottom="@dimen/_16dp"
+                app:cardBackgroundColor="@color/background"
                 >
                 <com.google.android.material.chip.ChipGroup
                     android:padding="@dimen/_16dp"

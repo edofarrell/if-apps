@@ -3,6 +3,7 @@ package com.example.p3b_tubes_2;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 
 import com.example.p3b_tubes_2.databinding.FragmentAddPertemuanBinding;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.ArrayList;
 
 
 public class TambahPertemuanFragment extends DialogFragment {
@@ -25,12 +29,15 @@ public class TambahPertemuanFragment extends DialogFragment {
     private PertemuanPresenter pertemuanPresenter;
     private MainPresenter mainPresenter;
     private TambahPartisipanFragment tambahPartisipanFragment;
+    private ChipGroup chipGroup;
+    private ArrayList<Chip> arrChipGroup;
 
     public static TambahPertemuanFragment newInstance(FragmentManager fm, PertemuanPresenter pertemuanPresenter, MainPresenter mainPresenter) {
         TambahPertemuanFragment fragment = new TambahPertemuanFragment();
         fragment.show(fm, "tambahPertemuan");
         fragment.pertemuanPresenter = pertemuanPresenter;
         fragment.mainPresenter = mainPresenter;
+        fragment.arrChipGroup = new ArrayList<>();
         return fragment;
     }
 
@@ -58,6 +65,7 @@ public class TambahPertemuanFragment extends DialogFragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         binding = FragmentAddPertemuanBinding.inflate(inflater);
+        this.chipGroup = binding.chipGroup;
 
         setDate();
         setTime();
@@ -93,8 +101,8 @@ public class TambahPertemuanFragment extends DialogFragment {
         String startDateTime = null;
         String endDateTime = null;
         try {
-            startDateTime = outputformatter.format(inputformatter.parse(inputDate+startTime));
-            endDateTime = outputformatter.format(inputformatter.parse(inputDate+endTime));
+            startDateTime = outputformatter.format(inputformatter.parse(inputDate + startTime));
+            endDateTime = outputformatter.format(inputformatter.parse(inputDate + endTime));
         } catch (ParseException e) {
             Log.d("DEBUG", "TambahAppointmentFragment: addAppointment() catch ParseException");
         }
@@ -106,8 +114,42 @@ public class TambahPertemuanFragment extends DialogFragment {
         this.tambahPartisipanFragment = TambahPartisipanFragment.newInstance(this.getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
     }
 
-    public void addSelecteduser(User user){
-        this.binding.tvPartisipan.setText(user.getName());
+    public void addSelecteduser(User user) {
+        String name = user.getName();
+        Chip chip = new Chip(this.getContext());
+        chip.setText(name);
+
+        chip.setCloseIconVisible(true);
+        chip.setTextColor(getResources().getColor(R.color.black));
+        chip.setOnCloseIconClickListener(this::removeChip);
+        chip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+        if (arrChipGroup.size() == 0) {
+            addChip(chip);
+        }
+
+        boolean isChipAdded = false;
+        for (Chip item : arrChipGroup) {
+            if (item.getText().toString().contains(name)) {
+                isChipAdded = true;
+                break;
+            }
+        }
+
+        if(!isChipAdded) {
+            addChip(chip);
+        }
+    }
+
+    private void addChip(Chip chip) {
+        chipGroup.addView(chip);
+        arrChipGroup.add(chip);
+    }
+
+    private void removeChip(View view) {
+        Chip chip = (Chip) view;
+        this.chipGroup.removeView(view);
+        this.arrChipGroup.remove(chip);
     }
 
     public void updateTimeSlot(List<TimeSlot> timeSlot){
