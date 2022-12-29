@@ -1,6 +1,7 @@
 package com.example.p3b_tubes_2;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +13,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.zip.Inflater;
+import java.util.List;
 
 public class AutocompleteAdapter extends ArrayAdapter {
-    private ArrayList<String> arrayListNama;
+    private List<User> arrayListNama;
     private Filter filter;
 
-    public AutocompleteAdapter(@NonNull Context context, int resource) {
+    public AutocompleteAdapter(@NonNull Context context, int resource, List<User> data) {
         super(context, resource);
-        this.arrayListNama = new ArrayList<>();
-        init();
-
+        this.arrayListNama = new ArrayList<>(data);
         this.filter = instantiateFilter();
     }
 
@@ -42,7 +40,7 @@ public class AutocompleteAdapter extends ArrayAdapter {
             convertView = inflater.inflate(R.layout.autocomplete_item, parent, false);
         }
 
-        String nama = getItem(position).toString();
+        String nama = ((User) getItem(position)).getName();
         TextView item = convertView.findViewById(R.id.tv_autocomplete_item);
         if(getItem(position) != null) {;
             item.setText(nama);
@@ -56,15 +54,15 @@ public class AutocompleteAdapter extends ArrayAdapter {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults filterResults = new FilterResults();
-                ArrayList<String> suggestions = new ArrayList<>();
+                List<User> suggestions = new ArrayList<>();
 
                 if(constraint == null || constraint.length() == 0 || constraint.equals("")) {
                     suggestions.addAll(arrayListNama);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
 
-                    for(String item : arrayListNama) {
-                        if(item.toLowerCase().contains(filterPattern)) {
+                    for(User item : arrayListNama) {
+                        if(item.getName().contains(filterPattern)) {
                             suggestions.add(item);
                         }
                     }
@@ -79,18 +77,15 @@ public class AutocompleteAdapter extends ArrayAdapter {
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 clear();
-                addAll((ArrayList<String>) results.values);
+                addAll((ArrayList<User>) results.values);
                 notifyDataSetChanged();
+            }
+
+            @Override
+            public CharSequence convertResultToString(Object resultValue) {
+                return ((User) resultValue).getName();
             }
         };
     }
 
-    private void init() {
-        this.arrayListNama.add("Keenan A. Leman, S.T., M.T.");
-        this.arrayListNama.add("Raymond Chandra Putra, S.T., M.T.");
-        this.arrayListNama.add("Edo Farrel Haryanto");
-        this.arrayListNama.add("Dearen Hippy");
-        this.arrayListNama.add("William Nehemia");
-        this.arrayListNama.add("Alexander Bleuvito Fevrier");
-    }
 }

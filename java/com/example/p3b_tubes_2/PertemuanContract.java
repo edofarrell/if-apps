@@ -1,6 +1,5 @@
 package com.example.p3b_tubes_2;
 
-import java.util.ArrayList;
 
 public interface PertemuanContract {
     
@@ -48,6 +47,7 @@ public interface PertemuanContract {
         interface PertemuanDibuat{
             void updatePertemuanDibuat(PertemuanList pertemuanList);
             void openDetailPertemuanDibuat(PertemuanList.Pertemuan pertemuan);
+            void addSelectedUserOnTambahPertemuan(User user);
         }
 
         interface PertemuanDiundang{

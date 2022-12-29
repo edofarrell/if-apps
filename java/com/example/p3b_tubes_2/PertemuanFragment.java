@@ -39,7 +39,7 @@ public class PertemuanFragment extends Fragment implements
         PertemuanFragment fragment = new PertemuanFragment();
         fragment.presenter = new PertemuanPresenter(fragment, context, mainPresenter);
         fragment.fragments = new HashMap<>();
-        PertemuanDibuatFragment dibuatFragment = PertemuanDibuatFragment.newInstance(fragment.presenter, frameLayout);
+        PertemuanDibuatFragment dibuatFragment = PertemuanDibuatFragment.newInstance(fragment.presenter, mainPresenter);
         PertemuanDiundangFragment diundangFragment = PertemuanDiundangFragment.newInstance(fragment.presenter, frameLayout);
         fragment.fragments.put("pertemuanDibuat", dibuatFragment);
         fragment.fragments.put("pertemuanDiundang", diundangFragment);
@@ -141,6 +141,11 @@ public class PertemuanFragment extends Fragment implements
     public void openDetailPertemuanDibuat(PertemuanList.Pertemuan pertemuan) {
         PertemuanDibuatFragment fragment = (PertemuanDibuatFragment) this.fragments.get("pertemuanDibuat");
         fragment.openDetailPertemuanDibuat(pertemuan);
+    }
+
+    @Override
+    public void addSelectedUserOnTambahPertemuan(User user) {
+
     }
 
 

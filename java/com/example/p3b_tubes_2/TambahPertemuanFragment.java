@@ -20,11 +20,15 @@ import java.text.SimpleDateFormat;
 
 
 public class TambahPertemuanFragment extends DialogFragment {
-    FragmentAddPertemuanBinding binding;
+    private FragmentAddPertemuanBinding binding;
+    private PertemuanPresenter pertemuanPresenter;
+    private MainPresenter mainPresenter;
 
-    public static TambahPertemuanFragment newInstance(FragmentManager fm) {
+    public static TambahPertemuanFragment newInstance(FragmentManager fm, PertemuanPresenter pertemuanPresenter, MainPresenter mainPresenter) {
         TambahPertemuanFragment fragment = new TambahPertemuanFragment();
         fragment.show(fm, "tambahPertemuan");
+        fragment.pertemuanPresenter = pertemuanPresenter;
+        fragment.mainPresenter = mainPresenter;
         return fragment;
     }
 
@@ -66,7 +70,6 @@ public class TambahPertemuanFragment extends DialogFragment {
 
         binding.appbar.setNavigationOnClickListener(this::closeDialogFragment);
         binding.btnCancel.setOnClickListener(this::closeDialogFragment);
-        binding.btnTambahPartisipan.setOnClickListener(this::openTambahPartisipanDialog);
 
         binding.etDate.setOnClickListener(this::showDatePicker);
         binding.etStartTime.setOnClickListener(this::showTimePicker);
@@ -98,10 +101,12 @@ public class TambahPertemuanFragment extends DialogFragment {
     }
 
     private void addParticipant(View view) {
-        TambahPartisipanFragment.newInstance(this.getParentFragmentManager());
+        TambahPartisipanFragment.newInstance(this.getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
     }
 
-
+    public void addSelecteduser(User user){
+        this.binding.tvPartisipan.setText(user.getName());
+    }
 
     private void showTimePicker(View view) {
         String type = "start";
@@ -140,10 +145,6 @@ public class TambahPertemuanFragment extends DialogFragment {
                 }
             }
         });
-    }
-
-    private void openTambahPartisipanDialog(View view) {
-        TambahPartisipanFragment.newInstance(this.getParentFragmentManager());
     }
 
     private void closeDialogFragment(View view) {

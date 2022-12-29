@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,16 +14,17 @@ import com.example.p3b_tubes_2.databinding.FragmentPertemuanDibuatBinding;
 public class PertemuanDibuatFragment extends Fragment implements PertemuanContract.View.PertemuanDibuat {
     private FragmentPertemuanDibuatBinding binding;
     private PertemuanDibuatListAdapter adapter;
-    private PertemuanPresenter presenter;
-    private FrameLayout frameLayout;
+    private PertemuanPresenter pertemuanPresenter;
+    private MainPresenter mainPresenter;
+    private TambahPertemuanFragment tambahPertemuanFragment;
 
     public PertemuanDibuatFragment(){};
 
-    public static PertemuanDibuatFragment newInstance(PertemuanPresenter presenter, FrameLayout frameLayout) {
+    public static PertemuanDibuatFragment newInstance(PertemuanPresenter pertemuanPresenter,  MainPresenter mainPresenter) {
         PertemuanDibuatFragment fragment = new PertemuanDibuatFragment();
-        fragment.adapter = new PertemuanDibuatListAdapter(presenter);
-        fragment.presenter = presenter;
-        fragment.frameLayout = frameLayout;
+        fragment.adapter = new PertemuanDibuatListAdapter(pertemuanPresenter);
+        fragment.pertemuanPresenter = pertemuanPresenter;
+        fragment.mainPresenter = mainPresenter;
         return fragment;
     }
 
@@ -33,7 +33,7 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = FragmentPertemuanDibuatBinding.inflate(inflater);
 
-        this.presenter.getPertemuanDibuat();
+        this.pertemuanPresenter.getPertemuanDibuat();
 
         this.binding.lstAppointments.setAdapter(this.adapter);
         this.binding.btnAddAppointment.setOnClickListener(this::onClick);
@@ -42,7 +42,7 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     }
 
     private void onClick(View view) {
-        TambahPertemuanFragment.newInstance(getParentFragmentManager());
+        this.tambahPertemuanFragment = TambahPertemuanFragment.newInstance(getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
     }
 
     @Override
@@ -53,5 +53,10 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     @Override
     public void openDetailPertemuanDibuat(PertemuanList.Pertemuan pertemuan) {
         PertemuanDetailFragment.newInstance(this.getParentFragmentManager(), pertemuan);
+    }
+
+    @Override
+    public void addSelectedUserOnTambahPertemuan(User user) {
+        this.tambahPertemuanFragment.addSelecteduser(user);
     }
 }

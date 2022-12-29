@@ -75,6 +75,9 @@ public class LoginFragment extends Fragment implements LoginContract.View{
 
     }
 
+    public UserPresenter getPresenter() {
+        return presenter;
+    }
 
     @Override
     public void updateLoginView(boolean status) {
