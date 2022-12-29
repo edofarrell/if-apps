@@ -83,9 +83,7 @@ public class PengumumanListAdapter extends BaseAdapter {
                 this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_black));
                 this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));
             }
-            else{
-                this.llPengumuman.getBackground().setTint(ContextCompat.getColor(this.context, R.color.bluePengumuman));
-            }
+
             presenter.getPengumumanDetail(pengumuman);
         }
 

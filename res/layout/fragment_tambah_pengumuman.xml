@@ -162,7 +162,10 @@
                 android:id="@+id/tv_error"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:layout_marginTop="@dimen/_10sp"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_20sp"/>
         </LinearLayout>
 
     </ScrollView>

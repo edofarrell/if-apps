@@ -93,6 +93,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         super.onResume();
         SearchView searchView = this.binding.searchBar;
         searchView.setActivated(true);
+        searchView.setOnClickListener(this::onClickSearch);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -106,6 +107,10 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
                 return false;
             }
         });
+    }
+
+    public void onClickSearch(View view){
+        this.binding.searchBar.onActionViewExpanded();
     }
 
 
