@@ -1,0 +1,159 @@
+package com.example.p3b_tubes_2;
+
+import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.p3b_tubes_2.databinding.FragmentTambahPartisipanPertemuanBinding;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TambahPartisipanPertemuanFragment extends Fragment implements UserContract.View {
+    private FragmentTambahPartisipanPertemuanBinding binding;
+    private MainPresenter mainPresenter;
+    private PertemuanPresenter pertemuanPresenter;
+
+    private User selectedUser;
+    private PartisipanListAdapter timeSlotAdapter;
+    private ChipGroup chipGroup;
+    private ArrayList<User> arrChipGroup;
+
+    public static TambahPartisipanPertemuanFragment newInstance(MainPresenter mainPresenter, PertemuanPresenter pertemuanPresenter) {
+        TambahPartisipanPertemuanFragment fragment = new TambahPartisipanPertemuanFragment();
+        fragment.mainPresenter = mainPresenter;
+        fragment.pertemuanPresenter = pertemuanPresenter;
+        fragment.timeSlotAdapter = new PartisipanListAdapter();
+        fragment.arrChipGroup = new ArrayList<>();
+
+        return fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        this.binding = FragmentTambahPartisipanPertemuanBinding.inflate(inflater);
+
+        this.timeSlotAdapter = new PartisipanListAdapter();
+        this.binding.lstTimeSlot.setAdapter(this.timeSlotAdapter);
+        this.chipGroup = binding.chipGroup;
+
+        LinearLayout layoutJadwal = binding.llJadwalDosen;
+        layoutJadwal.setVisibility(View.GONE);
+
+        this.mainPresenter.getAllUser(this);
+
+        return this.binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.actvChooseParticipant.setOnItemClickListener(onItemClick());
+        this.binding.btnAddParticipant.setOnClickListener(this::simpanPartisipan);
+    }
+
+    private AdapterView.OnItemClickListener onItemClick() {
+        return new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedUser = (User) parent.getItemAtPosition(position);
+                if (selectedItemIsDosen(selectedUser)) {
+                    binding.llJadwalDosen.setVisibility(View.VISIBLE);
+                    pertemuanPresenter.getTimeSlot(selectedUser.getId());
+                } else {
+                    binding.llJadwalDosen.setVisibility(View.GONE);
+                }
+            }
+        };
+    }
+
+    private boolean selectedItemIsDosen(User user) {
+        return user.isDosen();
+    }
+
+    private void simpanPartisipan(View view) {
+        this.pertemuanPresenter.addSelecteduser(this.selectedUser);
+    }
+
+    private void addParticipant(View view) {
+
+    }
+
+    private void back(View view) {
+        Bundle result = new Bundle();
+        result.putString("page", "isiDetail");
+
+        this.getParentFragmentManager().setFragmentResult("changePage", result);
+    }
+
+    public void addSelectedUser(User user) {
+        String nama = user.getName();
+        Chip chip = new Chip(this.getContext());
+        chip.setText(nama);
+
+        chip.setCloseIconVisible(true);
+        chip.setTextColor(getResources().getColor(R.color.black));
+        chip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        chip.setOnCloseIconClickListener(this::removeChip);
+
+        if (arrChipGroup.size() == 0) {
+            addChip(chip, user);
+        }
+
+        boolean isChipAdded = false;
+        for (User item : arrChipGroup) {
+            if (item.getName().contains(nama)) {
+                isChipAdded = true;
+                break;
+            }
+        }
+
+        if(!isChipAdded) {
+            addChip(chip, user);
+        }
+    }
+
+    private void addChip(Chip chip, User user) {
+        chipGroup.addView(chip);
+        arrChipGroup.add(user);
+    }
+
+    private void removeChip(View view) {
+        Chip chip = (Chip) view;
+
+        String nama = chip.getText().toString();
+        for(User item : arrChipGroup) {
+            if(item.getName().contains(nama)) {
+                arrChipGroup.remove(item);
+                break;
+            }
+        }
+
+        this.chipGroup.removeView(view);
+    }
+
+    public void updateTimeSlot(List<TimeSlot> timeSlot) {
+        this.timeSlotAdapter.update(timeSlot);
+    }
+
+    @Override
+    public void update(List<User> data) {
+        AutocompleteAdapter autocompleteAdapter = new AutocompleteAdapter(getContext(), 0, data);
+        autocompleteAdapter.getFilter().filter("");
+        AutoCompleteTextView autoCompleteTextView = binding.actvChooseParticipant;
+        autoCompleteTextView.setAdapter(autocompleteAdapter);
+    }
+}
