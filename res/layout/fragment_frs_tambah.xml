@@ -50,7 +50,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Semester Ganjil 2022/2023"
-                    android:textSize="@dimen/_15sp"></TextView>
+                    android:textSize="@dimen/_15sp"
+                    android:textColor="@color/black"></TextView>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/dropdown"
@@ -75,7 +76,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/dropdown"
                     android:layout_marginTop="@dimen/_15sp"
-                    android:text="@string/prasyarat">
+                    android:text="@string/prasyarat"
+                    android:textColor="@color/black">
 
                 </TextView>
 

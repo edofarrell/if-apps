@@ -42,12 +42,27 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_lv_matkul"
                 android:layout_below="@id/tv_semester"
-                android:layout_marginTop="@dimen/_10sp">
+                android:layout_marginTop="@dimen/_10sp"
+                android:padding="@dimen/_15sp"
+                android:divider="@color/white"
+                android:dividerHeight="@dimen/_20sp">
 
             </ListView>
 
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_matkul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_16dp"
+        android:layout_marginTop="@dimen/_16dp"
+        android:layout_marginEnd="@dimen/_16dp"
+        android:layout_marginBottom="@dimen/_16dp"
+        android:src="@android:drawable/ic_input_add" />
 
 
 
