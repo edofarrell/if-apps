@@ -26,18 +26,22 @@ public class FRSListAdapter extends BaseAdapter {
         }
 
         private void updateView(int i) {
+            this.i = i;
             this.academicYears.setText(tahunAjaran.getListAcademicYears().get(i).toString());
         }
 
         private void openDetail(View view){
-            Log.d("DEBUG",getSemesterNow()+"");
             presenter.getMataKuliah(getSemesterNow(),academicYears.getText().toString());
+            Log.d("DEBUG",tahunAjaran.getListAcademicYears().get(i)+" "+i);
         }
 
         private int getSemesterNow(){
             String semesterSkrg = tahunAjaran.getListAcademicYears().get(i).getSemester();
             int tahunSkrg = Integer.parseInt(tahunAjaran.getListAcademicYears().get(i).getTahun());
             int tahunMasuk = Integer.parseInt(tahunAjaran.getListAcademicYears().get(0).getTahun());
+//            for(int i = 0;i<tahunAjaran.getListAcademicYears().size();i++){
+//                Log.d("DEBUG",tahunAjaran.getListAcademicYears().get(i).getTahun()+" "+i);
+//            }
             if(semesterSkrg.equals("Genap")){
                 if(tahunSkrg-tahunMasuk==0){
                     return 2;
@@ -96,10 +100,10 @@ public class FRSListAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (view == null) {
             view = binding.getRoot();
-            viewHolder = new FRSListAdapter.ViewHolder(binding, i);
+            viewHolder = new ViewHolder(binding, i);
             view.setTag(viewHolder);
         } else {
-            viewHolder = (FRSListAdapter.ViewHolder) view.getTag();
+            viewHolder = (ViewHolder) view.getTag();
         }
         viewHolder.updateView(i);
 
