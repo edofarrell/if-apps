@@ -19,6 +19,7 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     private PertemuanPresenter pertemuanPresenter;
     private MainPresenter mainPresenter;
     private TambahPertemuanFragment tambahPertemuanFragment;
+    private TambahPartisipanPertemuanFragment tambahPartisipanPertemuanFragment;
 
     public PertemuanDibuatFragment(){};
 

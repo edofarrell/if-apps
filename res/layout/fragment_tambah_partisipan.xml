@@ -1,119 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
 
-    >
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:elevation="@dimen/_4dp"
-        >
+        app:elevation="@dimen/_4dp">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/buat_pertemuan"
-            app:titleCentered="true"
             app:navigationIcon="@drawable/ic_baseline_close_24"
-            />
+            app:title="@string/buat_pertemuan"
+            app:titleCentered="true" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_choose_participant"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/appbar_layout"
         android:layout_marginTop="@dimen/_16dp"
-        android:paddingHorizontal="@dimen/_16dp"
         android:orientation="vertical"
-        >
+        android:paddingHorizontal="@dimen/_16dp">
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/_8dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/partisipan"
-                android:textSize="@dimen/_16sp"
-                android:textColor="@color/black"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="*"
-                android:textSize="@dimen/_16sp"
-                android:textColor="@color/design_default_color_error"
-                />
-        </LinearLayout>
-        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ll_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_16dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            >
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/actv_choose_participant"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/partisipan"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/design_default_color_error"
+                    android:textSize="@dimen/_16sp" />
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/pilih_partisipan"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginBottom="@dimen/_16dp">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_choose_participant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pilih_partisipan"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_jadwal_dosen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:layout_below="@+id/ll_input"
+            android:layout_marginBottom="@dimen/_16dp"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_8dp"
                 android:text="Jadwal Dosen"
-                android:textSize="@dimen/_16sp"
                 android:textColor="@color/black"
-                />
+                android:textSize="@dimen/_16sp" />
+
             <ListView
                 android:id="@+id/lst_time_slot"
-                android:scrollbars="none"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"/>
+                android:layout_height="wrap_content"
+                android:scrollbars="none" />
         </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_buttons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="right"
-        android:layout_marginBottom="48dp"
-        >
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_cancel"
-            android:layout_width="@dimen/_120dp"
+        <LinearLayout
+            android:id="@+id/ll_buttons"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:strokeColor="@color/primary"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:text="@string/batal"
-            android:layout_marginRight="@dimen/_16dp"
-            />
-        <Button
-            android:id="@+id/btn_add"
-            android:layout_width="@dimen/_120dp"
-            android:layout_height="wrap_content"
-            android:text="@string/tambah"
-            />
-    </LinearLayout>
-    </LinearLayout>
+            android:layout_below="@+id/ll_jadwal_dosen"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="right"
+            android:layout_marginBottom="48dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancel"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="@dimen/_120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_16dp"
+                android:text="@string/batal"
+                app:strokeColor="@color/primary" />
+
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="@dimen/_120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tambah" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.example.p3b_tubes_2;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,8 +47,13 @@ public class PengumumanTambahFragment extends DialogFragment {
 
         this.binding.btnSimpan.setOnClickListener(this::OnClickSimpan);
         this.binding.btnPilih.setOnClickListener(this::tags);
+        this.binding.btnCancel.setOnClickListener(this::closeDialogFragment);
 
         return this.binding.getRoot();
+    }
+
+    private void closeDialogFragment(View view) {
+        this.dismiss();
     }
 
     private void tags(View view) {
@@ -124,6 +130,7 @@ public class PengumumanTambahFragment extends DialogFragment {
 
         chip.setCloseIconVisible(true);
         chip.setTextColor(getResources().getColor(R.color.black));
+        chip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         chip.setOnCloseIconClickListener(this::OnCloseIconClick);
 
         boolean check = false;
