@@ -59,12 +59,17 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     }
 
     @Override
-    public void addSelectedUserOnTambahPertemuan(User user) {
-        this.tambahPertemuanFragment.addSelecteduser(user);
+    public void addSelectedUserOnTambahPertemuan(User[] users) {
+        this.tambahPertemuanFragment.addSelecteduser(users);
     }
 
     @Override
     public void updateTimeSlot(List<TimeSlot> timeSlot) {
         this.tambahPertemuanFragment.updateTimeSlot(timeSlot);
+    }
+
+    @Override
+    public void openAddPartisipan(String idPertemuan) {
+        this.tambahPertemuanFragment.openAddPartisipan(idPertemuan);
     }
 }

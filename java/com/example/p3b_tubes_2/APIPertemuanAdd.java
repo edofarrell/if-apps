@@ -31,7 +31,7 @@ public class APIPertemuanAdd implements Response.Listener<JSONObject>, Response.
         this.gson = new Gson();
     }
 
-    public void tambahPertemuan(String title, String description, String startTime, String endTime) throws JSONException {
+    public void tambahPertemuan(String title, String description, String startTime, String endTime) {
         String url = APIClient.BASE_URL + "/appointments";
 
         JsonObject json = new JsonObject();
@@ -39,7 +39,12 @@ public class APIPertemuanAdd implements Response.Listener<JSONObject>, Response.
         json.addProperty("description", description);
         json.addProperty("start_datetime", startTime);
         json.addProperty("end_datetime", endTime);
-        JSONObject JSON = new JSONObject(json.toString());
+        JSONObject JSON = null;
+        try {
+            JSON = new JSONObject(json.toString());
+        } catch (JSONException e) {
+            Log.d("DEBUG", "APIAddPertemuan: tambahPertemuan() catch JSONException");
+        }
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,

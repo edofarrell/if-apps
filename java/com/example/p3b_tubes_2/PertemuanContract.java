@@ -38,7 +38,7 @@ public interface PertemuanContract {
         }
 
         interface AddParticipantsPertemuanOnSuccessListener {
-            void onSuccessAddParticipants(String hasil);
+            void onSuccessAddParticipants(User[] users);
 
             void onErrorAddParticipants();
         }
@@ -64,9 +64,11 @@ public interface PertemuanContract {
 
             void openDetailPertemuanDibuat(PertemuanList.Pertemuan pertemuan);
 
-            void addSelectedUserOnTambahPertemuan(User user);
+            void addSelectedUserOnTambahPertemuan(User[] users);
 
             void updateTimeSlot(List<TimeSlot> timeSlot);
+
+            void openAddPartisipan(String idPertemuan);
         }
 
         interface PertemuanDiundang {

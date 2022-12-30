@@ -39,7 +39,6 @@ public class PartisipanListAdapter extends BaseAdapter {
                 String waktu = timeSlot.getStart_time() + "-" + timeSlot.getEnd_time();
                 this.tvDay.setText(hari);
                 this.tvTimeSlot.setText(waktu);
-                Log.d("DEBUG", hari+" "+waktu);
             }
         }
 
@@ -79,6 +78,5 @@ public class PartisipanListAdapter extends BaseAdapter {
         public void update(List<TimeSlot> timeSlot){
             this.arrayList = timeSlot;
             notifyDataSetChanged();
-            Log.d("DEBUG", timeSlot.size()+"");
         }
 }

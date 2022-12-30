@@ -38,7 +38,6 @@ public class PengumumanPresenter implements
 
     @Override
     public void AddOnSuccess(PengumumanList.Pengumuman pengumuman) {
-//        this.pengumuman.addPengumuman(pengumuman);
         this.ui.closeAddPage();
         this.getPengumuman();
     }

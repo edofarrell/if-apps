@@ -1,6 +1,7 @@
 package com.example.p3b_tubes_2;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONException;
 
@@ -17,8 +18,7 @@ public class PertemuanPresenter implements
         PertemuanContract.Model.AddParticipantsPertemuanOnSuccessListener,
         PertemuanContract.Model.DeleteParticipantsPertemuanOnSuccessListener,
         PertemuanContract.Model.DeleteOnSuccessListener,
-        PertemuanContract.Model.GetTimeSlotOnSuccessListener
-{
+        PertemuanContract.Model.GetTimeSlotOnSuccessListener {
     private PertemuanList pertemuan;
     private PertemuanContract.View ui;
     private PertemuanContract.View.PertemuanDibuat uiDibuat;
@@ -40,22 +40,22 @@ public class PertemuanPresenter implements
         this.apiPertemuanAdd = new APIPertemuanAdd(this, context);
         this.apiPertemuanChange = new APIPertemuanChange(this, context);
         this.apiPertemuanGetPartisipan = new APIPertemuanGetPartisipan(this, context);
-        this.apiAddParticipantsPertemuan = new APIPertemuanAddParticipants(this,context);
-        this.apiDeleteParticipantsPertemuan = new APIPertemuanDeleteParticipants(this,context);
-        this.deletePertemuan = new APIPertemuanDelete(this,context);
-        this.getTimeSlot = new APIPertemuanGetTimeSlot(this,context);
-        this.tambahTimeSlot = new APIPertemuanTambahTimeSlot(this,context);
+        this.apiAddParticipantsPertemuan = new APIPertemuanAddParticipants(this, context);
+        this.apiDeleteParticipantsPertemuan = new APIPertemuanDeleteParticipants(this, context);
+        this.deletePertemuan = new APIPertemuanDelete(this, context);
+        this.getTimeSlot = new APIPertemuanGetTimeSlot(this, context);
+        this.tambahTimeSlot = new APIPertemuanTambahTimeSlot(this, context);
     }
 
     public void addTimeSlot(String day, String startTime, String endTime) throws JSONException {
-        tambahTimeSlot.addTimeSlot(day,startTime,endTime);
+        tambahTimeSlot.addTimeSlot(day, startTime, endTime);
     }
 
-    public void setUiDibuat(PertemuanContract.View.PertemuanDibuat ui){
+    public void setUiDibuat(PertemuanContract.View.PertemuanDibuat ui) {
         this.uiDibuat = ui;
     }
 
-    public void setUiDiundang(PertemuanContract.View.PertemuanDiundang ui){
+    public void setUiDiundang(PertemuanContract.View.PertemuanDiundang ui) {
         this.uiDiundang = ui;
     }
 
@@ -64,10 +64,10 @@ public class PertemuanPresenter implements
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.add(Calendar.DATE, -7);
+        calendar.add(Calendar.DATE, 7);
 
-//        this.pertemuan.getPertemuan(formatter.format(new Date()), formatter.format(calendar.getTime()));
-        this.pertemuan.getPertemuan(formatter.format(calendar.getTime()), formatter.format(new Date()));
+        this.pertemuan.getPertemuan(formatter.format(new Date()), formatter.format(calendar.getTime()));
+//        this.pertemuan.getPertemuan(formatter.format(calendar.getTime()), formatter.format(new Date()));
     }
 
     public void getPertemuanDibuat(String startDate, String endDate) {
@@ -85,7 +85,7 @@ public class PertemuanPresenter implements
     }
 
 
-    public void getPartisipanDibuat(PertemuanList.Pertemuan pertemuan){
+    public void getPartisipanDibuat(PertemuanList.Pertemuan pertemuan) {
         this.apiPertemuanGetPartisipan.getPartisipan(pertemuan);
     }
 
@@ -100,14 +100,14 @@ public class PertemuanPresenter implements
     }
 
 
-    public void addPertemuan(String title, String description, String startTime, String endTime) throws JSONException {
+    public void addPertemuan(String title, String description, String startTime, String endTime) {
         this.apiPertemuanAdd.tambahPertemuan(title, description, startTime, endTime);
     }
 
     @Override
     public void onSuccessAdd(PertemuanList.Pertemuan pertemuan) {
-        this.pertemuan.addPertemuan(pertemuan);
-        this.ui.updateDibuat(this.pertemuan);
+        this.uiDibuat.openAddPartisipan(pertemuan.getId());
+        this.getPertemuanDibuat();
     }
 
     @Override
@@ -131,21 +131,6 @@ public class PertemuanPresenter implements
     }
 
 
-    public void addParticipantsPertemuan(String[] arr) throws JSONException {
-        this.apiAddParticipantsPertemuan.addParticipants(arr);
-    }
-
-    @Override
-    public void onSuccessAddParticipants(String hasil) {
-//        this.ui.update(hasil);
-    }
-
-    @Override
-    public void onErrorAddParticipants() {
-
-    }
-
-
     public void deleteParticipantsPertemuan(String[] arr) throws JSONException {
         this.apiDeleteParticipantsPertemuan.deleteParticipants(arr);
     }
@@ -161,7 +146,7 @@ public class PertemuanPresenter implements
     }
 
 
-    public void deletePertemuan(String idPertemuan){
+    public void deletePertemuan(String idPertemuan) {
         this.deletePertemuan.deletePertemuan(idPertemuan);
     }
 
@@ -175,12 +160,22 @@ public class PertemuanPresenter implements
 
     }
 
-    public void addSelecteduser(User user){
-        this.uiDibuat.addSelectedUserOnTambahPertemuan(user);
+    public void addUserToPertemuan(User[] users, String idPertemuan) {
+        this.apiAddParticipantsPertemuan.addParticipants(users, idPertemuan);
+    }
+
+    @Override
+    public void onSuccessAddParticipants(User[] users) {
+        this.uiDibuat.addSelectedUserOnTambahPertemuan(users);
+    }
+
+    @Override
+    public void onErrorAddParticipants() {
+
     }
 
 
-    public void getTimeSlot(String lecturerId){
+    public void getTimeSlot(String lecturerId) {
         this.getTimeSlot.getTimeSlot(lecturerId);
     }
 

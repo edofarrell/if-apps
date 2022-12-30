@@ -20,13 +20,13 @@ import java.text.SimpleDateFormat;
 public class TambahDetailPertemuanFragment extends Fragment {
     private FragmentTambahDetailPertemuanBinding binding;
     private MainPresenter mainPresenter;
-    private PertemuanPresenter pertemuanPresenter;
+    private PertemuanPresenter presenter;
 
 
     public static TambahDetailPertemuanFragment newInstance(MainPresenter mainPresenter, PertemuanPresenter pertemuanPresenter) {
         TambahDetailPertemuanFragment fragment = new TambahDetailPertemuanFragment();
         fragment.mainPresenter = mainPresenter;
-        fragment.pertemuanPresenter = pertemuanPresenter;
+        fragment.presenter = pertemuanPresenter;
 
         return fragment;
     }
@@ -54,12 +54,7 @@ public class TambahDetailPertemuanFragment extends Fragment {
     }
 
     private void onClick(View view) {
-        addAppointment();
-
-        Bundle result = new Bundle();
-        result.putString("page", "pilihPartisipan");
-
-        this.getParentFragmentManager().setFragmentResult("changePage", result);
+        this.addAppointment();
     }
 
     private void addAppointment() {
@@ -79,6 +74,8 @@ public class TambahDetailPertemuanFragment extends Fragment {
         } catch (ParseException e) {
             Log.d("DEBUG", "TambahAppointmentFragment: addAppointment() catch ParseException");
         }
+
+        this.presenter.addPertemuan(title, description, startDateTime, endDateTime);
     }
 
     private void showDatePicker(View view) {

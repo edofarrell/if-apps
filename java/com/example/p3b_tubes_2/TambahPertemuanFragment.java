@@ -47,7 +47,7 @@ public class TambahPertemuanFragment extends DialogFragment {
 
         fragment.fragments = new HashMap<>();
         fragment.fragments.put("isiDetail", TambahDetailPertemuanFragment.newInstance(mainPresenter, pertemuanPresenter));
-        fragment.fragments.put("pilihPartisipan", TambahPartisipanPertemuanFragment.newInstance(mainPresenter, pertemuanPresenter));
+//        fragment.fragments.put("pilihPartisipan", TambahPartisipanPertemuanFragment.newInstance(mainPresenter, pertemuanPresenter));
         return fragment;
     }
 
@@ -126,13 +126,19 @@ public class TambahPertemuanFragment extends DialogFragment {
         dismiss();
     }
 
-    public void addSelecteduser(User user) {
+    public void addSelecteduser(User[] users) {
         TambahPartisipanPertemuanFragment fragment = (TambahPartisipanPertemuanFragment) this.fragments.get("pilihPartisipan");
-        fragment.addSelectedUser(user);
+        fragment.addSelectedUser(users);
     }
 
     public void updateTimeSlot(List<TimeSlot> timeSlot) {
         TambahPartisipanPertemuanFragment fragment = (TambahPartisipanPertemuanFragment) this.fragments.get("pilihPartisipan");
         fragment.updateTimeSlot(timeSlot);
+    }
+
+    public void openAddPartisipan(String idPertemuan){
+        TambahPartisipanPertemuanFragment fragment = TambahPartisipanPertemuanFragment.newInstance(mainPresenter, pertemuanPresenter, idPertemuan);
+        this.fragments.put("pilihPartisipan", fragment);
+        this.changePage("pilihPartisipan");
     }
 }

@@ -30,12 +30,15 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
     private ChipGroup chipGroup;
     private ArrayList<User> arrChipGroup;
 
-    public static TambahPartisipanPertemuanFragment newInstance(MainPresenter mainPresenter, PertemuanPresenter pertemuanPresenter) {
+    private String idPertemuan;
+
+    public static TambahPartisipanPertemuanFragment newInstance(MainPresenter mainPresenter, PertemuanPresenter pertemuanPresenter, String idPertemuan) {
         TambahPartisipanPertemuanFragment fragment = new TambahPartisipanPertemuanFragment();
         fragment.mainPresenter = mainPresenter;
         fragment.pertemuanPresenter = pertemuanPresenter;
         fragment.timeSlotAdapter = new PartisipanListAdapter();
         fragment.arrChipGroup = new ArrayList<>();
+        fragment.idPertemuan = idPertemuan;
 
         return fragment;
     }
@@ -63,6 +66,11 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
 
         binding.actvChooseParticipant.setOnItemClickListener(onItemClick());
         this.binding.btnAddParticipant.setOnClickListener(this::simpanPartisipan);
+        this.binding.btnSimpan.setOnClickListener(this::saveAll);
+    }
+
+    private void saveAll(View view) {
+        this.pertemuanPresenter.getPertemuanDibuat();
     }
 
     private AdapterView.OnItemClickListener onItemClick() {
@@ -70,7 +78,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectedUser = (User) parent.getItemAtPosition(position);
-                if (selectedItemIsDosen(selectedUser)) {
+                if (selectedUser.isDosen()) {
                     binding.llJadwalDosen.setVisibility(View.VISIBLE);
                     pertemuanPresenter.getTimeSlot(selectedUser.getId());
                 } else {
@@ -80,12 +88,8 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         };
     }
 
-    private boolean selectedItemIsDosen(User user) {
-        return user.isDosen();
-    }
-
     private void simpanPartisipan(View view) {
-        this.pertemuanPresenter.addSelecteduser(this.selectedUser);
+        this.pertemuanPresenter.addUserToPertemuan(new User[]{this.selectedUser}, this.idPertemuan);
     }
 
     private void addParticipant(View view) {
@@ -99,30 +103,32 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         this.getParentFragmentManager().setFragmentResult("changePage", result);
     }
 
-    public void addSelectedUser(User user) {
-        String nama = user.getName();
-        Chip chip = new Chip(this.getContext());
-        chip.setText(nama);
+    public void addSelectedUser(User[] users) {
+        for (User user : users) {
+            String nama = user.getName();
+            Chip chip = new Chip(this.getContext());
+            chip.setText(nama);
 
-        chip.setCloseIconVisible(true);
-        chip.setTextColor(getResources().getColor(R.color.black));
-        chip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        chip.setOnCloseIconClickListener(this::removeChip);
+            chip.setCloseIconVisible(true);
+            chip.setTextColor(getResources().getColor(R.color.black));
+            chip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            chip.setOnCloseIconClickListener(this::removeChip);
 
-        if (arrChipGroup.size() == 0) {
-            addChip(chip, user);
-        }
-
-        boolean isChipAdded = false;
-        for (User item : arrChipGroup) {
-            if (item.getName().contains(nama)) {
-                isChipAdded = true;
-                break;
+            if (arrChipGroup.size() == 0) {
+                addChip(chip, user);
             }
-        }
 
-        if(!isChipAdded) {
-            addChip(chip, user);
+            boolean isChipAdded = false;
+            for (User item : arrChipGroup) {
+                if (item.getName().contains(nama)) {
+                    isChipAdded = true;
+                    break;
+                }
+            }
+
+            if (!isChipAdded) {
+                addChip(chip, user);
+            }
         }
     }
 
@@ -135,8 +141,8 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         Chip chip = (Chip) view;
 
         String nama = chip.getText().toString();
-        for(User item : arrChipGroup) {
-            if(item.getName().contains(nama)) {
+        for (User item : arrChipGroup) {
+            if (item.getName().contains(nama)) {
                 arrChipGroup.remove(item);
                 break;
             }

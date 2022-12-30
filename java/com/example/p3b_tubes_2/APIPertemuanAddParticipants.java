@@ -26,6 +26,7 @@ public class APIPertemuanAddParticipants implements Response.Listener<JSONArray>
     private PertemuanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
+    private User[] queryUsers;
 
     public APIPertemuanAddParticipants(PertemuanPresenter presenter, Context context) {
         this.presenter = presenter;
@@ -33,22 +34,23 @@ public class APIPertemuanAddParticipants implements Response.Listener<JSONArray>
         this.gson = new Gson();
     }
 
-    public void addParticipants(String[] participantsId) throws JSONException {
-        String url = APIClient.BASE_URL + "/appointments" + "/26783a4f-9b00-4a35-ab44-da9214794efb" + "/participants";
+    public void addParticipants(User[] participants, String idPertemuan) {
+        this.queryUsers = participants;
+        String url = APIClient.BASE_URL + "/appointments" + "/" + idPertemuan + "/participants";
 
         JsonObject json = new JsonObject();
         JsonArray array = new JsonArray();
-        for (int i = 0; i < participantsId.length; i++) {
-            array.add(participantsId[i]);
+        for (int i = 0; i < participants.length; i++) {
+            array.add(participants[i].getId());
         }
-        json.addProperty("appointment_id", "26783a4f-9b00-4a35-ab44-da9214794efb");
         json.add("participants", array);
-        Log.d("DEBUG", json.toString());
-        JSONObject jsonObject = new JSONObject(json.toString());
-        //JSONArray JSON = new JSONArray();
-        //JSON.put(jsonObject);
-        //Log.d("DEBUG",JSON.toString());
-        Log.d("DEBUG", "rjnjdnjkd");
+        JSONObject jsonObject = null;
+
+        try {
+            jsonObject = new JSONObject(json.toString());
+        } catch (JSONException e) {
+            Log.d("DEBUG", "APIPertemuanAddParticipants: addParticipants() catch JSONException");
+        }
 
         CustomJsonRequest request = new CustomJsonRequest(
                 Request.Method.POST,
@@ -70,7 +72,7 @@ public class APIPertemuanAddParticipants implements Response.Listener<JSONArray>
 
     @Override
     public void onResponse(JSONArray response) {
-        Log.d("DEBUG", "SUCCESS");
+        this.presenter.onSuccessAddParticipants(this.queryUsers);
     }
 
     @Override
