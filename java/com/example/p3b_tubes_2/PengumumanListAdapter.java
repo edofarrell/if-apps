@@ -88,6 +88,7 @@ public class PengumumanListAdapter extends BaseAdapter {
         }
 
         private void updateView(int i) {
+            this.i = i;
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
             if(sp.getBoolean(pengumuman.getId(), false)){
                 this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_grey));

@@ -33,6 +33,7 @@ public class PartisipanListAdapter extends BaseAdapter {
             }
 
             private void updateView(int i) {
+                this.i = i;
                 TimeSlot timeSlot = arrayList.get(i);
                 String hari = timeSlot.getDay();
                 String waktu = timeSlot.getStart_time() + "-" + timeSlot.getEnd_time();

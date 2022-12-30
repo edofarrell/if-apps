@@ -43,6 +43,7 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
         }
 
         private void updateView(int i) {
+            this.i = i;
             PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
             this.tvTitle.setText(pertemuan.getTitle());
             this.tvDate.setText(pertemuan.getDate());

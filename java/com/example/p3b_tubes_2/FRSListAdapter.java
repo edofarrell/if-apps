@@ -26,11 +26,11 @@ public class FRSListAdapter extends BaseAdapter {
         }
 
         private void updateView(int i) {
+            this.i = i;
             this.academicYears.setText(tahunAjaran.getListAcademicYears().get(i).toString());
         }
 
         private void openDetail(View view){
-            Log.d("DEBUG",getSemesterNow()+"");
             presenter.getMataKuliah(getSemesterNow(),academicYears.getText().toString());
         }
 
@@ -96,10 +96,10 @@ public class FRSListAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (view == null) {
             view = binding.getRoot();
-            viewHolder = new FRSListAdapter.ViewHolder(binding, i);
+            viewHolder = new ViewHolder(binding, i);
             view.setTag(viewHolder);
         } else {
-            viewHolder = (FRSListAdapter.ViewHolder) view.getTag();
+            viewHolder = (ViewHolder) view.getTag();
         }
         viewHolder.updateView(i);
 
