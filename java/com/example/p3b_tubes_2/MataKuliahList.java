@@ -98,6 +98,7 @@ public class MataKuliahList implements Response.Listener<JSONArray>, Response.Er
         String res = response.toString();
         Type listType = new TypeToken<ArrayList<MataKuliah>>() {}.getType();
         listdata = this.gson.fromJson(res, listType);
+        //Log.d("DEBUG",tempSemester+" "+listdata.size());
         for(int i = 0;i<listdata.size();i++){
             if(listdata.get(i).semester==tempSemester){
                 listMataKuliah.add(listdata.get(i));

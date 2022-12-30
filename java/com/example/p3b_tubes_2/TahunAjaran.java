@@ -57,7 +57,6 @@ public class TahunAjaran implements Response.Listener<JSONObject>, Response.Erro
 
     public void getAcademicYears(){
         String url = APIClient.BASE_URL+"/academic-years";
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 this::onResponse,this::onErrorResponse){
             @Override
