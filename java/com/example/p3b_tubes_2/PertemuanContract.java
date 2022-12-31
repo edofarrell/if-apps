@@ -32,7 +32,7 @@ public interface PertemuanContract {
         }
 
         interface DeleteOnSuccessListener {
-            void onSuccessDelete(String hasil);
+            void onSuccessDelete();
 
             void onErrorDelete();
         }

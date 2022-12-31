@@ -151,8 +151,8 @@ public class PertemuanPresenter implements
     }
 
     @Override
-    public void onSuccessDelete(String hasil) {
-//        this.ui.update(hasil);
+    public void onSuccessDelete() {
+        this.getPertemuanDibuat();
     }
 
     @Override

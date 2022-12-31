@@ -41,7 +41,8 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
         }
 
         private void deletePertemuan(View view) {
-
+            PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
+            presenter.deletePertemuan(pertemuan.getId());
         }
 
         private void openDetail(View view) {

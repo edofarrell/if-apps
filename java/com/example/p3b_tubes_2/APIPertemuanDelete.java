@@ -51,7 +51,7 @@ public class APIPertemuanDelete implements Response.Listener<JSONObject>, Respon
 
     @Override
     public void onResponse(JSONObject response) {
-        presenter.onSuccessDelete(response.toString());
+        presenter.onSuccessDelete();
     }
 
     @Override
