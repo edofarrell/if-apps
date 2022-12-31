@@ -9,6 +9,11 @@ public interface UserContract {
             void onSuccessGet(List<User> data);
             void onErrorGet();
         }
+
+        interface GetOnGetCurrentUserListener{
+            void onSuccessGetCurrentUser(User user);
+            void onErrorGetCurrentUser();
+        }
     }
 
     interface View {

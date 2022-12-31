@@ -6,18 +6,24 @@ import org.json.JSONException;
 
 import java.util.List;
 
-public class UserPresenter implements LoginContract, UserContract.Model.GetOnSucessListener{
+public class UserPresenter implements
+        LoginContract,
+        UserContract.Model.GetOnSucessListener,
+        UserContract.Model.GetOnGetCurrentUserListener
+{
 
     private MainPresenter mainPresenter;
     private User user;
     private APIAuthorization auth;
     private LoginContract.View loginUI;
+    private APIGetCurrentUser apiGetCurrentUser;
 
     public UserPresenter(LoginContract.View loginUI, Context context, MainPresenter mainPresenter){
         this.user = new User(this, context);
         this.auth = new APIAuthorization(this, context);
         this.loginUI = loginUI;
         this.mainPresenter = mainPresenter;
+        this.apiGetCurrentUser = new APIGetCurrentUser(this, context);
     }
 
 
@@ -28,6 +34,7 @@ public class UserPresenter implements LoginContract, UserContract.Model.GetOnSuc
     @Override
     public void onSuccessLogin() {
         loginUI.updateLoginView(true);
+        this.getCurrentUser();
     }
 
     @Override
@@ -51,4 +58,17 @@ public class UserPresenter implements LoginContract, UserContract.Model.GetOnSuc
     }
 
 
+    public void getCurrentUser(){
+        this.apiGetCurrentUser.getCurrentUser();
+    }
+
+    @Override
+    public void onSuccessGetCurrentUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public void onErrorGetCurrentUser() {
+
+    }
 }

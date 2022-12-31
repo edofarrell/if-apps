@@ -4,4 +4,5 @@ public class APIClient {
     public static final String BASE_URL = "http://ifportal.labftis.net/api/v1";
     public static String token;
     public static String role;
+    public static String loggedInId;
 }

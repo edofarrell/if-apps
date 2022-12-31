@@ -78,6 +78,6 @@ public class APIPertemuanAdd implements Response.Listener<JSONObject>, Response.
         } catch (UnsupportedEncodingException e) {
             Log.d("DEBUG", "APIAddPertemuan: onErrorResponse() catch UnsupportedEncodingException");
         }
-        //handle error here
+//        this.presenter.onErrorAdd(res);
     }
 }

@@ -32,6 +32,7 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
         private String start_datetime;//2022-04-12 19:00+0500
         private String end_datetime;//2022-04-12 19:00+0500
         private String organizer_name;
+        private String organizer_id;
         private ArrayList<String> partisipan;
 
         public Pertemuan(String id, String title, String description, String startTime, String endTime, String organizer_name) {
@@ -90,6 +91,10 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
 
         public String getOrganizerName() {
             return organizer_name;
+        }
+
+        public String getOrganizer_id() {
+            return organizer_id;
         }
 
         public String getDate() {
