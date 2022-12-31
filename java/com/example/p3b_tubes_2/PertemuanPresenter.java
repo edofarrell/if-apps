@@ -18,7 +18,9 @@ public class PertemuanPresenter implements
         PertemuanContract.Model.AddParticipantsPertemuanOnSuccessListener,
         PertemuanContract.Model.DeleteParticipantsPertemuanOnSuccessListener,
         PertemuanContract.Model.DeleteOnSuccessListener,
-        PertemuanContract.Model.GetTimeSlotOnSuccessListener {
+        PertemuanContract.Model.GetTimeSlotOnSuccessListener,
+        PertemuanContract.Model.AddTimeSlotOnSuccessListener
+{
     private PertemuanList pertemuan;
     private PertemuanContract.View ui;
     private PertemuanContract.View.PertemuanDibuat uiDibuat;
@@ -45,10 +47,6 @@ public class PertemuanPresenter implements
         this.deletePertemuan = new APIPertemuanDelete(this, context);
         this.getTimeSlot = new APIPertemuanGetTimeSlot(this, context);
         this.tambahTimeSlot = new APIPertemuanTambahTimeSlot(this, context);
-    }
-
-    public void addTimeSlot(String day, String startTime, String endTime) throws JSONException {
-        tambahTimeSlot.addTimeSlot(day, startTime, endTime);
     }
 
     public void setUiDibuat(PertemuanContract.View.PertemuanDibuat ui) {
@@ -187,6 +185,21 @@ public class PertemuanPresenter implements
 
     @Override
     public void onErrorGetTimeSlot() {
+
+    }
+
+
+    public void addTimeSlot(String day, String startTime, String endTime) {
+        this.tambahTimeSlot.addTimeSlot(day, startTime, endTime);
+    }
+
+    @Override
+    public void onSuccessAddTimeSlot(List<TimeSlot> timeSlot) {
+
+    }
+
+    @Override
+    public void onErrorAddTimeSlot() {
 
     }
 }

@@ -29,6 +29,11 @@ public interface PengumumanContract {
             void deleteOnSuccess();
             void deleteOnError();
         }
+
+        interface AddTagOnSuccessListener{
+            void AddTagOnSuccess();
+            void AddTagOnError();
+        }
     }
 
     interface View {

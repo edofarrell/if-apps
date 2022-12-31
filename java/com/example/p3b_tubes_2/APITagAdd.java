@@ -20,33 +20,36 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class APIPertemuanTambahTimeSlot implements Response.Listener<JSONObject>, Response.ErrorListener{
-    private PertemuanPresenter presenter;
+public class APITagAdd implements Response.Listener<JSONObject>, Response.ErrorListener {
+    private PengumumanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
 
-    public APIPertemuanTambahTimeSlot(PertemuanPresenter presenter, Context context) {
+    public APITagAdd(PengumumanPresenter presenter, Context context) {
         this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
     }
 
-    public void addTimeSlot(String day, String startTime, String endTime) {
-        String url = APIClient.BASE_URL+"/lecturer-time-slots";
+    public void addTag(String tag) {
+        String url = APIClient.BASE_URL + "/tags";
 
         JsonObject json = new JsonObject();
-        json.addProperty("day",day);
-        json.addProperty("start_time",startTime);
-        json.addProperty("end_time",endTime);
+        json.addProperty("tag", tag);
         JSONObject JSON = null;
         try {
             JSON = new JSONObject(json.toString());
         } catch (JSONException e) {
-            Log.d("DEBUG", "APIPertemuanGetTimeSlot: addTimeSlot() catch JSONException");
+            Log.d("DEBUG", "APITagAdd: addTag() catch JSONException");
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,JSON,
-                this::onResponse,this::onErrorResponse){
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                JSON,
+                this::onResponse,
+                this::onErrorResponse
+        ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
@@ -54,22 +57,22 @@ public class APIPertemuanTambahTimeSlot implements Response.Listener<JSONObject>
                 return params;
             }
         };
+
         queue.add(request);
     }
 
     @Override
     public void onResponse(JSONObject response) {
-        Log.d("DEBUG","SUCCESS");
-//        this.presenter.onSuccessAddTimeSlot();
+//        this.presenter.AddTagOnSuccess();
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
         try {
             String responseBody = new String(error.networkResponse.data, "utf-8");
-            Log.d("DEBUG", "APIPertemuanGetTimeSlot: onErrorResponse(), Error=" + responseBody);
+            Log.d("DEBUG", "APITagAdd: onErrorResponse(), Error=" + responseBody);
         } catch (UnsupportedEncodingException e) {
-            Log.d("DEBUG", "APIPertemuanGetTimeSlot: onErrorResponse() catch UnsupportedEncodingException");
+            Log.d("DEBUG", "APITagAdd: onErrorResponse() catch UnsupportedEncodingException");
         }
     }
 }

@@ -55,7 +55,11 @@ public interface PertemuanContract {
             void onErrorGetTimeSlot();
         }
 
-        void getPertemuanList();
+        interface AddTimeSlotOnSuccessListener {
+            void onSuccessAddTimeSlot(List<TimeSlot> timeSlot);
+
+            void onErrorAddTimeSlot();
+        }
     }
 
     interface View {
@@ -80,6 +84,7 @@ public interface PertemuanContract {
         void updateDibuat(PertemuanList pertemuanList);
 
         void updateDiundang(PertemuanList pertemuanList);
+
         void updateTimeSlot(List<TimeSlot> timeSlot);
     }
 }

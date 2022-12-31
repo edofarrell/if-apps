@@ -11,7 +11,9 @@ public class PengumumanPresenter implements
         PengumumanContract.Model.GetTagOnSuccessListener,
         PengumumanContract.Model.GetDetailOnSuccessListener,
         PengumumanContract.Model.AddOnSuccessListener,
-        PengumumanContract.Model.DeleteOnSuccessListener {
+        PengumumanContract.Model.DeleteOnSuccessListener,
+        PengumumanContract.Model.AddTagOnSuccessListener
+{
 
     private PengumumanContract.View ui;
     private MainPresenter mainPresenter;
@@ -20,6 +22,7 @@ public class PengumumanPresenter implements
     private APIPengumumanAdd tambahPengumuman;
     private APIPengumumanDelete deletePengumuman;
     private APIPengumumanDetail detailPengumuman;
+    private APITagAdd apiTagAdd;
 
     public PengumumanPresenter(PengumumanContract.View ui, Context context, MainPresenter mainPresenter) {
         this.ui = ui;
@@ -29,6 +32,7 @@ public class PengumumanPresenter implements
         this.tambahPengumuman = new APIPengumumanAdd(this, context);
         this.deletePengumuman = new APIPengumumanDelete(this, context);
         this.detailPengumuman = new APIPengumumanDetail(this, context);
+        this.apiTagAdd = new APITagAdd(this, context);
     }
 
 
@@ -104,6 +108,21 @@ public class PengumumanPresenter implements
     }
 
 
+    public void addTag(String tag){
+        this.apiTagAdd.addTag(tag);
+    }
+
+    @Override
+    public void AddTagOnSuccess() {
+
+    }
+
+    @Override
+    public void AddTagOnError() {
+
+    }
+
+
     public void getPengumumanDetail(PengumumanList.Pengumuman pengumuman) {
         this.detailPengumuman.getDetail(pengumuman);
     }
@@ -122,5 +141,4 @@ public class PengumumanPresenter implements
     public List<String> getTagsId(List<String> tagName) {
         return this.tag.getActiveTagFilter(tagName);
     }
-
 }
