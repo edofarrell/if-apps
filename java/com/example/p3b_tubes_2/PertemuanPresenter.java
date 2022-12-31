@@ -131,13 +131,13 @@ public class PertemuanPresenter implements
     }
 
 
-    public void deleteParticipantsPertemuan(String[] arr) throws JSONException {
-        this.apiDeleteParticipantsPertemuan.deleteParticipants(arr);
+    public void deleteParticipantsPertemuan(User[] users, String idPertemuan) {
+        this.apiDeleteParticipantsPertemuan.deleteParticipants(users, idPertemuan);
     }
 
     @Override
-    public void onSuccessDeleteParticipants(String hasil) {
-//        this.ui.update(hasil);
+    public void onSuccessDeleteParticipants() {
+//
     }
 
     @Override
@@ -159,6 +159,7 @@ public class PertemuanPresenter implements
     public void onErrorDelete() {
 
     }
+
 
     public void addUserToPertemuan(User[] users, String idPertemuan) {
         this.apiAddParticipantsPertemuan.addParticipants(users, idPertemuan);

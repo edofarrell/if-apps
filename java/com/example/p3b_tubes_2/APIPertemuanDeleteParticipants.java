@@ -33,17 +33,21 @@ public class APIPertemuanDeleteParticipants implements Response.Listener<JSONArr
         this.gson = new Gson();
     }
 
-    public void deleteParticipants(String[] participantsId) throws JSONException {
-        String url = APIClient.BASE_URL + "/appointments" + "/26783a4f-9b00-4a35-ab44-da9214794efb" + "/participants" + "/delete";
+    public void deleteParticipants(User[] users, String idPertemuan) {
+        String url = APIClient.BASE_URL + "/appointments" + "/" +idPertemuan+ "/participants" + "/delete";
 
         JsonObject json = new JsonObject();
         JsonArray array = new JsonArray();
-        for (int i = 0; i < participantsId.length; i++) {
-            array.add(participantsId[i]);
+        for (int i = 0; i < users.length; i++) {
+            array.add(users[i].getId());
         }
-        json.addProperty("appointment_id", "26783a4f-9b00-4a35-ab44-da9214794efb");
         json.add("participants", array);
-        JSONObject jsonObject = new JSONObject(json.toString());
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(json.toString());
+        } catch (JSONException e) {
+            Log.d("DEBUG", "APIPertemuanDeleteParticipants: deleteParticipants() catch JSONException");
+        }
 
         CustomJsonRequest request = new CustomJsonRequest(
                 Request.Method.POST,
@@ -65,7 +69,8 @@ public class APIPertemuanDeleteParticipants implements Response.Listener<JSONArr
 
     @Override
     public void onResponse(JSONArray response) {
-        presenter.onSuccessDeleteParticipants(response.toString());
+        Log.d("DEBUG", "SUCCESS DELTE PARTICIPANTS");
+        presenter.onSuccessDeleteParticipants();
     }
 
     @Override

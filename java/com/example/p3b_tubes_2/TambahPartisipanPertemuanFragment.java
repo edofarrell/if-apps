@@ -138,16 +138,19 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
     }
 
     private void removeChip(View view) {
+        User removedUser = null;
         Chip chip = (Chip) view;
 
         String nama = chip.getText().toString();
         for (User item : arrChipGroup) {
             if (item.getName().contains(nama)) {
+                removedUser = item;
                 arrChipGroup.remove(item);
                 break;
             }
         }
 
+        this.pertemuanPresenter.deleteParticipantsPertemuan(new User[]{removedUser}, this.idPertemuan);
         this.chipGroup.removeView(view);
     }
 

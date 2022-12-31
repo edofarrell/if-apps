@@ -44,7 +44,7 @@ public interface PertemuanContract {
         }
 
         interface DeleteParticipantsPertemuanOnSuccessListener {
-            void onSuccessDeleteParticipants(String hasil);
+            void onSuccessDeleteParticipants();
 
             void onErrorDeleteParticipants();
         }

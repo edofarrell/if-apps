@@ -64,7 +64,7 @@ public class UserPresenter implements
 
     @Override
     public void onSuccessGetCurrentUser(User user) {
-        this.user = user;
+//        this.user = user;
     }
 
     @Override

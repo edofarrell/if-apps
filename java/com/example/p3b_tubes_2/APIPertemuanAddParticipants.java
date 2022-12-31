@@ -72,6 +72,7 @@ public class APIPertemuanAddParticipants implements Response.Listener<JSONArray>
 
     @Override
     public void onResponse(JSONArray response) {
+        Log.d("DEBUG", "SUCCESS ADD PARTICIPANTS");
         this.presenter.onSuccessAddParticipants(this.queryUsers);
     }
 
