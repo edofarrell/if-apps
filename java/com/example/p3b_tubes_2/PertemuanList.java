@@ -58,7 +58,7 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
         }
 
         public String getStartTime() {
-            SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd HH:mmZ");
             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH.mm");
 
             String startTime = "";
@@ -72,7 +72,7 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
         }
 
         public String getEndTime() {
-            SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd HH:mmZ");
             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH.mm");
 
             String endTime = "";
@@ -98,7 +98,7 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
         }
 
         public String getDate() {
-            SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd HH:mmZ");
             SimpleDateFormat dateFormatter = new SimpleDateFormat("E, dd MMM yyyy");
 
             String date = "";
