@@ -36,7 +36,7 @@ public class PartisipanListAdapter extends BaseAdapter {
                 this.i = i;
                 TimeSlot timeSlot = arrayList.get(i);
                 String hari = timeSlot.getDay();
-                String waktu = timeSlot.getStart_time() + "-" + timeSlot.getEnd_time();
+                String waktu = timeSlot.getStartTime() + "-" + timeSlot.getEndTime();
                 this.tvDay.setText(hari);
                 this.tvTimeSlot.setText(waktu);
             }

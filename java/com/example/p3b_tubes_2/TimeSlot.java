@@ -1,5 +1,7 @@
 package com.example.p3b_tubes_2;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -12,7 +14,7 @@ public class TimeSlot {
         return day;
     }
 
-    public String getStart_time() {
+    public String getStartTime() {
         SimpleDateFormat inputFormatter = new SimpleDateFormat("HH:mm:ss'+07'");
         SimpleDateFormat timeFormatter = new SimpleDateFormat("HH.mm");
 
@@ -21,13 +23,13 @@ public class TimeSlot {
         try {
             startTime = timeFormatter.format(inputFormatter.parse(this.start_time));
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.d("DEBUG", "TimeSlot, getStartTime() catch ParseException");
         }
 
         return startTime;
     }
 
-    public String getEnd_time() {
+    public String getEndTime() {
         SimpleDateFormat inputFormatter = new SimpleDateFormat("HH:mm:ss'+07'");
         SimpleDateFormat timeFormatter = new SimpleDateFormat("HH.mm");
 
@@ -36,7 +38,7 @@ public class TimeSlot {
         try {
             endTime = timeFormatter.format(inputFormatter.parse(this.end_time));
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.d("DEBUG", "TimeSlot, getEndTime() catch ParseException");
         }
 
         return endTime;
