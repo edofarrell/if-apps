@@ -24,33 +24,19 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/appbar_layout"
-        android:paddingLeft="@dimen/_16dp"
-        android:paddingRight="@dimen/_16dp">
+        android:id="@+id/tv_lv_matkul"
+        android:layout_marginTop="@dimen/_10sp"
+        android:padding="@dimen/_15sp"
+        android:divider="@color/white"
+        android:dividerHeight="@dimen/_20sp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    </ListView>
 
 
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_lv_matkul"
-                android:layout_below="@id/tv_semester"
-                android:layout_marginTop="@dimen/_10sp"
-                android:padding="@dimen/_15sp"
-                android:divider="@color/white"
-                android:dividerHeight="@dimen/_20sp">
-
-            </ListView>
-
-        </LinearLayout>
-    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_matkul"
