@@ -24,6 +24,7 @@ public class FRSDetailFragment extends DialogFragment {
     private ArrayList<MataKuliahList.MataKuliah> listMataKuliah;
     private FRSDetailListAdapter adapter;
     private FRSPresenter presenter;
+    private FRSTambahFragment frsTambahFragmentfragment;
 
     public static FRSDetailFragment newInstance(FragmentManager fm, String tahunAjar,
                                                 ArrayList<MataKuliahList.MataKuliah> listMataKuliah,
@@ -48,6 +49,7 @@ public class FRSDetailFragment extends DialogFragment {
         this.binding.appbar.setTitle(tahunAjar);
         this.binding.tvLvMatkul.setAdapter(adapter);
         this.adapter.update(listMataKuliah);
+        this.binding.btnAddMatkul.setOnClickListener(this::onClickAddMatkul);
         return binding.getRoot();
     }
 
@@ -78,5 +80,9 @@ public class FRSDetailFragment extends DialogFragment {
 
     private void onClickKembali(View view) {
         this.dismiss();
+    }
+
+    private void onClickAddMatkul(View view) {
+        this.frsTambahFragmentfragment = FRSTambahFragment.newInstance(getParentFragmentManager());
     }
 }
