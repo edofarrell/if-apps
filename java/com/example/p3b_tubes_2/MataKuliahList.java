@@ -67,7 +67,7 @@ public class MataKuliahList implements Response.Listener<JSONArray>, Response.Er
 
     public void getMataKuliah(int semester, String tahunAjar){
         listMataKuliah.clear();
-        String url = APIClient.BASE_URL+"/courses";
+        String url = APIClient.BASE_URL+"/courses?limit=10";
         this.tempSemester = semester;
         this.tempTahunAjar = tahunAjar;
         CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET,url,null,
@@ -98,12 +98,12 @@ public class MataKuliahList implements Response.Listener<JSONArray>, Response.Er
         String res = response.toString();
         Type listType = new TypeToken<ArrayList<MataKuliah>>() {}.getType();
         listdata = this.gson.fromJson(res, listType);
-        //Log.d("DEBUG",tempSemester+" "+listdata.size());
         for(int i = 0;i<listdata.size();i++){
             if(listdata.get(i).semester==tempSemester){
                 listMataKuliah.add(listdata.get(i));
             }
         }
+        //Log.d("DEBUG",listMataKuliah.size()+"");
         this.presenter.OnSuccessGetDetail(listMataKuliah,this.tempTahunAjar);
     }
 
