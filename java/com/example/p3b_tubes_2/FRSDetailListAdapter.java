@@ -1,5 +1,6 @@
 package com.example.p3b_tubes_2;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,12 +36,12 @@ public class FRSDetailListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return listMataKuliah.size();
+        return this.listMataKuliah.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return listMataKuliah.get(i);
+        return this.listMataKuliah.get(i);
     }
 
     @Override
@@ -52,20 +53,21 @@ public class FRSDetailListAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         ItemListDetailFrsBinding binding = ItemListDetailFrsBinding.inflate(inflater);
-        FRSDetailListAdapter.ViewHolder viewHolder;
+        ViewHolder viewHolder;
         if (view == null) {
             view = binding.getRoot();
-            viewHolder = new FRSDetailListAdapter.ViewHolder(binding, i);
+            viewHolder = new ViewHolder(binding, i);
             view.setTag(viewHolder);
         } else {
-            viewHolder = (FRSDetailListAdapter.ViewHolder) view.getTag();
+            viewHolder = (ViewHolder) view.getTag();
         }
         viewHolder.updateView(i);
-
         return view;
     }
 
     public void update(ArrayList<MataKuliahList.MataKuliah> mataKuliah){
+//        Log.d("DEBUG",mataKuliah.get(0).getName());
+//        Log.d("DEBUG",mataKuliah.get(1).getName());
         this.listMataKuliah = mataKuliah;
         notifyDataSetChanged();
     }
