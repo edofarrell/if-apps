@@ -112,6 +112,7 @@ public class PertemuanList implements Response.Listener<String>, Response.ErrorL
         }
 
         public String getPartisipan() {
+            if(this.partisipan==null) return null;
             String result = "";
 
             for (int i = 0; i < partisipan.size(); i++) {

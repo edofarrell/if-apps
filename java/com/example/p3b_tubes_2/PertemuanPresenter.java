@@ -202,6 +202,11 @@ public class PertemuanPresenter implements
     public void onErrorAddTimeSlot() {
 
     }
+
+
+    public void openDetail(PertemuanList.Pertemuan pertemuan){
+        this.uiDibuat.openDetailPertemuanDibuat(pertemuan);
+    }
 }
 
 

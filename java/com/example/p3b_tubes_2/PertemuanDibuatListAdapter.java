@@ -28,7 +28,7 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
         protected TextView tvEndTime;
         protected TextView tvDescription;
         protected TextView tvOrganizer;
-        protected Button btnSeeParticipants;
+        protected Button btnSeeDetails;
         protected Button btnDelete;
 
         public ViewHolder(ItemListPertemuanDibuatBinding binding, int i) {
@@ -37,10 +37,10 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
             this.tvDate = binding.tvDate;
             this.tvStartTime = binding.tvStartTime;
             this.tvEndTime = binding.tvEndTime;
-            this.btnSeeParticipants = binding.btnSeeParticipants;
+            this.btnSeeDetails = binding.btnSeeDetails;
             this.btnDelete = binding.btnDelete;
 
-            this.btnSeeParticipants.setOnClickListener(this::openDetail);
+            this.btnSeeDetails.setOnClickListener(this::openDetail);
             this.btnDelete.setOnClickListener(this::deletePertemuan);
         }
 
@@ -51,7 +51,14 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
 
         private void openDetail(View view) {
             PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
-            presenter.getPartisipanDibuat(pertemuan);
+            if(APIClient.loggedInId.equals(pertemuan.getOrganizer_id())){
+                Log.d("DEBUG", "oragnizer");
+                presenter.getPartisipanDibuat(pertemuan);
+            }else{
+                Log.d("DEBUG", "not organizer");
+                presenter.openDetail(pertemuan);
+            }
+
         }
 
         private void updateView(int i) {
@@ -63,7 +70,6 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
             this.tvEndTime.setText(pertemuan.getEndTime());
             if(!APIClient.loggedInId.equals(pertemuan.getOrganizer_id())){
                 this.btnDelete.setVisibility(View.GONE);
-                this.btnSeeParticipants.setVisibility(View.GONE);
             }
         }
     }

@@ -63,7 +63,10 @@ public class PertemuanDetailFragment extends DialogFragment {
         this.binding.tvTanggal.setText(this.pertemuan.getDate());
         this.binding.tvWaktuMulai.setText(this.pertemuan.getStartTime());
         this.binding.tvWaktuSelesai.setText(this.pertemuan.getEndTime());
-        this.binding.tvPartisipan.setText(this.pertemuan.getPartisipan());
+        String partisipan = this.pertemuan.getPartisipan();
+        if(partisipan!=null) {
+            this.binding.tvPartisipan.setText(partisipan);
+        }
         this.binding.tvDeskripsi.setText(this.pertemuan.getDescription());
 
         return binding.getRoot();

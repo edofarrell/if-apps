@@ -81,11 +81,11 @@
             android:text="@string/delete"/>
 
         <Button
-            android:id="@+id/btn_see_participants"
+            android:id="@+id/btn_see_details"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lihatPartisipan"/>
+            android:text="@string/lihatDetail"/>
 
     </LinearLayout>
 
