@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.example.p3b_tubes_2.databinding.ItemListPertemuanDibuatBinding;
 
+import org.w3c.dom.Text;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -25,6 +27,7 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
         protected TextView tvStartTime;
         protected TextView tvEndTime;
         protected TextView tvDescription;
+        protected TextView tvOrganizer;
         protected Button btnSeeParticipants;
         protected Button btnDelete;
 
@@ -35,6 +38,7 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
             this.tvStartTime = binding.tvStartTime;
             this.tvEndTime = binding.tvEndTime;
             this.tvDescription = binding.tvDeskripsi;
+            this.tvOrganizer = binding.tvOrganizer;
             this.btnSeeParticipants = binding.btnSeeParticipants;
             this.btnDelete = binding.btnDelete;
 
@@ -60,6 +64,7 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
             this.tvStartTime.setText(pertemuan.getStartTime());
             this.tvEndTime.setText(pertemuan.getEndTime());
             this.tvDescription.setText(pertemuan.getDescription());
+            this.tvOrganizer.setText(pertemuan.getOrganizerName());
             if(!APIClient.loggedInId.equals(pertemuan.getOrganizer_id())){
                 this.btnDelete.setVisibility(View.GONE);
                 this.btnSeeParticipants.setVisibility(View.GONE);

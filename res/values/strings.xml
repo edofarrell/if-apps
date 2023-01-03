@@ -26,6 +26,7 @@
     <string name="partisipan">Partisipan</string>
     <string name="pilih_partisipan">Pilih partisipan</string>
     <string name="deskripsi">Deskripsi</string>
+    <string name="description">Description:</string>
     <string name="tambah">Tambah</string>
     <string name="batal">Batal</string>
     <string-array name="dropdownRole">
