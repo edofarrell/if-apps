@@ -60,4 +60,5 @@
     <string name="OnlyOrganizer">Hanya pemilik pertemuan yang dapat melihat daftar partisipan</string>
     <string name="sebelumnya">Sebelumnya</string>
     <string name="selanjutnya">Selanjutnya</string>
+    <string name="tambah_slot_waktu">Tambah Slot Waktu</string>
 </resources>

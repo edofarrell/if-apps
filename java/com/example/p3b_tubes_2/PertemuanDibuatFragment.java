@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanDibuatBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     private TambahPertemuanFragment tambahPertemuanFragment;
     private TambahPartisipanPertemuanFragment tambahPartisipanPertemuanFragment;
 
+    private boolean isFabsVisible;
+
     public PertemuanDibuatFragment(){};
 
     public static PertemuanDibuatFragment newInstance(PertemuanPresenter pertemuanPresenter,  MainPresenter mainPresenter) {
@@ -31,12 +34,19 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
         return fragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = FragmentPertemuanDibuatBinding.inflate(inflater);
 
         this.pertemuanPresenter.getPertemuanDibuat();
+
+        hideExpandableFAB();
 
         this.binding.lstAppointments.setAdapter(this.adapter);
         this.binding.btnAddAppointment.setOnClickListener(this::onClick);
@@ -45,7 +55,41 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     }
 
     private void onClick(View view) {
-        this.tambahPertemuanFragment = TambahPertemuanFragment.newInstance(getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
+        FloatingActionButton floatingActionButton = this.binding.btnAddTimeSlot;
+        if(!isFabsVisible) {
+            showExpandableFAB();
+        } else {
+            hideExpandableFAB();
+        }
+        //this.tambahPertemuanFragment = TambahPertemuanFragment.newInstance(getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
+    }
+
+    private void hideExpandableFAB() {
+        this.binding.llExpandableFab.setVisibility(View.GONE);
+
+        this.binding.tvLabelAddInvitasiPertemuan.setVisibility(View.GONE);
+        this.binding.tvLabelAddTimeSlot.setVisibility(View.GONE);
+
+        this.binding.btnAddInvitasiPertemuan.hide();
+        this.binding.btnAddInvitasiPertemuan.setVisibility(View.GONE);
+        this.binding.btnAddTimeSlot.hide();
+        this.binding.btnAddTimeSlot.setVisibility(View.GONE);
+
+        this.isFabsVisible = false;
+    }
+
+    private void showExpandableFAB() {
+        this.binding.llExpandableFab.setVisibility(View.VISIBLE);
+
+        this.binding.tvLabelAddInvitasiPertemuan.setVisibility(View.VISIBLE);
+        this.binding.tvLabelAddTimeSlot.setVisibility(View.VISIBLE);
+
+        this.binding.btnAddInvitasiPertemuan.show();
+        this.binding.btnAddInvitasiPertemuan.setVisibility(View.VISIBLE);
+        this.binding.btnAddTimeSlot.show();
+        this.binding.btnAddTimeSlot.setVisibility(View.VISIBLE);
+
+        this.isFabsVisible = true;
     }
 
     @Override
