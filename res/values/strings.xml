@@ -55,4 +55,5 @@
     <string name="filter">Filter</string>
     <string name="tambah_pertemuan">Tambah Pertemuan</string>
     <string name="partisipan_pengumuman">Partisipan Pengumuman</string>
+    <string name="tambah_slot_waktu">Tambah Slot Waktu</string>
 </resources>

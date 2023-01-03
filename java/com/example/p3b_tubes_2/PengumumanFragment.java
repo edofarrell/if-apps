@@ -33,6 +33,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private String searchText;
     private PengumumanTambahFragment tambahFragment;
 
+    private boolean isFabsVisible;
+
     private PengumumanFragment() {
     }
 
@@ -50,10 +52,13 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = FragmentPengumumanBinding.inflate(inflater);
 
+        hideExpandableFAB();
+
         this.binding.lvPengumuman.setAdapter(this.adapter);
         this.presenter.getPengumuman();
 
-        this.binding.btnAddPengumuman.setOnClickListener(this::OnClickAddPengumuman);
+        this.binding.btnAddPengumuman.setOnClickListener(this::onClick);
+        this.binding.btnAddPengumumanExpandable.setOnClickListener(this::addPengumuman);
 
         this.binding.ivFilter.setOnClickListener(this::openFilter);
 
@@ -86,6 +91,13 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 //        });
 
         return this.binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
     }
 
     @Override
@@ -123,8 +135,44 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.presenter.getPengumuman(this.searchText, tag, true);
     }
 
-    private void OnClickAddPengumuman(View view) {
+    private void onClick(View view) {
+        if(!this.isFabsVisible) {
+            showExpandableFAB();
+        } else {
+            hideExpandableFAB();
+        }
+    }
+
+    private void addPengumuman(View view) {
         this.tambahFragment = PengumumanTambahFragment.newInstance(getParentFragmentManager(), this.presenter);
+    }
+
+    private void hideExpandableFAB() {
+        this.binding.llExpandableFab.setVisibility(View.GONE);
+
+        this.binding.tvLabelAddPengumuman.setVisibility(View.GONE);
+        this.binding.tvLabelAddTagPengumuman.setVisibility(View.GONE);
+
+        this.binding.btnAddPengumumanExpandable.hide();
+        this.binding.btnAddPengumumanExpandable.setVisibility(View.GONE);
+        this.binding.btnAddTagPengumuman.hide();
+        this.binding.btnAddTagPengumuman.setVisibility(View.GONE);
+
+        this.isFabsVisible = false;
+    }
+
+    private void showExpandableFAB() {
+        this.binding.llExpandableFab.setVisibility(View.VISIBLE);
+
+        this.binding.tvLabelAddPengumuman.setVisibility(View.VISIBLE);
+        this.binding.tvLabelAddTagPengumuman.setVisibility(View.VISIBLE);
+
+        this.binding.btnAddPengumumanExpandable.show();
+        this.binding.btnAddPengumumanExpandable.setVisibility(View.VISIBLE);
+        this.binding.btnAddTagPengumuman.show();
+        this.binding.btnAddTagPengumuman.setVisibility(View.VISIBLE);
+
+        this.isFabsVisible = true;
     }
 
     public void openFilter(View view) {

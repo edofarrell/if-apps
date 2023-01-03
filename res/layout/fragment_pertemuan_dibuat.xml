@@ -1,24 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ListView
         android:id="@+id/lst_appointments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@color/background"
-        android:dividerHeight="@dimen/_16dp"
-        />
+        android:dividerHeight="@dimen/_16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_appointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_input_add"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginRight="@dimen/_16dp"
         android:layout_marginBottom="@dimen/_32dp"
-        />
+        android:src="@android:drawable/ic_input_add" />
+
+    <LinearLayout
+        android:id="@+id/ll_expandable_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_add_appointment"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical"
+        android:gravity="right"
+        >
+
+        <LinearLayout
+            android:id="@+id/ll_add_invitasi_pertemuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:clipToPadding="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="@dimen/_20dp"
+            android:paddingBottom="@dimen/_16dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="2dp"
+                app:strokeWidth="1dp">
+
+                <TextView
+                    android:id="@+id/tv_label_add_invitasi_pertemuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_4dp"
+                    android:text="Invitasi Pertemuan"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_add_invitasi_pertemuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_16dp"
+                app:fabSize="mini" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_add_time_slot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:clipToPadding="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="@dimen/_20dp"
+            android:paddingBottom="@dimen/_16dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="2dp"
+                app:strokeWidth="1dp">
+
+                <TextView
+                    android:id="@+id/tv_label_add_time_slot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_4dp"
+                    android:text="Slot Waktu"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_add_time_slot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_16dp"
+                app:fabSize="mini" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 </RelativeLayout>

@@ -9,7 +9,6 @@
         android:id="@+id/ll_header_pengumuman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_pengumuman"
         android:layout_marginTop="@dimen/_10sp"
         android:orientation="horizontal">
 
@@ -61,9 +60,9 @@
         android:layout_height="match_parent"
         android:layout_below="@id/ll_chip"
         android:layout_marginTop="@dimen/_20sp"
-        android:padding="@dimen/_15sp"
         android:divider="@color/white"
-        android:dividerHeight="@dimen/_20sp"/>
+        android:dividerHeight="@dimen/_20sp"
+        android:padding="@dimen/_15sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -94,6 +93,90 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:id="@+id/ll_expandable_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_add_pengumuman"
+            android:layout_alignParentEnd="true"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_add_invitasi_pertemuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:clipToPadding="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingRight="@dimen/_20dp"
+                android:paddingBottom="@dimen/_16dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="2dp"
+                    app:strokeWidth="1dp">
+
+                    <TextView
+                        android:id="@+id/tv_label_add_tag_pengumuman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_4dp"
+                        android:text="Tag Pengumuman"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_add_tag_pengumuman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_16dp"
+                    app:fabSize="mini" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_add_time_slot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:clipToPadding="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingRight="@dimen/_20dp"
+                android:paddingBottom="@dimen/_16dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="2dp"
+                    app:strokeWidth="1dp">
+
+                    <TextView
+                        android:id="@+id/tv_label_add_pengumuman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_4dp"
+                        android:text="@string/pengumuman"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sp" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_add_pengumuman_expandable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_16dp"
+                    app:fabSize="mini" />
+
+            </LinearLayout>
+        </LinearLayout>
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_add_pengumuman"
             android:layout_width="wrap_content"
@@ -101,7 +184,6 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/_16dp"
-            android:layout_marginTop="@dimen/_16dp"
             android:layout_marginEnd="@dimen/_16dp"
             android:layout_marginBottom="@dimen/_16dp"
             android:src="@android:drawable/ic_input_add" />
