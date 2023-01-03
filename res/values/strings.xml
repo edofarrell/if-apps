@@ -58,4 +58,6 @@
     <string name="partisipan_pengumuman">Partisipan Pengumuman</string>
     <string name="lihatPartisipan">Lihat Partisipan</string>
     <string name="OnlyOrganizer">Hanya pemilik pertemuan yang dapat melihat daftar partisipan</string>
+    <string name="sebelumnya">Sebelumnya</string>
+    <string name="selanjutnya">Selanjutnya</string>
 </resources>
