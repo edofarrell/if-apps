@@ -5,9 +5,9 @@
     android:background="@drawable/border_grey"
     android:orientation="vertical"
     android:paddingTop="@dimen/_16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="4dp"
+    android:paddingLeft="@dimen/_16dp"
+    android:paddingRight="@dimen/_16dp"
+    android:paddingBottom="@dimen/_4dp"
     >
 
     <TextView
@@ -17,7 +17,7 @@
         android:layout_marginBottom="@dimen/_16dp"
         android:text="Judul Pertemuan"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="@dimen/_24sp"
         android:textStyle="bold"></TextView>
 
     <LinearLayout
@@ -34,7 +34,7 @@
             android:gravity="center"
             android:text="1 Desember 2022"
             android:textColor="@color/black"
-            android:textSize="14sp"></TextView>
+            android:textSize="@dimen/_14sp"></TextView>
 
         <TextView
             android:id="@+id/tv_start_time"
@@ -45,7 +45,7 @@
             android:gravity="center"
             android:text="09.00"
             android:textColor="@color/black"
-            android:textSize="14sp"></TextView>
+            android:textSize="@dimen/_14sp"></TextView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             android:gravity="center"
             android:text="-"
             android:textColor="@color/black"
-            android:textSize="14sp"></TextView>
+            android:textSize="@dimen/_14sp"></TextView>
 
         <TextView
             android:id="@+id/tv_end_time"
@@ -64,45 +64,7 @@
             android:gravity="center"
             android:text="10.00"
             android:textColor="@color/black"
-            android:textSize="14sp"></TextView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/organizer"
-            android:layout_weight="3"/>
-
-        <TextView
-            android:id="@+id/tv_organizer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/description"
-            android:layout_weight="3"/>
-
-        <TextView
-            android:id="@+id/tv_deskripsi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
+            android:textSize="@dimen/_14sp"></TextView>
     </LinearLayout>
 
     <LinearLayout
