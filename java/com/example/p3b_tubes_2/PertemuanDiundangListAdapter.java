@@ -28,7 +28,7 @@ public class PertemuanDiundangListAdapter extends BaseAdapter {
             this.tvDate = binding.tvDate;
             this.tvStartTime = binding.tvStartTime;
             this.tvEndTime = binding.tvEndTime;
-            this.btnSeeDetails = binding.btnSeeDetails;
+            this.btnSeeDetails = binding.btnSeeParticipants;
 
             this.btnSeeDetails.setOnClickListener(this::openDetail);
         }

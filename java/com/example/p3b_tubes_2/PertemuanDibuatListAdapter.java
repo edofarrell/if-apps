@@ -24,7 +24,8 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
         protected TextView tvDate;
         protected TextView tvStartTime;
         protected TextView tvEndTime;
-        protected Button btnSeeDetails;
+        protected TextView tvDescription;
+        protected Button btnSeeParticipants;
         protected Button btnDelete;
 
         public ViewHolder(ItemListPertemuanDibuatBinding binding, int i) {
@@ -33,10 +34,11 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
             this.tvDate = binding.tvDate;
             this.tvStartTime = binding.tvStartTime;
             this.tvEndTime = binding.tvEndTime;
-            this.btnSeeDetails = binding.btnSeeDetails;
+            this.tvDescription = binding.tvDeskripsi;
+            this.btnSeeParticipants = binding.btnSeeParticipants;
             this.btnDelete = binding.btnDelete;
 
-            this.btnSeeDetails.setOnClickListener(this::openDetail);
+            this.btnSeeParticipants.setOnClickListener(this::openDetail);
             this.btnDelete.setOnClickListener(this::deletePertemuan);
         }
 
@@ -57,8 +59,10 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
             this.tvDate.setText(pertemuan.getDate());
             this.tvStartTime.setText(pertemuan.getStartTime());
             this.tvEndTime.setText(pertemuan.getEndTime());
+            this.tvDescription.setText(pertemuan.getDescription());
             if(!APIClient.loggedInId.equals(pertemuan.getOrganizer_id())){
                 this.btnDelete.setVisibility(View.GONE);
+                this.btnSeeParticipants.setVisibility(View.GONE);
             }
         }
     }
