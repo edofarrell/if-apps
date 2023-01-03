@@ -43,14 +43,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_above="@id/btn_ambil">
+                android:layout_above="@id/ll_btn">
 
                 <TextView
                     android:id="@+id/tv_semester"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Semester Ganjil 2022/2023"
-                    android:textSize="@dimen/_15sp"
+                    android:textSize="@dimen/_20sp"
                     android:textColor="@color/black"></TextView>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -86,18 +86,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_prasyarat"
+
                     android:layout_marginTop="@dimen/_10sp"></ListView>
 
             </LinearLayout>
 
-
-            <Button
-                android:id="@+id/btn_ambil"
+            <LinearLayout
+                android:id="@+id/ll_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:text="@string/ambil"></Button>
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/_20sp">
+
+                <Button
+                    android:id="@+id/btn_batal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/batal"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_marginRight="@dimen/_10sp"
+                    >
+
+                </Button>
+
+
+                <Button
+                    android:id="@+id/btn_ambil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ambil"></Button>
+
+            </LinearLayout>
+
+
 
 
         </RelativeLayout>
