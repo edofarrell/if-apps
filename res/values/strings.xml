@@ -62,4 +62,7 @@
     <string name="selanjutnya">Selanjutnya</string>
     <string name="tambah_slot_waktu">Tambah Slot Waktu</string>
     <string name="tambah_tag_pengumuman">Tambah Tag Pengumuman</string>
+    <string name="hintMatkul">Ketik matakuliah disini</string>
+    <string name="hasilPencarianMatkul">Hasil Pencarian Matakuliah</string>
+    <string name="matkulTerpilih">Matakuliah Terpilih</string>
 </resources>
