@@ -32,20 +32,25 @@ public class PertemuanDiundangFragment extends Fragment implements PertemuanCont
         this.binding = FragmentPertemuanDiundangBinding.inflate(inflater);
 
         this.binding.lstAppointments.setAdapter(this.adapter);
+        binding.getRoot().setOnClickListener(this::test);
 
         return this.binding.getRoot();
     }
 
-    @Override
-    public void updatePertemuanDiundang(PertemuanList pertemuanList) {
-        this.adapter.update(pertemuanList);
+    private void test(View view) {
+        presenter.getInvites();
     }
 
     @Override
-    public void openDetailPertemuanDiundang(PertemuanList.Pertemuan pertemuan) {
-        PertemuanDetailFragment pertemuanDetailFragment = PertemuanDetailFragment.newInstance(getParentFragmentManager(), pertemuan);
+    public void updatePertemuanDiundang(APIPertemuanGetInvites listInvites) {
+        this.adapter.update(listInvites);
+    }
+
+    @Override
+    public void openDetailPertemuanDiundang(APIPertemuanGetInvites.Invites invites) {
+        /*PertemuanDetailFragment pertemuanDetailFragment = PertemuanDetailFragment.newInstance(getParentFragmentManager(), pertemuan);
         getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pertemuanDetailFragment)
                 .addToBackStack(null)
-                .commit();
+                .commit();*/
     }
 }

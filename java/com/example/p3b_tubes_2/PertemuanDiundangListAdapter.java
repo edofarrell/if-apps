@@ -8,10 +8,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.p3b_tubes_2.databinding.ItemListPertemuanDibuatBinding;
+import com.example.p3b_tubes_2.databinding.ItemListPertemuanDiundangBinding;
 
 public class PertemuanDiundangListAdapter extends BaseAdapter {
 
-    private PertemuanList pertemuanList;
+    private APIPertemuanGetInvites listInvites;
     private PertemuanPresenter presenter;
 
     private class ViewHolder {
@@ -22,7 +23,7 @@ public class PertemuanDiundangListAdapter extends BaseAdapter {
         protected TextView tvEndTime;
         protected Button btnSeeDetails;
 
-        public ViewHolder(ItemListPertemuanDibuatBinding binding, int i) {
+        public ViewHolder(ItemListPertemuanDiundangBinding binding, int i) {
             this.i = i;
             this.tvTitle = binding.tvTitle;
             this.tvDate = binding.tvDate;
@@ -34,33 +35,33 @@ public class PertemuanDiundangListAdapter extends BaseAdapter {
         }
 
         private void openDetail(View view) {
-            PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
+            APIPertemuanGetInvites.Invites invites = listInvites.getInvitation(i);
 //            presenter.getPartisipanPertemuanDiundang(pertemuan);
         }
 
         private void updateView(int i) {
             this.i = i;
-            PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
-            this.tvTitle.setText(pertemuan.getTitle());
-            this.tvDate.setText(pertemuan.getStartTime().substring(0, 10));
-            this.tvStartTime.setText(pertemuan.getStartTime());
-            this.tvEndTime.setText(pertemuan.getEndTime());
+            APIPertemuanGetInvites.Invites invites = listInvites.getInvitation(i);
+            this.tvTitle.setText(invites.title);
+            this.tvDate.setText(invites.description);
+            //this.tvStartTime.setText(pertemuan.getStartTime());
+            //this.tvEndTime.setText(pertemuan.getEndTime());
         }
     }
 
     public PertemuanDiundangListAdapter(PertemuanPresenter presenter) {
-        this.pertemuanList = new PertemuanList();
+        this.listInvites = new APIPertemuanGetInvites();
         this.presenter = presenter;
     }
 
     @Override
     public int getCount() {
-        return this.pertemuanList.getSize();
+        return this.listInvites.getListSize();
     }
 
     @Override
     public Object getItem(int position) {
-        return this.pertemuanList.getPertemuan(position);
+        return this.listInvites.getInvitation(position);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class PertemuanDiundangListAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        ItemListPertemuanDibuatBinding binding = ItemListPertemuanDibuatBinding.inflate(inflater);
+        ItemListPertemuanDiundangBinding binding = ItemListPertemuanDiundangBinding.inflate(inflater);
         ViewHolder viewHolder;
         if (view == null) {
             view = binding.getRoot();
@@ -85,8 +86,8 @@ public class PertemuanDiundangListAdapter extends BaseAdapter {
         return view;
     }
 
-    public void update(PertemuanList pertemuanList) {
-        this.pertemuanList = pertemuanList;
+    public void update(APIPertemuanGetInvites listInvites) {
+        this.listInvites = listInvites;
         notifyDataSetChanged();
     }
 }

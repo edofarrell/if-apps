@@ -12,7 +12,7 @@ import com.example.p3b_tubes_2.databinding.ItemListFrsBinding;
 
 import java.util.ArrayList;
 
-public class FRSDetailListAdapter extends BaseAdapter {
+public class FRSDetailListAdapterSearch extends BaseAdapter {
     private FRSPresenter presenter;
     private ArrayList<MataKuliahList.MataKuliah> listMataKuliah;
     private class ViewHolder{
@@ -29,7 +29,7 @@ public class FRSDetailListAdapter extends BaseAdapter {
         }
     }
 
-    public FRSDetailListAdapter(FRSPresenter presenter){
+    public FRSDetailListAdapterSearch(FRSPresenter presenter){
         this.presenter = presenter;
         this.listMataKuliah = new ArrayList<>();
     }
