@@ -73,9 +73,6 @@ public class PertemuanPresenter implements
         this.pertemuan.getPertemuan(startDate, endDate);
     }
 
-    public void getInvites() {
-        this.getInvites.getInvites();
-    }
 
     @Override
     public void onSuccessGetDibuat(PertemuanList pertemuanList) {
@@ -211,6 +208,11 @@ public class PertemuanPresenter implements
 
     public void openDetail(PertemuanList.Pertemuan pertemuan) {
         this.uiDibuat.openDetailPertemuanDibuat(pertemuan);
+    }
+
+    
+    public void getInvites() {
+        this.getInvites.getInvites();
     }
 
     @Override
