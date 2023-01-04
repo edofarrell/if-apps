@@ -20,8 +20,7 @@ public class PertemuanPresenter implements
         PertemuanContract.Model.DeleteOnSuccessListener,
         PertemuanContract.Model.GetTimeSlotOnSuccessListener,
         PertemuanContract.Model.AddTimeSlotOnSuccessListener,
-        PertemuanContract.Model.GetInvitesOnSuccessListener
-{
+        PertemuanContract.Model.GetInvitesOnSuccessListener {
     private PertemuanList pertemuan;
     private PertemuanContract.View ui;
     private PertemuanContract.View.PertemuanDibuat uiDibuat;
@@ -49,7 +48,7 @@ public class PertemuanPresenter implements
         this.deletePertemuan = new APIPertemuanDelete(this, context);
         this.getTimeSlot = new APIPertemuanGetTimeSlot(this, context);
         this.tambahTimeSlot = new APIPertemuanTambahTimeSlot(this, context);
-        this.getInvites = new APIPertemuanGetInvites(this,context);
+        this.getInvites = new APIPertemuanGetInvites(this, context);
     }
 
     public void setUiDibuat(PertemuanContract.View.PertemuanDibuat ui) {
@@ -75,7 +74,7 @@ public class PertemuanPresenter implements
         this.pertemuan.getPertemuan(startDate, endDate);
     }
 
-    public void getInvites(){
+    public void getInvites() {
         this.getInvites.getInvites();
     }
 
@@ -211,8 +210,9 @@ public class PertemuanPresenter implements
     }
 
 
-    public void openDetail(PertemuanList.Pertemuan pertemuan){
+    public void openDetail(PertemuanList.Pertemuan pertemuan) {
         this.uiDibuat.openDetailPertemuanDibuat(pertemuan);
+    }
 
     @Override
     public void onSuccessGetInvites(APIPertemuanGetInvites invites) {
@@ -223,6 +223,7 @@ public class PertemuanPresenter implements
     public void onErrorGetInvites() {
 
     }
+
 }
 
 
