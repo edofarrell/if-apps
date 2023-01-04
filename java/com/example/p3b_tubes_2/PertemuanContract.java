@@ -60,6 +60,11 @@ public interface PertemuanContract {
 
             void onErrorAddTimeSlot();
         }
+
+        interface GetInvitesOnSuccessListener{
+            void onSuccessGetInvites(APIPertemuanGetInvites invites);
+            void onErrorGetInvites();
+        }
     }
 
     interface View {
@@ -76,14 +81,14 @@ public interface PertemuanContract {
         }
 
         interface PertemuanDiundang {
-            void updatePertemuanDiundang(PertemuanList pertemuanList);
+            void updatePertemuanDiundang(APIPertemuanGetInvites listInvites);
 
-            void openDetailPertemuanDiundang(PertemuanList.Pertemuan pertemuan);
+            void openDetailPertemuanDiundang(APIPertemuanGetInvites.Invites invites);
         }
 
         void updateDibuat(PertemuanList pertemuanList);
 
-        void updateDiundang(PertemuanList pertemuanList);
+        void updateDiundang(APIPertemuanGetInvites listInvites);
 
         void updateTimeSlot(List<TimeSlot> timeSlot);
     }

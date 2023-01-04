@@ -19,7 +19,8 @@ public class PertemuanPresenter implements
         PertemuanContract.Model.DeleteParticipantsPertemuanOnSuccessListener,
         PertemuanContract.Model.DeleteOnSuccessListener,
         PertemuanContract.Model.GetTimeSlotOnSuccessListener,
-        PertemuanContract.Model.AddTimeSlotOnSuccessListener
+        PertemuanContract.Model.AddTimeSlotOnSuccessListener,
+        PertemuanContract.Model.GetInvitesOnSuccessListener
 {
     private PertemuanList pertemuan;
     private PertemuanContract.View ui;
@@ -34,6 +35,7 @@ public class PertemuanPresenter implements
     private APIPertemuanDelete deletePertemuan;
     private APIPertemuanGetTimeSlot getTimeSlot;
     private APIPertemuanTambahTimeSlot tambahTimeSlot;
+    private APIPertemuanGetInvites getInvites;
 
     public PertemuanPresenter(PertemuanContract.View ui, Context context, MainPresenter mainPresenter) {
         this.pertemuan = new PertemuanList(this, context);
@@ -47,6 +49,7 @@ public class PertemuanPresenter implements
         this.deletePertemuan = new APIPertemuanDelete(this, context);
         this.getTimeSlot = new APIPertemuanGetTimeSlot(this, context);
         this.tambahTimeSlot = new APIPertemuanTambahTimeSlot(this, context);
+        this.getInvites = new APIPertemuanGetInvites(this,context);
     }
 
     public void setUiDibuat(PertemuanContract.View.PertemuanDibuat ui) {
@@ -70,6 +73,10 @@ public class PertemuanPresenter implements
 
     public void getPertemuanDibuat(String startDate, String endDate) {
         this.pertemuan.getPertemuan(startDate, endDate);
+    }
+
+    public void getInvites(){
+        this.getInvites.getInvites();
     }
 
     @Override
@@ -200,6 +207,16 @@ public class PertemuanPresenter implements
 
     @Override
     public void onErrorAddTimeSlot() {
+
+    }
+
+    @Override
+    public void onSuccessGetInvites(APIPertemuanGetInvites invites) {
+        this.uiDiundang.updatePertemuanDiundang(invites);
+    }
+
+    @Override
+    public void onErrorGetInvites() {
 
     }
 }

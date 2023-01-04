@@ -128,8 +128,8 @@ public class PertemuanFragment extends Fragment implements
     }
 
     @Override
-    public void updateDiundang(PertemuanList pertemuanList) {
-        this.pertemuanDiundangFragment.updatePertemuanDiundang(pertemuanList);
+    public void updateDiundang(APIPertemuanGetInvites listInvites) {
+        this.pertemuanDiundangFragment.updatePertemuanDiundang(listInvites);
     }
 
     @Override

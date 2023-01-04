@@ -1,20 +1,18 @@
 package com.example.p3b_tubes_2;
 
 import android.app.Dialog;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.p3b_tubes_2.databinding.FragmentFrsDetailBinding;
-import com.example.p3b_tubes_2.databinding.FragmentFrsTambahBinding;
 
 import java.util.ArrayList;
 
@@ -22,9 +20,10 @@ public class FRSDetailFragment extends DialogFragment {
     private FragmentFrsDetailBinding binding;
     private String tahunAjar;
     private ArrayList<MataKuliahList.MataKuliah> listMataKuliah;
-    private FRSDetailListAdapter adapter;
+    private FRSDetailListAdapterSearch adapterSearch;
     private FRSPresenter presenter;
     private FRSTambahFragment frsTambahFragmentfragment;
+    private String searchText;
 
     public static FRSDetailFragment newInstance(FragmentManager fm, String tahunAjar,
                                                 ArrayList<MataKuliahList.MataKuliah> listMataKuliah,
@@ -38,7 +37,7 @@ public class FRSDetailFragment extends DialogFragment {
         fragment.tahunAjar = tahunAjar;
         fragment.listMataKuliah = listMataKuliah;
         fragment.presenter = presenter;
-        fragment.adapter = new FRSDetailListAdapter(presenter);
+        fragment.adapterSearch = new FRSDetailListAdapterSearch(presenter);
         return fragment;
     }
 
@@ -47,8 +46,8 @@ public class FRSDetailFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         this.binding = FragmentFrsDetailBinding.inflate(inflater);
         this.binding.appbar.setTitle(tahunAjar);
-        this.binding.tvLvMatkul.setAdapter(adapter);
-        this.adapter.update(listMataKuliah);
+        this.binding.tvLvMatkul.setAdapter(adapterSearch);
+        //this.adapter.update(listMataKuliah);
         this.binding.btnAddMatkul.setOnClickListener(this::onClickAddMatkul);
         return binding.getRoot();
     }
@@ -62,6 +61,31 @@ public class FRSDetailFragment extends DialogFragment {
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
             dialog.getWindow().setLayout(width, height);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SearchView searchView = this.binding.searchBar;
+        searchView.setActivated(true);
+        searchView.setOnClickListener(this::onClickSearch);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchText = newText;
+                //filter();
+                return false;
+            }
+        });
+    }
+
+    private void onClickSearch(View view) {
+        this.binding.searchBar.onActionViewExpanded();
     }
 
     @Override
