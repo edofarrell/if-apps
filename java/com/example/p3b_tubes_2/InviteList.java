@@ -1,0 +1,148 @@
+package com.example.p3b_tubes_2;
+
+import android.content.Context;
+import android.util.Log;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class InviteList implements Response.Listener<JSONArray>, Response.ErrorListener{
+    class Invites{
+        String appointment_id;
+        String title;
+        String description;
+        String start_datetime;
+        String end_datetime;
+        String organizer_name;
+
+        public String getAppointment_id() {
+            return appointment_id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getStartTime() {
+            SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd HH:mmZ");
+            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH.mm");
+
+            String startTime = "";
+            try {
+                startTime = timeFormatter.format(inputformatter.parse(this.start_datetime));
+            } catch (ParseException e) {
+                Log.d("DEBUG", "InviteList, getStartTime() catch ParseException");
+            }
+
+            return startTime;
+        }
+
+        public String getEndTime() {
+            SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd HH:mmZ");
+            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH.mm");
+
+            String endTime = "";
+            try {
+                endTime = timeFormatter.format(inputformatter.parse(this.end_datetime));
+            } catch (ParseException e) {
+                Log.d("DEBUG", "InviteList, getStartTime() catch ParseException");
+            }
+
+            return endTime;
+        }
+
+        public String getDate(){
+            SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd HH:mmZ");
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("E, dd MMM yyyy");
+
+            String date = "";
+            try {
+                date = dateFormatter.format(inputformatter.parse(this.start_datetime));
+            } catch (ParseException e) {
+                Log.d("DEBUG", "InviteList, getDate() catch ParseException");
+            }
+
+            return date;
+        }
+
+        public String getOrganizer_name() {
+            return organizer_name;
+        }
+    }
+
+    private PertemuanPresenter presenter;
+    private RequestQueue queue;
+    private Gson gson;
+    private ArrayList<InviteList.Invites> listInvites;
+
+    public InviteList(PertemuanPresenter presenter, Context context) {
+        this.presenter = presenter;
+        this.queue = Volley.newRequestQueue(context);
+        this.gson = new Gson();
+    }
+
+    public InviteList(){
+        this.listInvites = new ArrayList<>();
+    }
+
+    public int getListSize(){
+        return this.listInvites.size();
+    }
+
+    public Invites getInvitation(int i){
+        return this.listInvites.get(i);
+    }
+
+    public void getInvites(){
+        String url = APIClient.BASE_URL+"/appointments/invitations";
+        CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET,url,null,
+                this::onResponse,this::onErrorResponse){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", APIClient.token);
+                return params;
+            }
+        };
+        queue.add(request);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        try {
+            String responseBody = new String(error.networkResponse.data, "utf-8");
+            Log.d("DEBUG", "APIPertemuanGetInvites: onErrorResponse(), Error=" + responseBody);
+        } catch (UnsupportedEncodingException e) {
+            Log.d("DEBUG", "APIPertemuanGetInvites: onErrorResponse() catch UnsupportedEncodingException");
+        }
+    }
+
+    @Override
+    public void onResponse(JSONArray response) {
+        Log.d("DEBUG","Invites");
+        Type listType = new TypeToken<ArrayList<InviteList.Invites>>() {}.getType();
+        ArrayList<InviteList.Invites> listInvites = this.gson.fromJson(response.toString(), listType);
+        this.listInvites = listInvites;
+        this.presenter.onSuccessGetInvites(this);
+    }
+}

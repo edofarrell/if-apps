@@ -7,12 +7,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.p3b_tubes_2.databinding.ItemListPertemuanDibuatBinding;
 import com.example.p3b_tubes_2.databinding.ItemListPertemuanDiundangBinding;
 
 public class PertemuanDiundangListAdapter extends BaseAdapter {
 
-    private APIPertemuanGetInvites listInvites;
+    private InviteList listInvites;
     private PertemuanPresenter presenter;
 
     private class ViewHolder {
@@ -35,22 +34,22 @@ public class PertemuanDiundangListAdapter extends BaseAdapter {
         }
 
         private void openDetail(View view) {
-            APIPertemuanGetInvites.Invites invites = listInvites.getInvitation(i);
+            InviteList.Invites invites = listInvites.getInvitation(i);
 //            presenter.getPartisipanPertemuanDiundang(pertemuan);
         }
 
         private void updateView(int i) {
             this.i = i;
-            APIPertemuanGetInvites.Invites invites = listInvites.getInvitation(i);
-            this.tvTitle.setText(invites.title);
-            this.tvDate.setText(invites.description);
-            //this.tvStartTime.setText(pertemuan.getStartTime());
-            //this.tvEndTime.setText(pertemuan.getEndTime());
+            InviteList.Invites invite = listInvites.getInvitation(i);
+            this.tvTitle.setText(invite.getTitle());
+            this.tvDate.setText(invite.getDate());
+            this.tvStartTime.setText(invite.getStartTime());
+            this.tvEndTime.setText(invite.getEndTime());
         }
     }
 
     public PertemuanDiundangListAdapter(PertemuanPresenter presenter) {
-        this.listInvites = new APIPertemuanGetInvites();
+        this.listInvites = new InviteList();
         this.presenter = presenter;
     }
 
@@ -86,7 +85,7 @@ public class PertemuanDiundangListAdapter extends BaseAdapter {
         return view;
     }
 
-    public void update(APIPertemuanGetInvites listInvites) {
+    public void update(InviteList listInvites) {
         this.listInvites = listInvites;
         notifyDataSetChanged();
     }

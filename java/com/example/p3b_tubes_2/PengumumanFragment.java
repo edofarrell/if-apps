@@ -67,8 +67,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
         this.searchText = "";
         this.binding.btnNext.setOnClickListener(this::onClickNext);
-        this.binding.btnBack.setOnClickListener(this::onClickBack);
 
+        Log.d("DEBUG", APIClient.role);
         if(!APIClient.role.equals("admin")) {
             this.binding.btnAddPengumuman.setVisibility(View.GONE);
         }
