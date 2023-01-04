@@ -18,8 +18,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanBinding;
 import com.google.android.material.tabs.TabLayout;
 
-import org.json.JSONException;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -128,7 +126,7 @@ public class PertemuanFragment extends Fragment implements
     }
 
     @Override
-    public void updateDiundang(APIPertemuanGetInvites listInvites) {
+    public void updateDiundang(InviteList listInvites) {
         this.pertemuanDiundangFragment.updatePertemuanDiundang(listInvites);
     }
 

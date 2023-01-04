@@ -62,7 +62,7 @@ public interface PertemuanContract {
         }
 
         interface GetInvitesOnSuccessListener{
-            void onSuccessGetInvites(APIPertemuanGetInvites invites);
+            void onSuccessGetInvites(InviteList invites);
             void onErrorGetInvites();
         }
     }
@@ -81,14 +81,14 @@ public interface PertemuanContract {
         }
 
         interface PertemuanDiundang {
-            void updatePertemuanDiundang(APIPertemuanGetInvites listInvites);
+            void updatePertemuanDiundang(InviteList listInvites);
 
-            void openDetailPertemuanDiundang(APIPertemuanGetInvites.Invites invites);
+            void openDetailPertemuanDiundang(InviteList.Invites invites);
         }
 
         void updateDibuat(PertemuanList pertemuanList);
 
-        void updateDiundang(APIPertemuanGetInvites listInvites);
+        void updateDiundang(InviteList listInvites);
 
         void updateTimeSlot(List<TimeSlot> timeSlot);
     }
