@@ -59,6 +59,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
         this.binding.btnAddPengumuman.setOnClickListener(this::onClick);
         this.binding.btnAddPengumumanExpandable.setOnClickListener(this::addPengumuman);
+        this.binding.btnAddTagPengumuman.setOnClickListener(this::addTag);
 
         this.binding.ivFilter.setOnClickListener(this::openFilter);
 
@@ -68,36 +69,20 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.binding.btnNext.setOnClickListener(this::onClickNext);
         this.binding.btnBack.setOnClickListener(this::onClickBack);
 
-        if(APIClient.role.equals("student")){
+        if(!APIClient.role.equals("admin")) {
             this.binding.btnAddPengumuman.setVisibility(View.GONE);
         }
 
-        //infinite scroll
-//        ListView listView = this.binding.lvPengumuman;
-//        this.binding.lvPengumuman.setOnScrollListener(new AbsListView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(AbsListView view, int scrollState) {
-//                if(scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && (listView.getLastVisiblePosition() - listView.getHeaderViewsCount() -
-//                        listView.getFooterViewsCount()) >= (adapter.getCount() - 1)){
-//                    Log.d("DEBUG", "BOTTOM");
-//                    onClickNext();
-//                }
-//            }
-//
-//            @Override
-//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//
-//            }
-//        });
-
         return this.binding.getRoot();
+    }
+
+    private void addTag(View view) {
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
     }
 
     @Override
