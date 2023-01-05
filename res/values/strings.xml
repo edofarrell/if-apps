@@ -65,4 +65,6 @@
     <string name="hintMatkul">Ketik matakuliah disini</string>
     <string name="hasilPencarianMatkul">Hasil Pencarian Matakuliah</string>
     <string name="matkulTerpilih">Matakuliah Terpilih</string>
+    <string name="terima">Terima</string>
+    <string name="telahDiterima">Sudah Diterima</string>
 </resources>

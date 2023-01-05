@@ -23,13 +23,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InviteList implements Response.Listener<JSONArray>, Response.ErrorListener{
-    class Invites{
+    class Invites {
         String appointment_id;
         String title;
         String description;
         String start_datetime;
         String end_datetime;
+        String oraganizer_id;
         String organizer_name;
+        boolean attending;
+        String created_at;
+        String updated_at;
 
         public String getAppointment_id() {
             return appointment_id;
@@ -85,8 +89,12 @@ public class InviteList implements Response.Listener<JSONArray>, Response.ErrorL
             return date;
         }
 
-        public String getOrganizer_name() {
+        public String getOrganizerName() {
             return organizer_name;
+        }
+
+        public boolean isAttending() {
+            return attending;
         }
     }
 
@@ -139,9 +147,9 @@ public class InviteList implements Response.Listener<JSONArray>, Response.ErrorL
 
     @Override
     public void onResponse(JSONArray response) {
-        Log.d("DEBUG","Invites");
         Type listType = new TypeToken<ArrayList<InviteList.Invites>>() {}.getType();
         ArrayList<InviteList.Invites> listInvites = this.gson.fromJson(response.toString(), listType);
+        Log.d("DEBUG", listInvites.size()+"");
         this.listInvites = listInvites;
         this.presenter.onSuccessGetInvites(this);
     }

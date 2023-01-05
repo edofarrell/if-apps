@@ -11,20 +11,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.p3b_tubes_2.databinding.FragmentDetailPertemuanBinding;
 import com.example.p3b_tubes_2.databinding.FragmentDetailPertemuanUndanganBinding;
 
-public class PertemuanDetailFragmentUndangan extends DialogFragment {
+public class PertemuanDetailUndanganFragment extends DialogFragment {
 
     private FragmentDetailPertemuanUndanganBinding binding;
-    private PertemuanList.Pertemuan pertemuan;
+    private InviteList.Invites invite;
+    private PertemuanPresenter presenter;
 
-    public PertemuanDetailFragmentUndangan() {
+    public PertemuanDetailUndanganFragment() {
     }
 
-    public static PertemuanDetailFragmentUndangan newInstance(FragmentManager fm, PertemuanList.Pertemuan pertemuan) {
-        PertemuanDetailFragmentUndangan fragment = new PertemuanDetailFragmentUndangan();
-        fragment.pertemuan = pertemuan;
+    public static PertemuanDetailUndanganFragment newInstance(FragmentManager fm, InviteList.Invites invite, PertemuanPresenter presenter) {
+        PertemuanDetailUndanganFragment fragment = new PertemuanDetailUndanganFragment();
+        fragment.invite = invite;
+        fragment.presenter = presenter;
         fragment.show(fm, "openAppointmentInvitationDetail");
 
         return fragment;
@@ -55,13 +56,14 @@ public class PertemuanDetailFragmentUndangan extends DialogFragment {
 
         this.binding = FragmentDetailPertemuanUndanganBinding.inflate(inflater);
 
-        this.binding.tvTitle.setText(this.pertemuan.getTitle());
-        this.binding.tvOrganizer.setText(this.pertemuan.getOrganizerName());
-        this.binding.tvTanggal.setText(this.pertemuan.getDate());
-        this.binding.tvWaktuMulai.setText(this.pertemuan.getStartTime());
-        this.binding.tvWaktuSelesai.setText(this.pertemuan.getEndTime());
-        this.binding.tvPartisipan.setText(this.pertemuan.getPartisipan());
-        this.binding.tvDeskripsi.setText(this.pertemuan.getDescription());
+        this.binding.tvTitle.setText(this.invite.getTitle());
+        this.binding.tvOrganizer.setText(this.invite.getOrganizerName());
+        this.binding.tvTanggal.setText(this.invite.getDate());
+        this.binding.tvWaktuMulai.setText(this.invite.getStartTime());
+        this.binding.tvWaktuSelesai.setText(this.invite.getEndTime());
+        this.binding.tvDeskripsi.setText(this.invite.getDescription());
+
+        this.binding.btnAccept.setOnClickListener(this::acceptInvitation);
 
         return binding.getRoot();
     }
@@ -75,6 +77,7 @@ public class PertemuanDetailFragmentUndangan extends DialogFragment {
     }
 
     private void acceptInvitation(View view) {
+        this.presenter.acceptInvitation(this.invite.getAppointment_id());
     }
 
     private void onClickKembali(View view) {

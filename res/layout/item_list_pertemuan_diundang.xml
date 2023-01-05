@@ -74,18 +74,18 @@
         android:gravity="end">
 
         <Button
-            android:id="@+id/btn_delete"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/delete"/>
-
-        <Button
             android:id="@+id/btn_see_details"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lihatDetail"/>
+            android:text="@string/terima"/>
+
+        <TextView
+            android:id="@+id/tv_accepted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/telahDiterima"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

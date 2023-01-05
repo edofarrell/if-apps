@@ -19,7 +19,8 @@ public class PertemuanPresenter implements
         PertemuanContract.Model.DeleteOnSuccessListener,
         PertemuanContract.Model.GetTimeSlotOnSuccessListener,
         PertemuanContract.Model.AddTimeSlotOnSuccessListener,
-        PertemuanContract.Model.GetInvitesOnSuccessListener {
+        PertemuanContract.Model.GetInvitesOnSuccessListener,
+PertemuanContract.Model.ChangeInvitesOnSuccessListener{
     private PertemuanList pertemuan;
     private PertemuanContract.View ui;
     private PertemuanContract.View.PertemuanDibuat uiDibuat;
@@ -33,6 +34,7 @@ public class PertemuanPresenter implements
     private APIPertemuanDelete deletePertemuan;
     private APIPertemuanGetTimeSlot getTimeSlot;
     private APIPertemuanTambahTimeSlot tambahTimeSlot;
+    private APIPertemuanAcceptInvitation acceptInvitation;
     private InviteList getInvites;
 
     public PertemuanPresenter(PertemuanContract.View ui, Context context, MainPresenter mainPresenter) {
@@ -48,6 +50,7 @@ public class PertemuanPresenter implements
         this.getTimeSlot = new APIPertemuanGetTimeSlot(this, context);
         this.tambahTimeSlot = new APIPertemuanTambahTimeSlot(this, context);
         this.getInvites = new InviteList(this, context);
+        this.acceptInvitation = new APIPertemuanAcceptInvitation(this, context);
     }
 
     public void setUiDibuat(PertemuanContract.View.PertemuanDibuat ui) {
@@ -73,9 +76,6 @@ public class PertemuanPresenter implements
         this.pertemuan.getPertemuan(startDate, endDate);
     }
 
-    public void getInvites() {
-        this.getInvites.getInvites();
-    }
 
     @Override
     public void onSuccessGetDibuat(PertemuanList pertemuanList) {
@@ -213,6 +213,11 @@ public class PertemuanPresenter implements
         this.uiDibuat.openDetailPertemuanDibuat(pertemuan);
     }
 
+    
+    public void getInvites() {
+        this.getInvites.getInvites();
+    }
+
     @Override
     public void onSuccessGetInvites(InviteList invites) {
         this.uiDiundang.updatePertemuanDiundang(invites);
@@ -223,6 +228,24 @@ public class PertemuanPresenter implements
 
     }
 
+    public void openDetailUndangan(InviteList.Invites invite){
+        this.uiDiundang.openDetailPertemuanDiundang(invite);
+    }
+
+
+    public void acceptInvitation(String appointmentId){
+        this.acceptInvitation.acceptInvitation(appointmentId, APIClient.loggedInId);
+    }
+
+    @Override
+    public void onSuccessChangeInvites() {
+        this.uiDiundang.closeDetail();
+    }
+
+    @Override
+    public void onErrorChangeInvites() {
+
+    }
 }
 
 

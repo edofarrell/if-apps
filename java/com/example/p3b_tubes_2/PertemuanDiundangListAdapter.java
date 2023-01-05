@@ -20,6 +20,7 @@ public class PertemuanDiundangListAdapter extends BaseAdapter {
         protected TextView tvDate;
         protected TextView tvStartTime;
         protected TextView tvEndTime;
+        protected TextView tvAccepted;
         protected Button btnSeeDetails;
 
         public ViewHolder(ItemListPertemuanDiundangBinding binding, int i) {
@@ -29,13 +30,14 @@ public class PertemuanDiundangListAdapter extends BaseAdapter {
             this.tvStartTime = binding.tvStartTime;
             this.tvEndTime = binding.tvEndTime;
             this.btnSeeDetails = binding.btnSeeDetails;
+            this.tvAccepted = binding.tvAccepted;
 
             this.btnSeeDetails.setOnClickListener(this::openDetail);
         }
 
         private void openDetail(View view) {
-            InviteList.Invites invites = listInvites.getInvitation(i);
-//            presenter.getPartisipanPertemuanDiundang(pertemuan);
+            InviteList.Invites invite = listInvites.getInvitation(i);
+            presenter.openDetailUndangan(invite);
         }
 
         private void updateView(int i) {
@@ -45,6 +47,10 @@ public class PertemuanDiundangListAdapter extends BaseAdapter {
             this.tvDate.setText(invite.getDate());
             this.tvStartTime.setText(invite.getStartTime());
             this.tvEndTime.setText(invite.getEndTime());
+            if(invite.isAttending()){
+                tvAccepted.setVisibility(View.VISIBLE);
+                btnSeeDetails.setVisibility(View.GONE);
+            }
         }
     }
 
