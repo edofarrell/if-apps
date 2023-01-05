@@ -17,6 +17,7 @@ public class PertemuanDiundangFragment extends Fragment implements PertemuanCont
     private PertemuanDiundangListAdapter adapter;
     private PertemuanPresenter presenter;
     private FrameLayout frameLayout;
+    private PertemuanDetailUndanganFragment pertemuanDetailUndanganFragment;
 
     public static PertemuanDiundangFragment newInstance(PertemuanPresenter presenter, FrameLayout frameLayout) {
         PertemuanDiundangFragment fragment = new PertemuanDiundangFragment();
@@ -43,10 +44,16 @@ public class PertemuanDiundangFragment extends Fragment implements PertemuanCont
     }
 
     @Override
-    public void openDetailPertemuanDiundang(InviteList.Invites invites) {
-        /*PertemuanDetailFragment pertemuanDetailFragment = PertemuanDetailFragment.newInstance(getParentFragmentManager(), pertemuan);
-        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pertemuanDetailFragment)
+    public void openDetailPertemuanDiundang(InviteList.Invites invite) {
+        this.pertemuanDetailUndanganFragment = PertemuanDetailUndanganFragment.newInstance(getParentFragmentManager(), invite, this.presenter);
+        getParentFragmentManager().beginTransaction().replace(frameLayout.getId(), pertemuanDetailUndanganFragment)
                 .addToBackStack(null)
-                .commit();*/
+                .commit();
+    }
+
+    @Override
+    public void closeDetail() {
+        this.pertemuanDetailUndanganFragment.dismiss();
+        this.presenter.getInvites();
     }
 }

@@ -65,6 +65,11 @@ public interface PertemuanContract {
             void onSuccessGetInvites(InviteList invites);
             void onErrorGetInvites();
         }
+
+        interface ChangeInvitesOnSuccessListener{
+            void onSuccessChangeInvites();
+            void onErrorChangeInvites();
+        }
     }
 
     interface View {
@@ -84,6 +89,8 @@ public interface PertemuanContract {
             void updatePertemuanDiundang(InviteList listInvites);
 
             void openDetailPertemuanDiundang(InviteList.Invites invites);
+
+            void closeDetail();
         }
 
         void updateDibuat(PertemuanList pertemuanList);

@@ -62,4 +62,6 @@
     <string name="selanjutnya">Selanjutnya</string>
     <string name="tambah_slot_waktu">Tambah Slot Waktu</string>
     <string name="tambah_tag_pengumuman">Tambah Tag Pengumuman</string>
+    <string name="terima">Terima</string>
+    <string name="telahDiterima">Sudah Diterima</string>
 </resources>

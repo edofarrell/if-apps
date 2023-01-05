@@ -55,9 +55,15 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         LinearLayout layoutJadwal = binding.llJadwalDosen;
         layoutJadwal.setVisibility(View.GONE);
 
+        this.binding.btnSimpan.setOnClickListener(this::closePage);
+
         this.mainPresenter.getAllUser(this);
 
         return this.binding.getRoot();
+    }
+
+    private void closePage(View view) {
+
     }
 
     @Override
@@ -90,10 +96,6 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
 
     private void simpanPartisipan(View view) {
         this.pertemuanPresenter.addUserToPertemuan(new User[]{this.selectedUser}, this.idPertemuan);
-    }
-
-    private void addParticipant(View view) {
-
     }
 
     private void back(View view) {
