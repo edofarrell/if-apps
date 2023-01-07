@@ -18,6 +18,17 @@
         android:layout_marginLeft="@dimen/_10sp"
         android:text="DAA"
         android:textSize="@dimen/_20sp"
-        android:textColor="@color/black"></TextView>
+        android:textColor="@color/black"
+        android:layout_weight="0.9"></TextView>
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:text="delete"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="end"
+        android:layout_weight="0.1">
+
+    </Button>
 
 </LinearLayout>

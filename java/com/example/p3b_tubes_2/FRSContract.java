@@ -21,8 +21,13 @@ public interface FRSContract {
        }
 
        interface GetMataKuliahEnrolmentOnSuccessListener{
-           void OnSuccessGetMataKuliahEnrolment(ArrayList<String> listNamaMatkul);
+           void OnSuccessGetMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul);
            void OnErrorGetMataKuliahEnrolment();
+       }
+
+       interface EnrolStudentOnSuccessListener{
+           void OnSuccessEnrolStudent();
+           void OnErrorEnrolStudent(String nama, String kode);
        }
    }
 
@@ -31,6 +36,8 @@ public interface FRSContract {
         void openDetail(TahunAjaran.TahunAjar tahunAjar);
         void updateSearch(ArrayList<MataKuliahList.MataKuliah> listMataKuliah);
         void addToSelectedMataKuliah(MataKuliahList.MataKuliah matkul);
-        void updateMataKuliahEnrolment(ArrayList<String> listNamaMatkul);
+        void updateMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul);
+        void showErrorMataKuliahEnrol(String nama, String kode);
+        void showSuccessMataKuliahEnrol();
     }
 }

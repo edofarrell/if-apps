@@ -21,6 +21,7 @@ import com.example.p3b_tubes_2.MainPresenter;
 import com.example.p3b_tubes_2.Model.PengumumanList;
 import com.example.p3b_tubes_2.Model.TagList;
 import com.example.p3b_tubes_2.PengumumanContract;
+import com.example.p3b_tubes_2.PengumumanTambahTagFragment;
 import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
 import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentPengumumanBinding;

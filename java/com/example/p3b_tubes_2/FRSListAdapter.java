@@ -1,16 +1,13 @@
 package com.example.p3b_tubes_2;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.p3b_tubes_2.Presenter.FRSPresenter;
 import com.example.p3b_tubes_2.databinding.ItemListFrsBinding;
-
-import java.sql.Array;
-import java.util.ArrayList;
 
 public class FRSListAdapter extends BaseAdapter {
     private FRSPresenter presenter;

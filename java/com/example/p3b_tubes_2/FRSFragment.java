@@ -2,15 +2,14 @@ package com.example.p3b_tubes_2;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.p3b_tubes_2.Presenter.FRSPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentFrsBinding;
-import com.example.p3b_tubes_2.databinding.FragmentFrsDetailBinding;
 
 import java.util.ArrayList;
 
@@ -65,7 +64,17 @@ public class FRSFragment extends Fragment implements FRSContract.View{
     }
 
     @Override
-    public void updateMataKuliahEnrolment(ArrayList<String> listNamaMatkul) {
+    public void updateMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul) {
         detailFragment.setMataKuliahEnrolment(listNamaMatkul);
+    }
+
+    @Override
+    public void showErrorMataKuliahEnrol(String nama, String kode) {
+        detailFragment.showErrorMataKuliahEnrolment(nama,kode);
+    }
+
+    @Override
+    public void showSuccessMataKuliahEnrol() {
+        detailFragment.showToastSuccessStudentEnrolment();
     }
 }

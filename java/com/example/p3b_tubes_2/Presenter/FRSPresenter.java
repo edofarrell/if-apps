@@ -1,6 +1,12 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.Presenter;
 
 import android.content.Context;
+
+import com.example.p3b_tubes_2.FRSContract;
+import com.example.p3b_tubes_2.MainPresenter;
+import com.example.p3b_tubes_2.MataKuliahList;
+import com.example.p3b_tubes_2.Model.FRSList;
+import com.example.p3b_tubes_2.TahunAjaran;
 
 import org.json.JSONException;
 
@@ -9,14 +15,14 @@ import java.util.ArrayList;
 public class FRSPresenter implements FRSContract.Model.GetOnSuccessListener,
 FRSContract.Model.GetDetailOnSuccessListener,
 FRSContract.Model.GetSearchMataKuliahOnSuccessListener,
-FRSContract.Model.GetMataKuliahEnrolmentOnSuccessListener{
+FRSContract.Model.GetMataKuliahEnrolmentOnSuccessListener,
+FRSContract.Model.EnrolStudentOnSuccessListener{
 
     private FRSContract.View ui;
     private MainPresenter mainPresenter;
     private MataKuliahList mataKuliahList;
     private TahunAjaran tahunAjaran;
-    private APIFRSEnrolmentStudent enrolmentStudent;
-    private APIFRSGetEnrolmentStudent getEnrolmentStudent;
+    private FRSList frs;
     //TahunAjaran tahunAjaranList;
 
     public FRSPresenter(FRSContract.View ui, Context context, MainPresenter mainPresenter){
@@ -24,8 +30,7 @@ FRSContract.Model.GetMataKuliahEnrolmentOnSuccessListener{
         this.mainPresenter = mainPresenter;
         this.tahunAjaran = new TahunAjaran(this,context);
         this.mataKuliahList = new MataKuliahList(this,context);
-        this.enrolmentStudent = new APIFRSEnrolmentStudent(this,context);
-        this.getEnrolmentStudent = new APIFRSGetEnrolmentStudent(this,context);
+        this.frs = new FRSList(this,context);
     }
 
     public void getMataKuliah(String text){
@@ -41,11 +46,11 @@ FRSContract.Model.GetMataKuliahEnrolmentOnSuccessListener{
     }
 
     public void enrolStudent(String id, String academicYear) throws JSONException {
-        this.enrolmentStudent.enrolStudent(id,academicYear);
+        FRSList.enrollStudent(id,academicYear);
     }
 
     public void getMataKuliahEnrolment(String academicYear) throws JSONException {
-        this.getEnrolmentStudent.getEnrolmentStudent(academicYear);
+        FRSList.getEnrollmentStudent(academicYear);
     }
 
     public void getAcademicYears(){
@@ -83,12 +88,22 @@ FRSContract.Model.GetMataKuliahEnrolmentOnSuccessListener{
     }
 
     @Override
-    public void OnSuccessGetMataKuliahEnrolment(ArrayList<String> listNamaMatkul) {
+    public void OnSuccessGetMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul) {
         this.ui.updateMataKuliahEnrolment(listNamaMatkul);
     }
 
     @Override
     public void OnErrorGetMataKuliahEnrolment() {
 
+    }
+
+    @Override
+    public void OnSuccessEnrolStudent() {
+        this.ui.showSuccessMataKuliahEnrol();
+    }
+
+    @Override
+    public void OnErrorEnrolStudent(String nama, String kode) {
+        this.ui.showErrorMataKuliahEnrol(nama,kode);
     }
 }

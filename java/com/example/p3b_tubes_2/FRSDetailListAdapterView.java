@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.p3b_tubes_2.databinding.ItemListDetailFrsBinding;
+import com.example.p3b_tubes_2.Presenter.FRSPresenter;
 import com.example.p3b_tubes_2.databinding.ItemListDetailFrsViewBinding;
 
 import java.util.ArrayList;
@@ -22,7 +22,12 @@ public class FRSDetailListAdapterView extends BaseAdapter {
             this.i = i;
             this.matkul = binding.tvMatkul;
             binding.llMatkulView.setOnClickListener(this::onClick);
+            binding.btnDelete.setOnClickListener(this::delete);
+        }
 
+        private void delete(View view) {
+            listMataKuliah.remove(i);
+            notifyDataSetChanged();
         }
 
         private void updateView(int i) {
