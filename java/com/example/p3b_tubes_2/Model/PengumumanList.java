@@ -150,6 +150,10 @@ public class PengumumanList {
         this.metadata = metadata;
     }
 
+    public void clearCursor(){
+        this.metadata.next = "none";
+    }
+
     private class APIPengumumanGet implements Response.Listener<String>, Response.ErrorListener {
 
         public void fetchAll() {

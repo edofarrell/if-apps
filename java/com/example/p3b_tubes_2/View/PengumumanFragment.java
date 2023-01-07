@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,20 +71,22 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.binding.btnAddPengumuman.setOnClickListener(this::onClick);
         this.binding.btnAddPengumumanExpandable.setOnClickListener(this::addPengumuman);
         this.binding.btnAddTagPengumuman.setOnClickListener(this::addTag);
-//        this.binding.btnNext.setOnClickListener(this::onClickNext);
         this.binding.ivFilter.setOnClickListener(this::openFilter);
 
         this.chipGroup = this.binding.chipGrup;
         this.searchText = "";
 
-        if(!APIClient.role.equals("admin")) {
+        if (!APIClient.role.equals("admin")) {
             this.binding.btnAddPengumuman.setVisibility(View.GONE);
         }
 
-        this.binding.lvPengumuman.setOnScrollListener(new AbsListView.OnScrollListener() {
+        ListView lv = this.binding.lvPengumuman;
+        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if(!view.canScrollVertically(1)){
+                if (view.getLastVisiblePosition() == view.getAdapter().getCount() -1 &&
+                        view.getChildAt(view.getChildCount() - 1).getBottom() <= view.getHeight())
+                {
                     getNext();
                 }
             }
@@ -97,7 +101,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     private void addTag(View view) {
-        this.tambahTagFragment = PengumumanTambahTagFragment.newInstance(getParentFragmentManager());
+        this.tambahTagFragment = PengumumanTambahTagFragment.newInstance(getParentFragmentManager(), presenter);
     }
 
     @Override
@@ -126,7 +130,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         });
     }
 
-    public void onClickSearch(View view){
+    public void onClickSearch(View view) {
         this.binding.searchBar.onActionViewExpanded();
     }
 
@@ -136,7 +140,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     private void onClick(View view) {
-        if(!this.isFabsVisible) {
+        if (!this.isFabsVisible) {
             showExpandableFAB();
         } else {
             hideExpandableFAB();
@@ -146,8 +150,6 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private void addPengumuman(View view) {
         this.tambahFragment = PengumumanTambahFragment.newInstance(getParentFragmentManager(), this.presenter);
     }
-
-
 
     private void hideExpandableFAB() {
         this.binding.llExpandableFab.setVisibility(View.GONE);

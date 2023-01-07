@@ -11,24 +11,31 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
 import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentTambahTagBinding;
 
 public class PengumumanTambahTagFragment extends DialogFragment {
-    FragmentTambahTagBinding binding;
-    public static PengumumanTambahTagFragment newInstance(FragmentManager fm){
-        Bundle args = new Bundle();
+    private FragmentTambahTagBinding binding;
+    private PengumumanPresenter presenter;
+
+    public static PengumumanTambahTagFragment newInstance(FragmentManager fm, PengumumanPresenter presenter) {
         PengumumanTambahTagFragment fragment = new PengumumanTambahTagFragment();
-        fragment.setArguments(args);
+        fragment.presenter = presenter;
         fragment.show(fm, "tambahTag");
         return fragment;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.binding = FragmentTambahTagBinding.inflate(inflater);
+
+        this.binding.btnTambah.setOnClickListener(this::addTag);
+
         return binding.getRoot();
+    }
+
+    private void addTag(View view) {
     }
 
     @Override

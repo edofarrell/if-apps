@@ -37,10 +37,13 @@ public class PengumumanPresenter implements
 
     public void getPengumuman(String title, List<String> tags, boolean next) {
         if (!next) {
+            this.pengumuman.clearData();
             PengumumanList.getPengumumanAll(title, tags, "none");
         } else {
-            if (!this.pengumuman.getCursor().equals("none"))
-                PengumumanList.getPengumumanAll(title, tags, this.pengumuman.getCursor());
+            String cursor = this.pengumuman.getCursor();
+            this.pengumuman.clearCursor();
+            if (!cursor.equals("none"))
+                PengumumanList.getPengumumanAll(title, tags, cursor);
         }
     }
 
