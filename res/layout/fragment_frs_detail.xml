@@ -36,15 +36,17 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_10dp">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_bar"
+                android:layout_margin="@dimen/_10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10dp"
                 android:background="@drawable/custom_kotak_filter_pengumuman"
                 app:queryHint="@string/hintMatkul"
+                android:layout_marginTop="@dimen/_10dp"
                 />
 
             <TextView
@@ -62,7 +64,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_below="@id/tv_hasil_pencarian_matkul"
-                android:layout_margin="@dimen/_10dp">
+                android:layout_margin="@dimen/_10dp"
+                android:divider="@color/white"
+                android:dividerHeight="@dimen/_20sp"
+                android:clipToPadding="false">
 
             </ListView>
 
@@ -102,7 +107,10 @@
                     <ListView
                         android:id="@+id/tv_lv_matkuldipilih"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp">
+                        android:layout_height="200dp"
+                        android:divider="@color/white"
+                        android:dividerHeight="@dimen/_20sp"
+                        android:clipToPadding="false">
 
                     </ListView>
                 </LinearLayout>
