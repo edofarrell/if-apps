@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.p3b_tubes_2.Presenter.FRSPresenter;
 import com.example.p3b_tubes_2.databinding.ItemListFrsBinding;
 
 public class FRSListAdapter extends BaseAdapter {

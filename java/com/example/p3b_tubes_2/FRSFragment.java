@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.Presenter.MainPresenter;
+import com.example.p3b_tubes_2.Presenter.FRSPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentFrsBinding;
 
 import java.util.ArrayList;
@@ -64,7 +65,17 @@ public class FRSFragment extends Fragment implements FRSContract.View{
     }
 
     @Override
-    public void updateMataKuliahEnrolment(ArrayList<String> listNamaMatkul) {
+    public void updateMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul) {
         detailFragment.setMataKuliahEnrolment(listNamaMatkul);
+    }
+
+    @Override
+    public void showErrorMataKuliahEnrol(String nama, String kode) {
+        detailFragment.showErrorMataKuliahEnrolment(nama,kode);
+    }
+
+    @Override
+    public void showSuccessMataKuliahEnrol() {
+        detailFragment.showToastSuccessStudentEnrolment();
     }
 }

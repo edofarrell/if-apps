@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.p3b_tubes_2.Presenter.FRSPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentFrsDetailBinding;
 
 import org.json.JSONException;
@@ -64,9 +66,12 @@ public class FRSDetailFragment extends DialogFragment{
         this.binding.tvLvMatkuldipilih.setAdapter(adapterView);
         this.inflater = inflater;
         this.binding.btnAddMatkul.setOnClickListener(this::onClickAddMatkul);
+        this.binding.tvTitleError.setVisibility(View.GONE);
         if(!this.tahunAjar.toStringFormatAPI().equals(this.activeYear.toStringFormatAPI())){
             binding.searchBar.setVisibility(View.GONE);
             binding.btnAddMatkul.setVisibility(View.GONE);
+            binding.tvHasilPencarianMatkul.setText("Mata Kuliah yang dipilih");
+            binding.tvMatkulTerpilih.setVisibility(View.GONE);
             binding.tvLvMatkuldipilih.setVisibility(View.GONE);
             getMataKuliahEnrolment();
         }
@@ -104,6 +109,16 @@ public class FRSDetailFragment extends DialogFragment{
         });
     }
 
+    public void showErrorMataKuliahEnrolment(String nama, String kode){
+        this.binding.tvTitleError.setVisibility(View.VISIBLE);
+        this.binding.tvNamaMatkulError.setText(nama);
+        this.binding.tvKodeMatkulError.setText(kode);
+    }
+
+    public void showToastSuccessStudentEnrolment(){
+        Toast.makeText(getActivity(),"Enrolment Berhasil",Toast.LENGTH_SHORT).show();
+    }
+
     public void getMataKuliah(String text){
         this.presenter.getMataKuliah(text);
     }
@@ -121,12 +136,8 @@ public class FRSDetailFragment extends DialogFragment{
         this.adapterView.update(matkul);
     }
 
-    public void setMataKuliahEnrolment(ArrayList<String> listNamaMatkul){
-        ArrayList<MataKuliahList.MataKuliah> listMatkul = new ArrayList<>();
-        for(int i = 0;i<listNamaMatkul.size();i++){
-            listMatkul.get(i).setName(listNamaMatkul.get(i));
-        }
-        this.adapterSearch.update(listMatkul);
+    public void setMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul){
+        this.adapterSearch.update(listNamaMatkul);
     }
 
     public void getMataKuliahEnrolment(){
