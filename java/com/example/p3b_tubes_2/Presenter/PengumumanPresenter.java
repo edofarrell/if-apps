@@ -130,7 +130,7 @@ public class PengumumanPresenter implements
 
     @Override
     public void AddTagOnSuccess() {
-
+        this.ui.closeAddPage();;
     }
 
     @Override

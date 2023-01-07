@@ -30,12 +30,7 @@ public class PengumumanTambahTagFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.binding = FragmentTambahTagBinding.inflate(inflater);
 
-        this.binding.btnTambah.setOnClickListener(this::addTag);
-
         return binding.getRoot();
-    }
-
-    private void addTag(View view) {
     }
 
     @Override
@@ -61,6 +56,17 @@ public class PengumumanTambahTagFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         this.binding.appbar.setNavigationOnClickListener(this::onClickKembali);
+        this.binding.btnCancel.setOnClickListener(this::onClickKembali);
+        this.binding.btnTambah.setOnClickListener(this::addTag);
+    }
+
+    private void addTag(View view) {
+        String tagName = binding.etTag.getEditableText().toString();
+        if(tagName.trim().equals("")){
+            this.binding.tvError.setText("Nama tag harus diisi");
+        }else{
+            this.presenter.addTag(tagName);
+        }
     }
 
     private void onClickKembali(View view) {

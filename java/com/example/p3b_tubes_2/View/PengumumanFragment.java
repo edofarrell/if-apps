@@ -84,9 +84,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if (view.getLastVisiblePosition() == view.getAdapter().getCount() -1 &&
-                        view.getChildAt(view.getChildCount() - 1).getBottom() <= view.getHeight())
-                {
+                if (view.getLastVisiblePosition() == view.getAdapter().getCount() - 1 &&
+                        view.getChildAt(view.getChildCount() - 1).getBottom() <= view.getHeight()) {
                     getNext();
                 }
             }
@@ -101,6 +100,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     private void addTag(View view) {
+        this.hideExpandableFAB();
         this.tambahTagFragment = PengumumanTambahTagFragment.newInstance(getParentFragmentManager(), presenter);
     }
 
@@ -148,6 +148,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     private void addPengumuman(View view) {
+        this.hideExpandableFAB();
         this.tambahFragment = PengumumanTambahFragment.newInstance(getParentFragmentManager(), this.presenter);
     }
 
@@ -253,7 +254,12 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
     @Override
     public void closeAddPage() {
-        this.tambahFragment.dismiss();
+        if (this.tambahFragment != null && this.tambahFragment.isVisible()) {
+            this.tambahFragment.dismiss();
+        }
+        if (this.tambahTagFragment != null && this.tambahTagFragment.isVisible()) {
+            this.tambahTagFragment.dismiss();
+        }
     }
 
     @Override
