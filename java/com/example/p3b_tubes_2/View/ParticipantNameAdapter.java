@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.view.LayoutInflater;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,13 +8,16 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.p3b_tubes_2.FRSContract;
+import com.example.p3b_tubes_2.Model.MataKuliahList;
+import com.example.p3b_tubes_2.Model.TahunAjaran;
 import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Presenter.FRSPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentFrsBinding;
 
 import java.util.ArrayList;
 
-public class FRSFragment extends Fragment implements FRSContract.View{
+public class FRSFragment extends Fragment implements FRSContract.View {
     private FragmentFrsBinding binding;
     private FRSPresenter presenter;
     private FRSListAdapter adapter;

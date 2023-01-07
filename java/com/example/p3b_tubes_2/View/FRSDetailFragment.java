@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 
 
@@ -19,7 +19,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.p3b_tubes_2.Model.MataKuliahList;
 import com.example.p3b_tubes_2.Presenter.FRSPresenter;
+import com.example.p3b_tubes_2.R;
+import com.example.p3b_tubes_2.Model.TahunAjaran;
 import com.example.p3b_tubes_2.databinding.FragmentFrsDetailBinding;
 
 import org.json.JSONException;

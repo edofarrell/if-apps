@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -11,25 +11,28 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.p3b_tubes_2.databinding.FragmentFrsTambahMatkulBinding;
+import com.example.p3b_tubes_2.R;
+import com.example.p3b_tubes_2.databinding.FragmentFrsTambahBinding;
 
-public class FRSTambahMatkulFragment extends DialogFragment {
-    FragmentFrsTambahMatkulBinding binding;
+public class FRSTambahFragment extends DialogFragment {
+    FragmentFrsTambahBinding binding;
+    public static FRSTambahFragment newInstance(FragmentManager fm) {
 
-    public static FRSTambahMatkulFragment newInstance(FragmentManager fm) {
         Bundle args = new Bundle();
-        FRSTambahMatkulFragment fragment = new FRSTambahMatkulFragment();
+
+        FRSTambahFragment fragment = new FRSTambahFragment();
         fragment.setArguments(args);
-        fragment.show(fm, "tambahMatkulFRS");
+        fragment.show(fm, "tambahMatkul");
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.binding = FragmentFrsTambahMatkulBinding.inflate(inflater);
+        this.binding = FragmentFrsTambahBinding.inflate(inflater);
         return binding.getRoot();
     }
+
 
     @Override
     public void onStart() {

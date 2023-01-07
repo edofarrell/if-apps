@@ -13,7 +13,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.p3b_tubes_2.APIClient;
 import com.example.p3b_tubes_2.CustomJsonRequest;
 import com.example.p3b_tubes_2.Presenter.FRSPresenter;
-import com.example.p3b_tubes_2.MataKuliahList;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

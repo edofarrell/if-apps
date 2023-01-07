@@ -2,11 +2,10 @@ package com.example.p3b_tubes_2.Presenter;
 
 import android.content.Context;
 
-import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.FRSContract;
-import com.example.p3b_tubes_2.MataKuliahList;
+import com.example.p3b_tubes_2.Model.MataKuliahList;
 import com.example.p3b_tubes_2.Model.FRSList;
-import com.example.p3b_tubes_2.TahunAjaran;
+import com.example.p3b_tubes_2.Model.TahunAjaran;
 
 import org.json.JSONException;
 

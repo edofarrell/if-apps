@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.p3b_tubes_2.Model.MataKuliahList;
 import com.example.p3b_tubes_2.Presenter.FRSPresenter;
 import com.example.p3b_tubes_2.databinding.ItemListDetailFrsViewBinding;
 

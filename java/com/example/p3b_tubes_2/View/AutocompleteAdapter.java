@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.p3b_tubes_2.Model.User;
+import com.example.p3b_tubes_2.R;
 
 import java.util.ArrayList;
 import java.util.List;

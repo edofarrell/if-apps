@@ -6,20 +6,15 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.p3b_tubes_2.AutocompleteAdapter;
 import com.example.p3b_tubes_2.Model.TimeslotList;
 import com.example.p3b_tubes_2.Model.User;
-import com.example.p3b_tubes_2.ParticipantNameAdapter;
 import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.R;
