@@ -61,7 +61,8 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
             if(APIClient.role.equals("lecturer")) {
                 showExpandableFAB();
             }else{
-                this.openAddPertemuan(view);
+                TambahSlotWaktuFragment.newInstance(this.getParentFragmentManager());
+                //this.openAddPertemuan(view);
             }
         } else {
             hideExpandableFAB();

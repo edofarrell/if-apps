@@ -69,4 +69,13 @@
     <string name="telahDiterima">Sudah Diterima</string>
     <string name="tambahTag">Tambah Tag</string>
     <string name="tag">Tag</string>
+    <string-array name="dropdownHari">
+        <item>Senin</item>
+        <item>Selasa</item>
+        <item>Rabu</item>
+        <item>Kamis</item>
+        <item>Jumat</item>
+        <item>Sabtu</item>
+        <item>Minggu</item>
+    </string-array>
 </resources>
