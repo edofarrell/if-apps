@@ -2,15 +2,14 @@ package com.example.p3b_tubes_2;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentFrsBinding;
-import com.example.p3b_tubes_2.databinding.FragmentFrsDetailBinding;
 
 import java.util.ArrayList;
 
@@ -21,7 +20,7 @@ public class FRSFragment extends Fragment implements FRSContract.View{
     private FRSDetailFragment detailFragment;
     private TahunAjaran.TahunAjar activeYear;
     private FRSFragment(){}
-    public static FRSFragment newInstance(MainPresenter mainPresenter,Context context) {
+    public static FRSFragment newInstance(MainPresenter mainPresenter, Context context) {
         Bundle args = new Bundle();
         FRSFragment fragment = new FRSFragment();
         fragment.presenter = new FRSPresenter(fragment,context, mainPresenter);

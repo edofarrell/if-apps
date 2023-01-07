@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
+import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentTambahDetailPertemuanBinding;
 
@@ -116,5 +117,9 @@ public class TambahDetailPertemuanFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public void showError(String msg) {
+        this.binding.tvError.setText(msg);
     }
 }

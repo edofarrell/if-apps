@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -14,14 +14,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.p3b_tubes_2.Model.TimeSlot;
+import com.example.p3b_tubes_2.Presenter.MainPresenter;
+import com.example.p3b_tubes_2.Model.TimeslotList;
 import com.example.p3b_tubes_2.Model.User;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
+import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentAddPertemuanBinding;
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ public class TambahPertemuanFragment extends DialogFragment {
     private PertemuanPresenter pertemuanPresenter;
     private MainPresenter mainPresenter;
     private TambahPartisipanFragment tambahPartisipanFragment;
+    private TambahDetailPertemuanFragment tambahDetailPertemuanFragment;
     private ChipGroup chipGroup;
     private ArrayList<User> arrChipGroup;
 
@@ -44,7 +46,8 @@ public class TambahPertemuanFragment extends DialogFragment {
         fragment.mainPresenter = mainPresenter;
 
         fragment.fragments = new HashMap<>();
-        fragment.fragments.put("isiDetail", TambahDetailPertemuanFragment.newInstance(mainPresenter, pertemuanPresenter));
+        fragment.tambahDetailPertemuanFragment = TambahDetailPertemuanFragment.newInstance(mainPresenter, pertemuanPresenter);
+        fragment.fragments.put("isiDetail", fragment.tambahDetailPertemuanFragment);
 //        fragment.fragments.put("pilihPartisipan", TambahPartisipanPertemuanFragment.newInstance(mainPresenter, pertemuanPresenter));
         return fragment;
     }
@@ -129,14 +132,18 @@ public class TambahPertemuanFragment extends DialogFragment {
         fragment.addSelectedUser(users);
     }
 
-    public void updateTimeSlot(List<TimeSlot> timeSlot) {
+    public void updateTimeSlot(TimeslotList timeslotList) {
         TambahPartisipanPertemuanFragment fragment = (TambahPartisipanPertemuanFragment) this.fragments.get("pilihPartisipan");
-        fragment.updateTimeSlot(timeSlot);
+        fragment.updateTimeSlot(timeslotList);
     }
 
     public void openAddPartisipan(String idPertemuan){
         TambahPartisipanPertemuanFragment fragment = TambahPartisipanPertemuanFragment.newInstance(mainPresenter, pertemuanPresenter, idPertemuan);
         this.fragments.put("pilihPartisipan", fragment);
         this.changePage("pilihPartisipan");
+    }
+
+    public void showError(String msg) {
+        this.tambahDetailPertemuanFragment.showError(msg);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.Model.InviteList;
+import com.example.p3b_tubes_2.PertemuanContract;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanDiundangBinding;
 
-public class PertemuanDiundangFragment extends Fragment implements PertemuanContract.View.PertemuanDiundang{
+public class PertemuanDiundangFragment extends Fragment implements PertemuanContract.View.PertemuanDiundang {
     private FragmentPertemuanDiundangBinding binding;
     private PertemuanDiundangListAdapter adapter;
     private PertemuanPresenter presenter;

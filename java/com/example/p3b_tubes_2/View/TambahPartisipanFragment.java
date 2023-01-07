@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,21 +13,25 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.p3b_tubes_2.Model.TimeSlot;
+import com.example.p3b_tubes_2.AutocompleteAdapter;
+import com.example.p3b_tubes_2.Presenter.MainPresenter;
+import com.example.p3b_tubes_2.Model.TimeslotList;
 import com.example.p3b_tubes_2.Model.User;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
+import com.example.p3b_tubes_2.R;
+import com.example.p3b_tubes_2.UserContract;
 import com.example.p3b_tubes_2.databinding.FragmentTambahPartisipanBinding;
 
 import java.util.List;
 
 public class TambahPartisipanFragment extends DialogFragment implements
-    UserContract.View
+        UserContract.View
 {
     private FragmentTambahPartisipanBinding binding;
     private PertemuanPresenter pertemuanPresenter;
     private MainPresenter mainPresenter;
     private User selectedUser;
-    private PartisipanListAdapter timeSlotAdapter;
+    private TimeslotListAdapter timeSlotAdapter;
 
     public static TambahPartisipanFragment newInstance(FragmentManager fm, PertemuanPresenter pertemuanPresenter, MainPresenter mainPresenter) {
         TambahPartisipanFragment fragment = new TambahPartisipanFragment();
@@ -51,7 +55,7 @@ public class TambahPartisipanFragment extends DialogFragment implements
         super.onCreateView(inflater, container, savedInstanceState);
 
         this.binding = FragmentTambahPartisipanBinding.inflate(inflater);
-        this.timeSlotAdapter = new PartisipanListAdapter();
+        this.timeSlotAdapter = new TimeslotListAdapter();
         this.binding.lstTimeSlot.setAdapter(this.timeSlotAdapter);
 
         LinearLayout layoutJadwal = binding.llJadwalDosen;
@@ -109,7 +113,7 @@ public class TambahPartisipanFragment extends DialogFragment implements
         autoCompleteTextView.setAdapter(autocompleteAdapter);
     }
 
-    public void updateTimeSlot(List<TimeSlot> timeSlot){
-        this.timeSlotAdapter.update(timeSlot);
+    public void updateTimeSlot(TimeslotList timeslotList){
+        this.timeSlotAdapter.update(timeslotList);
     }
 }

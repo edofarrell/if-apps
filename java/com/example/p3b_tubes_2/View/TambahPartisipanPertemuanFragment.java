@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -13,9 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.p3b_tubes_2.Model.TimeSlot;
+import com.example.p3b_tubes_2.AutocompleteAdapter;
+import com.example.p3b_tubes_2.Presenter.MainPresenter;
+import com.example.p3b_tubes_2.Model.TimeslotList;
 import com.example.p3b_tubes_2.Model.User;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
+import com.example.p3b_tubes_2.R;
+import com.example.p3b_tubes_2.UserContract;
 import com.example.p3b_tubes_2.databinding.FragmentTambahPartisipanPertemuanBinding;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -29,7 +33,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
     private PertemuanPresenter pertemuanPresenter;
 
     private User selectedUser;
-    private PartisipanListAdapter timeSlotAdapter;
+    private TimeslotListAdapter timeSlotAdapter;
     private ChipGroup chipGroup;
     private ArrayList<User> arrChipGroup;
 
@@ -39,7 +43,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         TambahPartisipanPertemuanFragment fragment = new TambahPartisipanPertemuanFragment();
         fragment.mainPresenter = mainPresenter;
         fragment.pertemuanPresenter = pertemuanPresenter;
-        fragment.timeSlotAdapter = new PartisipanListAdapter();
+        fragment.timeSlotAdapter = new TimeslotListAdapter();
         fragment.arrChipGroup = new ArrayList<>();
         fragment.idPertemuan = idPertemuan;
 
@@ -51,7 +55,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = FragmentTambahPartisipanPertemuanBinding.inflate(inflater);
 
-        this.timeSlotAdapter = new PartisipanListAdapter();
+        this.timeSlotAdapter = new TimeslotListAdapter();
         this.binding.lstTimeSlot.setAdapter(this.timeSlotAdapter);
         this.chipGroup = binding.chipGroup;
 
@@ -159,8 +163,8 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         this.chipGroup.removeView(view);
     }
 
-    public void updateTimeSlot(List<TimeSlot> timeSlot) {
-        this.timeSlotAdapter.update(timeSlot);
+    public void updateTimeSlot(TimeslotList timeslotList) {
+        this.timeSlotAdapter.update(timeslotList);
     }
 
     @Override

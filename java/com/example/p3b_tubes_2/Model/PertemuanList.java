@@ -13,11 +13,15 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.p3b_tubes_2.APIClient;
+import com.example.p3b_tubes_2.APIError;
+import com.example.p3b_tubes_2.CustomJsonRequest;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -133,17 +137,30 @@ public class PertemuanList {
     }
 
     private ArrayList<Pertemuan> arr;
-    private PertemuanPresenter pertemuanPresenter;
+    private PertemuanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
     private static APIPertemuanGet apiGet;
+    private static APIPertemuanAdd apiAdd;
+    private static APIPertemuanDelete apiDelete;
+    private static APIPertemuanEdit apiEdit;
+    private static APIPertemuanGetParticipants apiGetParticipants;
+    private static APIPertemuanAddParticipants apiAddParticipants;
+    private static APIPertemuanDeleteParticipants apiDeleteParticipants;
 
     public PertemuanList(PertemuanPresenter presenter, Context context) {
         this.arr = new ArrayList<>();
-        this.pertemuanPresenter = presenter;
+        this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
+
         this.apiGet = new APIPertemuanGet();
+        this.apiAdd = new APIPertemuanAdd();
+        this.apiDelete = new APIPertemuanDelete();
+        this.apiEdit = new APIPertemuanEdit();
+        this.apiGetParticipants = new APIPertemuanGetParticipants();
+        this.apiAddParticipants = new APIPertemuanAddParticipants();
+        this.apiDeleteParticipants = new APIPertemuanDeleteParticipants();
     }
 
     public PertemuanList() {
@@ -189,7 +206,7 @@ public class PertemuanList {
         public void onResponse(String response) {
             Type listType = new TypeToken<ArrayList<Pertemuan>>() {}.getType();
             arr = gson.fromJson(response, listType);
-            pertemuanPresenter.onSuccessGetDibuat(PertemuanList.this);
+            presenter.onSuccessGetDibuat(PertemuanList.this);
         }
 
         @Override
@@ -241,7 +258,7 @@ public class PertemuanList {
         @Override
         public void onResponse(JSONObject response) {
             PertemuanList.Pertemuan newPertemuan = gson.fromJson(response.toString(), PertemuanList.Pertemuan.class);
-            pertemuanPresenter.onSuccessAdd(newPertemuan);
+            presenter.onSuccessAdd(newPertemuan);
         }
 
         @Override
@@ -249,15 +266,313 @@ public class PertemuanList {
             try {
                 String responseBody = new String(error.networkResponse.data, "utf-8");
                 Log.d("DEBUG", "PertemuanList: APIAddPertemuan: onErrorResponse(), Error=" + responseBody);
+
+                String msg;
+                APIError err = gson.fromJson(responseBody, APIError.class);
+                if(err.getErrcode().equals("E_OVERLAPPING_SCHEDULE")){
+                    msg = "Anda sudah memiliki pertemuan di jam tersebut";
+                }else{
+                    msg = responseBody;
+                }
+
+                presenter.onErrorAdd(msg);
             } catch (UnsupportedEncodingException e) {
                 Log.d("DEBUG", "PertemuanList: APIAddPertemuan: onErrorResponse() catch UnsupportedEncodingException");
             }
-//        this.presenter.onErrorAdd(res);
+        }
+    }
+
+    private class APIPertemuanDelete implements Response.Listener<JSONObject>, Response.ErrorListener {
+
+        public void delete(String idPertemuan) {
+            String url = APIClient.BASE_URL + "/appointments" + "/" + idPertemuan;
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.DELETE,
+                    url,
+                    null,
+                    this::onResponse,
+                    this::onErrorResponse
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
+                }
+            };
+
+            queue.add(request);
+        }
+
+        @Override
+        public void onResponse(JSONObject response) {
+            presenter.onSuccessDelete();
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "PertemuanList: APIPertemuanDelete: onErrorResponse(), Error=" + responseBody);
+                presenter.onErrorDelete(responseBody);
+            } catch (UnsupportedEncodingException e) {
+                Log.d("DEBUG", "PertemuanList: APIPertemuanDelete: onErrorResponse() catch UnsupportedEncodingException");
+            }
+        }
+    }
+
+    public class APIPertemuanEdit implements Response.Listener<JSONObject>, Response.ErrorListener {
+
+        public void edit(Pertemuan p){
+            String url = APIClient.BASE_URL + "/appointments/" + p.getId();
+
+            JSONObject JSON = null;
+            try {
+                JSON = new JSONObject(gson.toJson(p));
+            } catch (JSONException e) {
+                Log.d("DEBUG", "PertemuanList: APIPertemuanEdit: edit() catch JSONException");
+            }
+
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.PATCH,
+                    url,
+                    JSON,
+                    this::onResponse,
+                    this::onErrorResponse
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
+                }
+            };
+
+            queue.add(request);
+        }
+
+        @Override
+        public void onResponse(JSONObject response) {
+            PertemuanList.Pertemuan newPertemuan = gson.fromJson(response.toString(), PertemuanList.Pertemuan.class);
+            presenter.onSuccessChange();
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "PertemuanList: APIPertemuanEdit: onErrorResponse(), Error=" + responseBody);
+                presenter.onErrorChange(responseBody);
+            } catch (UnsupportedEncodingException e) {
+                Log.d("DEBUG", "PertemuanList: APIPertemuanEdit: onErrorResponse() catch UnsupportedEncodingException");
+            }
+        }
+    }
+
+    private class APIPertemuanGetParticipants implements Response.Listener<String>, Response.ErrorListener {
+
+        class Partisipan {
+            private String id;
+            private String name;
+            private boolean attending;
+        }
+
+        private PertemuanList.Pertemuan pertemuan;
+
+        public void getParticipants(PertemuanList.Pertemuan pertemuan) {
+            this.pertemuan = pertemuan;
+            String url = APIClient.BASE_URL + "/appointments/" + pertemuan.getId() + "/participants";
+
+            StringRequest request = new StringRequest(
+                    Request.Method.GET,
+                    url,
+                    this::onResponse,
+                    this::onErrorResponse
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
+                }
+            };
+
+            queue.add(request);
+        }
+
+        @Override
+        public void onResponse(String response) {
+            Type listType = new TypeToken<ArrayList<Partisipan>>() {}.getType();
+            ArrayList<Partisipan> partisipans = gson.fromJson(response, listType);
+
+            ArrayList<String> attending = new ArrayList<>();
+            for (int i = 0; i < partisipans.size(); i++) {
+                if (partisipans.get(i).attending) {
+                    attending.add(partisipans.get(i).name);
+                }
+            }
+
+            this.pertemuan.setPartisipan(attending);
+            presenter.onSuccessGetPartisipanDibuat(this.pertemuan);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "PertemuanList: APIPertemuanGetPartisipan: onErrorResponse(), Error=" + responseBody);
+                presenter.onErrorGetPartisipanDibuat(responseBody);
+            } catch (UnsupportedEncodingException e) {
+                Log.d("DEBUG", "PertemuanList: APIPertemuanGetPartisipan: onErrorResponse() catch UnsupportedEncodingException");
+            }
+        }
+    }
+
+    private class APIPertemuanAddParticipants implements Response.Listener<JSONArray>, Response.ErrorListener {
+        private User[] queryUsers;
+
+        public void addParticipants(User[] participants, String idPertemuan) {
+            this.queryUsers = participants;
+            String url = APIClient.BASE_URL + "/appointments" + "/" + idPertemuan + "/participants";
+
+            JsonObject json = new JsonObject();
+            JsonArray array = new JsonArray();
+            for (int i = 0; i < participants.length; i++) {
+                array.add(participants[i].getId());
+            }
+            json.add("participants", array);
+            JSONObject jsonObject = null;
+
+            try {
+                jsonObject = new JSONObject(json.toString());
+            } catch (JSONException e) {
+                Log.d("DEBUG", "PertemuanList: APIPertemuanAddParticipants: addParticipants() catch JSONException");
+            }
+
+            CustomJsonRequest request = new CustomJsonRequest(
+                    Request.Method.POST,
+                    url,
+                    jsonObject,
+                    this::onResponse,
+                    this::onErrorResponse
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
+                }
+            };
+
+            queue.add(request);
+        }
+
+        @Override
+        public void onResponse(JSONArray response) {
+            presenter.onSuccessAddParticipants(this.queryUsers);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "PertemuanList: APIPertemuanAddParticipants: onErrorResponse(), Error=" + responseBody);
+
+                String msg;
+                APIError err = gson.fromJson(responseBody, APIError.class);
+                if(err.getErrcode().equals("E_OVERLAPPING_SCHEDULE")){
+                    msg = "Orang tersebut sudah memiliki pertemuan di jam tersebut";
+                }else{
+                    msg = responseBody;
+                }
+
+                presenter.onErrorAddParticipants(msg);
+            } catch (UnsupportedEncodingException e) {
+                Log.d("DEBUG", "PertemuanList: APIPertemuanAddParticipants: onErrorResponse() catch UnsupportedEncodingException");
+            }
+        }
+    }
+
+    private class APIPertemuanDeleteParticipants implements Response.Listener<JSONArray>, Response.ErrorListener {
+
+        public void deleteParticipants(User[] users, String idPertemuan) {
+            String url = APIClient.BASE_URL + "/appointments" + "/" +idPertemuan+ "/participants" + "/delete";
+
+            JsonObject json = new JsonObject();
+            JsonArray array = new JsonArray();
+            for (int i = 0; i < users.length; i++) {
+                array.add(users[i].getId());
+            }
+            json.add("participants", array);
+
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(json.toString());
+            } catch (JSONException e) {
+                Log.d("DEBUG", "PertemuanList: APIPertemuanDeleteParticipants: deleteParticipants() catch JSONException");
+            }
+
+            CustomJsonRequest request = new CustomJsonRequest(
+                    Request.Method.POST,
+                    url,
+                    jsonObject,
+                    this::onResponse,
+                    this::onErrorResponse
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
+                }
+            };
+
+            queue.add(request);
+        }
+
+        @Override
+        public void onResponse(JSONArray response) {
+            presenter.onSuccessDeleteParticipants();
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "PertemuanList: APIPertemuanDeleteParticipants: onErrorResponse(), Error=" + responseBody);
+                presenter.onErrorDeleteParticipants(responseBody);
+            } catch (UnsupportedEncodingException e) {
+                Log.d("DEBUG", "PertemuanList: APIPertemuanDeleteParticipants: onErrorResponse() catch UnsupportedEncodingException");
+            }
         }
     }
 
     public static void fetch(String startDate, String endDate){
         apiGet.get(startDate, endDate);
+    }
+
+    public static void addPertemuan(String title, String description, String startTime, String endTime){
+        apiAdd.add(title, description, startTime, endTime);
+    }
+
+    public static void deletePertemuan(String id){
+        apiDelete.delete(id);
+    }
+
+    public static void editPertemuan(Pertemuan p){
+        apiEdit.edit(p);
+    }
+
+    public static void getParticipants(Pertemuan p){
+        apiGetParticipants.getParticipants(p);
+    }
+
+    public static void addParticipants(User[] participants, String idPertemuan){
+        apiAddParticipants.addParticipants(participants, idPertemuan);
+    }
+
+    public static void deleteParticipants(User[] users, String idPertemuan){
+        apiDeleteParticipants.deleteParticipants(users, idPertemuan);
     }
 
 }

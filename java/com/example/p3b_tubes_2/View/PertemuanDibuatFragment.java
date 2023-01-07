@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,14 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.p3b_tubes_2.APIClient;
+import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Model.PertemuanList;
-import com.example.p3b_tubes_2.Model.TimeSlot;
+import com.example.p3b_tubes_2.Model.TimeslotList;
 import com.example.p3b_tubes_2.Model.User;
+import com.example.p3b_tubes_2.PertemuanContract;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanDibuatBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
 
 public class PertemuanDibuatFragment extends Fragment implements PertemuanContract.View.PertemuanDibuat {
     private FragmentPertemuanDibuatBinding binding;
@@ -126,8 +127,8 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     }
 
     @Override
-    public void updateTimeSlot(List<TimeSlot> timeSlot) {
-        this.tambahPertemuanFragment.updateTimeSlot(timeSlot);
+    public void updateTimeSlot(TimeslotList timeslotList) {
+        this.tambahPertemuanFragment.updateTimeSlot(timeslotList);
     }
 
     @Override
@@ -138,5 +139,10 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     @Override
     public void closeAddPage() {
         this.tambahSlotWaktuFragment.dismiss();
+    }
+
+    @Override
+    public void showErrorAddPertemuan(String msg) {
+        this.tambahPertemuanFragment.showError(msg);
     }
 }
