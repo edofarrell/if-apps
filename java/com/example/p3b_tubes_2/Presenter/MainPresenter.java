@@ -26,6 +26,10 @@ public class MainPresenter implements UserContract.Model.GetOnSucessListener {
         this.userPresenter.getUsers();
     }
 
+    public void getFilteredUser(String filter){
+        this.userPresenter.getUsers(filter);
+    }
+
     @Override
     public void onSuccessGet(List<User> data) {
         this.ui.update(data);
@@ -34,5 +38,9 @@ public class MainPresenter implements UserContract.Model.GetOnSucessListener {
     @Override
     public void onErrorGet(String msg) {
 
+    }
+
+    public void selectUser(User user){
+        this.ui.selectUser(user);
     }
 }

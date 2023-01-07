@@ -84,26 +84,6 @@ public class User {
 
     private class APIUsersGet implements Response.Listener<String>, Response.ErrorListener {
 
-        public void getUsers() {
-            String url = APIClient.BASE_URL + "/users";
-
-            StringRequest request = new StringRequest(
-                    Request.Method.GET,
-                    url,
-                    this::onResponse,
-                    this::onErrorResponse
-            ) {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("Authorization", APIClient.token);
-                    return params;
-                }
-            };
-
-            queue.add(request);
-        }
-
         public void getUsers(String filter) {
             String url = APIClient.BASE_URL + "/users?filter[name]=" + filter;
 
@@ -193,14 +173,14 @@ public class User {
 //        json.addProperty("email", email);
 //        json.addProperty("password", password);
 //        json.addProperty("role", role);
-            json.addProperty("email", "default.admin@domain.local");
-            json.addProperty("password", "mu8XyUogLi6Dk7");
-            json.addProperty("role", "admin");
-            role = "admin";
-//        json.addProperty("email", "halodearen@mail.com");
-//        json.addProperty("password", "halodearen");
-//        json.addProperty("role", "lecturer");
-//        role = "lecturer";
+//            json.addProperty("email", "default.admin@domain.local");
+//            json.addProperty("password", "mu8XyUogLi6Dk7");
+//            json.addProperty("role", "admin");
+//            role = "admin";
+        json.addProperty("email", "halodearen@mail.com");
+        json.addProperty("password", "halodearen");
+        json.addProperty("role", "lecturer");
+        role = "lecturer";
             JSONObject jsonObject = null;
             try {
                 jsonObject = new JSONObject(json.toString());
@@ -246,7 +226,11 @@ public class User {
     }
 
     public static void getUsers() {
-        apiGetAll.getUsers();
+        apiGetAll.getUsers("");
+    }
+
+    public static void getFilteredUsers(String filter){
+        apiGetAll.getUsers(filter);
     }
 
     public static void getUser() {

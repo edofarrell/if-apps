@@ -7,14 +7,19 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.p3b_tubes_2.Model.User;
+import com.example.p3b_tubes_2.Presenter.MainPresenter;
+import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
+import com.example.p3b_tubes_2.Presenter.UserPresenter;
 import com.example.p3b_tubes_2.databinding.ItemListFrsBinding;
 import com.example.p3b_tubes_2.databinding.ItemListNamaBinding;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ParticipantNameAdapter extends BaseAdapter {
-    ArrayList<User> userArrayList;
+    List<User> userArrayList;
+    MainPresenter presenter;
 
     private class ViewHolder {
         private int i;
@@ -30,16 +35,20 @@ public class ParticipantNameAdapter extends BaseAdapter {
         }
 
         private void onClick(View view) {
+            User user = userArrayList.get(i);
+            presenter.selectUser(user);
         }
 
         private void updateView(int i) {
+            this.i = i;
             User user = userArrayList.get(i);
             this.tvNama.setText(user.getName());
         }
     }
 
-    public ParticipantNameAdapter() {
+    public ParticipantNameAdapter(MainPresenter presenter) {
         this.userArrayList = new ArrayList<>();
+        this.presenter= presenter;
     }
 
     @Override
@@ -74,5 +83,10 @@ public class ParticipantNameAdapter extends BaseAdapter {
         viewHolder.updateView(position);
 
         return convertView;
+    }
+
+    public void update(List<User> users){
+        this.userArrayList = users;
+        notifyDataSetChanged();
     }
 }

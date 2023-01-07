@@ -21,5 +21,6 @@ public interface UserContract {
     interface View {
         void update(List<User> data);
         void updateProfile(User user);
+        void selectUser(User user);
     }
 }

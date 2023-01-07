@@ -49,6 +49,10 @@ public class UserPresenter implements
         User.getUsers();
     }
 
+    public void getUsers(String filter){
+        User.getFilteredUsers(filter);
+    }
+
     @Override
     public void onSuccessGet(List<User> data) {
         this.mainPresenter.onSuccessGet(data);

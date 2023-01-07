@@ -66,4 +66,9 @@ public class ProfilFragment extends Fragment implements UserContract.View{
     public void updateProfile(User user) {
         this.user = user;
     }
+
+    @Override
+    public void selectUser(User user) {
+
+    }
 }

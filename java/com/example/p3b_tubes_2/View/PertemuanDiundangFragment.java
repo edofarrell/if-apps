@@ -48,7 +48,7 @@ public class PertemuanDiundangFragment extends Fragment implements PertemuanCont
 
     @Override
     public void openDetailPertemuanDiundang(InviteList.Invites invite) {
-        PertemuanDetailUndanganFragment.newInstance(getParentFragmentManager(), invite, this.presenter);
+        this.pertemuanDetailUndanganFragment = PertemuanDetailUndanganFragment.newInstance(getParentFragmentManager(), invite, this.presenter);
     }
 
     @Override

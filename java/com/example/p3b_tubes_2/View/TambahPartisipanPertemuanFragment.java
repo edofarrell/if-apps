@@ -51,7 +51,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         fragment.mainPresenter = mainPresenter;
         fragment.pertemuanPresenter = pertemuanPresenter;
         fragment.timeSlotAdapter = new TimeslotListAdapter();
-        fragment.participantNameAdapter = new ParticipantNameAdapter();
+        fragment.participantNameAdapter = new ParticipantNameAdapter(fragment.mainPresenter);
         fragment.arrChipGroup = new ArrayList<>();
         fragment.idPertemuan = idPertemuan;
 
@@ -65,7 +65,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
 
         this.timeSlotAdapter = new TimeslotListAdapter();
         this.binding.lstTimeSlot.setAdapter(this.timeSlotAdapter);
-        this.participantNameAdapter = new ParticipantNameAdapter();
+        this.participantNameAdapter = new ParticipantNameAdapter(this.mainPresenter);
         this.binding.lstNames.setAdapter(participantNameAdapter);
         this.chipGroup = binding.chipGroup;
 
@@ -100,6 +100,11 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                mainPresenter.getFilteredUser(newText);
+                if(binding.llJadwalDosen.isShown()){
+                    binding.llJadwalDosen.setVisibility(View.GONE);
+                }
+                binding.lstNames.setVisibility(View.VISIBLE);
                 return false;
             }
         };
@@ -196,14 +201,29 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
 
     @Override
     public void update(List<User> data) {
-        AutocompleteAdapter autocompleteAdapter = new AutocompleteAdapter(getContext(), 0, data);
-        autocompleteAdapter.getFilter().filter("");
-        SearchView autoCompleteTextView = binding.actvChooseParticipant;
+        this.participantNameAdapter.update(data);
+//        AutocompleteAdapter autocompleteAdapter = new AutocompleteAdapter(getContext(), 0, data);
+//        autocompleteAdapter.getFilter().filter("");
+//        SearchView autoCompleteTextView = binding.actvChooseParticipant;
         /*autoCompleteTextView.setAdapter(autocompleteAdapter);*/
     }
 
     @Override
     public void updateProfile(User user) {
+
+    }
+
+    @Override
+    public void selectUser(User user) {
+        this.selectedUser = user;
+        this.binding.actvChooseParticipant.setQuery(user.getName(), true);
+        this.binding.lstNames.setVisibility(View.GONE);
+        if (user.isDosen()) {
+            binding.llJadwalDosen.setVisibility(View.VISIBLE);
+            pertemuanPresenter.getTimeSlot(selectedUser.getId());
+        } else {
+            binding.llJadwalDosen.setVisibility(View.GONE);
+        }
 
     }
 }
