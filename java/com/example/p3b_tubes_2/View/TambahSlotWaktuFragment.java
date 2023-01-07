@@ -13,13 +13,18 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 
+import com.example.p3b_tubes_2.APIClient;
+import com.example.p3b_tubes_2.Model.TimeslotList;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentTambahSlotWaktuBinding;
 
+import java.util.List;
+
 public class TambahSlotWaktuFragment extends DialogFragment {
     private FragmentTambahSlotWaktuBinding binding;
     private PertemuanPresenter presenter;
+    private TimeslotListAdapter timeslotListAdapter;
 
     public static TambahSlotWaktuFragment newInstance(FragmentManager fm, PertemuanPresenter presenter) {
         TambahSlotWaktuFragment fragment = new TambahSlotWaktuFragment();
@@ -45,9 +50,18 @@ public class TambahSlotWaktuFragment extends DialogFragment {
         ArrayAdapter arrayAdapter = new ArrayAdapter(this.getContext(), R.layout.login_dropdown_item, hari);
         binding.etHari.setAdapter(arrayAdapter);
 
+        this.timeslotListAdapter = new TimeslotListAdapter();
+        binding.lstTimeSlot.setAdapter(this.timeslotListAdapter);
+
+        this.presenter.getTimeSlot(APIClient.loggedInId);
+
         setTime();
 
         return binding.getRoot();
+    }
+
+    public void updateTimeSlot(TimeslotList timeslotList) {
+        this.timeslotListAdapter.update(timeslotList);
     }
 
     private void setTime() {

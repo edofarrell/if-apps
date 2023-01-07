@@ -137,6 +137,8 @@ public class PertemuanFragment extends Fragment implements
 
     @Override
     public void updateTimeSlot(TimeslotList timeslotList) {
-        this.pertemuanDibuatFragment.updateTimeSlot(timeslotList);
+        if(this.pertemuanDibuatFragment != null) {
+            this.pertemuanDibuatFragment.updateTimeSlot(timeslotList);
+        }
     }
 }

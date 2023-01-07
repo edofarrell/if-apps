@@ -142,10 +142,12 @@ public class TambahPertemuanFragment extends DialogFragment {
 
     public void updateTimeSlot(TimeslotList timeslotList) {
         TambahPartisipanPertemuanFragment fragment = (TambahPartisipanPertemuanFragment) this.fragments.get("pilihPartisipan");
-        fragment.updateTimeSlot(timeslotList);
+        if (fragment != null) {
+            fragment.updateTimeSlot(timeslotList);
+        }
     }
 
-    public void openAddPartisipan(String idPertemuan){
+    public void openAddPartisipan(String idPertemuan) {
         TambahPartisipanPertemuanFragment fragment = TambahPartisipanPertemuanFragment.newInstance(mainPresenter, pertemuanPresenter, idPertemuan);
         this.fragments.put("pilihPartisipan", fragment);
         this.changePage("pilihPartisipan");
