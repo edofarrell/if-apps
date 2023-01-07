@@ -99,7 +99,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/red"
             android:textSize="@dimen/_16sp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            />
 
     </LinearLayout>
 </RelativeLayout>
