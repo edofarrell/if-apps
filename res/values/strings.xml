@@ -69,4 +69,6 @@
     <string name="telahDiterima">Sudah Diterima</string>
     <string name="tambahTag">Tambah Tag</string>
     <string name="tag">Tag</string>
+    <string name="namaMatakuliah">Nama Matakuliah</string>
+
 </resources>

@@ -21,10 +21,16 @@ public class FRSDetailListAdapterView extends BaseAdapter {
         public ViewHolder(ItemListDetailFrsViewBinding binding, int i){
             this.i = i;
             this.matkul = binding.tvMatkul;
+            binding.llMatkulView.setOnClickListener(this::onClick);
+
         }
 
         private void updateView(int i) {
             this.matkul.setText(listMataKuliah.get(i).getName());
+        }
+
+        private void onClick(View view){
+
         }
     }
 
