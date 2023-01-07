@@ -67,4 +67,6 @@
     <string name="matkulTerpilih">Matakuliah Terpilih</string>
     <string name="terima">Terima</string>
     <string name="telahDiterima">Sudah Diterima</string>
+    <string name="tambahTag">Tambah Tag</string>
+    <string name="tag">Tag</string>
 </resources>
