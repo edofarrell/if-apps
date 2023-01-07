@@ -1,5 +1,8 @@
 package com.example.p3b_tubes_2;
 
+import com.example.p3b_tubes_2.Model.MataKuliahList;
+import com.example.p3b_tubes_2.Model.TahunAjaran;
+
 import java.util.ArrayList;
 
 public interface FRSContract {

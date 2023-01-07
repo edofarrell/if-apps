@@ -13,9 +13,11 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.p3b_tubes_2.Presenter.MainPresenter;
-import com.example.p3b_tubes_2.Presenter.UserPresenter;
+import com.example.p3b_tubes_2.View.FRSFragment;
+import com.example.p3b_tubes_2.View.LoginFragment;
 import com.example.p3b_tubes_2.View.PengumumanFragment;
 import com.example.p3b_tubes_2.View.PertemuanFragment;
+import com.example.p3b_tubes_2.View.ProfilFragment;
 import com.example.p3b_tubes_2.databinding.ActivityMainBinding;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,13 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.p3b_tubes_2.LoginContract;
 import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Presenter.UserPresenter;
+import com.example.p3b_tubes_2.R;
+import com.example.p3b_tubes_2.UserContract;
 import com.example.p3b_tubes_2.databinding.FragmentLoginBinding;
 
 import org.json.JSONException;
 
-public class LoginFragment extends Fragment implements LoginContract.View{
+public class LoginFragment extends Fragment implements LoginContract.View {
     private FragmentLoginBinding fragmentLoginBinding;
     private UserPresenter presenter;
 
