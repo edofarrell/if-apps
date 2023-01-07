@@ -1,6 +1,7 @@
 package com.example.p3b_tubes_2;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.fragments.put("pengumuman", PengumumanFragment.newInstance(mainPresenter, this, this.binding.fragmentContainer));
         this.fragments.put("pertemuan", PertemuanFragment.newInstance(mainPresenter, this, this.binding.fragmentContainer));
-        this.fragments.put("frs", FRSFragment.newInstance(mainPresenter,this));
+        this.fragments.put("frs", FRSFragment.newInstance(mainPresenter, this));
         this.fragments.put("profil", ProfilFragment.newInstance());
         this.fragments.put("login", LoginFragment.newInstance(mainPresenter, this, (ProfilFragment) this.fragments.get("profil")));
         this.fm = getSupportFragmentManager();
@@ -97,6 +98,22 @@ public class MainActivity extends AppCompatActivity {
                 changePage(page);
             }
         });
+
+        this.fm.setFragmentResultListener("hideMenuItem", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                boolean hide = result.getBoolean("hideMenuItem");
+                hideMenu(hide);
+            }
+        });
+    }
+
+    private void hideMenu(boolean hide) {
+        if (hide) {
+            if (!APIClient.role.equals("student")) {
+                binding.bottomNavigation.getMenu().removeItem(R.id.item_frs);
+            }
+        }
     }
 
     private void changePage(String page) {
@@ -129,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeAppBarElevation(String page) {
-        if(page.equals("pertemuan")) {
+        if (page.equals("pertemuan")) {
             this.binding.appbarTopAppBar.setElevation(0f);
         } else {
             this.binding.appbarTopAppBar.setElevation(8.0f);

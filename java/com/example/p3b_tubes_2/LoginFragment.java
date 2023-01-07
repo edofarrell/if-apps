@@ -85,6 +85,10 @@ public class LoginFragment extends Fragment implements LoginContract.View{
             Bundle result = new Bundle();
             result.putString("page", "pengumuman");
             getParentFragmentManager().setFragmentResult("changePage", result);
+
+            result = new Bundle();
+            result.putBoolean("hideMenuItem", true);
+            getParentFragmentManager().setFragmentResult("hideMenuItem", result);
         }
     }
 
