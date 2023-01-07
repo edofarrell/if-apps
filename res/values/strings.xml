@@ -79,4 +79,5 @@
         <item>Minggu</item>
     </string-array>
     <string name="namaMatakuliah">Nama Matakuliah</string>
+    <string name="infoPentingFRS">Penting: Hanya dapat enroll satu matakuliah per satu kali enroll</string>
 </resources>
