@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -14,6 +14,9 @@ import androidx.fragment.app.DialogFragment;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.p3b_tubes_2.Model.TagList;
+import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
+import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentTambahPengumumanBinding;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;

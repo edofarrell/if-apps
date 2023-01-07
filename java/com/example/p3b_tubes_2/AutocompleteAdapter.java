@@ -1,7 +1,6 @@
 package com.example.p3b_tubes_2;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.p3b_tubes_2.Model.User;
 
 import java.util.ArrayList;
 import java.util.List;

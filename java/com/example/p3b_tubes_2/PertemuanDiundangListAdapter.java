@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.p3b_tubes_2.Model.InviteList;
+import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.databinding.ItemListPertemuanDiundangBinding;
 
 public class PertemuanDiundangListAdapter extends BaseAdapter {

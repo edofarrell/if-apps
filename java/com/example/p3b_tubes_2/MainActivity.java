@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.p3b_tubes_2.View.PengumumanFragment;
 import com.example.p3b_tubes_2.databinding.ActivityMainBinding;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

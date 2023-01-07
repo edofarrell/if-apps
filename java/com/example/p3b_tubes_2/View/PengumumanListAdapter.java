@@ -1,13 +1,9 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +11,12 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 
+import com.example.p3b_tubes_2.APIClient;
+import com.example.p3b_tubes_2.Model.PengumumanList;
+import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
+import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.ItemListPengumumanBinding;
 
 public class PengumumanListAdapter extends BaseAdapter {

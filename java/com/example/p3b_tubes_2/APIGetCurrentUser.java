@@ -10,6 +10,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.p3b_tubes_2.Model.User;
+import com.example.p3b_tubes_2.Presenter.UserPresenter;
 import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;

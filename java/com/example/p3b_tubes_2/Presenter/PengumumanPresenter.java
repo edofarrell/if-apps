@@ -1,6 +1,12 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.Presenter;
 
 import android.content.Context;
+import android.util.Log;
+
+import com.example.p3b_tubes_2.MainPresenter;
+import com.example.p3b_tubes_2.Model.PengumumanList;
+import com.example.p3b_tubes_2.Model.TagList;
+import com.example.p3b_tubes_2.PengumumanContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +58,11 @@ public class PengumumanPresenter implements
 
     //Add pengumuman
     public void addPengumuman(String title, String content, String[] tags) {
-        PengumumanList.addPengumuman(title, content, tags);
+//        for(int i=0;i<tags.length; i++){
+//            Log.d("DEBUG", tags[i]);
+//        }
+        Log.d("DEBUG", tags.length+"");
+//        PengumumanList.addPengumuman(title, content, tags);
     }
 
     @Override

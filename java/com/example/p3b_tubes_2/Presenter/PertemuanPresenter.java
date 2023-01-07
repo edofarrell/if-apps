@@ -1,6 +1,23 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.Presenter;
 
 import android.content.Context;
+
+import com.example.p3b_tubes_2.APIClient;
+import com.example.p3b_tubes_2.APIPertemuanAcceptInvitation;
+import com.example.p3b_tubes_2.APIPertemuanAdd;
+import com.example.p3b_tubes_2.APIPertemuanAddParticipants;
+import com.example.p3b_tubes_2.APIPertemuanChange;
+import com.example.p3b_tubes_2.APIPertemuanDelete;
+import com.example.p3b_tubes_2.APIPertemuanDeleteParticipants;
+import com.example.p3b_tubes_2.APIPertemuanGetPartisipan;
+import com.example.p3b_tubes_2.APIPertemuanGetTimeSlot;
+import com.example.p3b_tubes_2.APIPertemuanTambahTimeSlot;
+import com.example.p3b_tubes_2.MainPresenter;
+import com.example.p3b_tubes_2.Model.InviteList;
+import com.example.p3b_tubes_2.Model.PertemuanList;
+import com.example.p3b_tubes_2.Model.TimeSlot;
+import com.example.p3b_tubes_2.Model.User;
+import com.example.p3b_tubes_2.PertemuanContract;
 
 import org.json.JSONException;
 
@@ -20,7 +37,7 @@ public class PertemuanPresenter implements
         PertemuanContract.Model.GetTimeSlotOnSuccessListener,
         PertemuanContract.Model.AddTimeSlotOnSuccessListener,
         PertemuanContract.Model.GetInvitesOnSuccessListener,
-PertemuanContract.Model.ChangeInvitesOnSuccessListener{
+        PertemuanContract.Model.ChangeInvitesOnSuccessListener{
     private PertemuanList pertemuan;
     private PertemuanContract.View ui;
     private PertemuanContract.View.PertemuanDibuat uiDibuat;

@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -9,9 +9,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.p3b_tubes_2.Model.PengumumanList;
+import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentDetailPengumumanBinding;
 
 public class PengumumanDetailFragment extends DialogFragment {

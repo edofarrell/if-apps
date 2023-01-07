@@ -1,5 +1,8 @@
 package com.example.p3b_tubes_2;
 
+import com.example.p3b_tubes_2.Model.PengumumanList;
+import com.example.p3b_tubes_2.Model.TagList;
+
 import java.util.ArrayList;
 
 public interface PengumumanContract {
