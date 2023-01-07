@@ -21,14 +21,13 @@
             app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/appbar_layout"
-        android:fillViewport="true"
         android:paddingLeft="@dimen/_16dp"
-        android:paddingRight="@dimen/_16dp">
+        android:paddingRight="@dimen/_16dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,39 +38,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/_16dp"
-                android:layout_weight="3"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_16dp"
-                    android:text="Daftar Tag"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="@color/background"
-                    app:strokeColor="@color/grey"
-                    app:strokeWidth="1dp">
-
-                    <ListView
-                        android:id="@+id/lst_tag"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="7"
                 android:orientation="vertical">
 
                 <TextView
@@ -94,14 +60,19 @@
                         android:layout_height="wrap_content"
                         android:hint="Masukkan judul tag" />
                 </com.google.android.material.textfield.TextInputLayout>
-
+                <TextView
+                    android:id="@+id/tv_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/_20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20dp"
                     android:layout_marginBottom="@dimen/_16dp"
-
                     android:gravity="right">
 
                     <Button
@@ -110,16 +81,53 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tambah" />
                 </LinearLayout>
+
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_error"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sp"
-                android:textAlignment="center"
-                android:textColor="@color/red"
-                android:textSize="@dimen/_20sp" />
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_16dp"
+                    android:text="Daftar Tag"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    app:cardBackgroundColor="@color/background"
+                    app:strokeColor="@color/grey"
+                    app:strokeWidth="1dp">
+
+                    <ListView
+                        android:id="@+id/lst_tag"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:divider="@color/white"
+                        android:dividerHeight="@dimen/_20sp"
+                        android:padding="@dimen/_15dp"
+                        android:clipToPadding="false"/>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+
+
+
+
+
+
         </LinearLayout>
     </ScrollView>
+
+
+
+
 </RelativeLayout>
