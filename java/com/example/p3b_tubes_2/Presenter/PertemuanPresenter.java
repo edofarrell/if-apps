@@ -87,12 +87,12 @@ public class PertemuanPresenter implements
         calendar.setTime(new Date());
         calendar.add(Calendar.DATE, 7);
 
-        this.pertemuan.getPertemuan(formatter.format(new Date()), formatter.format(calendar.getTime()));
+       PertemuanList.fetch(formatter.format(new Date()), formatter.format(calendar.getTime()));
 //        this.pertemuan.getPertemuan(formatter.format(calendar.getTime()), formatter.format(new Date()));
     }
 
     public void getPertemuanDibuat(String startDate, String endDate) {
-        this.pertemuan.getPertemuan(startDate, endDate);
+        PertemuanList.fetch(startDate, endDate);
     }
 
 
