@@ -1,10 +1,16 @@
 package com.example.p3b_tubes_2;
 
+
+
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +33,7 @@ public class FRSDetailFragment extends DialogFragment{
     private FRSPresenter presenter;
     private FRSTambahFragment frsTambahFragmentfragment;
     private String searchText;
+    private LayoutInflater inflater;
 
     public static FRSDetailFragment newInstance(FragmentManager fm,
                                                 FRSPresenter presenter, TahunAjaran.TahunAjar tahunAjar) {
@@ -51,6 +58,7 @@ public class FRSDetailFragment extends DialogFragment{
         this.binding.appbar.setTitle(tahunAjar.toString());
         this.binding.tvLvMatkul.setAdapter(adapterSearch);
         this.binding.tvLvMatkuldipilih.setAdapter(adapterView);
+        this.inflater = inflater;
         this.binding.btnAddMatkul.setOnClickListener(this::onClickAddMatkul);
         return binding.getRoot();
     }
@@ -131,4 +139,31 @@ public class FRSDetailFragment extends DialogFragment{
             }
         }
     }
+
+    public void onButtonShowPopupWindowClick(View view) {
+
+        // inflate the layout of the popup window
+        View popupView = this.inflater.inflate(R.layout.popup_prasyarat_matkul, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }
+
+
 }

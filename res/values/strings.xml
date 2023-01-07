@@ -78,4 +78,5 @@
         <item>Sabtu</item>
         <item>Minggu</item>
     </string-array>
+    <string name="namaMatakuliah">Nama Matakuliah</string>
 </resources>
