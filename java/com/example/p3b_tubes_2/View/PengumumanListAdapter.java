@@ -44,7 +44,7 @@ public class PengumumanListAdapter extends BaseAdapter {
             binding.btnDetail.setOnClickListener(this::openDetail);
             binding.btnDelete.setOnClickListener(this::onClickDelete);
 
-            if(APIClient.role.equals("student")){
+            if(!APIClient.role.equals("admin")){
                 binding.btnDelete.setVisibility(View.GONE);
             }
 

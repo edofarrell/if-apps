@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
         AppBarLayout topAppBar = binding.appbarTopAppBar;
 
-//        getSupportActionBar().hide();
         topAppBar.setVisibility(View.GONE);
         bottomNavigation.setVisibility(View.GONE);
 
@@ -113,7 +112,9 @@ public class MainActivity extends AppCompatActivity {
     private void hideMenu(boolean hide) {
         if (hide) {
             if (!APIClient.role.equals("student")) {
-                binding.bottomNavigation.getMenu().removeItem(R.id.item_frs);
+                binding.bottomNavigation.getMenu().findItem(R.id.item_frs).setVisible(false);
+            }else{
+                binding.bottomNavigation.getMenu().findItem(R.id.item_frs).setVisible(true);
             }
         }
     }

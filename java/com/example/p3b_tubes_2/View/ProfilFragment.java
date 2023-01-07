@@ -1,6 +1,7 @@
 package com.example.p3b_tubes_2.View;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,18 @@ public class ProfilFragment extends Fragment implements UserContract.View.Profil
     @Override
     public void onResume() {
         super.onResume();
+        updateView();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            updateView();
+        }
+    }
+
+    public void updateView(){
         this.binding.tvNamePlaceholder.setText(user.getName());
         this.binding.tvName.setText(user.getName());
         this.binding.tvEmail.setText(user.getEmail());

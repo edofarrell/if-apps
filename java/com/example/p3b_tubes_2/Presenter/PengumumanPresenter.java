@@ -30,6 +30,7 @@ public class PengumumanPresenter implements
 
     //Get pengumuman
     public void getPengumuman() {
+        this.pengumuman.clearData();
         PengumumanList.getPengumumanAll();
     }
 

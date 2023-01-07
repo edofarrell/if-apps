@@ -196,9 +196,9 @@ public class User {
                     this::onErrorResponse
             );
 
-            queue.add(request);
-
             APIClient.role = role;
+
+            queue.add(request);
         }
 
         @Override

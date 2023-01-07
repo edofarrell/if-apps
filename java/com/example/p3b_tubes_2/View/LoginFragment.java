@@ -3,6 +3,7 @@ package com.example.p3b_tubes_2.View;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,6 +93,11 @@ public class LoginFragment extends Fragment implements LoginContract.View {
             result = new Bundle();
             result.putBoolean("hideMenuItem", true);
             getParentFragmentManager().setFragmentResult("hideMenuItem", result);
+
+            this.fragmentLoginBinding.etEmail.setText("");
+            this.fragmentLoginBinding.etPassword.setText("");
+            this.fragmentLoginBinding.etRole.setText("");
+            this.fragmentLoginBinding.error.setText("");
         }
     }
 
