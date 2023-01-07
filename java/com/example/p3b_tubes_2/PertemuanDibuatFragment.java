@@ -25,6 +25,7 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     private MainPresenter mainPresenter;
     private TambahPertemuanFragment tambahPertemuanFragment;
     private TambahPartisipanPertemuanFragment tambahPartisipanPertemuanFragment;
+    private TambahSlotWaktuFragment tambahSlotWaktuFragment;
 
     private boolean isFabsVisible;
 
@@ -78,7 +79,7 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     }
 
     private void openAddTimeSlot(View view) {
-        TambahSlotWaktuFragment.newInstance(this.getParentFragmentManager());
+        this.tambahSlotWaktuFragment = TambahSlotWaktuFragment.newInstance(this.getParentFragmentManager(), this.pertemuanPresenter);
     }
 
     private void hideExpandableFAB() {
@@ -132,5 +133,10 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     @Override
     public void openAddPartisipan(String idPertemuan) {
         this.tambahPertemuanFragment.openAddPartisipan(idPertemuan);
+    }
+
+    @Override
+    public void closeAddPage() {
+        this.tambahSlotWaktuFragment.dismiss();
     }
 }

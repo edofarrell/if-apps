@@ -61,7 +61,7 @@ public interface PertemuanContract {
         }
 
         interface AddTimeSlotOnSuccessListener {
-            void onSuccessAddTimeSlot(List<TimeSlot> timeSlot);
+            void onSuccessAddTimeSlot();
 
             void onErrorAddTimeSlot();
         }
@@ -88,6 +88,8 @@ public interface PertemuanContract {
             void updateTimeSlot(List<TimeSlot> timeSlot);
 
             void openAddPartisipan(String idPertemuan);
+
+            void closeAddPage();
         }
 
         interface PertemuanDiundang {

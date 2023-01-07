@@ -30,7 +30,7 @@ public class TimeSlot {
     }
 
     public String getEndTime() {
-        SimpleDateFormat inputFormatter = new SimpleDateFormat("HH:mm:ss'+07'");
+        SimpleDateFormat inputFormatter = new SimpleDateFormat("HH:mmZ");
         SimpleDateFormat timeFormatter = new SimpleDateFormat("HH.mm");
 
         String endTime = "";

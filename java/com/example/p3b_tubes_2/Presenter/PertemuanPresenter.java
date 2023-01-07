@@ -1,6 +1,7 @@
 package com.example.p3b_tubes_2.Presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.p3b_tubes_2.APIClient;
 import com.example.p3b_tubes_2.APIPertemuanAcceptInvitation;
@@ -21,6 +22,7 @@ import com.example.p3b_tubes_2.PertemuanContract;
 
 import org.json.JSONException;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -212,12 +214,35 @@ public class PertemuanPresenter implements
 
 
     public void addTimeSlot(String day, String startTime, String endTime) {
-        this.tambahTimeSlot.addTimeSlot(day, startTime, endTime);
+        String dayFormatted;
+        switch (day){
+            case "Senin": dayFormatted = "mon"; break;
+            case "Selasa": dayFormatted = "tue"; break;
+            case "Rabu": dayFormatted = "wed"; break;
+            case "Kamis": dayFormatted= "thu"; break;
+            case "Jumat": dayFormatted = "fri"; break;
+            case "Sabtu": dayFormatted = "sat"; break;
+            default: dayFormatted = "sun"; break;
+        }
+
+        SimpleDateFormat inputFormatter = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mmZ");
+
+        String startTimeFormatted = "";
+        String endTimeFormatted = "";
+        try {
+            startTimeFormatted = timeFormatter.format(inputFormatter.parse(startTime));
+            endTimeFormatted = timeFormatter.format(inputFormatter.parse(endTime));
+        } catch (ParseException e) {
+            Log.d("DEBUG", "PertemuanPresenter, addTimeSlot() catch ParseException");
+        }
+
+        this.tambahTimeSlot.addTimeSlot(dayFormatted, startTimeFormatted, endTimeFormatted);
     }
 
     @Override
-    public void onSuccessAddTimeSlot(List<TimeSlot> timeSlot) {
-
+    public void onSuccessAddTimeSlot() {
+        this.uiDibuat.closeAddPage();
     }
 
     @Override

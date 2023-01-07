@@ -28,7 +28,6 @@ public class APIPertemuanGetTimeSlot implements Response.Listener<JSONArray>, Re
     private PertemuanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
-    private PertemuanList.Pertemuan pertemuan;
 
     public APIPertemuanGetTimeSlot(PertemuanPresenter presenter, Context context) {
         this.presenter = presenter;

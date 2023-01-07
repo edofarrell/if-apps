@@ -61,7 +61,7 @@ public class APIPertemuanTambahTimeSlot implements Response.Listener<JSONObject>
     @Override
     public void onResponse(JSONObject response) {
         Log.d("DEBUG","SUCCESS");
-//        this.presenter.onSuccessAddTimeSlot();
+        this.presenter.onSuccessAddTimeSlot();
     }
 
     @Override

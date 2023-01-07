@@ -123,8 +123,10 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                searchText = newText;
-                filter();
+                if (!searchText.equals(newText)) {
+                    searchText = newText;
+                    filter();
+                }
                 return false;
             }
         });
