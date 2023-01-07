@@ -19,6 +19,11 @@ public interface FRSContract {
            void OnSuccessGetSearchMataKuliah(ArrayList<MataKuliahList.MataKuliah> listMataKuliah);
            void OnErrorGetSearchMataKuliah();
        }
+
+       interface GetMataKuliahEnrolmentOnSuccessListener{
+           void OnSuccessGetMataKuliahEnrolment(ArrayList<String> listNamaMatkul);
+           void OnErrorGetMataKuliahEnrolment();
+       }
    }
 
     interface View{
@@ -26,5 +31,6 @@ public interface FRSContract {
         void openDetail(TahunAjaran.TahunAjar tahunAjar);
         void updateSearch(ArrayList<MataKuliahList.MataKuliah> listMataKuliah);
         void addToSelectedMataKuliah(MataKuliahList.MataKuliah matkul);
+        void updateMataKuliahEnrolment(ArrayList<String> listNamaMatkul);
     }
 }

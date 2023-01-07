@@ -19,6 +19,7 @@ public class FRSFragment extends Fragment implements FRSContract.View{
     private FRSPresenter presenter;
     private FRSListAdapter adapter;
     private FRSDetailFragment detailFragment;
+    private TahunAjaran.TahunAjar activeYear;
     private FRSFragment(){}
     public static FRSFragment newInstance(MainPresenter mainPresenter,Context context) {
         Bundle args = new Bundle();
@@ -44,12 +45,13 @@ public class FRSFragment extends Fragment implements FRSContract.View{
 
     @Override
     public void update(TahunAjaran tahunAjaran) {
+        this.activeYear = tahunAjaran.getActiveYear();
         this.adapter.update(tahunAjaran);
     }
 
     @Override
     public void openDetail(TahunAjaran.TahunAjar tahunAjar) {
-        detailFragment = FRSDetailFragment.newInstance(getParentFragmentManager(),presenter,tahunAjar);
+        detailFragment = FRSDetailFragment.newInstance(getParentFragmentManager(),presenter,tahunAjar,activeYear);
     }
 
     @Override
@@ -60,5 +62,10 @@ public class FRSFragment extends Fragment implements FRSContract.View{
     @Override
     public void addToSelectedMataKuliah(MataKuliahList.MataKuliah matkul) {
         detailFragment.setSelectedMataKuliah(matkul);
+    }
+
+    @Override
+    public void updateMataKuliahEnrolment(ArrayList<String> listNamaMatkul) {
+        detailFragment.setMataKuliahEnrolment(listNamaMatkul);
     }
 }

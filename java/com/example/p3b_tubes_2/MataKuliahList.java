@@ -45,6 +45,10 @@ public class MataKuliahList implements Response.Listener<JSONArray>, Response.Er
         public int getSemester() {
             return semester;
         }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 
     private ArrayList<MataKuliah> listMataKuliah;
