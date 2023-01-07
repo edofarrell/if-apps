@@ -2,7 +2,6 @@ package com.example.p3b_tubes_2.View;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +41,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private ChipGroup chipGroup;
     private String searchText;
     private PengumumanTambahFragment tambahFragment;
-    private PengumumanTambahTagFragment tambahTagFragment;
+    private PengumumanTambahTagFragment  tambahTagFragment;
 
     private boolean isFabsVisible;
 

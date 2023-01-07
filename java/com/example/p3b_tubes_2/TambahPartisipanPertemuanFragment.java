@@ -1,6 +1,7 @@
 package com.example.p3b_tubes_2;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.p3b_tubes_2.Model.TimeSlot;
 import com.example.p3b_tubes_2.Model.User;
@@ -32,6 +34,8 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
     private PartisipanListAdapter timeSlotAdapter;
     private ChipGroup chipGroup;
     private ArrayList<User> arrChipGroup;
+
+    private FragmentManager fm;
 
     private String idPertemuan;
 
@@ -58,15 +62,14 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         LinearLayout layoutJadwal = binding.llJadwalDosen;
         layoutJadwal.setVisibility(View.GONE);
 
-        this.binding.btnSimpan.setOnClickListener(this::closePage);
-
         this.mainPresenter.getAllUser(this);
 
         return this.binding.getRoot();
     }
 
     private void closePage(View view) {
-
+        Log.d("DEBUG", "masuk onclose");
+        getParentFragmentManager().setFragmentResult("closeDialog", null);
     }
 
     @Override
@@ -80,6 +83,8 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
 
     private void saveAll(View view) {
         this.pertemuanPresenter.getPertemuanDibuat();
+        Log.d("DEBUG", "masuk onclose");
+        this.getParentFragmentManager().setFragmentResult("closeDialog", null);
     }
 
     private AdapterView.OnItemClickListener onItemClick() {
