@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.p3b_tubes_2.databinding.ItemListDetailFrsBinding;
 import com.example.p3b_tubes_2.databinding.ItemListDetailFrsViewBinding;
 
 import java.util.ArrayList;

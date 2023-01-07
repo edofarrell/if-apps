@@ -1,8 +1,6 @@
 package com.example.p3b_tubes_2.Presenter;
 
 import com.example.p3b_tubes_2.Model.User;
-import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
-import com.example.p3b_tubes_2.Presenter.UserPresenter;
 import com.example.p3b_tubes_2.UserContract;
 
 import java.util.List;

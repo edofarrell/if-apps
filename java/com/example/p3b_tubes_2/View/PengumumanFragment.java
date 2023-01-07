@@ -17,10 +17,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.APIClient;
-import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Model.PengumumanList;
 import com.example.p3b_tubes_2.Model.TagList;
 import com.example.p3b_tubes_2.PengumumanContract;
+import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
 import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentPengumumanBinding;

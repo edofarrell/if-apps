@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.p3b_tubes_2.databinding.FragmentJadwalBinding;
 import com.example.p3b_tubes_2.databinding.FragmentLeftBinding;
 
 public class LeftFragment extends Fragment {
