@@ -104,6 +104,26 @@ public class User {
             queue.add(request);
         }
 
+        public void getUsers(String filter) {
+            String url = APIClient.BASE_URL + "/users?filter[name]=" + filter;
+
+            StringRequest request = new StringRequest(
+                    Request.Method.GET,
+                    url,
+                    this::onResponse,
+                    this::onErrorResponse
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
+                }
+            };
+
+            queue.add(request);
+        }
+
         @Override
         public void onResponse(String response) {
             Type listType = new TypeToken<List<User>>() {

@@ -38,7 +38,17 @@ public class TimeslotList {
         private String end_time;
 
         public String getDay() {
-            return day;
+            String dayFormatted;
+            switch (day){
+                case "mon": dayFormatted = "Senin"; break;
+                case "tue": dayFormatted = "Selasa"; break;
+                case "wed": dayFormatted = "Rabu"; break;
+                case "thu": dayFormatted= "Kamis"; break;
+                case "fri": dayFormatted = "Jumat"; break;
+                case "sat": dayFormatted = "Sabtu"; break;
+                default: dayFormatted = "Minggu"; break;
+            }
+            return dayFormatted;
         }
 
         public String getStartTime() {
