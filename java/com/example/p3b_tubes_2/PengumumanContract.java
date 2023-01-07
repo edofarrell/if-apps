@@ -4,43 +4,53 @@ import java.util.ArrayList;
 
 public interface PengumumanContract {
 
-    interface Model{
-        interface GetOnSuccessListener{
+    interface Model {
+        interface GetOnSuccessListener {
             void OnSuccessGet(PengumumanList pengumumanList);
-            void OnErrorGet();
+
+            void OnErrorGet(String msg);
         }
 
-        interface GetTagOnSuccessListener{
+        interface GetTagOnSuccessListener {
             void GetTagOnSuccess(ArrayList<TagList.Tag> listTag);
-            void GetTagOnError();
+
+            void GetTagOnError(String msg);
         }
 
-        interface GetDetailOnSuccessListener{
+        interface GetDetailOnSuccessListener {
             void GetDetailOnSuccess(PengumumanList.Pengumuman pengumuman);
-            void GetDetailOnError();
+
+            void GetDetailOnError(String msg);
         }
 
-        interface AddOnSuccessListener{
+        interface AddOnSuccessListener {
             void AddOnSuccess(PengumumanList.Pengumuman pengumuman);
+
             void AddOnError(String msg);
         }
 
-        interface DeleteOnSuccessListener{
+        interface DeleteOnSuccessListener {
             void deleteOnSuccess(PengumumanList.Pengumuman deleted);
-            void deleteOnError();
+
+            void deleteOnError(String msg);
         }
 
-        interface AddTagOnSuccessListener{
+        interface AddTagOnSuccessListener {
             void AddTagOnSuccess();
-            void AddTagOnError();
+
+            void AddTagOnError(String msg);
         }
     }
 
     interface View {
         void updatePengumumanList(PengumumanList pengumumanList);
+
         void updateListTag(ArrayList<TagList.Tag> listTag);
+
         void openDetail(PengumumanList.Pengumuman pengumuman);
+
         void closeAddPage();
+
         void showErrorAddPengumuman(String msg);
     }
 }

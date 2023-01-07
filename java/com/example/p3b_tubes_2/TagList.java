@@ -8,10 +8,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
@@ -20,18 +25,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TagList implements Response.Listener<String>, Response.ErrorListener {
+public class TagList {
 
     class Tag {
-        private String id;
         private String tag;
+        private String tag_id;
 
         public String getName() {
             return tag;
         }
 
         public String getId() {
-            return id;
+            return tag_id;
         }
     }
 
@@ -39,48 +44,17 @@ public class TagList implements Response.Listener<String>, Response.ErrorListene
     private PengumumanPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
+    private static APITagGet apiGet;
+    private static APITagAdd apiAdd;
 
     public TagList(PengumumanPresenter presenter, Context context) {
         this.listTag = new ArrayList<>();
         this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
-    }
 
-    public void getTag() {
-        String url = APIClient.BASE_URL + "/tags";
-
-        StringRequest request = new StringRequest(
-                Request.Method.GET,
-                url,
-                this::onResponse,
-                this::onErrorResponse
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Authorization", APIClient.token);
-                return params;
-            }
-        };
-        queue.add(request);
-    }
-
-    @Override
-    public void onResponse(String response) {
-        Type listType = new TypeToken<ArrayList<TagList.Tag>>() {}.getType();
-        listTag = gson.fromJson(response, listType);
-        presenter.GetTagOnSuccess(listTag);
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        try {
-            String responseBody = new String(error.networkResponse.data, "utf-8");
-            Log.d("DEBUG", "TagList: onErrorResponse(), Error=" + responseBody);
-        } catch (UnsupportedEncodingException e) {
-            Log.d("DEBUG", "TagList: onErrorResponse() catch UnsupportedEncodingException");
-        }
+        this.apiGet = new APITagGet();
+        this.apiAdd = new APITagAdd();
     }
 
     public List<String> getActiveTagFilter(List<String> arr) {
@@ -94,5 +68,102 @@ public class TagList implements Response.Listener<String>, Response.ErrorListene
             }
         }
         return result;
+    }
+
+    private class APITagGet implements Response.Listener<String>, Response.ErrorListener {
+
+        public void get() {
+            String url = APIClient.BASE_URL + "/tags";
+
+            StringRequest request = new StringRequest(
+                    Request.Method.GET,
+                    url,
+                    this::onResponse,
+                    this::onErrorResponse
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
+                }
+            };
+            queue.add(request);
+        }
+
+        @Override
+        public void onResponse(String response) {
+            Type listType = new TypeToken<ArrayList<TagList.Tag>>() {}.getType();
+            listTag = gson.fromJson(response, listType);
+            presenter.GetTagOnSuccess(listTag);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "TagList: APITagGet: onErrorResponse(), Error=" + responseBody);
+                presenter.GetTagOnError(responseBody);
+            } catch (UnsupportedEncodingException e) {
+                Log.d("DEBUG", "TagList: APITagGet: onErrorResponse() catch UnsupportedEncodingException");
+            }
+        }
+    }
+
+    private class APITagAdd implements Response.Listener<JSONObject>, Response.ErrorListener {
+
+        public void add(String tag) {
+            String url = APIClient.BASE_URL + "/tags";
+
+            JsonObject json = new JsonObject();
+            json.addProperty("tag", tag);
+            JSONObject JSON = null;
+            try {
+                JSON = new JSONObject(json.toString());
+            } catch (JSONException e) {
+                Log.d("DEBUG", "TagList: APITagAdd: addTag() catch JSONException");
+            }
+
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.POST,
+                    url,
+                    JSON,
+                    this::onResponse,
+                    this::onErrorResponse
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
+                }
+            };
+
+            queue.add(request);
+        }
+
+        @Override
+        public void onResponse(JSONObject response) {
+            presenter.AddTagOnSuccess();
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "TagList: APITagAdd: onErrorResponse(), Error=" + responseBody);
+                presenter.AddTagOnError(responseBody);
+            } catch (UnsupportedEncodingException e) {
+                Log.d("DEBUG", "TagList: APITagAdd: onErrorResponse() catch UnsupportedEncodingException");
+            }
+        }
+    }
+
+    public static void fetch(){
+        apiGet.get();
+    }
+
+    public static void addTag(String tag){
+        apiAdd.add(tag);
     }
 }

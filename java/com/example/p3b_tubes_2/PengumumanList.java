@@ -77,23 +77,26 @@ public class PengumumanList {
     private static APIPengumumanGet apiGet;
     private static APIPengumumanDelete apiDelete;
     private static APIPengumumanAdd apiAdd;
+    private static APIPengumumanDetail apiDetail;
+
+    public PengumumanList() {
+        this.data = new ArrayList<>();
+    }
 
     public PengumumanList(PengumumanPresenter presenter, Context context) {
         this.data = new ArrayList<>();
         this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
+
         this.apiGet = new APIPengumumanGet();
         this.apiDelete = new APIPengumumanDelete();
         this.apiAdd = new APIPengumumanAdd();
+        this.apiDetail = new APIPengumumanDetail();
     }
 
     public String getCursor() {
         return this.metadata.getCursor();
-    }
-
-    public PengumumanList() {
-        this.data = new ArrayList<>();
     }
 
     public int getSize() {
@@ -203,6 +206,7 @@ public class PengumumanList {
             try {
                 String responseBody = new String(error.networkResponse.data, "utf-8");
                 Log.d("DEBUG", "PengumumanList: APIPengumumanGet: onErrorResponse(), Error=" + responseBody);
+                presenter.OnErrorGet(responseBody);
             } catch (UnsupportedEncodingException e) {
                 Log.d("DEBUG", "PengumumanList: APIPengumumanGet: onErrorResponse() catch UnsupportedEncodingException");
             }
@@ -243,6 +247,7 @@ public class PengumumanList {
             try {
                 String responseBody = new String(error.networkResponse.data, "utf-8");
                 Log.d("DEBUG", "PengumumanList: APIPengumumanGet: onErrorResponse(), Error=" + responseBody);
+                presenter.deleteOnError(responseBody);
             } catch (UnsupportedEncodingException e) {
                 Log.d("DEBUG", "PengumumanList: APIPengumumanGet:onErrorResponse() catch UnsupportedEncodingException");
             }
@@ -313,6 +318,48 @@ public class PengumumanList {
 
     }
 
+    private class APIPengumumanDetail implements Response.Listener<String>, Response.ErrorListener {
+        private PengumumanList.Pengumuman pengumuman;
+
+        public void getDetail(PengumumanList.Pengumuman pengumuman) {
+            this.pengumuman = pengumuman;
+            String url = APIClient.BASE_URL + "/announcements/" + pengumuman.getId();
+
+            StringRequest request = new StringRequest(
+                    Request.Method.GET,
+                    url,
+                    this::onResponse,
+                    this::onErrorResponse
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
+                }
+            };
+
+            queue.add(request);
+        }
+
+        @Override
+        public void onResponse(String response) {
+            this.pengumuman = gson.fromJson(response, Pengumuman.class);
+            presenter.GetDetailOnSuccess(this.pengumuman);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "PengumumanList: APIPengumumanDetail: onErrorResponse(), Error=" + responseBody);
+                presenter.GetDetailOnError(responseBody);
+            } catch (UnsupportedEncodingException e) {
+                Log.d("DEBUG", "PengumumanList: APIPengumumanDetail: onErrorResponse() catch UnsupportedEncodingException");
+            }
+        }
+    }
+
     public static void getPengumumanAll() {
         apiGet.fetchAll();
     }
@@ -327,5 +374,9 @@ public class PengumumanList {
 
     public static void addPengumuman(String title, String content, String[] idTags){
         apiAdd.add(title, content, idTags);
+    }
+
+    public static void getDetailPengumuman(Pengumuman p){
+        apiDetail.getDetail(p);
     }
 }
