@@ -237,7 +237,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="48dp"
+                android:layout_marginBottom="@dimen/_15dp"
 
                 android:gravity="right">
 
@@ -254,7 +254,10 @@
                 android:id="@+id/tv_error"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_16sp"
+                />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
