@@ -14,18 +14,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_matkul"
-        android:layout_marginLeft="@dimen/_10sp"
+        android:layout_marginLeft="@dimen/_10dp"
         android:text="DAA"
         android:textSize="@dimen/_20sp"
         android:textColor="@color/black"></TextView>
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_delete"
-        android:text="delete"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_gravity="end">
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_delete_24"
+        android:background="@color/white"
+        android:layout_gravity="end"
+        android:layout_marginRight="@dimen/_10dp"></ImageButton>
 
-    </Button>
+
 
 </LinearLayout>
