@@ -1,7 +1,6 @@
 package com.example.p3b_tubes_2;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,67 +15,26 @@ public class PengumumanPresenter implements
 {
 
     private PengumumanContract.View ui;
-    private MainPresenter mainPresenter;
     private PengumumanList pengumuman;
     private TagList tag;
-    private APIPengumumanAdd tambahPengumuman;
-    private APIPengumumanDelete deletePengumuman;
-    private APIPengumumanDetail detailPengumuman;
-    private APITagAdd apiTagAdd;
 
     public PengumumanPresenter(PengumumanContract.View ui, Context context, MainPresenter mainPresenter) {
         this.ui = ui;
-        this.mainPresenter = mainPresenter;
         this.pengumuman = new PengumumanList(this, context);
         this.tag = new TagList(this, context);
-        this.tambahPengumuman = new APIPengumumanAdd(this, context);
-        this.deletePengumuman = new APIPengumumanDelete(this, context);
-        this.detailPengumuman = new APIPengumumanDetail(this, context);
-        this.apiTagAdd = new APITagAdd(this, context);
     }
 
-
-    public void addPengumuman(String title, String content, String[] tags) {
-        this.tambahPengumuman.addPengumuman(title, content, tags);
-    }
-
-    @Override
-    public void AddOnSuccess(PengumumanList.Pengumuman pengumuman) {
-        this.ui.closeAddPage();
-        this.getPengumuman();
-    }
-
-    @Override
-    public void AddOnError(String msg) {
-        this.ui.showErrorAddPengumuman(msg);
-    }
-
-
-    public void deletePengumuman(String id) {
-        deletePengumuman.deletePengumuman(id);
-    }
-
-    @Override
-    public void deleteOnSuccess() {
-        this.getPengumuman();
-    }
-
-    @Override
-    public void deleteOnError() {
-
-    }
-
-
+    //Get pengumuman
     public void getPengumuman() {
-        this.pengumuman.getPengumumanAll();
+        PengumumanList.getPengumumanAll();
     }
 
     public void getPengumuman(String title, List<String> tags, boolean next) {
         if (!next) {
-            this.pengumuman.getPengumumanAll(title, tags, "none");
+            PengumumanList.getPengumumanAll(title, tags, "none");
         } else {
             if (!this.pengumuman.getCursor().equals("none"))
-                this.pengumuman.getPengumumanAll(title, tags, this.pengumuman.getCursor());
+                PengumumanList.getPengumumanAll(title, tags, this.pengumuman.getCursor());
         }
     }
 
@@ -88,43 +46,46 @@ public class PengumumanPresenter implements
     }
 
     @Override
-    public void OnErrorGet() {
+    public void OnErrorGet(String msg) {
 
     }
 
-
-    public void getTag() {
-        this.tag.getTag();
-    }
-
-    @Override
-    public void GetTagOnSuccess(ArrayList<TagList.Tag> listTag) {
-        this.ui.updateListTag(listTag);
+    //Add pengumuman
+    public void addPengumuman(String title, String content, String[] tags) {
+        PengumumanList.addPengumuman(title, content, tags);
     }
 
     @Override
-    public void GetTagOnError() {
-
-    }
-
-
-    public void addTag(String tag){
-        this.apiTagAdd.addTag(tag);
+    public void AddOnSuccess(PengumumanList.Pengumuman pengumuman) {
+        this.ui.closeAddPage();
+        this.pengumuman.add(pengumuman);
+        this.ui.updatePengumumanList(this.pengumuman);
     }
 
     @Override
-    public void AddTagOnSuccess() {
+    public void AddOnError(String msg) {
+        this.ui.showErrorAddPengumuman(msg);
+    }
 
+    //Delete pengumuman
+    public void deletePengumuman(String id) {
+        PengumumanList.deletePengumuman(id);
     }
 
     @Override
-    public void AddTagOnError() {
+    public void deleteOnSuccess(PengumumanList.Pengumuman p) {
+        this.pengumuman.delete(p);
+        this.ui.updatePengumumanList(this.pengumuman);
+    }
+
+    @Override
+    public void deleteOnError(String msg) {
 
     }
 
-
+    //Get detail pengumuman
     public void getPengumumanDetail(PengumumanList.Pengumuman pengumuman) {
-        this.detailPengumuman.getDetail(pengumuman);
+        PengumumanList.getDetailPengumuman(pengumuman);
     }
 
     @Override
@@ -133,7 +94,37 @@ public class PengumumanPresenter implements
     }
 
     @Override
-    public void GetDetailOnError() {
+    public void GetDetailOnError(String msg) {
+
+    }
+
+    //Get Tag
+    public void getTag() {
+        TagList.fetch();
+    }
+
+    @Override
+    public void GetTagOnSuccess(ArrayList<TagList.Tag> listTag) {
+        this.ui.updateListTag(listTag);
+    }
+
+    @Override
+    public void GetTagOnError(String msg) {
+
+    }
+
+    //Add tag
+    public void addTag(String tag){
+        TagList.addTag(tag);
+    }
+
+    @Override
+    public void AddTagOnSuccess() {
+
+    }
+
+    @Override
+    public void AddTagOnError(String msg) {
 
     }
 
