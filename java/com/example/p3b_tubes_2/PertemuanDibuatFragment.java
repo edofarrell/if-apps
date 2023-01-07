@@ -51,6 +51,7 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
         this.binding.lstAppointments.setAdapter(this.adapter);
         this.binding.btnAddAppointment.setOnClickListener(this::onClick);
         this.binding.btnAddInvitasiPertemuan.setOnClickListener(this::openAddPertemuan);
+        this.binding.btnAddTimeSlot.setOnClickListener(this::openAddTimeSlot);
 
         return binding.getRoot();
     }
@@ -61,8 +62,7 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
             if(APIClient.role.equals("lecturer")) {
                 showExpandableFAB();
             }else{
-                TambahSlotWaktuFragment.newInstance(this.getParentFragmentManager());
-                //this.openAddPertemuan(view);
+                this.openAddPertemuan(view);
             }
         } else {
             hideExpandableFAB();
@@ -71,6 +71,10 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
 
     private void openAddPertemuan(View view){
         this.tambahPertemuanFragment = TambahPertemuanFragment.newInstance(getParentFragmentManager(), this.pertemuanPresenter, this.mainPresenter);
+    }
+
+    private void openAddTimeSlot(View view) {
+        TambahSlotWaktuFragment.newInstance(this.getParentFragmentManager());
     }
 
     private void hideExpandableFAB() {
