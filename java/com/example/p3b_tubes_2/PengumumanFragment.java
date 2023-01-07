@@ -32,6 +32,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private ChipGroup chipGroup;
     private String searchText;
     private PengumumanTambahFragment tambahFragment;
+    private PengumumanTambahTagFragment tambahTagFragment;
 
     private boolean isFabsVisible;
 
@@ -77,7 +78,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     private void addTag(View view) {
-
+        this.tambahTagFragment = PengumumanTambahTagFragment.newInstance(getParentFragmentManager());
     }
 
     @Override
@@ -131,6 +132,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private void addPengumuman(View view) {
         this.tambahFragment = PengumumanTambahFragment.newInstance(getParentFragmentManager(), this.presenter);
     }
+
+
 
     private void hideExpandableFAB() {
         this.binding.llExpandableFab.setVisibility(View.GONE);
