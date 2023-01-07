@@ -12,7 +12,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.p3b_tubes_2.APIClient;
-import com.example.p3b_tubes_2.APIError;
 import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

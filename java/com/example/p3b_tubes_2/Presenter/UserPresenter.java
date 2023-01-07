@@ -2,8 +2,6 @@ package com.example.p3b_tubes_2.Presenter;
 
 import android.content.Context;
 
-import com.example.p3b_tubes_2.APIAuthorization;
-import com.example.p3b_tubes_2.APIGetCurrentUser;
 import com.example.p3b_tubes_2.LoginContract;
 import com.example.p3b_tubes_2.Model.User;
 import com.example.p3b_tubes_2.UserContract;
@@ -20,21 +18,19 @@ public class UserPresenter implements
 
     private MainPresenter mainPresenter;
     private User user;
-    private APIAuthorization auth;
     private LoginContract.View loginUI;
-    private APIGetCurrentUser apiGetCurrentUser;
+    private UserContract.View profileUI;
 
-    public UserPresenter(LoginContract.View loginUI, Context context, MainPresenter mainPresenter){
+    public UserPresenter(LoginContract.View loginUI, UserContract.View profile, Context context, MainPresenter mainPresenter){
         this.user = new User(this, context);
-        this.auth = new APIAuthorization(this, context);
         this.loginUI = loginUI;
+        this.profileUI = profile;
         this.mainPresenter = mainPresenter;
-        this.apiGetCurrentUser = new APIGetCurrentUser(this, context);
     }
 
 
     public void login(String email, String password, String role) throws JSONException {
-        this.auth.login(email, password, role);
+        User.login(email, password, role);
     }
 
     @Override
@@ -50,7 +46,7 @@ public class UserPresenter implements
 
 
     public void getUsers(){
-        this.user.getUsers();
+        User.getUsers();
     }
 
     @Override
@@ -59,22 +55,22 @@ public class UserPresenter implements
     }
 
     @Override
-    public void onErrorGet() {
+    public void onErrorGet(String msg) {
 
     }
 
 
     public void getCurrentUser(){
-        this.apiGetCurrentUser.getCurrentUser();
+       User.getUser();
     }
 
     @Override
     public void onSuccessGetCurrentUser(User user) {
-//        this.user = user;
+        this.profileUI.updateProfile(user);
     }
 
     @Override
-    public void onErrorGetCurrentUser() {
+    public void onErrorGetCurrentUser(String msg) {
 
     }
 }

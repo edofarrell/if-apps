@@ -179,4 +179,9 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         AutoCompleteTextView autoCompleteTextView = binding.actvChooseParticipant;
         autoCompleteTextView.setAdapter(autocompleteAdapter);
     }
+
+    @Override
+    public void updateProfile(User user) {
+
+    }
 }

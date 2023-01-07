@@ -32,7 +32,7 @@ public class MainPresenter implements UserContract.Model.GetOnSucessListener {
     }
 
     @Override
-    public void onErrorGet() {
+    public void onErrorGet(String msg) {
 
     }
 }

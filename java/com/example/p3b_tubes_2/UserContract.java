@@ -9,16 +9,17 @@ public interface UserContract {
     interface Model {
         interface GetOnSucessListener {
             void onSuccessGet(List<User> data);
-            void onErrorGet();
+            void onErrorGet(String msg);
         }
 
         interface GetOnGetCurrentUserListener{
             void onSuccessGetCurrentUser(User user);
-            void onErrorGetCurrentUser();
+            void onErrorGetCurrentUser(String msg);
         }
     }
 
     interface View {
         void update(List<User> data);
+        void updateProfile(User user);
     }
 }

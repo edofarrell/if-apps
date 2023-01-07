@@ -32,7 +32,6 @@ public class TambahPertemuanFragment extends DialogFragment {
     private FragmentAddPertemuanBinding binding;
     private PertemuanPresenter pertemuanPresenter;
     private MainPresenter mainPresenter;
-    private TambahPartisipanFragment tambahPartisipanFragment;
     private TambahDetailPertemuanFragment tambahDetailPertemuanFragment;
     private ChipGroup chipGroup;
     private ArrayList<User> arrChipGroup;

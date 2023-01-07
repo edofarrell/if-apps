@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.p3b_tubes_2.Presenter.MainPresenter;
+import com.example.p3b_tubes_2.Presenter.UserPresenter;
 import com.example.p3b_tubes_2.View.PengumumanFragment;
 import com.example.p3b_tubes_2.View.PertemuanFragment;
 import com.example.p3b_tubes_2.databinding.ActivityMainBinding;
@@ -38,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
 
         this.fragments = new HashMap<>();
 
-        this.fragments.put("login", LoginFragment.newInstance(mainPresenter, this));
         this.fragments.put("pengumuman", PengumumanFragment.newInstance(mainPresenter, this, this.binding.fragmentContainer));
         this.fragments.put("pertemuan", PertemuanFragment.newInstance(mainPresenter, this, this.binding.fragmentContainer));
         this.fragments.put("frs", FRSFragment.newInstance(mainPresenter,this));
         this.fragments.put("profil", ProfilFragment.newInstance());
+        this.fragments.put("login", LoginFragment.newInstance(mainPresenter, this, (ProfilFragment) this.fragments.get("profil")));
         this.fm = getSupportFragmentManager();
 
         LoginFragment loginFragment = (LoginFragment) this.fragments.get("login");

@@ -9,10 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.p3b_tubes_2.Model.User;
 import com.example.p3b_tubes_2.databinding.FragmentProfilBinding;
 
-public class ProfilFragment extends Fragment {
-    FragmentProfilBinding binding;
+import java.util.List;
+
+public class ProfilFragment extends Fragment implements UserContract.View{
+    private FragmentProfilBinding binding;
+    private User user;
 
     public static ProfilFragment newInstance() {
         ProfilFragment fragment = new ProfilFragment();
@@ -32,36 +36,17 @@ public class ProfilFragment extends Fragment {
 
         this.binding = FragmentProfilBinding.inflate(inflater);
 
-        this.binding.tvNamePlaceholder.setText(getAccountName());
-        this.binding.tvName.setText(getAccountName());
-        this.binding.tvEmail.setText(getAccountEmail());
-        this.binding.tvRole.setText(getAccountRole());
+        this.binding.tvNamePlaceholder.setText(user.getName());
+        this.binding.tvName.setText(user.getName());
+        this.binding.tvEmail.setText(user.getEmail());
+        this.binding.tvRole.setText(user.getRoles());
 
         return binding.getRoot();
-    }
-
-    private String getAccountRole() {
-        String accountRole = "";
-
-        return accountRole;
-    }
-
-    private String getAccountEmail() {
-        String accountEmail = "";
-
-        return accountEmail;
-    }
-
-    private String getAccountName() {
-        String accountName = "";
-
-        return accountName;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         binding.btnLogout.setOnClickListener(this::logout);
     }
 
@@ -69,5 +54,15 @@ public class ProfilFragment extends Fragment {
         Bundle result = new Bundle();
         result.putString("page", "login");
         this.getParentFragmentManager().setFragmentResult("changePage", result);
+    }
+
+    @Override
+    public void update(List<User> data) {
+
+    }
+
+    @Override
+    public void updateProfile(User user) {
+        this.user = user;
     }
 }
