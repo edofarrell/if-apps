@@ -12,12 +12,14 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.p3b_tubes_2.AutocompleteAdapter;
 import com.example.p3b_tubes_2.Model.TimeslotList;
 import com.example.p3b_tubes_2.Model.User;
+import com.example.p3b_tubes_2.ParticipantNameAdapter;
 import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.R;
@@ -36,6 +38,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
 
     private User selectedUser;
     private TimeslotListAdapter timeSlotAdapter;
+    private ParticipantNameAdapter participantNameAdapter;
     private ChipGroup chipGroup;
     private ArrayList<User> arrChipGroup;
 
@@ -48,6 +51,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         fragment.mainPresenter = mainPresenter;
         fragment.pertemuanPresenter = pertemuanPresenter;
         fragment.timeSlotAdapter = new TimeslotListAdapter();
+        fragment.participantNameAdapter = new ParticipantNameAdapter();
         fragment.arrChipGroup = new ArrayList<>();
         fragment.idPertemuan = idPertemuan;
 
@@ -61,6 +65,8 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
 
         this.timeSlotAdapter = new TimeslotListAdapter();
         this.binding.lstTimeSlot.setAdapter(this.timeSlotAdapter);
+        this.participantNameAdapter = new ParticipantNameAdapter();
+        this.binding.lstNames.setAdapter(participantNameAdapter);
         this.chipGroup = binding.chipGroup;
 
         LinearLayout layoutJadwal = binding.llJadwalDosen;
@@ -80,9 +86,23 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.actvChooseParticipant.setOnItemClickListener(onItemClick());
+        binding.actvChooseParticipant.setOnQueryTextListener(onQueryTextListener());
         this.binding.btnAddParticipant.setOnClickListener(this::simpanPartisipan);
         this.binding.btnSimpan.setOnClickListener(this::saveAll);
+    }
+
+    private androidx.appcompat.widget.SearchView.OnQueryTextListener onQueryTextListener() {
+        return new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        };
     }
 
     private void saveAll(View view) {
@@ -91,6 +111,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         this.getParentFragmentManager().setFragmentResult("closeDialog", null);
     }
 
+/*
     private AdapterView.OnItemClickListener onItemClick() {
         return new AdapterView.OnItemClickListener() {
             @Override
@@ -105,6 +126,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
             }
         };
     }
+*/
 
     private void simpanPartisipan(View view) {
         this.pertemuanPresenter.addUserToPertemuan(new User[]{this.selectedUser}, this.idPertemuan);
@@ -176,8 +198,8 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
     public void update(List<User> data) {
         AutocompleteAdapter autocompleteAdapter = new AutocompleteAdapter(getContext(), 0, data);
         autocompleteAdapter.getFilter().filter("");
-        AutoCompleteTextView autoCompleteTextView = binding.actvChooseParticipant;
-        autoCompleteTextView.setAdapter(autocompleteAdapter);
+        SearchView autoCompleteTextView = binding.actvChooseParticipant;
+        /*autoCompleteTextView.setAdapter(autocompleteAdapter);*/
     }
 
     @Override

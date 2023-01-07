@@ -86,19 +86,18 @@
                             android:textSize="@dimen/_16sp" />
                     </LinearLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/actv_choose_participant"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_16dp">
+                        android:layout_marginBottom="@dimen/_16dp"
+                        app:iconifiedByDefault="true"
+                        />
 
-                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                            android:id="@+id/actv_choose_participant"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/pilih_partisipan"
-                            android:inputType="text" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                    <ListView
+                        android:id="@+id/lst_names"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
 
                 <LinearLayout
