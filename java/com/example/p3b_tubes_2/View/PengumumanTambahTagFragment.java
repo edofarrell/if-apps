@@ -56,7 +56,6 @@ public class PengumumanTambahTagFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         this.binding.appbar.setNavigationOnClickListener(this::onClickKembali);
-        this.binding.btnCancel.setOnClickListener(this::onClickKembali);
         this.binding.btnTambah.setOnClickListener(this::addTag);
     }
 
