@@ -67,7 +67,7 @@ public class TambahDetailPertemuanFragment extends Fragment {
         String description = this.binding.etDescription.getEditableText().toString();
 
         if(title.trim().equals("")){
-            this.binding.tvError.setText("Judul pertemeuan harus diisi");
+            this.binding.tvError.setText("Judul pertemuan harus diisi");
         }else if(inputDate.trim().equals("")){
             this.binding.tvError.setText("Tanggal harus diisi");
         }else if(startTime.trim().equals("")){

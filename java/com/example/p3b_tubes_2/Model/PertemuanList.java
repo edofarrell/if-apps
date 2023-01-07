@@ -326,7 +326,7 @@ public class PertemuanList {
         }
     }
 
-    public class APIPertemuanEdit implements Response.Listener<JSONObject>, Response.ErrorListener {
+    private class APIPertemuanEdit implements Response.Listener<JSONObject>, Response.ErrorListener {
 
         public void edit(Pertemuan p){
             String url = APIClient.BASE_URL + "/appointments/" + p.getId();

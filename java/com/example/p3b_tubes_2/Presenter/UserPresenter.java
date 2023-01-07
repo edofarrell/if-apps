@@ -19,9 +19,9 @@ public class UserPresenter implements
     private MainPresenter mainPresenter;
     private User user;
     private LoginContract.View loginUI;
-    private UserContract.View profileUI;
+    private UserContract.View.Profile profileUI;
 
-    public UserPresenter(LoginContract.View loginUI, UserContract.View profile, Context context, MainPresenter mainPresenter){
+    public UserPresenter(LoginContract.View loginUI, UserContract.View.Profile profile, Context context, MainPresenter mainPresenter){
         this.user = new User(this, context);
         this.loginUI = loginUI;
         this.profileUI = profile;

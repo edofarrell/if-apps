@@ -68,6 +68,8 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
             this.tvEndTime.setText(pertemuan.getEndTime());
             if(!APIClient.loggedInId.equals(pertemuan.getOrganizer_id())){
                 this.btnDelete.setVisibility(View.GONE);
+            }else{
+                this.btnDelete.setVisibility(View.VISIBLE);
             }
         }
     }

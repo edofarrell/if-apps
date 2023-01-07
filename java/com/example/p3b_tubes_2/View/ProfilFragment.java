@@ -16,7 +16,7 @@ import com.example.p3b_tubes_2.databinding.FragmentProfilBinding;
 
 import java.util.List;
 
-public class ProfilFragment extends Fragment implements UserContract.View {
+public class ProfilFragment extends Fragment implements UserContract.View.Profile {
     private FragmentProfilBinding binding;
     private User user;
 
@@ -38,11 +38,6 @@ public class ProfilFragment extends Fragment implements UserContract.View {
 
         this.binding = FragmentProfilBinding.inflate(inflater);
 
-        this.binding.tvNamePlaceholder.setText(user.getName());
-        this.binding.tvName.setText(user.getName());
-        this.binding.tvEmail.setText(user.getEmail());
-        this.binding.tvRole.setText(user.getRoles());
-
         return binding.getRoot();
     }
 
@@ -50,6 +45,15 @@ public class ProfilFragment extends Fragment implements UserContract.View {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.btnLogout.setOnClickListener(this::logout);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.binding.tvNamePlaceholder.setText(user.getName());
+        this.binding.tvName.setText(user.getName());
+        this.binding.tvEmail.setText(user.getEmail());
+        this.binding.tvRole.setText(user.getRoles());
     }
 
     private void logout(View view) {
@@ -60,17 +64,8 @@ public class ProfilFragment extends Fragment implements UserContract.View {
     }
 
     @Override
-    public void update(List<User> data) {
-
-    }
-
-    @Override
     public void updateProfile(User user) {
         this.user = user;
     }
 
-    @Override
-    public void selectUser(User user) {
-
-    }
 }

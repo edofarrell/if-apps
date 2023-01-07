@@ -204,11 +204,6 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
     }
 
     @Override
-    public void updateProfile(User user) {
-
-    }
-
-    @Override
     public void selectUser(User user) {
         this.selectedUser = user;
         this.binding.actvChooseParticipant.setQuery(user.getName(), true);

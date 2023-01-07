@@ -26,7 +26,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     private FragmentLoginBinding fragmentLoginBinding;
     private UserPresenter presenter;
 
-    public static LoginFragment newInstance(MainPresenter mainPresenter, Context context, UserContract.View profilFragment) {
+    public static LoginFragment newInstance(MainPresenter mainPresenter, Context context, UserContract.View.Profile profilFragment) {
         Bundle args = new Bundle();
         LoginFragment fragment = new LoginFragment();
         fragment.presenter = new UserPresenter(fragment, profilFragment, context, mainPresenter);
