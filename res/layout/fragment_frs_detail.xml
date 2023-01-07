@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
@@ -25,46 +25,84 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <LinearLayout
+
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_below="@id/appbar_layout">
+        android:layout_below="@id/appbar_layout"
+        android:paddingLeft="@dimen/_16dp"
+        android:paddingRight="@dimen/_16dp">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:queryHint="ABCDE">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </androidx.appcompat.widget.SearchView>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10dp"
+                android:background="@drawable/custom_kotak_filter_pengumuman"
+                app:queryHint="@string/hintMatkul"
+                />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="418dp"
-        android:id="@+id/tv_lv_matkul"
-        android:layout_marginTop="@dimen/_10sp"
-        android:padding="@dimen/_15sp"
-        android:divider="@color/white"
-        android:dividerHeight="@dimen/_20sp"
-        android:layout_weight="0.4">
+            <TextView
+                android:id="@+id/tv_hasil_pencarian_matkul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hasilPencarianMatkul"
+                android:layout_below="@id/search_bar"
+                android:layout_margin="@dimen/_10dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sp"></TextView>
 
-    </ListView>
+            <ListView
+                android:id="@+id/tv_lv_matkul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_hasil_pencarian_matkul"
+                android:layout_margin="@dimen/_10dp">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="418dp"
-        android:id="@+id/tv_lv_matkuldipilih"
-        android:layout_marginTop="@dimen/_10sp"
-        android:padding="@dimen/_15sp"
-        android:divider="@color/white"
-        android:dividerHeight="@dimen/_20sp"
-        android:layout_weight="0.4">
-        >
+            </ListView>
 
-    </ListView>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_matkul_terpilih"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/matkulTerpilih"
+                android:layout_below="@id/tv_lv_matkul"
+                android:layout_margin="@dimen/_10dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sp"></TextView>
 
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10dp"
+                android:layout_below="@id/tv_matkul_terpilih">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/tv_lv_matkuldipilih"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </ListView>
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+
+
+
+    </ScrollView>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -80,8 +118,4 @@
         android:backgroundTint="?attr/colorAccent"
         android:src="@android:drawable/ic_input_add" />
 
-
-
-
-    
 </RelativeLayout>
