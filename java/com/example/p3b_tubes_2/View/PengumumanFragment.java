@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -18,7 +17,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import com.example.p3b_tubes_2.APIClient;
-import com.example.p3b_tubes_2.MainPresenter;
+import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Model.PengumumanList;
 import com.example.p3b_tubes_2.Model.TagList;
 import com.example.p3b_tubes_2.PengumumanContract;
@@ -122,8 +121,10 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                searchText = newText;
-                filter();
+                if (!searchText.equals(newText)) {
+                    searchText = newText;
+                    filter();
+                }
                 return false;
             }
         });
@@ -264,5 +265,10 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     @Override
     public void showErrorAddPengumuman(String msg) {
         this.tambahFragment.showError(msg);
+    }
+
+    @Override
+    public void showErrorAddTag(String msg) {
+        this.tambahTagFragment.showError(msg);
     }
 }

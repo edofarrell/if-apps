@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,17 +7,14 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.p3b_tubes_2.Model.TimeSlot;
+import com.example.p3b_tubes_2.Model.TimeslotList;
 import com.example.p3b_tubes_2.databinding.ItemListTimeslotBinding;
 
-import java.util.ArrayList;
-import java.util.List;
+public class TimeslotListAdapter extends BaseAdapter {
+       TimeslotList timeslotList;
 
-public class PartisipanListAdapter extends BaseAdapter {
-        List<TimeSlot> arrayList;
-
-        public PartisipanListAdapter() {
-            this.arrayList = new ArrayList<>();
+        public TimeslotListAdapter() {
+            this.timeslotList = new TimeslotList();
         }
 
         private class ViewHolder {
@@ -34,9 +31,9 @@ public class PartisipanListAdapter extends BaseAdapter {
 
             private void updateView(int i) {
                 this.i = i;
-                TimeSlot timeSlot = arrayList.get(i);
-                String hari = timeSlot.getDay();
-                String waktu = timeSlot.getStartTime() + "-" + timeSlot.getEndTime();
+                TimeslotList.Timeslot timeslot = timeslotList.get(i);
+                String hari = timeslot.getDay();
+                String waktu = timeslot.getStartTime() + "-" + timeslot.getEndTime();
                 this.tvDay.setText(hari);
                 this.tvTimeSlot.setText(waktu);
             }
@@ -44,12 +41,12 @@ public class PartisipanListAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return this.arrayList.size();
+            return this.timeslotList.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return this.arrayList.get(position);
+            return this.timeslotList.get(position);
         }
 
         @Override
@@ -75,8 +72,8 @@ public class PartisipanListAdapter extends BaseAdapter {
             return convertView;
         }
 
-        public void update(List<TimeSlot> timeSlot){
-            this.arrayList = timeSlot;
+        public void update(TimeslotList timeslotList){
+            this.timeslotList = timeslotList;
             notifyDataSetChanged();
         }
 }

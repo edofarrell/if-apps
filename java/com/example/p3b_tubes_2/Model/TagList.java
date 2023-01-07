@@ -12,6 +12,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.p3b_tubes_2.APIClient;
+import com.example.p3b_tubes_2.APIError;
 import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -160,7 +161,16 @@ public class TagList {
             try {
                 String responseBody = new String(error.networkResponse.data, "utf-8");
                 Log.d("DEBUG", "TagList: APITagAdd: onErrorResponse(), Error=" + responseBody);
-                presenter.AddTagOnError(responseBody);
+
+                String msg;
+                APIError err = gson.fromJson(responseBody, APIError.class);
+                if(err.getErrcode().equals("E_DUPLICATE")){
+                    msg = "Tag sudah pernah ditambahkan";
+                }else{
+                    msg = responseBody;
+                }
+
+                presenter.AddTagOnError(msg);
             } catch (UnsupportedEncodingException e) {
                 Log.d("DEBUG", "TagList: APITagAdd: onErrorResponse() catch UnsupportedEncodingException");
             }

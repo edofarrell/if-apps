@@ -5,7 +5,6 @@ import android.content.Context;
 import com.example.p3b_tubes_2.APIAuthorization;
 import com.example.p3b_tubes_2.APIGetCurrentUser;
 import com.example.p3b_tubes_2.LoginContract;
-import com.example.p3b_tubes_2.MainPresenter;
 import com.example.p3b_tubes_2.Model.User;
 import com.example.p3b_tubes_2.UserContract;
 

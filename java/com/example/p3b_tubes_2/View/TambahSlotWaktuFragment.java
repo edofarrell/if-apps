@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -6,24 +6,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 
+import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
+import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentTambahSlotWaktuBinding;
 
 public class TambahSlotWaktuFragment extends DialogFragment {
     private FragmentTambahSlotWaktuBinding binding;
+    private PertemuanPresenter presenter;
 
-    public static TambahSlotWaktuFragment newInstance(FragmentManager fm) {
+    public static TambahSlotWaktuFragment newInstance(FragmentManager fm, PertemuanPresenter presenter) {
         TambahSlotWaktuFragment fragment = new TambahSlotWaktuFragment();
         fragment.show(fm, "tambahSlotWaktu");
-
+        fragment.presenter = presenter;
         return fragment;
     }
 
@@ -84,7 +85,7 @@ public class TambahSlotWaktuFragment extends DialogFragment {
         String waktuMulai = binding.etStartTime.getText().toString();
         String waktuBerakhir = binding.etEndTime.getText().toString();
 
-        Toast.makeText(this.getContext(), "Slot waktu berhasil ditambahkan!", Toast.LENGTH_SHORT).show();
+        this.presenter.addTimeSlot(hari, waktuMulai, waktuBerakhir);
     }
 
     private void showTimePicker(View view) {

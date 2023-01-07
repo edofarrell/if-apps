@@ -3,10 +3,8 @@ package com.example.p3b_tubes_2;
 
 import com.example.p3b_tubes_2.Model.InviteList;
 import com.example.p3b_tubes_2.Model.PertemuanList;
-import com.example.p3b_tubes_2.Model.TimeSlot;
+import com.example.p3b_tubes_2.Model.TimeslotList;
 import com.example.p3b_tubes_2.Model.User;
-
-import java.util.List;
 
 public interface PertemuanContract {
 
@@ -15,65 +13,65 @@ public interface PertemuanContract {
         interface AddOnSuccessListener {
             void onSuccessAdd(PertemuanList.Pertemuan pertemuan);
 
-            void onErrorAdd();
+            void onErrorAdd(String msg);
         }
 
         interface ChangeOnSuccessListener {
             void onSuccessChange();
 
-            void onErrorChange();
+            void onErrorChange(String msg);
         }
 
         interface GetOnSuccessListener {
             void onSuccessGetDibuat(PertemuanList pertemuanList);
 
-            void onErrorGetDibuat();
+            void onErrorGetDibuat(String msg);
         }
 
         interface GetPartisipanSuccessListener {
             void onSuccessGetPartisipanDibuat(PertemuanList.Pertemuan pertemuan);
 
-            void onErrorGetPartisipanDibuat();
+            void onErrorGetPartisipanDibuat(String msg);
         }
 
         interface DeleteOnSuccessListener {
             void onSuccessDelete();
 
-            void onErrorDelete();
+            void onErrorDelete(String msg);
         }
 
         interface AddParticipantsPertemuanOnSuccessListener {
             void onSuccessAddParticipants(User[] users);
 
-            void onErrorAddParticipants();
+            void onErrorAddParticipants(String msg);
         }
 
         interface DeleteParticipantsPertemuanOnSuccessListener {
             void onSuccessDeleteParticipants();
 
-            void onErrorDeleteParticipants();
+            void onErrorDeleteParticipants(String msg);
         }
 
         interface GetTimeSlotOnSuccessListener {
-            void onSuccessGetTimeSlot(List<TimeSlot> timeSlot);
+            void onSuccessGetTimeSlot(TimeslotList timeslotList);
 
-            void onErrorGetTimeSlot();
+            void onErrorGetTimeSlot(String msg);
         }
 
         interface AddTimeSlotOnSuccessListener {
-            void onSuccessAddTimeSlot(List<TimeSlot> timeSlot);
+            void onSuccessAddTimeSlot();
 
-            void onErrorAddTimeSlot();
+            void onErrorAddTimeSlot(String msg);
         }
 
         interface GetInvitesOnSuccessListener{
             void onSuccessGetInvites(InviteList invites);
-            void onErrorGetInvites();
+            void onErrorGetInvites(String msg);
         }
 
         interface ChangeInvitesOnSuccessListener{
             void onSuccessChangeInvites();
-            void onErrorChangeInvites();
+            void onErrorChangeInvites(String msg);
         }
     }
 
@@ -85,9 +83,13 @@ public interface PertemuanContract {
 
             void addSelectedUserOnTambahPertemuan(User[] users);
 
-            void updateTimeSlot(List<TimeSlot> timeSlot);
+            void updateTimeSlot(TimeslotList timeslotList);
 
             void openAddPartisipan(String idPertemuan);
+
+            void closeAddPage();
+
+            void showErrorAddPertemuan(String msg);
         }
 
         interface PertemuanDiundang {
@@ -102,6 +104,6 @@ public interface PertemuanContract {
 
         void updateDiundang(InviteList listInvites);
 
-        void updateTimeSlot(List<TimeSlot> timeSlot);
+        void updateTimeSlot(TimeslotList timeslotList);
     }
 }

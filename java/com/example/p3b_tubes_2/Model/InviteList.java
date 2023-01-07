@@ -8,14 +8,19 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.p3b_tubes_2.APIClient;
+import com.example.p3b_tubes_2.APIError;
 import com.example.p3b_tubes_2.CustomJsonRequest;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
@@ -25,7 +30,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InviteList implements Response.Listener<JSONArray>, Response.ErrorListener{
+public class InviteList {
+
     public class Invites {
         String appointment_id;
         String title;
@@ -78,7 +84,7 @@ public class InviteList implements Response.Listener<JSONArray>, Response.ErrorL
             return endTime;
         }
 
-        public String getDate(){
+        public String getDate() {
             SimpleDateFormat inputformatter = new SimpleDateFormat("yyyy-MM-dd HH:mmZ");
             SimpleDateFormat dateFormatter = new SimpleDateFormat("E, dd MMM yyyy");
 
@@ -105,55 +111,135 @@ public class InviteList implements Response.Listener<JSONArray>, Response.ErrorL
     private RequestQueue queue;
     private Gson gson;
     private ArrayList<InviteList.Invites> listInvites;
+    private static APIInvitesGet apiGet;
+    private static APIInvitesAccept apiAccept;
 
     public InviteList(PertemuanPresenter presenter, Context context) {
         this.presenter = presenter;
         this.queue = Volley.newRequestQueue(context);
         this.gson = new Gson();
+
+        this.apiGet = new APIInvitesGet();
+        this.apiAccept = new APIInvitesAccept();
     }
 
-    public InviteList(){
+    public InviteList() {
         this.listInvites = new ArrayList<>();
     }
 
-    public int getListSize(){
+    public int getListSize() {
         return this.listInvites.size();
     }
 
-    public Invites getInvitation(int i){
+    public Invites getInvitation(int i) {
         return this.listInvites.get(i);
     }
 
-    public void getInvites(){
-        String url = APIClient.BASE_URL+"/appointments/invitations";
-        CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET,url,null,
-                this::onResponse,this::onErrorResponse){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorization", APIClient.token);
-                return params;
-            }
-        };
-        queue.add(request);
-    }
+    private class APIInvitesGet implements Response.Listener<JSONArray>, Response.ErrorListener{
 
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        try {
-            String responseBody = new String(error.networkResponse.data, "utf-8");
-            Log.d("DEBUG", "APIPertemuanGetInvites: onErrorResponse(), Error=" + responseBody);
-        } catch (UnsupportedEncodingException e) {
-            Log.d("DEBUG", "APIPertemuanGetInvites: onErrorResponse() catch UnsupportedEncodingException");
+        public void get() {
+            String url = APIClient.BASE_URL + "/appointments/invitations";
+            CustomJsonRequest request = new CustomJsonRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    this::onResponse,
+                    this::onErrorResponse
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
+                }
+            };
+            queue.add(request);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "InviteList: APIInvitesGet: onErrorResponse(), Error=" + responseBody);
+            } catch (UnsupportedEncodingException e) {
+                Log.d("DEBUG", "InviteList: APIInvitesGet: onErrorResponse() catch UnsupportedEncodingException");
+            }
+        }
+
+        @Override
+        public void onResponse(JSONArray response) {
+            Type listType = new TypeToken<ArrayList<InviteList.Invites>>() {}.getType();
+            ArrayList<InviteList.Invites> list = gson.fromJson(response.toString(), listType);
+            listInvites = list;
+            presenter.onSuccessGetInvites(InviteList.this);
         }
     }
 
-    @Override
-    public void onResponse(JSONArray response) {
-        Type listType = new TypeToken<ArrayList<InviteList.Invites>>() {}.getType();
-        ArrayList<InviteList.Invites> listInvites = this.gson.fromJson(response.toString(), listType);
-        Log.d("DEBUG", listInvites.size()+"");
-        this.listInvites = listInvites;
-        this.presenter.onSuccessGetInvites(this);
+    private class APIInvitesAccept implements Response.Listener<JSONObject>, Response.ErrorListener{
+
+        public void accept(String appointmentId, String userId) {
+            String url = APIClient.BASE_URL + "/appointments" + "/" + appointmentId + "/participants" + "/" + userId;
+
+            JsonObject json = new JsonObject();
+            json.addProperty("attending", true);
+            JSONObject jsonObject = null;
+
+            try {
+                jsonObject = new JSONObject(json.toString());
+            } catch (JSONException e) {
+                Log.d("DEBUG", "InviteList: APIInvitesAccept: accept() catch JSONException");
+            }
+
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.PATCH,
+                    url,
+                    jsonObject,
+                    this::onResponse,
+                    this::onErrorResponse
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
+                }
+            };
+
+            queue.add(request);
+        }
+
+        @Override
+        public void onResponse(JSONObject response) {
+            presenter.onSuccessChangeInvites();
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "InviteList: APIInvitesAccept: onErrorResponse(), Error=" + responseBody);
+
+                String msg;
+                APIError err = gson.fromJson(responseBody, APIError.class);
+                if(err.getErrcode().equals("E_OVERLAPPING_SCHEDULE")){
+                    msg = "Anda sudah memiliki pertemuan di jam tersebut";
+                }else{
+                    msg = responseBody;
+                }
+
+                presenter.onErrorChangeInvites(msg);
+            } catch (UnsupportedEncodingException e) {
+                Log.d("DEBUG", "InviteList: APIInvitesAccept: onErrorResponse() catch UnsupportedEncodingException");
+            }
+        }
     }
+
+    public static void getInvites(){
+        apiGet.get();
+    }
+
+    public static void acceptInvite(String appointmentId, String userId){
+        apiAccept.accept(appointmentId, userId);
+    }
+
 }

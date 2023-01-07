@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.p3b_tubes_2.Model.InviteList;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
+import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentDetailPertemuanUndanganBinding;
 
 public class PertemuanDetailUndanganFragment extends DialogFragment {

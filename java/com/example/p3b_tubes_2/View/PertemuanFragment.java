@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,15 +15,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Model.InviteList;
 import com.example.p3b_tubes_2.Model.PertemuanList;
-import com.example.p3b_tubes_2.Model.TimeSlot;
+import com.example.p3b_tubes_2.Model.TimeslotList;
+import com.example.p3b_tubes_2.PertemuanContract;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanBinding;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class PertemuanFragment extends Fragment implements
@@ -135,7 +136,7 @@ public class PertemuanFragment extends Fragment implements
     }
 
     @Override
-    public void updateTimeSlot(List<TimeSlot> timeSlot) {
-        this.pertemuanDibuatFragment.updateTimeSlot(timeSlot);
+    public void updateTimeSlot(TimeslotList timeslotList) {
+        this.pertemuanDibuatFragment.updateTimeSlot(timeslotList);
     }
 }
