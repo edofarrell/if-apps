@@ -128,7 +128,12 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
 
     @Override
     public void updateTimeSlot(TimeslotList timeslotList) {
-        this.tambahPertemuanFragment.updateTimeSlot(timeslotList);
+        if(this.tambahPertemuanFragment != null) {
+            this.tambahPertemuanFragment.updateTimeSlot(timeslotList);
+        }
+        if(this.tambahSlotWaktuFragment != null) {
+            this.tambahSlotWaktuFragment.updateTimeSlot(timeslotList);
+        }
     }
 
     @Override
