@@ -18,6 +18,7 @@ public class FRSFragment extends Fragment implements FRSContract.View{
     private FragmentFrsBinding binding;
     private FRSPresenter presenter;
     private FRSListAdapter adapter;
+    private FRSDetailFragment detailFragment;
     private FRSFragment(){}
     public static FRSFragment newInstance(MainPresenter mainPresenter,Context context) {
         Bundle args = new Bundle();
@@ -47,7 +48,17 @@ public class FRSFragment extends Fragment implements FRSContract.View{
     }
 
     @Override
-    public void openDetail(String tahunAjar, ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
-        FRSDetailFragment.newInstance(getParentFragmentManager(),tahunAjar,listMataKuliah,presenter);
+    public void openDetail(TahunAjaran.TahunAjar tahunAjar) {
+        detailFragment = FRSDetailFragment.newInstance(getParentFragmentManager(),presenter,tahunAjar);
+    }
+
+    @Override
+    public void updateSearch(ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
+        detailFragment.setListMataKuliah(listMataKuliah);
+    }
+
+    @Override
+    public void addToSelectedMataKuliah(MataKuliahList.MataKuliah matkul) {
+        detailFragment.setSelectedMataKuliah(matkul);
     }
 }

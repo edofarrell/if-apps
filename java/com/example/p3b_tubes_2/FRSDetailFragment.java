@@ -14,30 +14,33 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.p3b_tubes_2.databinding.FragmentFrsDetailBinding;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
-public class FRSDetailFragment extends DialogFragment {
+public class FRSDetailFragment extends DialogFragment{
     private FragmentFrsDetailBinding binding;
-    private String tahunAjar;
+    private TahunAjaran.TahunAjar tahunAjar;
     private ArrayList<MataKuliahList.MataKuliah> listMataKuliah;
     private FRSDetailListAdapterSearch adapterSearch;
+    private FRSDetailListAdapterView adapterView;
     private FRSPresenter presenter;
     private FRSTambahFragment frsTambahFragmentfragment;
     private String searchText;
 
-    public static FRSDetailFragment newInstance(FragmentManager fm, String tahunAjar,
-                                                ArrayList<MataKuliahList.MataKuliah> listMataKuliah,
-                                                FRSPresenter presenter) {
+    public static FRSDetailFragment newInstance(FragmentManager fm,
+                                                FRSPresenter presenter, TahunAjaran.TahunAjar tahunAjar) {
 
         Bundle args = new Bundle();
 
         FRSDetailFragment fragment = new FRSDetailFragment();
         fragment.setArguments(args);
         fragment.show(fm, "detailFRS");
-        fragment.tahunAjar = tahunAjar;
-        fragment.listMataKuliah = listMataKuliah;
+        //fragment.listMataKuliah = listMataKuliah;
         fragment.presenter = presenter;
         fragment.adapterSearch = new FRSDetailListAdapterSearch(presenter);
+        fragment.adapterView = new FRSDetailListAdapterView(presenter);
+        fragment.tahunAjar = tahunAjar;
         return fragment;
     }
 
@@ -45,9 +48,9 @@ public class FRSDetailFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.binding = FragmentFrsDetailBinding.inflate(inflater);
-        this.binding.appbar.setTitle(tahunAjar);
+        this.binding.appbar.setTitle(tahunAjar.toString());
         this.binding.tvLvMatkul.setAdapter(adapterSearch);
-        //this.adapter.update(listMataKuliah);
+        this.binding.tvLvMatkuldipilih.setAdapter(adapterView);
         this.binding.btnAddMatkul.setOnClickListener(this::onClickAddMatkul);
         return binding.getRoot();
     }
@@ -77,15 +80,27 @@ public class FRSDetailFragment extends DialogFragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                searchText = newText;
-                //filter();
+                getMataKuliah(newText);
                 return false;
             }
         });
     }
 
+    public void getMataKuliah(String text){
+        this.presenter.getMataKuliah(text);
+    }
+
     private void onClickSearch(View view) {
         this.binding.searchBar.onActionViewExpanded();
+    }
+
+    public void setListMataKuliah(ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
+        this.listMataKuliah = listMataKuliah;
+        this.adapterSearch.update(listMataKuliah);
+    }
+
+    public void setSelectedMataKuliah(MataKuliahList.MataKuliah matkul){
+        this.adapterView.update(matkul);
     }
 
     @Override
@@ -107,6 +122,13 @@ public class FRSDetailFragment extends DialogFragment {
     }
 
     private void onClickAddMatkul(View view) {
-        this.frsTambahFragmentfragment = FRSTambahFragment.newInstance(getParentFragmentManager());
+        //this.frsTambahFragmentfragment = FRSTambahFragment.newInstance(getParentFragmentManager());
+        for(int i = 0;i<this.adapterView.getCount();i++){
+            try {
+                this.presenter.enrolStudent(this.adapterView.getMataKuliahEnrol(i).getId(),this.tahunAjar.toStringFormatAPI());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

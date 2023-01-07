@@ -35,8 +35,6 @@
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/tv_lv_matkul"
-        android:layout_below="@+id/appbar_layout"
         app:queryHint="ABCDE">
 
     </androidx.appcompat.widget.SearchView>
@@ -44,24 +42,24 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="418dp"
-        android:layout_below="@id/appbar_layout"
         android:id="@+id/tv_lv_matkul"
         android:layout_marginTop="@dimen/_10sp"
         android:padding="@dimen/_15sp"
         android:divider="@color/white"
-        android:dividerHeight="@dimen/_20sp">
+        android:dividerHeight="@dimen/_20sp"
+        android:layout_weight="0.4">
 
     </ListView>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="418dp"
-        android:layout_below="@id/tv_lv_matkul"
         android:id="@+id/tv_lv_matkuldipilih"
         android:layout_marginTop="@dimen/_10sp"
         android:padding="@dimen/_15sp"
         android:divider="@color/white"
-        android:dividerHeight="@dimen/_20sp">
+        android:dividerHeight="@dimen/_20sp"
+        android:layout_weight="0.4">
         >
 
     </ListView>

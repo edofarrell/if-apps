@@ -31,7 +31,7 @@ public class FRSListAdapter extends BaseAdapter {
         }
 
         private void openDetail(View view){
-            presenter.getMataKuliah(getSemesterNow(),academicYears.getText().toString());
+            presenter.openFragment(tahunAjaran.getListAcademicYears().get(i));
         }
 
         private int getSemesterNow(){

@@ -51,8 +51,6 @@ public class MataKuliahList implements Response.Listener<JSONArray>, Response.Er
     private FRSPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
-    private int tempSemester;
-    private String tempTahunAjar;
 
     public MataKuliahList(FRSPresenter presenter, Context context){
         this.presenter = presenter;
@@ -65,11 +63,9 @@ public class MataKuliahList implements Response.Listener<JSONArray>, Response.Er
         this.listMataKuliah = new ArrayList<>();
     }
 
-    public void getMataKuliah(int semester, String tahunAjar){
+    public void getMataKuliah(String text){
         listMataKuliah.clear();
-        String url = APIClient.BASE_URL+"/courses?limit=10";
-        this.tempSemester = semester;
-        this.tempTahunAjar = tahunAjar;
+        String url = APIClient.BASE_URL+"/courses?filter[name]="+text+"&limit=10";
         CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET,url,null,
                 this::onResponse,this::onErrorResponse){
             @Override
@@ -98,13 +94,8 @@ public class MataKuliahList implements Response.Listener<JSONArray>, Response.Er
         String res = response.toString();
         Type listType = new TypeToken<ArrayList<MataKuliah>>() {}.getType();
         listdata = this.gson.fromJson(res, listType);
-        for(int i = 0;i<listdata.size();i++){
-            if(listdata.get(i).semester==tempSemester){
-                listMataKuliah.add(listdata.get(i));
-            }
-        }
-        //Log.d("DEBUG",listMataKuliah.size()+"");
-        this.presenter.OnSuccessGetDetail(listMataKuliah,this.tempTahunAjar);
+        //Log.d("DEBUG","SUCCESS");
+        this.presenter.OnSuccessGetSearchMataKuliah(listdata);
     }
 
 }
