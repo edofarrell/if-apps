@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class FRSDetailFragment extends DialogFragment{
     private FragmentFrsDetailBinding binding;
     private TahunAjaran.TahunAjar tahunAjar;
+    private TahunAjaran.TahunAjar activeYear;
     private ArrayList<MataKuliahList.MataKuliah> listMataKuliah;
     private FRSDetailListAdapterSearch adapterSearch;
     private FRSDetailListAdapterView adapterView;
@@ -29,7 +30,9 @@ public class FRSDetailFragment extends DialogFragment{
     private String searchText;
 
     public static FRSDetailFragment newInstance(FragmentManager fm,
-                                                FRSPresenter presenter, TahunAjaran.TahunAjar tahunAjar) {
+                                                FRSPresenter presenter,
+                                                TahunAjaran.TahunAjar tahunAjar,
+                                                TahunAjaran.TahunAjar activeYear) {
 
         Bundle args = new Bundle();
 
@@ -41,6 +44,7 @@ public class FRSDetailFragment extends DialogFragment{
         fragment.adapterSearch = new FRSDetailListAdapterSearch(presenter);
         fragment.adapterView = new FRSDetailListAdapterView(presenter);
         fragment.tahunAjar = tahunAjar;
+        fragment.activeYear = activeYear;
         return fragment;
     }
 
@@ -52,6 +56,12 @@ public class FRSDetailFragment extends DialogFragment{
         this.binding.tvLvMatkul.setAdapter(adapterSearch);
         this.binding.tvLvMatkuldipilih.setAdapter(adapterView);
         this.binding.btnAddMatkul.setOnClickListener(this::onClickAddMatkul);
+        if(!this.tahunAjar.toStringFormatAPI().equals(this.activeYear.toStringFormatAPI())){
+            binding.searchBar.setVisibility(View.GONE);
+            binding.btnAddMatkul.setVisibility(View.GONE);
+            binding.tvLvMatkuldipilih.setVisibility(View.GONE);
+            getMataKuliahEnrolment();
+        }
         return binding.getRoot();
     }
 
@@ -101,6 +111,22 @@ public class FRSDetailFragment extends DialogFragment{
 
     public void setSelectedMataKuliah(MataKuliahList.MataKuliah matkul){
         this.adapterView.update(matkul);
+    }
+
+    public void setMataKuliahEnrolment(ArrayList<String> listNamaMatkul){
+        ArrayList<MataKuliahList.MataKuliah> listMatkul = new ArrayList<>();
+        for(int i = 0;i<listNamaMatkul.size();i++){
+            listMatkul.get(i).setName(listNamaMatkul.get(i));
+        }
+        this.adapterSearch.update(listMatkul);
+    }
+
+    public void getMataKuliahEnrolment(){
+        try {
+            presenter.getMataKuliahEnrolment(this.tahunAjar.toStringFormatAPI());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

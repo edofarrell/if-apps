@@ -8,13 +8,15 @@ import java.util.ArrayList;
 
 public class FRSPresenter implements FRSContract.Model.GetOnSuccessListener,
 FRSContract.Model.GetDetailOnSuccessListener,
-FRSContract.Model.GetSearchMataKuliahOnSuccessListener{
+FRSContract.Model.GetSearchMataKuliahOnSuccessListener,
+FRSContract.Model.GetMataKuliahEnrolmentOnSuccessListener{
 
     private FRSContract.View ui;
     private MainPresenter mainPresenter;
     private MataKuliahList mataKuliahList;
     private TahunAjaran tahunAjaran;
     private APIFRSEnrolmentStudent enrolmentStudent;
+    private APIFRSGetEnrolmentStudent getEnrolmentStudent;
     //TahunAjaran tahunAjaranList;
 
     public FRSPresenter(FRSContract.View ui, Context context, MainPresenter mainPresenter){
@@ -23,6 +25,7 @@ FRSContract.Model.GetSearchMataKuliahOnSuccessListener{
         this.tahunAjaran = new TahunAjaran(this,context);
         this.mataKuliahList = new MataKuliahList(this,context);
         this.enrolmentStudent = new APIFRSEnrolmentStudent(this,context);
+        this.getEnrolmentStudent = new APIFRSGetEnrolmentStudent(this,context);
     }
 
     public void getMataKuliah(String text){
@@ -39,6 +42,10 @@ FRSContract.Model.GetSearchMataKuliahOnSuccessListener{
 
     public void enrolStudent(String id, String academicYear) throws JSONException {
         this.enrolmentStudent.enrolStudent(id,academicYear);
+    }
+
+    public void getMataKuliahEnrolment(String academicYear) throws JSONException {
+        this.getEnrolmentStudent.getEnrolmentStudent(academicYear);
     }
 
     public void getAcademicYears(){
@@ -72,6 +79,16 @@ FRSContract.Model.GetSearchMataKuliahOnSuccessListener{
 
     @Override
     public void OnErrorGetSearchMataKuliah() {
+
+    }
+
+    @Override
+    public void OnSuccessGetMataKuliahEnrolment(ArrayList<String> listNamaMatkul) {
+        this.ui.updateMataKuliahEnrolment(listNamaMatkul);
+    }
+
+    @Override
+    public void OnErrorGetMataKuliahEnrolment() {
 
     }
 }

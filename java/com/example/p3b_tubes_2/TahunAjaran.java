@@ -82,8 +82,18 @@ public class TahunAjaran implements Response.Listener<JSONObject>, Response.Erro
     @Override
     public void onResponse(JSONObject response) {
         try {
+            String tempSem = response.getString("active_year").substring(4);
+            if(tempSem.equals("1")){
+                tempSem = "Ganjil";
+            }
+            else if(tempSem.equals("2")){
+                tempSem = "Genap";
+            }
+            else{
+                tempSem = "Pendek";
+            }
             this.activeYear = new TahunAjar(response.getString("active_year").substring(0,4),
-                    response.getString("active_year").substring(4));
+                    tempSem);
             JSONArray array = response.getJSONArray("academic_years");
             for(int i = 0;i<array.length();i++){
                 String tahun = array.getString(i).substring(0,4);
