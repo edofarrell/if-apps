@@ -80,7 +80,7 @@ public class LoginFragment extends Fragment implements LoginContract.View{
     @Override
     public void updateLoginView(boolean status) {
         if(!status){
-            this.fragmentLoginBinding.error.setText("Login gagal, periksa kemabli username/password/role");
+            this.fragmentLoginBinding.error.setText("Login gagal, periksa kembali username/password/role");
         }else{
             Bundle result = new Bundle();
             result.putString("page", "pengumuman");
