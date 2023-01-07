@@ -73,6 +73,7 @@ public class FRSDetailFragment extends DialogFragment{
             binding.tvHasilPencarianMatkul.setText("Mata Kuliah yang dipilih");
             binding.tvMatkulTerpilih.setVisibility(View.GONE);
             binding.tvLvMatkuldipilih.setVisibility(View.GONE);
+            binding.tvInfoPenting.setVisibility(View.GONE);
             getMataKuliahEnrolment();
         }
         return binding.getRoot();
