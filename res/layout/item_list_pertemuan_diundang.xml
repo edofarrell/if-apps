@@ -4,11 +4,10 @@
     android:layout_height="wrap_content"
     android:background="@drawable/border_grey"
     android:orientation="vertical"
-    android:paddingTop="@dimen/_16dp"
     android:paddingLeft="16dp"
+    android:paddingTop="@dimen/_16dp"
     android:paddingRight="16dp"
-    android:paddingBottom="4dp"
-    >
+    android:paddingBottom="4dp">
 
     <TextView
         android:id="@+id/tv_title"
@@ -70,22 +69,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end">
+        android:gravity="end"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_see_details"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/terima"/>
+            android:text="@string/terima" />
 
-        <TextView
+        <Button
             android:id="@+id/tv_accepted"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:text="@string/telahDiterima"
-            android:visibility="gone"/>
+            android:textColor="@color/grey"
+            android:visibility="gone" />
 
     </LinearLayout>
 

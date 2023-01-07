@@ -2,6 +2,7 @@ package com.example.p3b_tubes_2;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,6 +79,14 @@ public class TambahPertemuanFragment extends DialogFragment {
         FragmentTransaction ft = this.fm.beginTransaction();
         ft.add(this.binding.fragmentContainer.getId(), this.fragments.get("isiDetail"))
                 .commit();
+
+        this.fm.setFragmentResultListener("closeDialog", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                Log.d("DEBUG", "close dialog");
+                dismiss();
+            }
+        });
 
         this.fm.setFragmentResultListener("changePage", this, new FragmentResultListener() {
             @Override
