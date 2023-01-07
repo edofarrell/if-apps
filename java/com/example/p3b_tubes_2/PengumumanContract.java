@@ -15,7 +15,7 @@ public interface PengumumanContract {
         }
 
         interface GetTagOnSuccessListener {
-            void GetTagOnSuccess(ArrayList<TagList.Tag> listTag);
+            void GetTagOnSuccess(TagList listTag);
 
             void GetTagOnError(String msg);
         }
@@ -48,7 +48,7 @@ public interface PengumumanContract {
     interface View {
         void updatePengumumanList(PengumumanList pengumumanList);
 
-        void updateListTag(ArrayList<TagList.Tag> listTag);
+        void updateListTag(TagList listTag);
 
         void openDetail(PengumumanList.Pengumuman pengumuman);
 

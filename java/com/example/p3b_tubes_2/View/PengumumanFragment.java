@@ -40,7 +40,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private ChipGroup chipGroup;
     private String searchText;
     private PengumumanTambahFragment tambahFragment;
-    private PengumumanTambahTagFragment  tambahTagFragment;
+    private PengumumanTambahTagFragment tambahTagFragment;
 
     private boolean isFabsVisible;
 
@@ -228,7 +228,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     }
 
     @Override
-    public void updateListTag(ArrayList<TagList.Tag> listTag) {
+    public void updateListTag(TagList listTag) {
 
         PopupMenu popupMenu = new PopupMenu(getContext(), this.binding.ivFilter);
 
@@ -244,6 +244,10 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
             popupMenu.show();
 
             popupMenu.setOnMenuItemClickListener(this::onOptionsItemSelected);
+        }
+
+        if (this.tambahTagFragment != null && this.tambahTagFragment.isVisible()) {
+            this.tambahTagFragment.updateTag(listTag);
         }
     }
 

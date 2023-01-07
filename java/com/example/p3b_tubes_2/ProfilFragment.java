@@ -51,6 +51,7 @@ public class ProfilFragment extends Fragment implements UserContract.View{
     }
 
     private void logout(View view) {
+        APIClient.token = "";
         Bundle result = new Bundle();
         result.putString("page", "login");
         this.getParentFragmentManager().setFragmentResult("changePage", result);

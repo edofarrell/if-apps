@@ -112,7 +112,7 @@ public class PengumumanTambahFragment extends DialogFragment {
         this.dismiss();
     }
 
-    public void updateTag(ArrayList<TagList.Tag> listTag) {
+    public void updateTag(TagList listTag) {
         PopupMenu popupMenu = new PopupMenu(getContext(), binding.btnPilih);
 
         for (int i = 0; i < listTag.size(); i++) {

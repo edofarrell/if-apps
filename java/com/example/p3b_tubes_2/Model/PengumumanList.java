@@ -52,7 +52,7 @@ public class PengumumanList {
             String res = "";
             for (int i = 0; i < tags.length; i++) {
                 if (i != 0) {
-                    res += ",";
+                    res += ", ";
                 }
                 res += tags[i].getName();
             }

@@ -64,6 +64,10 @@ public class TagList {
         this.apiAdd = new APITagAdd();
     }
 
+    public TagList(){
+        this.listTag = new ArrayList<>();
+    }
+
     public List<String> getActiveTagFilter(List<String> arr) {
         List<String> result = new ArrayList<>();
         for (int i = 0; i < arr.size(); i++) {
@@ -75,6 +79,14 @@ public class TagList {
             }
         }
         return result;
+    }
+
+    public Tag get(int i){
+        return this.listTag.get(i);
+    }
+
+    public int size(){
+        return this.listTag.size();
     }
 
     private class APITagGet implements Response.Listener<String>, Response.ErrorListener {
@@ -103,7 +115,7 @@ public class TagList {
             Type listType = new TypeToken<ArrayList<TagList.Tag>>() {
             }.getType();
             listTag = gson.fromJson(response, listType);
-            presenter.GetTagOnSuccess(listTag);
+            presenter.GetTagOnSuccess(TagList.this);
         }
 
         @Override

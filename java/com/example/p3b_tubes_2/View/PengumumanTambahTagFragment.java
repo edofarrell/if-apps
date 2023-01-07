@@ -11,17 +11,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.p3b_tubes_2.Model.TagList;
 import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
 import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentTambahTagBinding;
 
+import java.util.ArrayList;
+
 public class PengumumanTambahTagFragment extends DialogFragment {
     private FragmentTambahTagBinding binding;
     private PengumumanPresenter presenter;
+    private TagListAdapter adapter;
 
     public static PengumumanTambahTagFragment newInstance(FragmentManager fm, PengumumanPresenter presenter) {
         PengumumanTambahTagFragment fragment = new PengumumanTambahTagFragment();
         fragment.presenter = presenter;
+        fragment.adapter = new TagListAdapter();
         fragment.show(fm, "tambahTag");
         return fragment;
     }
@@ -29,6 +34,8 @@ public class PengumumanTambahTagFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.binding = FragmentTambahTagBinding.inflate(inflater);
+
+        this.binding.lstTag.setAdapter(adapter);
 
         return binding.getRoot();
     }
@@ -55,6 +62,7 @@ public class PengumumanTambahTagFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        this.presenter.getTag();
         this.binding.appbar.setNavigationOnClickListener(this::onClickKembali);
         this.binding.btnTambah.setOnClickListener(this::addTag);
     }
@@ -74,5 +82,9 @@ public class PengumumanTambahTagFragment extends DialogFragment {
 
     public void showError(String msg){
         this.binding.tvError.setText(msg);
+    }
+
+    public void updateTag(TagList listTag) {
+        this.adapter.update(listTag);
     }
 }

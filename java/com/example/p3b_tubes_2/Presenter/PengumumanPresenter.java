@@ -112,7 +112,7 @@ public class PengumumanPresenter implements
     }
 
     @Override
-    public void GetTagOnSuccess(ArrayList<TagList.Tag> listTag) {
+    public void GetTagOnSuccess(TagList listTag) {
         this.ui.updateListTag(listTag);
     }
 
