@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.p3b_tubes_2.Model.InviteList;
+import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentDetailPertemuanUndanganBinding;
 
 public class PertemuanDetailUndanganFragment extends DialogFragment {

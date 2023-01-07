@@ -1,6 +1,12 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.Presenter;
 
 import android.content.Context;
+import android.util.Log;
+
+import com.example.p3b_tubes_2.MainPresenter;
+import com.example.p3b_tubes_2.Model.PengumumanList;
+import com.example.p3b_tubes_2.Model.TagList;
+import com.example.p3b_tubes_2.PengumumanContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +64,9 @@ public class PengumumanPresenter implements
     @Override
     public void AddOnSuccess(PengumumanList.Pengumuman pengumuman) {
         this.ui.closeAddPage();
-        this.pengumuman.add(pengumuman);
         this.ui.updatePengumumanList(this.pengumuman);
+        this.pengumuman.clearData();
+        this.getPengumuman();
     }
 
     @Override
@@ -74,8 +81,8 @@ public class PengumumanPresenter implements
 
     @Override
     public void deleteOnSuccess(PengumumanList.Pengumuman p) {
-        this.pengumuman.delete(p);
-        this.ui.updatePengumumanList(this.pengumuman);
+        this.pengumuman.clearData();
+        this.getPengumuman();
     }
 
     @Override

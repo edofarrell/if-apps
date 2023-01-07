@@ -1,6 +1,11 @@
 package com.example.p3b_tubes_2;
 
 
+import com.example.p3b_tubes_2.Model.InviteList;
+import com.example.p3b_tubes_2.Model.PertemuanList;
+import com.example.p3b_tubes_2.Model.TimeSlot;
+import com.example.p3b_tubes_2.Model.User;
+
 import java.util.List;
 
 public interface PertemuanContract {

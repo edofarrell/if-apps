@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.Model;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,6 +11,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.p3b_tubes_2.APIClient;
+import com.example.p3b_tubes_2.APIError;
+import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -26,7 +29,7 @@ import java.util.Map;
 
 public class PengumumanList {
 
-    class Pengumuman {
+    public class Pengumuman {
         private String id;
         private String title;
         private String updated_at;
@@ -133,6 +136,10 @@ public class PengumumanList {
         for (int i = 0; i < pengumumanList.size(); i++) {
             this.data.add(pengumumanList.get(i));
         }
+    }
+
+    public void clearData(){
+        this.data.clear();
     }
 
     public Cursor getMetadata() {

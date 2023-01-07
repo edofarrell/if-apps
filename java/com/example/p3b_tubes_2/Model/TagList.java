@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.Model;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,6 +11,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.p3b_tubes_2.APIClient;
+import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -27,7 +29,8 @@ import java.util.Map;
 
 public class TagList {
 
-    class Tag {
+    public class Tag {
+        private String id;
         private String tag;
         private String tag_id;
 
@@ -36,7 +39,11 @@ public class TagList {
         }
 
         public String getId() {
-            return tag_id;
+            if (id == null) {
+                return tag_id;
+            } else {
+                return id;
+            }
         }
     }
 
@@ -93,7 +100,8 @@ public class TagList {
 
         @Override
         public void onResponse(String response) {
-            Type listType = new TypeToken<ArrayList<TagList.Tag>>() {}.getType();
+            Type listType = new TypeToken<ArrayList<TagList.Tag>>() {
+            }.getType();
             listTag = gson.fromJson(response, listType);
             presenter.GetTagOnSuccess(listTag);
         }
@@ -159,11 +167,11 @@ public class TagList {
         }
     }
 
-    public static void fetch(){
+    public static void fetch() {
         apiGet.get();
     }
 
-    public static void addTag(String tag){
+    public static void addTag(String tag) {
         apiAdd.add(tag);
     }
 }

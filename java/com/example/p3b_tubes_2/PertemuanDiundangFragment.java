@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.p3b_tubes_2.Model.InviteList;
+import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentPertemuanDiundangBinding;
 
 public class PertemuanDiundangFragment extends Fragment implements PertemuanContract.View.PertemuanDiundang{

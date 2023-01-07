@@ -1,5 +1,7 @@
 package com.example.p3b_tubes_2;
 
+import com.example.p3b_tubes_2.Model.User;
+
 import java.util.List;
 
 public interface UserContract {

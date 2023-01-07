@@ -8,12 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.p3b_tubes_2.Model.PertemuanList;
+import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.databinding.ItemListPertemuanDibuatBinding;
-
-import org.w3c.dom.Text;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 public class PertemuanDibuatListAdapter extends BaseAdapter {
 

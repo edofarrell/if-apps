@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.View;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,13 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import com.example.p3b_tubes_2.APIClient;
+import com.example.p3b_tubes_2.MainPresenter;
+import com.example.p3b_tubes_2.Model.PengumumanList;
+import com.example.p3b_tubes_2.Model.TagList;
+import com.example.p3b_tubes_2.PengumumanContract;
+import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
+import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentPengumumanBinding;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -61,18 +69,29 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.binding.btnAddPengumuman.setOnClickListener(this::onClick);
         this.binding.btnAddPengumumanExpandable.setOnClickListener(this::addPengumuman);
         this.binding.btnAddTagPengumuman.setOnClickListener(this::addTag);
-
+//        this.binding.btnNext.setOnClickListener(this::onClickNext);
         this.binding.ivFilter.setOnClickListener(this::openFilter);
 
         this.chipGroup = this.binding.chipGrup;
-
         this.searchText = "";
-        this.binding.btnNext.setOnClickListener(this::onClickNext);
 
-        Log.d("DEBUG", APIClient.role);
         if(!APIClient.role.equals("admin")) {
             this.binding.btnAddPengumuman.setVisibility(View.GONE);
         }
+
+        this.binding.lvPengumuman.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if(!view.canScrollVertically(1)){
+                    getNext();
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
 
         return this.binding.getRoot();
     }
@@ -111,12 +130,7 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
         this.binding.searchBar.onActionViewExpanded();
     }
 
-
-    private void onClickBack(View view) {
-        filter();
-    }
-
-    private void onClickNext(View view) {
+    private void getNext() {
         List<String> tag = this.presenter.getTagsId(this.arrChipGroup);
         this.presenter.getPengumuman(this.searchText, tag, true);
     }

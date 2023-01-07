@@ -1,4 +1,4 @@
-package com.example.p3b_tubes_2;
+package com.example.p3b_tubes_2.Model;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,6 +11,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.p3b_tubes_2.APIClient;
+import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -25,7 +27,7 @@ import java.util.Map;
 
 public class PertemuanList implements Response.Listener<String>, Response.ErrorListener {
 
-    class Pertemuan {
+    public class Pertemuan {
         private String id;//uuidv4
         private String title;//length:1-256
         private String description;//length:1-1000
