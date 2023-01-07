@@ -71,7 +71,6 @@ public class PengumumanTambahFragment extends DialogFragment {
         String[] tags = new String[arrChipGroup.size()];
         for (int i = 0; i < listTag.size(); i++) {
             tags[i] = listTag.get(i);
-            Log.d("DEBUG", tags[i]);
         }
 
         if (title.trim().equals("")) {
@@ -81,7 +80,7 @@ public class PengumumanTambahFragment extends DialogFragment {
         } else if (content.trim().equals("")) {
             this.showError("Deskripsi pengumuman harus diisi");
         } else {
-//            this.presenter.addPengumuman(title, content, tags);
+            this.presenter.addPengumuman(title, content, tags);
         }
     }
 

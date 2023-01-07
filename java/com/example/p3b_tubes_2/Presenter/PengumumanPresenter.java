@@ -58,14 +58,15 @@ public class PengumumanPresenter implements
 
     //Add pengumuman
     public void addPengumuman(String title, String content, String[] tags) {
-//        PengumumanList.addPengumuman(title, content, tags);
+        PengumumanList.addPengumuman(title, content, tags);
     }
 
     @Override
     public void AddOnSuccess(PengumumanList.Pengumuman pengumuman) {
         this.ui.closeAddPage();
-        this.pengumuman.add(pengumuman);
         this.ui.updatePengumumanList(this.pengumuman);
+        this.pengumuman.clearData();
+        this.getPengumuman();
     }
 
     @Override
@@ -80,8 +81,8 @@ public class PengumumanPresenter implements
 
     @Override
     public void deleteOnSuccess(PengumumanList.Pengumuman p) {
-        this.pengumuman.delete(p);
-        this.ui.updatePengumumanList(this.pengumuman);
+        this.pengumuman.clearData();
+        this.getPengumuman();
     }
 
     @Override

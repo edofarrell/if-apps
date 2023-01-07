@@ -138,6 +138,10 @@ public class PengumumanList {
         }
     }
 
+    public void clearData(){
+        this.data.clear();
+    }
+
     public Cursor getMetadata() {
         return metadata;
     }

@@ -30,6 +30,7 @@ import java.util.Map;
 public class TagList {
 
     public class Tag {
+        private String id;
         private String tag;
         private String tag_id;
 
@@ -38,7 +39,11 @@ public class TagList {
         }
 
         public String getId() {
-            return tag_id;
+            if (id == null) {
+                return tag_id;
+            } else {
+                return id;
+            }
         }
     }
 
@@ -95,7 +100,8 @@ public class TagList {
 
         @Override
         public void onResponse(String response) {
-            Type listType = new TypeToken<ArrayList<TagList.Tag>>() {}.getType();
+            Type listType = new TypeToken<ArrayList<TagList.Tag>>() {
+            }.getType();
             listTag = gson.fromJson(response, listType);
             presenter.GetTagOnSuccess(listTag);
         }
@@ -161,11 +167,11 @@ public class TagList {
         }
     }
 
-    public static void fetch(){
+    public static void fetch() {
         apiGet.get();
     }
 
-    public static void addTag(String tag){
+    public static void addTag(String tag) {
         apiAdd.add(tag);
     }
 }
