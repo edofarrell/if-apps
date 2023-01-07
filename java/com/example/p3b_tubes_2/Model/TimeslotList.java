@@ -192,7 +192,23 @@ public class TimeslotList {
             try {
                 String responseBody = new String(error.networkResponse.data, "utf-8");
                 Log.d("DEBUG", "TimeslotList: APITimeslotAdd: onErrorResponse(), Error=" + responseBody);
-                presenter.onErrorAddTimeSlot(responseBody);
+
+                String msg;
+                APIError err = gson.fromJson(responseBody, APIError.class);
+                if(err.getErrcode().equals("E_OVERLAPPING_SCHEDULE")){
+                    msg = "Anda sudah memiliki slot waktu di jam tersebut";
+                }else if(err.getErrcode().equals("E_INVALID_VALUE")){
+                    List<String> field = err.field;
+                    if(field.get(0).equals("end_time")){
+                        msg = "Waktu akhir harus setelah waktu awal";
+                    }else{
+                        msg = responseBody;
+                    }
+                }else{
+                    msg = responseBody;
+                }
+
+                presenter.onErrorAddTimeSlot(msg);
             } catch (UnsupportedEncodingException e) {
                 Log.d("DEBUG", "TimeslotList: APITimeslotAdd: onErrorResponse() catch UnsupportedEncodingException");
             }

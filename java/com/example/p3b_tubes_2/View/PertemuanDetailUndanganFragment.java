@@ -86,4 +86,8 @@ public class PertemuanDetailUndanganFragment extends DialogFragment {
     private void onClickKembali(View view) {
         dismiss();
     }
+
+    public void showError(String msg) {
+        this.binding.tvError.setText(msg);
+    }
 }

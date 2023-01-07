@@ -253,6 +253,12 @@
                     android:text="@string/deskripsi"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
         </LinearLayout>
     </ScrollView>
 

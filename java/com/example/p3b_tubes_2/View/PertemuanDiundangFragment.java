@@ -56,4 +56,9 @@ public class PertemuanDiundangFragment extends Fragment implements PertemuanCont
         this.pertemuanDetailUndanganFragment.dismiss();
         this.presenter.getInvites();
     }
+
+    @Override
+    public void showErrorAcceptInvite(String msg) {
+        this.pertemuanDetailUndanganFragment.showError(msg);
+    }
 }

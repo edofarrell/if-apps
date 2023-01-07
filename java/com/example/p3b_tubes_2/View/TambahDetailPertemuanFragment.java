@@ -66,18 +66,30 @@ public class TambahDetailPertemuanFragment extends Fragment {
         String endTime = this.binding.etEndTime.getEditableText().toString();
         String description = this.binding.etDescription.getEditableText().toString();
 
-        SimpleDateFormat inputformatter = new SimpleDateFormat("E,dd MMM yyyyHH:mm");
-        SimpleDateFormat outputformatter = new SimpleDateFormat("yyyy-MM-dd HH:mmZ");
-        String startDateTime = null;
-        String endDateTime = null;
-        try {
-            startDateTime = outputformatter.format(inputformatter.parse(inputDate + startTime));
-            endDateTime = outputformatter.format(inputformatter.parse(inputDate + endTime));
-        } catch (ParseException e) {
-            Log.d("DEBUG", "TambahAppointmentFragment: addAppointment() catch ParseException");
-        }
+        if(title.trim().equals("")){
+            this.binding.tvError.setText("Judul pertemeuan harus diisi");
+        }else if(inputDate.trim().equals("")){
+            this.binding.tvError.setText("Tanggal harus diisi");
+        }else if(startTime.trim().equals("")){
+            this.binding.tvError.setText("Waktu mulai harus diisi");
+        }else if(endTime.trim().equals("")){
+            this.binding.tvError.setText("Waktu selesai harus diisi");
+        }else if(description.trim().equals("")){
+            this.binding.tvError.setText("Deskripsi pertemuan harus diisi");
+        }else{
+            SimpleDateFormat inputformatter = new SimpleDateFormat("E,dd MMM yyyyHH:mm");
+            SimpleDateFormat outputformatter = new SimpleDateFormat("yyyy-MM-dd HH:mmZ");
+            String startDateTime = null;
+            String endDateTime = null;
+            try {
+                startDateTime = outputformatter.format(inputformatter.parse(inputDate + startTime));
+                endDateTime = outputformatter.format(inputformatter.parse(inputDate + endTime));
+            } catch (ParseException e) {
+                Log.d("DEBUG", "TambahAppointmentFragment: addAppointment() catch ParseException");
+            }
 
-        this.presenter.addPertemuan(title, description, startDateTime, endDateTime);
+            this.presenter.addPertemuan(title, description, startDateTime, endDateTime);
+        }
     }
 
     private void showDatePicker(View view) {

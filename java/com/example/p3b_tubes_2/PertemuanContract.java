@@ -90,6 +90,8 @@ public interface PertemuanContract {
             void closeAddPage();
 
             void showErrorAddPertemuan(String msg);
+
+            void showErrorAddTimeslot(String msg);
         }
 
         interface PertemuanDiundang {
@@ -98,6 +100,8 @@ public interface PertemuanContract {
             void openDetailPertemuanDiundang(InviteList.Invites invites);
 
             void closeDetail();
+
+            void showErrorAcceptInvite(String msg);
         }
 
         void updateDibuat(PertemuanList pertemuanList);

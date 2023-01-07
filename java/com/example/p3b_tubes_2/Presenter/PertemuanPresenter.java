@@ -219,7 +219,7 @@ public class PertemuanPresenter implements
 
     @Override
     public void onErrorAddTimeSlot(String msg) {
-
+        this.uiDibuat.showErrorAddTimeslot(msg);
     }
 
 
@@ -258,7 +258,7 @@ public class PertemuanPresenter implements
 
     @Override
     public void onErrorChangeInvites(String msg) {
-
+        this.uiDiundang.showErrorAcceptInvite(msg);
     }
 }
 

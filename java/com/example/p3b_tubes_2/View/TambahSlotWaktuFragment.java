@@ -85,7 +85,15 @@ public class TambahSlotWaktuFragment extends DialogFragment {
         String waktuMulai = binding.etStartTime.getText().toString();
         String waktuBerakhir = binding.etEndTime.getText().toString();
 
-        this.presenter.addTimeSlot(hari, waktuMulai, waktuBerakhir);
+        if(hari.equals("")){
+            this.binding.tvError.setText("Hari harus diisi");
+        }else if(waktuMulai.equals("")){
+            this.binding.tvError.setText("Waktu mulai harus diisi");
+        }else if(waktuBerakhir.equals("")){
+            this.binding.tvError.setText("Waktu selesai harus diisi");
+        }else{
+            this.presenter.addTimeSlot(hari, waktuMulai, waktuBerakhir);
+        }
     }
 
     private void showTimePicker(View view) {
@@ -106,5 +114,9 @@ public class TambahSlotWaktuFragment extends DialogFragment {
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
             dialog.getWindow().setLayout(width, height);
         }
+    }
+
+    public void showError(String msg) {
+        this.binding.tvError.setText(msg);
     }
 }

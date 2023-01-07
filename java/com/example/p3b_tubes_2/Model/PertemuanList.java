@@ -29,6 +29,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PertemuanList {
@@ -268,6 +269,13 @@ public class PertemuanList {
                 APIError err = gson.fromJson(responseBody, APIError.class);
                 if(err.getErrcode().equals("E_OVERLAPPING_SCHEDULE")){
                     msg = "Anda sudah memiliki pertemuan di jam tersebut";
+                }else if(err.getErrcode().equals("E_INVALID_VALUE")){
+                    List<String> field = err.field;
+                    if(field.get(0).equals("start_datetime")){
+                        msg = "Tanggal dan waktu mulai tidak bisa kurang dari saat ini";
+                    }else{
+                        msg = responseBody;
+                    }
                 }else{
                     msg = responseBody;
                 }

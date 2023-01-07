@@ -145,4 +145,9 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     public void showErrorAddPertemuan(String msg) {
         this.tambahPertemuanFragment.showError(msg);
     }
+
+    @Override
+    public void showErrorAddTimeslot(String msg) {
+        this.tambahSlotWaktuFragment.showError(msg);
+    }
 }
