@@ -55,5 +55,6 @@ public interface PengumumanContract {
         void closeAddPage();
 
         void showErrorAddPengumuman(String msg);
+        void showErrorAddTag(String msg);
     }
 }

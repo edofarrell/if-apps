@@ -321,7 +321,7 @@ public class PengumumanList {
 
                 String errMessage = errField.get(0) + " " + err.getMessage();
 
-                presenter.AddOnError(errMessage);
+                presenter.AddTagOnError(errMessage);
             } catch (UnsupportedEncodingException e) {
                 Log.d("DEBUG", "PengumumanList: APIPengumumanAdd: onErrorResponse() catch UnsupportedEncodingException");
             }

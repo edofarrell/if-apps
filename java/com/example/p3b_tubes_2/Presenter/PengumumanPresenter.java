@@ -135,7 +135,7 @@ public class PengumumanPresenter implements
 
     @Override
     public void AddTagOnError(String msg) {
-
+        this.ui.showErrorAddTag(msg);
     }
 
 

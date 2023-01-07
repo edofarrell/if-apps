@@ -268,4 +268,9 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     public void showErrorAddPengumuman(String msg) {
         this.tambahFragment.showError(msg);
     }
+
+    @Override
+    public void showErrorAddTag(String msg) {
+        this.tambahTagFragment.showError(msg);
+    }
 }

@@ -72,4 +72,8 @@ public class PengumumanTambahTagFragment extends DialogFragment {
     private void onClickKembali(View view) {
         this.dismiss();
     }
+
+    public void showError(String msg){
+        this.binding.tvError.setText(msg);
+    }
 }
