@@ -43,6 +43,7 @@ public class PengumumanPresenter implements
     @Override
     public void AddOnSuccess(PengumumanList.Pengumuman pengumuman) {
         this.ui.closeAddPage();
+        this.pengumuman.add(pengumuman);
         this.getPengumuman();
     }
 
@@ -53,12 +54,13 @@ public class PengumumanPresenter implements
 
 
     public void deletePengumuman(String id) {
-        deletePengumuman.deletePengumuman(id);
+        PengumumanList.deletePengumuman(id);
     }
 
     @Override
-    public void deleteOnSuccess() {
-        this.getPengumuman();
+    public void deleteOnSuccess(PengumumanList.Pengumuman p) {
+        this.pengumuman.delete(p);
+        this.ui.updatePengumumanList(this.pengumuman);
     }
 
     @Override
@@ -68,15 +70,15 @@ public class PengumumanPresenter implements
 
 
     public void getPengumuman() {
-        this.pengumuman.getPengumumanAll();
+        PengumumanList.getPengumumanAll();
     }
 
     public void getPengumuman(String title, List<String> tags, boolean next) {
         if (!next) {
-            this.pengumuman.getPengumumanAll(title, tags, "none");
+            PengumumanList.getPengumumanAll(title, tags, "none");
         } else {
             if (!this.pengumuman.getCursor().equals("none"))
-                this.pengumuman.getPengumumanAll(title, tags, this.pengumuman.getCursor());
+                PengumumanList.getPengumumanAll(title, tags, this.pengumuman.getCursor());
         }
     }
 

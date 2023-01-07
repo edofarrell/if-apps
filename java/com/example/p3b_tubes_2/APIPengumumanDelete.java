@@ -52,7 +52,7 @@ public class APIPengumumanDelete implements Response.Listener<JSONObject>, Respo
 
     @Override
     public void onResponse(JSONObject response) {
-        this.presenter.deleteOnSuccess();
+//        this.presenter.deleteOnSuccess();
     }
 
     @Override

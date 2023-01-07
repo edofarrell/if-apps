@@ -26,7 +26,7 @@ public interface PengumumanContract {
         }
 
         interface DeleteOnSuccessListener{
-            void deleteOnSuccess();
+            void deleteOnSuccess(PengumumanList.Pengumuman deleted);
             void deleteOnError();
         }
 
