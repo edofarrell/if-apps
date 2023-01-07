@@ -254,11 +254,7 @@
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/tv_error"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+
         </LinearLayout>
     </ScrollView>
 
@@ -277,8 +273,17 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/_16dp"
         android:gravity="right"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingHorizontal="@dimen/_16dp">
+
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:gravity="center"
+            android:textSize="@dimen/_16sp"
+            />
 
         <Button
             android:id="@+id/btn_accept"

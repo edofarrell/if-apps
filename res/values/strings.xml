@@ -41,7 +41,7 @@
     <string name="tags">Tags</string>
     <string name="simpan">Simpan</string>
     <string name="tagsPengumuman">Tags : </string>
-    <string name="mataKuliah">Matakuliah</string>
+    <string name="mataKuliah">Mata Kuliah</string>
     <string name="hyphen">-</string>
     <string name="organizer">Organizer:</string>
     <string name="kembali">Kembali</string>
@@ -62,9 +62,9 @@
     <string name="selanjutnya">Selanjutnya</string>
     <string name="tambah_slot_waktu">Tambah Slot Waktu</string>
     <string name="tambah_tag_pengumuman">Tambah Tag Pengumuman</string>
-    <string name="hintMatkul">Ketik matakuliah disini</string>
-    <string name="hasilPencarianMatkul">Hasil Pencarian Matakuliah</string>
-    <string name="matkulTerpilih">Matakuliah Terpilih</string>
+    <string name="hintMatkul">Ketik mata kuliah disini</string>
+    <string name="hasilPencarianMatkul">Hasil Pencarian Mata Kuliah</string>
+    <string name="matkulTerpilih">Mata Kuliah Terpilih</string>
     <string name="terima">Terima</string>
     <string name="telahDiterima">Sudah Diterima</string>
     <string name="tambahTag">Tambah Tag</string>
@@ -78,6 +78,6 @@
         <item>Sabtu</item>
         <item>Minggu</item>
     </string-array>
-    <string name="namaMatakuliah">Nama Matakuliah</string>
-    <string name="infoPentingFRS">Penting: Hanya dapat enroll satu matakuliah per satu kali enroll</string>
+    <string name="namaMatakuliah">Nama Mata Kuliah</string>
+    <string name="infoPentingFRS">Penting: Hanya dapat enroll satu mata kuliah per satu kali enroll</string>
 </resources>
