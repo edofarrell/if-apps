@@ -128,5 +128,20 @@ public class TahunAjaran implements Response.Listener<JSONObject>, Response.Erro
             String result = "Semester "+this.semester+" "+tahun;
             return result;
         }
+
+        public String toStringFormatAPI(){
+            String temp = "";
+            if(this.semester.equals("Genap")){
+                temp = "2";
+            }
+            else if(this.semester.equals("Ganjil")){
+                temp = "1";
+            }
+            else{
+                temp = "3";
+            }
+            String result = tahun+temp;
+            return result;
+        }
     }
 }

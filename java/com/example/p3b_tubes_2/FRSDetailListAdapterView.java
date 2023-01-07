@@ -1,6 +1,5 @@
 package com.example.p3b_tubes_2;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,26 +7,20 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.p3b_tubes_2.databinding.ItemListDetailFrsBinding;
-import com.example.p3b_tubes_2.databinding.ItemListFrsBinding;
+import com.example.p3b_tubes_2.databinding.ItemListDetailFrsViewBinding;
 
 import java.util.ArrayList;
 
-public class FRSDetailListAdapterSearch extends BaseAdapter {
+public class FRSDetailListAdapterView extends BaseAdapter {
     private FRSPresenter presenter;
     private ArrayList<MataKuliahList.MataKuliah> listMataKuliah;
     private class ViewHolder{
         protected int i;
         private TextView matkul;
 
-        public ViewHolder(ItemListDetailFrsBinding binding, int i){
+        public ViewHolder(ItemListDetailFrsViewBinding binding, int i){
             this.i = i;
             this.matkul = binding.tvMatkul;
-            binding.getRoot().setOnClickListener(this::addToSelectedMataKuliah);
-        }
-
-        private void addToSelectedMataKuliah(View view) {
-            MataKuliahList.MataKuliah matkul = listMataKuliah.get(i);
-            presenter.addToSelectedMataKuliah(matkul);
         }
 
         private void updateView(int i) {
@@ -35,7 +28,7 @@ public class FRSDetailListAdapterSearch extends BaseAdapter {
         }
     }
 
-    public FRSDetailListAdapterSearch(FRSPresenter presenter){
+    public FRSDetailListAdapterView(FRSPresenter presenter){
         this.presenter = presenter;
         this.listMataKuliah = new ArrayList<>();
     }
@@ -58,23 +51,29 @@ public class FRSDetailListAdapterSearch extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        ItemListDetailFrsBinding binding = ItemListDetailFrsBinding.inflate(inflater);
-        ViewHolder viewHolder;
+        ItemListDetailFrsViewBinding binding = ItemListDetailFrsViewBinding.inflate(inflater);
+        FRSDetailListAdapterView.ViewHolder viewHolder;
         if (view == null) {
             view = binding.getRoot();
-            viewHolder = new ViewHolder(binding, i);
+            viewHolder = new FRSDetailListAdapterView.ViewHolder(binding, i);
             view.setTag(viewHolder);
         } else {
-            viewHolder = (ViewHolder) view.getTag();
+            viewHolder = (FRSDetailListAdapterView.ViewHolder) view.getTag();
         }
         viewHolder.updateView(i);
         return view;
     }
 
-    public void update(ArrayList<MataKuliahList.MataKuliah> mataKuliah){
+    public MataKuliahList.MataKuliah getMataKuliahEnrol(int i){
+        return this.listMataKuliah.get(i);
+    }
+
+    public void update(MataKuliahList.MataKuliah mataKuliah){
 //        Log.d("DEBUG",mataKuliah.get(0).getName());
 //        Log.d("DEBUG",mataKuliah.get(1).getName());
-        this.listMataKuliah = mataKuliah;
+        if(!listMataKuliah.contains(mataKuliah)){
+            listMataKuliah.add(mataKuliah);
+        }
         notifyDataSetChanged();
     }
 }

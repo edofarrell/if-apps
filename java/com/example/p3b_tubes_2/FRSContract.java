@@ -11,13 +11,20 @@ public interface FRSContract {
        }
 
        interface GetDetailOnSuccessListener{
-           void OnSuccessGetDetail(ArrayList<MataKuliahList.MataKuliah> listMataKuliah, String tahunAjar);
+           void OnSuccessGetDetail(ArrayList<MataKuliahList.MataKuliah> listMataKuliah);
            void OnErrorGetDetail();
+       }
+
+       interface GetSearchMataKuliahOnSuccessListener{
+           void OnSuccessGetSearchMataKuliah(ArrayList<MataKuliahList.MataKuliah> listMataKuliah);
+           void OnErrorGetSearchMataKuliah();
        }
    }
 
     interface View{
         void update(TahunAjaran tahunAjaran);
-        void openDetail(String tahunAjar,ArrayList<MataKuliahList.MataKuliah> listMataKuliah);
+        void openDetail(TahunAjaran.TahunAjar tahunAjar);
+        void updateSearch(ArrayList<MataKuliahList.MataKuliah> listMataKuliah);
+        void addToSelectedMataKuliah(MataKuliahList.MataKuliah matkul);
     }
 }
