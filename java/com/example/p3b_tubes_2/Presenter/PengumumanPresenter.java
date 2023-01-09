@@ -1,6 +1,7 @@
 package com.example.p3b_tubes_2.Presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.p3b_tubes_2.Model.PengumumanList;
 import com.example.p3b_tubes_2.Model.TagList;

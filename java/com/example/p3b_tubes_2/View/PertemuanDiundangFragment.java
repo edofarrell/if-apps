@@ -42,6 +42,14 @@ public class PertemuanDiundangFragment extends Fragment implements PertemuanCont
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            this.presenter.getInvites();
+        }
+    }
+
+    @Override
     public void updatePertemuanDiundang(InviteList listInvites) {
         this.adapter.update(listInvites);
     }

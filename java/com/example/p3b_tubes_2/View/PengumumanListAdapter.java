@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,8 +47,9 @@ public class PengumumanListAdapter extends BaseAdapter {
 
             if(!APIClient.role.equals("admin")){
                 binding.btnDelete.setVisibility(View.GONE);
+            }else{
+                binding.btnDelete.setVisibility(View.VISIBLE);
             }
-
         }
 
         private void onClickDelete(View view) {
@@ -94,6 +96,7 @@ public class PengumumanListAdapter extends BaseAdapter {
             }
             else{
                 this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.rounded_pengumuman));
+                this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.white));
             }
 
             this.tvJudul.setText(pengumuman.getTitle());

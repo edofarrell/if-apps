@@ -1,5 +1,7 @@
 package com.example.p3b_tubes_2.View;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +46,24 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
 
         private void deletePertemuan(View view) {
             PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
-            presenter.deletePertemuan(pertemuan.getId());
+            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            builder.setMessage("Hapus Pertemuan \n\"" + pertemuan.getTitle() + "\" ?");
+            builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    presenter.deletePertemuan(pertemuan.getId());
+                    notifyDataSetChanged();
+                }
+            });
+            builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog deleteAlert = builder.create();
+            deleteAlert.show();
         }
 
         private void openDetail(View view) {

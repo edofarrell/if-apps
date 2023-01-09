@@ -75,8 +75,6 @@ public class PertemuanFragment extends Fragment implements
                         page = "pertemuanDiundang";
                         break;
                 }
-                Log.d("DEBUG", page);
-
                 changePage(page);
             }
 
@@ -100,6 +98,14 @@ public class PertemuanFragment extends Fragment implements
         });
 
         return this.binding.getRoot();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            this.presenter.getPertemuanDibuat();
+        }
     }
 
     private void changePage(String page) {

@@ -1,6 +1,7 @@
 package com.example.p3b_tubes_2.View;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,14 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
         this.binding.btnAddTimeSlot.setOnClickListener(this::openAddTimeSlot);
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            this.pertemuanPresenter.getPertemuanDibuat();
+        }
     }
 
     private void onClick(View view) {
