@@ -80,10 +80,8 @@ public class FRSDetailListAdapterView extends BaseAdapter {
         return this.listMataKuliah.get(i);
     }
 
-    public void update(MataKuliahList.MataKuliah mataKuliah){
-        if(!listMataKuliah.contains(mataKuliah)){
-            listMataKuliah.add(mataKuliah);
-        }
+    public void update(ArrayList<MataKuliahList.MataKuliah> listMataKuliah){
+        this.listMataKuliah = listMataKuliah;
         notifyDataSetChanged();
     }
 }
