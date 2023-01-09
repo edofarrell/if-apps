@@ -27,14 +27,14 @@
         android:layout_above="@+id/divider"
         android:layout_below="@+id/appbar_layout"
         android:clipToPadding="false"
-        android:paddingLeft="@dimen/_16dp"
-        android:paddingRight="@dimen/_16dp"
-        android:paddingBottom="@dimen/_16dp">
+        android:paddingHorizontal="@dimen/_16dp"
+        android:paddingTop="@dimen/_16dp"
+        android:paddingBottom="@dimen/_32dp"
+        android:scrollbarStyle="outsideOverlay">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_16dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -44,11 +44,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/penyelenggara"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -76,11 +75,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/judul"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -113,11 +111,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        style="@style/TextAppearance.MdcTypographyStyles.Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tanggal"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -158,11 +155,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/TextAppearance.MdcTypographyStyles.Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/waktu_mulai"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -196,11 +192,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/TextAppearance.MdcTypographyStyles.Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/waktu_selesai"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -229,11 +224,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/deskripsi"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -272,18 +266,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/_16dp"
-        android:gravity="right"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/_16dp">
 
         <TextView
             android:id="@+id/tv_error"
+            style="@style/TextAppearance.MdcTypographyStyles.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/red"
             android:gravity="center"
-            android:textSize="@dimen/_16sp"
-            />
+            android:textColor="@color/red" />
 
         <Button
             android:id="@+id/btn_accept"

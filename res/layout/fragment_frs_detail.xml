@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:elevation="@dimen/_4dp"
-        >
+        app:elevation="@dimen/_4dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/appbar"
@@ -19,183 +18,150 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_baseline_close_24"
             app:title="@string/judulTambahFRS"
-            app:titleCentered="true"
-            />
+            app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
-
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/divider"
         android:layout_below="@id/appbar_layout"
-        android:paddingLeft="@dimen/_16dp"
-        android:paddingRight="@dimen/_16dp"
-        android:layout_above="@id/divider">
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/_16dp"
+        android:paddingTop="@dimen/_16dp"
+        android:paddingBottom="@dimen/_32dp"
+        android:scrollbarStyle="outsideOverlay">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_10dp">
+            android:orientation="vertical">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginStart="@dimen/_10dp"
                 android:layout_marginTop="@dimen/_10dp"
                 android:layout_marginEnd="@dimen/_10dp"
                 android:layout_marginBottom="@dimen/_10dp"
                 android:background="@drawable/custom_kotak_filter_pengumuman"
+=======
+                android:layout_marginBottom="@dimen/_16dp"
+                android:background="@color/white"
+>>>>>>> origin/Vito
                 app:queryHint="@string/hintMatkul" />
 
             <TextView
                 android:id="@+id/tv_hasil_pencarian_matkul"
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/search_bar"
-                android:layout_marginStart="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_10dp"
-                android:layout_marginEnd="@dimen/_10dp"
-                android:layout_marginBottom="@dimen/_10dp"
+                android:layout_marginBottom="@dimen/_8dp"
                 android:text="@string/hasilPencarianMatkul"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15sp"></TextView>
+                android:textStyle="bold" />
 
-            <ListView
-                android:id="@+id/tv_lv_matkul"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_below="@id/tv_hasil_pencarian_matkul"
-                android:layout_margin="@dimen/_10dp"
-                android:divider="@color/white"
-                android:dividerHeight="@dimen/_20sp"
-                android:clipToPadding="false">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_16dp"
+                android:elevation="0dp"
+                app:cardBackgroundColor="@color/background"
+                app:strokeColor="@color/grey"
+                app:strokeWidth="1dp">
 
-            </ListView>
+                <ListView
+                    android:id="@+id/tv_lv_matkul"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200dp"
+                    android:layout_below="@id/tv_hasil_pencarian_matkul"
+                    android:clipToPadding="false"
+                    android:divider="@color/background"
+                    android:dividerHeight="@dimen/_16dp"
+                    android:scrollbarStyle="insideOverlay" />
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:id="@+id/tv_matkul_terpilih"
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/matkulTerpilih"
                 android:layout_below="@id/tv_lv_matkul"
-                android:layout_margin="@dimen/_10dp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15sp"></TextView>
+                android:layout_marginBottom="@dimen/_4dp"
+                android:text="@string/matkulTerpilih"
+                android:textStyle="bold" />
 
-
+            <TextView
+                android:id="@+id/tv_info_penting"
+                style="@style/TextAppearance.MdcTypographyStyles.Caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8dp"
+                android:text="@string/infoPentingFRS"
+                android:textColor="@color/red" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10dp"
-                android:layout_below="@id/tv_matkul_terpilih"
-                >
+                android:layout_below="@id/tv_info_penting"
+                android:layout_marginBottom="@dimen/_16dp"
+                android:elevation="0dp"
+                app:cardBackgroundColor="@color/background"
+                app:strokeColor="@color/grey"
+                app:strokeWidth="1dp">
 
-                <LinearLayout
+                <ListView
+                    android:id="@+id/tv_lv_matkuldipilih"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <ListView
-                        android:id="@+id/tv_lv_matkuldipilih"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_100dp"
-                        android:divider="@color/white"
-                        android:dividerHeight="@dimen/_20sp"
-                        android:clipToPadding="false">
-
-                    </ListView>
-                </LinearLayout>
-
-
+                    android:layout_height="@dimen/_100dp"
+                    android:clipToPadding="false"
+                    android:divider="@color/background"
+                    android:dividerHeight="@dimen/_16dp" />
             </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:id="@+id/tv_matkul_yang_akan_dienroll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/mataKuliahYangAkanDiEnroll"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16sp"
-                android:layout_marginTop="@dimen/_10dp"
-                android:layout_below="@id/card_view"
-                android:layout_marginLeft="@dimen/_10dp">
-
-            </TextView>
-
-            <LinearLayout
-                android:id="@+id/ll_selected_matkul"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignBottom="@id/tv_lv_matkul"
-                android:layout_below="@id/tv_matkul_yang_akan_dienroll"
-                android:background="@drawable/border_black"
-                android:layout_margin="@dimen/_10dp"
-                android:padding="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_10dp">
-
-                <TextView
-                    android:id="@+id/tv_matakuliah_terpilih"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp"
-                    />
-
-                <ImageView
-                    android:id="@+id/btn_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_delete_24"
-                    android:layout_marginLeft="@dimen/_10dp"/>
-
-            </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll_error"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_below="@id/ll_selected_matkul"
-                android:layout_marginLeft="@dimen/_10dp"
-                >
+                android:layout_height="wrap_content"
+                android:layout_below="@id/card_view"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tv_title_error"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Prasyarat Mata Kuliah yang belum terpenuhi :"/>
+                    android:layout_marginBottom="@dimen/_8dp"
+                    android:text="Prasyarat Mata Kuliah yang belum perpenuhi :" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/_15dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_kode_matkul_error"
+                        style="@style/TextAppearance.MdcTypographyStyles.Body2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        />
+                        android:layout_marginLeft="@dimen/_8dp"
+                        android:text="" />
+
                     <TextView
                         android:id="@+id/tv_nama_matkul_error"
+                        style="@style/TextAppearance.MdcTypographyStyles.Body2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:layout_marginLeft="@dimen/_10dp"/>
-
+                        android:layout_marginLeft="@dimen/_4dp"
+                        android:text="" />
                 </LinearLayout>
-
             </LinearLayout>
-
-        </RelativeLayout>
-
-
-
+        </LinearLayout>
     </ScrollView>
 
     <com.google.android.material.divider.MaterialDivider
@@ -210,10 +176,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/_10dp"
-        android:layout_marginRight="@dimen/_10dp"
-        android:layout_marginBottom="@dimen/_10dp"
-        android:gravity="right">
+        android:layout_marginBottom="@dimen/_16dp"
+        android:paddingHorizontal="@dimen/_16dp">
 
         <Button
             android:id="@+id/btn_add_matkul"
@@ -221,7 +185,4 @@
             android:layout_height="wrap_content"
             android:text="@string/tambah" />
     </LinearLayout>
-
-
-
 </RelativeLayout>
