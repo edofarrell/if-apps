@@ -169,17 +169,17 @@ public class User {
             String url = APIClient.BASE_URL + "/authenticate";
 
             JsonObject json = new JsonObject();
-            json.addProperty("email", email);
-            json.addProperty("password", password);
-            json.addProperty("role", role);
+//            json.addProperty("email", email);
+//            json.addProperty("password", password);
+//            json.addProperty("role", role);
 //        json.addProperty("email", "default.admin@domain.local");
 //        json.addProperty("password", "mu8XyUogLi6Dk7");
 //        json.addProperty("role", "admin");
 //        role = "admin";
-//        json.addProperty("email", "halodearen@mail.com");
-//        json.addProperty("password", "halodearen");
-//        json.addProperty("role", "lecturer");
-//        role = "lecturer";
+        json.addProperty("email", "halodearen@mail.com");
+        json.addProperty("password", "halodearen");
+        json.addProperty("role", "lecturer");
+        role = "lecturer";
             JSONObject jsonObject = null;
             try {
                 jsonObject = new JSONObject(json.toString());

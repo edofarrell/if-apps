@@ -138,17 +138,18 @@
                     android:layout_marginBottom="@dimen/_15dp">
 
                     <TextView
-                        android:id="@+id/tv_nama_matkul_error"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""/>
-                    <TextView
                         android:id="@+id/tv_kode_matkul_error"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:layout_marginLeft="@dimen/_10dp"
                         />
+                    <TextView
+                        android:id="@+id/tv_nama_matkul_error"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:layout_marginLeft="@dimen/_10dp"/>
+
                 </LinearLayout>
 
             </LinearLayout>

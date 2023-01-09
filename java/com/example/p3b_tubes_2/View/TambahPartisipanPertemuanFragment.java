@@ -74,6 +74,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         binding.actvChooseParticipant.setOnQueryTextListener(onQueryTextListener());
         this.binding.btnAddParticipant.setOnClickListener(this::simpanPartisipan);
         this.binding.btnSimpan.setOnClickListener(this::saveAll);
+        this. binding.actvChooseParticipant.setOnClickListener(this::onClickSearch);
     }
 
     private androidx.appcompat.widget.SearchView.OnQueryTextListener onQueryTextListener() {
@@ -93,6 +94,10 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
                 return false;
             }
         };
+    }
+
+    public void onClickSearch(View view) {
+        this.binding.actvChooseParticipant.onActionViewExpanded();
     }
 
     private void saveAll(View view) {
