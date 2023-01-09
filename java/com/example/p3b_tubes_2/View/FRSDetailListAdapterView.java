@@ -23,7 +23,7 @@ public class FRSDetailListAdapterView extends BaseAdapter {
             this.i = i;
             this.matkul = binding.tvMatkul;
             binding.llMatkulView.setOnClickListener(this::onClick);
-            binding.btnDelete.setOnClickListener(this::delete);
+
         }
 
         private void delete(View view) {
