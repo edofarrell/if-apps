@@ -28,24 +28,16 @@ public class FRSDetailFragment extends DialogFragment{
     private FragmentFrsDetailBinding binding;
     private TahunAjaran.TahunAjar tahunAjar;
     private TahunAjaran.TahunAjar activeYear;
-    private ArrayList<MataKuliahList.MataKuliah> listMataKuliah;
     private FRSDetailListAdapterSearch adapterSearch;
     private FRSDetailListAdapterView adapterView;
     private FRSPresenter presenter;
     private MataKuliahList.MataKuliah selectedMatkul;
-    private FRSTambahFragment frsTambahFragmentfragment;
-    private String searchText;
-    private LayoutInflater inflater;
 
     public static FRSDetailFragment newInstance(FragmentManager fm,
                                                 FRSPresenter presenter,
                                                 TahunAjaran.TahunAjar tahunAjar,
                                                 TahunAjaran.TahunAjar activeYear) {
-
-        Bundle args = new Bundle();
-
         FRSDetailFragment fragment = new FRSDetailFragment();
-        fragment.setArguments(args);
         fragment.show(fm, "detailFRS");
         fragment.presenter = presenter;
         fragment.adapterSearch = new FRSDetailListAdapterSearch(presenter);
@@ -62,7 +54,6 @@ public class FRSDetailFragment extends DialogFragment{
         this.binding.appbar.setTitle(tahunAjar.toString());
         this.binding.tvLvMatkul.setAdapter(adapterSearch);
         this.binding.tvLvMatkuldipilih.setAdapter(adapterView);
-        this.inflater = inflater;
         this.binding.btnAddMatkul.setOnClickListener(this::onClickAddMatkul);
         this.binding.tvTitleError.setVisibility(View.GONE);
         if(!this.tahunAjar.toStringFormatAPI().equals(this.activeYear.toStringFormatAPI())){
@@ -150,7 +141,6 @@ public class FRSDetailFragment extends DialogFragment{
     }
 
     public void setListMataKuliah(ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
-        this.listMataKuliah = listMataKuliah;
         this.adapterSearch.update(listMataKuliah);
     }
 
