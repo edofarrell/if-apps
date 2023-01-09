@@ -30,5 +30,6 @@
     <dimen name="_15dp">15dp</dimen>
     <dimen name="_200dp">200dp</dimen>
     <dimen name="_100dp">100dp</dimen>
+    <dimen name="_48dp">48dp</dimen>
 
 </resources>
