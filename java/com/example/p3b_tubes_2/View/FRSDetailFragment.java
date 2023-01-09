@@ -75,7 +75,17 @@ public class FRSDetailFragment extends DialogFragment{
             getMataKuliahEnrolment(false);
         }
         getMataKuliahEnrolment(true);
+        this.binding.llSelectedMatkul.setVisibility(View.GONE);
+        this.binding.btnDelete.setOnClickListener(this::deleteSelectedMatkul);
         return binding.getRoot();
+    }
+
+    private void deleteSelectedMatkul(View view) {
+        this.binding.tvKodeMatkulError.setVisibility(View.GONE);
+        this.binding.llSelectedMatkul.setVisibility(View.GONE);
+        this.binding.searchBar.setVisibility(View.VISIBLE);
+        this.binding.tvHasilPencarianMatkul.setVisibility(View.VISIBLE);
+        this.binding.tvLvMatkul.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -118,6 +128,10 @@ public class FRSDetailFragment extends DialogFragment{
     }
 
     public void showToastSuccessStudentEnrolment(){
+        this.binding.llSelectedMatkul.setVisibility(View.GONE);
+        this.binding.searchBar.setVisibility(View.VISIBLE);
+        this.binding.tvHasilPencarianMatkul.setVisibility(View.VISIBLE);
+        this.binding.tvLvMatkul.setVisibility(View.VISIBLE);
         Toast.makeText(getActivity(),"Enrolment Berhasil",Toast.LENGTH_SHORT).show();
     }
 
@@ -136,7 +150,11 @@ public class FRSDetailFragment extends DialogFragment{
 
     public void setSelectedMataKuliah(MataKuliahList.MataKuliah matkul){
         this.selectedMatkul = matkul;
-        this.binding.tvMatakuliahTerpilih.setText("Mata Kuliah yang akan ditambah: "+matkul.getName());
+        this.binding.tvMatakuliahTerpilih.setText(matkul.getName());
+        this.binding.searchBar.setVisibility(View.GONE);
+        this.binding.tvHasilPencarianMatkul.setVisibility(View.GONE);
+        this.binding.tvLvMatkul.setVisibility(View.GONE);
+        this.binding.llSelectedMatkul.setVisibility(View.VISIBLE);
     }
 
     public void setMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul,boolean thisYear){

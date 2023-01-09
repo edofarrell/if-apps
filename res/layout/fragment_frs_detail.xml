@@ -42,21 +42,25 @@
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_bar"
-                android:layout_margin="@dimen/_10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_kotak_filter_pengumuman"
-                app:queryHint="@string/hintMatkul"
+                android:layout_marginStart="@dimen/_10dp"
                 android:layout_marginTop="@dimen/_10dp"
-                />
+                android:layout_marginEnd="@dimen/_10dp"
+                android:layout_marginBottom="@dimen/_10dp"
+                android:background="@drawable/custom_kotak_filter_pengumuman"
+                app:queryHint="@string/hintMatkul" />
 
             <TextView
                 android:id="@+id/tv_hasil_pencarian_matkul"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/hasilPencarianMatkul"
                 android:layout_below="@id/search_bar"
-                android:layout_margin="@dimen/_10dp"
+                android:layout_marginStart="@dimen/_10dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_marginEnd="@dimen/_10dp"
+                android:layout_marginBottom="@dimen/_10dp"
+                android:text="@string/hasilPencarianMatkul"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15sp"></TextView>
 
@@ -71,6 +75,26 @@
                 android:clipToPadding="false">
 
             </ListView>
+
+            <LinearLayout
+                android:id="@+id/ll_selected_matkul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignBottom="@id/tv_lv_matkul">
+
+                <TextView
+                    android:id="@+id/tv_matakuliah_terpilih"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/btn_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_delete_24"/>
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_matkul_terpilih"
@@ -104,14 +128,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_matakuliah_terpilih"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="">
-
-                    </TextView>
 
                     <ListView
                         android:id="@+id/tv_lv_matkuldipilih"
