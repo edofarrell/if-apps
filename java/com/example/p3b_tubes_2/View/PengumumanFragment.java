@@ -2,13 +2,11 @@ package com.example.p3b_tubes_2.View;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -36,23 +34,20 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     private FragmentPengumumanBinding binding;
     private PengumumanPresenter presenter;
     private PengumumanListAdapter adapter;
-    private FrameLayout frameLayout;
     private List<String> arrChipGroup;
     private ChipGroup chipGroup;
     private String searchText;
     private PengumumanTambahFragment tambahFragment;
     private PengumumanTambahTagFragment tambahTagFragment;
-
     private boolean isFabsVisible;
 
     private PengumumanFragment() {
     }
 
-    public static PengumumanFragment newInstance(MainPresenter mainPresenter, Context context, FrameLayout frameLayout) {
+    public static PengumumanFragment newInstance(MainPresenter mainPresenter, Context context) {
         PengumumanFragment fragment = new PengumumanFragment();
         fragment.presenter = new PengumumanPresenter(fragment, context, mainPresenter);
         fragment.adapter = new PengumumanListAdapter(fragment.presenter, context.getSharedPreferences("sp_read_status", 0));
-        fragment.frameLayout = frameLayout;
         fragment.arrChipGroup = new ArrayList<>();
         return fragment;
     }

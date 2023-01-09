@@ -1,7 +1,6 @@
 package com.example.p3b_tubes_2.View;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +14,12 @@ import com.example.p3b_tubes_2.Model.User;
 import com.example.p3b_tubes_2.UserContract;
 import com.example.p3b_tubes_2.databinding.FragmentProfilBinding;
 
-import java.util.List;
-
 public class ProfilFragment extends Fragment implements UserContract.View.Profile {
     private FragmentProfilBinding binding;
     private User user;
 
     public static ProfilFragment newInstance() {
         ProfilFragment fragment = new ProfilFragment();
-
         return fragment;
     }
 

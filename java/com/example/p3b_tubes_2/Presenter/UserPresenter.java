@@ -28,7 +28,7 @@ public class UserPresenter implements
         this.mainPresenter = mainPresenter;
     }
 
-
+    //Login
     public void login(String email, String password, String role) throws JSONException {
         User.login(email, password, role);
     }
@@ -44,7 +44,7 @@ public class UserPresenter implements
         loginUI.updateLoginView(false);
     }
 
-
+    //Get users
     public void getUsers(){
         User.getUsers();
     }
@@ -63,7 +63,7 @@ public class UserPresenter implements
 
     }
 
-
+    //Get logged in user
     public void getCurrentUser(){
        User.getUser();
     }

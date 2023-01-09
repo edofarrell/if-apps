@@ -11,8 +11,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-//Referensi Kode diambil dari link dibawah :
-//https://stackoverflow.com/questions/35146570/android-volley-jsonobjectrequest-but-receiving-jsonarray
+/*
+Referensi Kode diambil dari link dibawah :
+https://stackoverflow.com/questions/35146570/android-volley-jsonobjectrequest-but-receiving-jsonarray
+ */
 public class CustomJsonRequest extends JsonRequest<JSONArray>{
     private JSONObject mRequestObject;
     private Response.Listener<JSONArray> mResponseListener;

@@ -12,7 +12,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
-import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentTambahDetailPertemuanBinding;
 
@@ -21,15 +20,12 @@ import java.text.SimpleDateFormat;
 
 public class TambahDetailPertemuanFragment extends Fragment {
     private FragmentTambahDetailPertemuanBinding binding;
-    private MainPresenter mainPresenter;
     private PertemuanPresenter presenter;
 
 
-    public static TambahDetailPertemuanFragment newInstance(MainPresenter mainPresenter, PertemuanPresenter pertemuanPresenter) {
+    public static TambahDetailPertemuanFragment newInstance(PertemuanPresenter pertemuanPresenter) {
         TambahDetailPertemuanFragment fragment = new TambahDetailPertemuanFragment();
-        fragment.mainPresenter = mainPresenter;
         fragment.presenter = pertemuanPresenter;
-
         return fragment;
     }
 

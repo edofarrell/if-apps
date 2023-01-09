@@ -2,17 +2,14 @@ package com.example.p3b_tubes_2.View;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.p3b_tubes_2.Model.InviteList;
@@ -39,12 +36,12 @@ public class PertemuanFragment extends Fragment implements
 
     private PertemuanFragment() {}
 
-    public static PertemuanFragment newInstance(MainPresenter mainPresenter, Context context, FrameLayout frameLayout) {
+    public static PertemuanFragment newInstance(MainPresenter mainPresenter, Context context) {
         PertemuanFragment fragment = new PertemuanFragment();
-        fragment.presenter = new PertemuanPresenter(fragment, context, mainPresenter);
+        fragment.presenter = new PertemuanPresenter(fragment, context);
         fragment.fragments = new HashMap<>();
         fragment.pertemuanDibuatFragment = PertemuanDibuatFragment.newInstance(fragment.presenter, mainPresenter);
-        fragment.pertemuanDiundangFragment = PertemuanDiundangFragment.newInstance(fragment.presenter, frameLayout);
+        fragment.pertemuanDiundangFragment = PertemuanDiundangFragment.newInstance(fragment.presenter);
         fragment.fragments.put("pertemuanDibuat", fragment.pertemuanDibuatFragment);
         fragment.fragments.put("pertemuanDiundang", fragment.pertemuanDiundangFragment);
         fragment.presenter.setUiDibuat(fragment.pertemuanDibuatFragment);
@@ -86,14 +83,6 @@ public class PertemuanFragment extends Fragment implements
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
-            }
-        });
-
-        this.fm.setFragmentResultListener("backPertemuan", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                String page = result.getString("page");
-                changePage(page);
             }
         });
 

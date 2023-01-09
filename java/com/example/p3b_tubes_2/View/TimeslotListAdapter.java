@@ -11,7 +11,7 @@ import com.example.p3b_tubes_2.Model.TimeslotList;
 import com.example.p3b_tubes_2.databinding.ItemListTimeslotBinding;
 
 public class TimeslotListAdapter extends BaseAdapter {
-    TimeslotList timeslotList;
+    private TimeslotList timeslotList;
 
     public TimeslotListAdapter() {
         this.timeslotList = new TimeslotList();

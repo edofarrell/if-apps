@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import com.example.p3b_tubes_2.FRSContract;
 import com.example.p3b_tubes_2.Model.MataKuliahList;
 import com.example.p3b_tubes_2.Model.TahunAjaran;
-import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Presenter.FRSPresenter;
 import com.example.p3b_tubes_2.databinding.FragmentFrsBinding;
 
@@ -24,10 +23,10 @@ public class FRSFragment extends Fragment implements FRSContract.View {
     private FRSDetailFragment detailFragment;
     private TahunAjaran.TahunAjar activeYear;
     private FRSFragment(){}
-    public static FRSFragment newInstance(MainPresenter mainPresenter, Context context) {
+    public static FRSFragment newInstance(Context context) {
         Bundle args = new Bundle();
         FRSFragment fragment = new FRSFragment();
-        fragment.presenter = new FRSPresenter(fragment,context, mainPresenter);
+        fragment.presenter = new FRSPresenter(fragment,context);
         fragment.adapter = new FRSListAdapter(fragment.presenter);
         fragment.setArguments(args);
         return fragment;
@@ -48,10 +47,6 @@ public class FRSFragment extends Fragment implements FRSContract.View {
         if(!hidden){
             this.presenter.getAcademicYears();
         }
-    }
-
-    private void test(View view) {
-        this.presenter.getAcademicYears();
     }
 
     @Override

@@ -30,7 +30,6 @@ public class PertemuanDetailUndanganFragment extends DialogFragment {
         fragment.invite = invite;
         fragment.presenter = presenter;
         fragment.show(fm, "openAppointmentInvitationDetail");
-
         return fragment;
     }
 

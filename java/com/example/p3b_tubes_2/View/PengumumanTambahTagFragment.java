@@ -16,8 +16,6 @@ import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
 import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentTambahTagBinding;
 
-import java.util.ArrayList;
-
 public class PengumumanTambahTagFragment extends DialogFragment {
     private FragmentTambahTagBinding binding;
     private PengumumanPresenter presenter;

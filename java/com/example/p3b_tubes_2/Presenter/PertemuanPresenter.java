@@ -28,7 +28,8 @@ public class PertemuanPresenter implements
         PertemuanContract.Model.GetTimeSlotOnSuccessListener,
         PertemuanContract.Model.AddTimeSlotOnSuccessListener,
         PertemuanContract.Model.GetInvitesOnSuccessListener,
-        PertemuanContract.Model.ChangeInvitesOnSuccessListener{
+        PertemuanContract.Model.ChangeInvitesOnSuccessListener
+{
     private PertemuanList pertemuan;
     private PertemuanContract.View ui;
     private PertemuanContract.View.PertemuanDibuat uiDibuat;
@@ -36,7 +37,7 @@ public class PertemuanPresenter implements
     private InviteList inviteList;
     private TimeslotList timeslotList;
 
-    public PertemuanPresenter(PertemuanContract.View ui, Context context, MainPresenter mainPresenter) {
+    public PertemuanPresenter(PertemuanContract.View ui, Context context) {
         this.pertemuan = new PertemuanList(this, context);
         this.inviteList = new InviteList(this, context);
         this.timeslotList = new TimeslotList(this, context);
@@ -59,7 +60,6 @@ public class PertemuanPresenter implements
         calendar.add(Calendar.DATE, 7);
 
        PertemuanList.fetch(formatter.format(new Date()), formatter.format(calendar.getTime()));
-//        this.pertemuan.getPertemuan(formatter.format(calendar.getTime()), formatter.format(new Date()));
     }
 
     public void getPertemuanDibuat(String startDate, String endDate) {
@@ -92,7 +92,7 @@ public class PertemuanPresenter implements
         this.uiDibuat.showErrorAddPertemuan(msg);
     }
 
-    //Change pertemuan
+    //Change pertemuan (belum diimplementasi)
     public void ubahPertemuan(PertemuanList.Pertemuan pertemuan) throws JSONException {
         PertemuanList.editPertemuan(pertemuan);
     }
@@ -122,6 +122,15 @@ public class PertemuanPresenter implements
 
     }
 
+    //open detail pertemuan
+    public void openDetail(PertemuanList.Pertemuan pertemuan) {
+        this.uiDibuat.openDetailPertemuanDibuat(pertemuan);
+    }
+
+    //open detail invite
+    public void openDetailUndangan(InviteList.Invites invite){
+        this.uiDiundang.openDetailPertemuanDiundang(invite);
+    }
 
     //Get partisipan
     public void getPartisipanDibuat(PertemuanList.Pertemuan pertemuan) {
@@ -169,7 +178,7 @@ public class PertemuanPresenter implements
 
     }
 
-
+    //Get timeslot
     public void getTimeSlot(String lecturerId) {
         TimeslotList.fetch(lecturerId);
     }
@@ -184,7 +193,7 @@ public class PertemuanPresenter implements
 
     }
 
-
+    //Add timeslot
     public void addTimeSlot(String day, String startTime, String endTime) {
         String dayFormatted;
         switch (day){
@@ -222,12 +231,7 @@ public class PertemuanPresenter implements
         this.uiDibuat.showErrorAddTimeslot(msg);
     }
 
-
-    public void openDetail(PertemuanList.Pertemuan pertemuan) {
-        this.uiDibuat.openDetailPertemuanDibuat(pertemuan);
-    }
-
-    
+    //Get Invites
     public void getInvites() {
         this.inviteList.getInvites();
     }
@@ -242,11 +246,7 @@ public class PertemuanPresenter implements
 
     }
 
-    public void openDetailUndangan(InviteList.Invites invite){
-        this.uiDiundang.openDetailPertemuanDiundang(invite);
-    }
-
-
+    //Accept invitation
     public void acceptInvitation(String appointmentId){
         InviteList.acceptInvite(appointmentId, APIClient.loggedInId);
     }

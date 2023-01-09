@@ -3,30 +3,30 @@ package com.example.p3b_tubes_2.Presenter;
 import android.content.Context;
 
 import com.example.p3b_tubes_2.FRSContract;
-import com.example.p3b_tubes_2.Model.MataKuliahList;
 import com.example.p3b_tubes_2.Model.FRSList;
+import com.example.p3b_tubes_2.Model.MataKuliahList;
 import com.example.p3b_tubes_2.Model.TahunAjaran;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class FRSPresenter implements FRSContract.Model.GetOnSuccessListener,
-FRSContract.Model.GetDetailOnSuccessListener,
-FRSContract.Model.GetSearchMataKuliahOnSuccessListener,
-FRSContract.Model.GetMataKuliahEnrolmentOnSuccessListener,
-FRSContract.Model.EnrolStudentOnSuccessListener{
+public class FRSPresenter implements
+        FRSContract.Model.GetOnSuccessListener,
+    FRSContract.Model.GetDetailOnSuccessListener,
+    FRSContract.Model.GetSearchMataKuliahOnSuccessListener,
+    FRSContract.Model.GetMataKuliahEnrolmentOnSuccessListener,
+    FRSContract.Model.EnrolStudentOnSuccessListener
+{
 
     private FRSContract.View ui;
-    private MainPresenter mainPresenter;
     private MataKuliahList mataKuliahList;
     private TahunAjaran tahunAjaran;
     private FRSList frs;
     //TahunAjaran tahunAjaranList;
 
-    public FRSPresenter(FRSContract.View ui, Context context, MainPresenter mainPresenter){
+    public FRSPresenter(FRSContract.View ui, Context context){
         this.ui = ui;
-        this.mainPresenter = mainPresenter;
         this.tahunAjaran = new TahunAjaran(this,context);
         this.mataKuliahList = new MataKuliahList(this,context);
         this.frs = new FRSList(this,context);

@@ -3,7 +3,6 @@ package com.example.p3b_tubes_2.Model;
 import android.content.Context;
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -12,7 +11,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.p3b_tubes_2.APIClient;
 import com.example.p3b_tubes_2.Presenter.FRSPresenter;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,13 +26,11 @@ public class TahunAjaran implements Response.Listener<JSONObject>, Response.Erro
     private ArrayList<TahunAjar> listAcademicYears;
     private FRSPresenter presenter;
     private RequestQueue queue;
-    private Gson gson;
 
     public TahunAjaran(FRSPresenter presenter, Context context){
         this.presenter = presenter;
-        listAcademicYears = new ArrayList<>();
+        this.listAcademicYears = new ArrayList<>();
         this.queue = Volley.newRequestQueue(context);
-        this.gson = new Gson();
     }
 
     public TahunAjar getActiveYear() {
@@ -59,10 +55,15 @@ public class TahunAjaran implements Response.Listener<JSONObject>, Response.Erro
 
     public void getAcademicYears(){
         String url = APIClient.BASE_URL+"/academic-years";
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                this::onResponse,this::onErrorResponse){
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                this::onResponse,
+                this::onErrorResponse
+        ){
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<>();
                 params.put("Authorization", APIClient.token);
                 return params;

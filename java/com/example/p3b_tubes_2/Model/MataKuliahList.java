@@ -3,7 +3,6 @@ package com.example.p3b_tubes_2.Model;
 import android.content.Context;
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -74,7 +73,7 @@ public class MataKuliahList implements Response.Listener<JSONArray>, Response.Er
         CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET,url,null,
                 this::onResponse,this::onErrorResponse){
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<>();
                 params.put("Authorization", APIClient.token);
                 return params;
@@ -99,7 +98,6 @@ public class MataKuliahList implements Response.Listener<JSONArray>, Response.Er
         String res = response.toString();
         Type listType = new TypeToken<ArrayList<MataKuliah>>() {}.getType();
         listdata = this.gson.fromJson(res, listType);
-        //Log.d("DEBUG","SUCCESS");
         this.presenter.OnSuccessGetSearchMataKuliah(listdata);
     }
 

@@ -15,13 +15,9 @@ import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentFrsTambahBinding;
 
 public class FRSTambahFragment extends DialogFragment {
-    FragmentFrsTambahBinding binding;
+    private FragmentFrsTambahBinding binding;
     public static FRSTambahFragment newInstance(FragmentManager fm) {
-
-        Bundle args = new Bundle();
-
         FRSTambahFragment fragment = new FRSTambahFragment();
-        fragment.setArguments(args);
         fragment.show(fm, "tambahMatkul");
         return fragment;
     }

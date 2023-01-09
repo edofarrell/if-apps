@@ -26,7 +26,6 @@ public class PertemuanDetailFragment extends DialogFragment {
         PertemuanDetailFragment fragment = new PertemuanDetailFragment();
         fragment.pertemuan = pertemuan;
         fragment.show(fm, "openAppointmentDetail");
-
         return fragment;
     }
 

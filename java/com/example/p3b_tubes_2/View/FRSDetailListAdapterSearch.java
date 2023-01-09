@@ -72,8 +72,6 @@ public class FRSDetailListAdapterSearch extends BaseAdapter {
     }
 
     public void update(ArrayList<MataKuliahList.MataKuliah> mataKuliah){
-//        Log.d("DEBUG",mataKuliah.get(0).getName());
-//        Log.d("DEBUG",mataKuliah.get(1).getName());
         this.listMataKuliah = mataKuliah;
         notifyDataSetChanged();
     }

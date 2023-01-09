@@ -3,7 +3,6 @@ package com.example.p3b_tubes_2.Model;
 import android.content.Context;
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -94,7 +93,7 @@ public class User {
                     this::onErrorResponse
             ) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Authorization", APIClient.token);
                     return params;
@@ -106,8 +105,7 @@ public class User {
 
         @Override
         public void onResponse(String response) {
-            Type listType = new TypeToken<List<User>>() {
-            }.getType();
+            Type listType = new TypeToken<List<User>>() {}.getType();
             List<User> users = gson.fromJson(response, listType);
             presenter.onSuccessGet(users);
         }
@@ -117,6 +115,7 @@ public class User {
             try {
                 String responseBody = new String(error.networkResponse.data, "utf-8");
                 Log.d("DEBUG", "User: APIUsersGet: onErrorResponse(), Error=" + responseBody);
+                presenter.onErrorGet(responseBody);
             } catch (UnsupportedEncodingException e) {
                 Log.d("DEBUG", "User: APIUsersGet: onErrorResponse() catch UnsupportedEncodingException");
             }
@@ -135,7 +134,7 @@ public class User {
                     this::onErrorResponse
             ) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Authorization", APIClient.token);
                     return params;
@@ -170,13 +169,13 @@ public class User {
             String url = APIClient.BASE_URL + "/authenticate";
 
             JsonObject json = new JsonObject();
-        json.addProperty("email", email);
-        json.addProperty("password", password);
-        json.addProperty("role", role);
-//            json.addProperty("email", "default.admin@domain.local");
-//            json.addProperty("password", "mu8XyUogLi6Dk7");
-//            json.addProperty("role", "admin");
-//            role = "admin";
+            json.addProperty("email", email);
+            json.addProperty("password", password);
+            json.addProperty("role", role);
+//        json.addProperty("email", "default.admin@domain.local");
+//        json.addProperty("password", "mu8XyUogLi6Dk7");
+//        json.addProperty("role", "admin");
+//        role = "admin";
 //        json.addProperty("email", "halodearen@mail.com");
 //        json.addProperty("password", "halodearen");
 //        json.addProperty("role", "lecturer");
@@ -218,10 +217,10 @@ public class User {
             try {
                 String responseBody = new String(error.networkResponse.data, "utf-8");
                 Log.d("DEBUG", "User: APIAuthorization: onErrorResponse(), Error=" + responseBody);
+                presenter.onFailedLogin();
             } catch (UnsupportedEncodingException e) {
                 Log.d("DEBUG", "User: APIAuthorization: onErrorResponse() catch UnsupportedEncodingException");
             }
-            presenter.onFailedLogin();
         }
     }
 

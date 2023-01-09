@@ -3,7 +3,6 @@ package com.example.p3b_tubes_2.Model;
 import android.content.Context;
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FRSList {
+public class  FRSList {
     private FRSPresenter presenter;
     private Gson gson;
     private RequestQueue queue;
@@ -56,7 +55,7 @@ public class FRSList {
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,JSON,
                     this::onResponse,this::onErrorResponse){
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Authorization", APIClient.token);
                     return params;
@@ -69,10 +68,12 @@ public class FRSList {
         public void onErrorResponse(VolleyError error) {
             try {
                 String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "APIFRSEnrolmentStudent: onErrorResponse(), Error=" + responseBody);
+
                 JsonParser parser = new JsonParser();
                 JsonObject json = (JsonObject) parser.parse(responseBody);
                 JSONObject JSON = new JSONObject(json.toString());
-                Log.d("DEBUG", "APIFRSEnrolmentStudent: onErrorResponse(), Error=" + JSON.toString());
+
                 String errorCode = JSON.getString("errcode");
                 if(errorCode.equals("E_UNSATISFIED_PREREQUISITE")){
                     String code = JSON.getJSONArray("reason").getJSONObject(0).getString("code");
@@ -86,7 +87,6 @@ public class FRSList {
 
         @Override
         public void onResponse(JSONObject response) {
-            Log.d("DEBUG","enrolstudent");
             presenter.OnSuccessEnrolStudent();
         }
     }
@@ -99,7 +99,7 @@ public class FRSList {
             CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET,url,null,
                     this::onResponse,this::onErrorResponse){
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders(){
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Authorization", APIClient.token);
                     return params;
@@ -124,7 +124,6 @@ public class FRSList {
             String res = response.toString();
             Type listType = new TypeToken<ArrayList<MataKuliahList.MataKuliah>>() {}.getType();
             listdata = gson.fromJson(res, listType);
-            //Log.d("DEBUG",namaMatKul.size()+"");
             presenter.OnSuccessGetMataKuliahEnrolment(listdata);
         }
     }

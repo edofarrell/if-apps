@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,14 +18,12 @@ public class PertemuanDiundangFragment extends Fragment implements PertemuanCont
     private FragmentPertemuanDiundangBinding binding;
     private PertemuanDiundangListAdapter adapter;
     private PertemuanPresenter presenter;
-    private FrameLayout frameLayout;
     private PertemuanDetailUndanganFragment pertemuanDetailUndanganFragment;
 
-    public static PertemuanDiundangFragment newInstance(PertemuanPresenter presenter, FrameLayout frameLayout) {
+    public static PertemuanDiundangFragment newInstance(PertemuanPresenter presenter) {
         PertemuanDiundangFragment fragment = new PertemuanDiundangFragment();
         fragment.adapter = new PertemuanDiundangListAdapter(presenter);
         fragment.presenter = presenter;
-        fragment.frameLayout = frameLayout;
         return fragment;
     }
 

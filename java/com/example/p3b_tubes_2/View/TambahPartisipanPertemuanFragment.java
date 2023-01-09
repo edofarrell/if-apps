@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.p3b_tubes_2.Model.TimeslotList;
 import com.example.p3b_tubes_2.Model.User;
@@ -30,15 +29,11 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
     private FragmentTambahPartisipanPertemuanBinding binding;
     private MainPresenter mainPresenter;
     private PertemuanPresenter pertemuanPresenter;
-
     private User selectedUser;
     private TimeslotListAdapter timeSlotAdapter;
     private ParticipantNameAdapter participantNameAdapter;
     private ChipGroup chipGroup;
     private ArrayList<User> arrChipGroup;
-
-    private FragmentManager fm;
-
     private String idPertemuan;
 
     public static TambahPartisipanPertemuanFragment newInstance(MainPresenter mainPresenter, PertemuanPresenter pertemuanPresenter, String idPertemuan) {
@@ -70,11 +65,6 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         this.mainPresenter.getAllUser(this);
 
         return this.binding.getRoot();
-    }
-
-    private void closePage(View view) {
-        Log.d("DEBUG", "masuk onclose");
-        getParentFragmentManager().setFragmentResult("closeDialog", null);
     }
 
     @Override
@@ -111,32 +101,8 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         this.getParentFragmentManager().setFragmentResult("closeDialog", null);
     }
 
-/*
-    private AdapterView.OnItemClickListener onItemClick() {
-        return new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedUser = (User) parent.getItemAtPosition(position);
-                if (selectedUser.isDosen()) {
-                    binding.llJadwalDosen.setVisibility(View.VISIBLE);
-                    pertemuanPresenter.getTimeSlot(selectedUser.getId());
-                } else {
-                    binding.llJadwalDosen.setVisibility(View.GONE);
-                }
-            }
-        };
-    }
-*/
-
     private void simpanPartisipan(View view) {
         this.pertemuanPresenter.addUserToPertemuan(new User[]{this.selectedUser}, this.idPertemuan);
-    }
-
-    private void back(View view) {
-        Bundle result = new Bundle();
-        result.putString("page", "isiDetail");
-
-        this.getParentFragmentManager().setFragmentResult("changePage", result);
     }
 
     public void addSelectedUser(User[] users) {
@@ -197,10 +163,6 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
     @Override
     public void update(List<User> data) {
         this.participantNameAdapter.update(data);
-//        AutocompleteAdapter autocompleteAdapter = new AutocompleteAdapter(getContext(), 0, data);
-//        autocompleteAdapter.getFilter().filter("");
-//        SearchView autoCompleteTextView = binding.actvChooseParticipant;
-        /*autoCompleteTextView.setAdapter(autocompleteAdapter);*/
     }
 
     @Override
@@ -214,6 +176,5 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         } else {
             binding.llJadwalDosen.setVisibility(View.GONE);
         }
-
     }
 }

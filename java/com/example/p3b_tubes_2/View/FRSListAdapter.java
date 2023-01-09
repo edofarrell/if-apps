@@ -32,39 +32,6 @@ public class FRSListAdapter extends BaseAdapter {
             presenter.openFragment(tahunAjaran.getListAcademicYears().get(i));
         }
 
-        private int getSemesterNow(){
-            String semesterSkrg = tahunAjaran.getListAcademicYears().get(i).getSemester();
-            int tahunSkrg = Integer.parseInt(tahunAjaran.getListAcademicYears().get(i).getTahun());
-            int tahunMasuk = Integer.parseInt(tahunAjaran.getListAcademicYears().get(0).getTahun());
-            if(semesterSkrg.equals("Genap")){
-                if(tahunSkrg-tahunMasuk==0){
-                    return 2;
-                }
-                else if(tahunSkrg-tahunMasuk==1){
-                    return 4;
-                }
-                else if(tahunSkrg-tahunMasuk==2){
-                    return 6;
-                }
-                else{
-                    return 8;
-                }
-            }
-            else{
-                if(tahunSkrg-tahunMasuk==0){
-                    return 1;
-                }
-                else if(tahunSkrg-tahunMasuk==1){
-                    return 3;
-                }
-                else if(tahunSkrg-tahunMasuk==2){
-                    return 5;
-                }
-                else{
-                    return 7;
-                }
-            }
-        }
     }
 
     public FRSListAdapter(FRSPresenter presenter){

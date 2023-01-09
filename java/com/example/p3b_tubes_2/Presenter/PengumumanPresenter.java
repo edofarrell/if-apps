@@ -1,13 +1,11 @@
 package com.example.p3b_tubes_2.Presenter;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.p3b_tubes_2.Model.PengumumanList;
 import com.example.p3b_tubes_2.Model.TagList;
 import com.example.p3b_tubes_2.PengumumanContract;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PengumumanPresenter implements
@@ -137,7 +135,6 @@ public class PengumumanPresenter implements
     public void AddTagOnError(String msg) {
         this.ui.showErrorAddTag(msg);
     }
-
 
     public List<String> getTagsId(List<String> tagName) {
         return this.tag.getActiveTagFilter(tagName);

@@ -3,7 +3,6 @@ package com.example.p3b_tubes_2.View;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +27,8 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     private UserPresenter presenter;
 
     public static LoginFragment newInstance(MainPresenter mainPresenter, Context context, UserContract.View.Profile profilFragment) {
-        Bundle args = new Bundle();
         LoginFragment fragment = new LoginFragment();
         fragment.presenter = new UserPresenter(fragment, profilFragment, context, mainPresenter);
-        fragment.setArguments(args);
         return fragment;
     }
 

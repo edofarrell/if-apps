@@ -1,7 +1,6 @@
 package com.example.p3b_tubes_2.View;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,6 @@ public class PertemuanDibuatFragment extends Fragment implements PertemuanContra
     private PertemuanPresenter pertemuanPresenter;
     private MainPresenter mainPresenter;
     private TambahPertemuanFragment tambahPertemuanFragment;
-    private TambahPartisipanPertemuanFragment tambahPartisipanPertemuanFragment;
     private TambahSlotWaktuFragment tambahSlotWaktuFragment;
 
     private boolean isFabsVisible;

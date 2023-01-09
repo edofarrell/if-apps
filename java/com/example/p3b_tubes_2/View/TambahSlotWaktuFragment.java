@@ -19,8 +19,6 @@ import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentTambahSlotWaktuBinding;
 
-import java.util.List;
-
 public class TambahSlotWaktuFragment extends DialogFragment {
     private FragmentTambahSlotWaktuBinding binding;
     private PertemuanPresenter presenter;

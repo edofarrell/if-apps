@@ -2,7 +2,6 @@ package com.example.p3b_tubes_2.View;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +20,7 @@ import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.Presenter.PertemuanPresenter;
 import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.FragmentAddPertemuanBinding;
-import com.google.android.material.chip.ChipGroup;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,8 +30,6 @@ public class TambahPertemuanFragment extends DialogFragment {
     private PertemuanPresenter pertemuanPresenter;
     private MainPresenter mainPresenter;
     private TambahDetailPertemuanFragment tambahDetailPertemuanFragment;
-    private ChipGroup chipGroup;
-    private ArrayList<User> arrChipGroup;
 
     private HashMap<String, Fragment> fragments;
     private FragmentManager fm;
@@ -44,11 +39,9 @@ public class TambahPertemuanFragment extends DialogFragment {
         fragment.show(fm, "tambahPertemuan");
         fragment.pertemuanPresenter = pertemuanPresenter;
         fragment.mainPresenter = mainPresenter;
-
         fragment.fragments = new HashMap<>();
-        fragment.tambahDetailPertemuanFragment = TambahDetailPertemuanFragment.newInstance(mainPresenter, pertemuanPresenter);
+        fragment.tambahDetailPertemuanFragment = TambahDetailPertemuanFragment.newInstance(pertemuanPresenter);
         fragment.fragments.put("isiDetail", fragment.tambahDetailPertemuanFragment);
-//        fragment.fragments.put("pilihPartisipan", TambahPartisipanPertemuanFragment.newInstance(mainPresenter, pertemuanPresenter));
         return fragment;
     }
 
@@ -85,7 +78,6 @@ public class TambahPertemuanFragment extends DialogFragment {
         this.fm.setFragmentResultListener("closeDialog", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                Log.d("DEBUG", "close dialog");
                 dismiss();
             }
         });

@@ -3,7 +3,6 @@ package com.example.p3b_tubes_2.Model;
 import android.content.Context;
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -190,7 +189,7 @@ public class PertemuanList {
                     this::onErrorResponse
             ) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<>();
                     params.put("Authorization", APIClient.token);
                     return params;
@@ -243,7 +242,7 @@ public class PertemuanList {
                     this::onErrorResponse
             ) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<>();
                     params.put("Authorization", APIClient.token);
                     return params;
@@ -299,7 +298,7 @@ public class PertemuanList {
                     this::onErrorResponse
             ) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<>();
                     params.put("Authorization", APIClient.token);
                     return params;
@@ -346,7 +345,7 @@ public class PertemuanList {
                     this::onErrorResponse
             ) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<>();
                     params.put("Authorization", APIClient.token);
                     return params;
@@ -395,7 +394,7 @@ public class PertemuanList {
                     this::onErrorResponse
             ) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Authorization", APIClient.token);
                     return params;
@@ -462,7 +461,7 @@ public class PertemuanList {
                     this::onErrorResponse
             ) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<>();
                     params.put("Authorization", APIClient.token);
                     return params;
@@ -525,7 +524,7 @@ public class PertemuanList {
                     this::onErrorResponse
             ) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<>();
                     params.put("Authorization", APIClient.token);
                     return params;

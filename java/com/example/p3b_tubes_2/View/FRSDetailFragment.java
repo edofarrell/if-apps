@@ -1,16 +1,11 @@
 package com.example.p3b_tubes_2.View;
 
 
-
 import android.app.Dialog;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,9 +15,9 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.p3b_tubes_2.Model.MataKuliahList;
+import com.example.p3b_tubes_2.Model.TahunAjaran;
 import com.example.p3b_tubes_2.Presenter.FRSPresenter;
 import com.example.p3b_tubes_2.R;
-import com.example.p3b_tubes_2.Model.TahunAjaran;
 import com.example.p3b_tubes_2.databinding.FragmentFrsDetailBinding;
 
 import org.json.JSONException;
@@ -51,7 +46,6 @@ public class FRSDetailFragment extends DialogFragment{
         FRSDetailFragment fragment = new FRSDetailFragment();
         fragment.setArguments(args);
         fragment.show(fm, "detailFRS");
-        //fragment.listMataKuliah = listMataKuliah;
         fragment.presenter = presenter;
         fragment.adapterSearch = new FRSDetailListAdapterSearch(presenter);
         fragment.adapterView = new FRSDetailListAdapterView(presenter);
@@ -171,7 +165,6 @@ public class FRSDetailFragment extends DialogFragment{
     }
 
     private void onClickAddMatkul(View view) {
-        //this.frsTambahFragmentfragment = FRSTambahFragment.newInstance(getParentFragmentManager());
         for(int i = 0;i<this.adapterView.getCount();i++){
             try {
                 this.presenter.enrolStudent(this.adapterView.getMataKuliahEnrol(i).getId(),this.tahunAjar.toStringFormatAPI());
@@ -180,31 +173,5 @@ public class FRSDetailFragment extends DialogFragment{
             }
         }
     }
-
-    public void onButtonShowPopupWindowClick(View view) {
-
-        // inflate the layout of the popup window
-        View popupView = this.inflater.inflate(R.layout.popup_prasyarat_matkul, null);
-
-        // create the popup window
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = true; // lets taps outside the popup also dismiss it
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
-        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-
-        // dismiss the popup window when touched
-        popupView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                popupWindow.dismiss();
-                return true;
-            }
-        });
-    }
-
 
 }

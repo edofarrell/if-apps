@@ -8,17 +8,12 @@ import java.util.List;
 public class MainPresenter implements UserContract.Model.GetOnSucessListener {
 
     private UserPresenter userPresenter;
-    private PertemuanPresenter pertemuanPresenter;
     private UserContract.View ui;
 
     public MainPresenter(){}
 
     public void setUserPresenter(UserPresenter userPresenter) {
         this.userPresenter = userPresenter;
-    }
-
-    public void setPertemuanPresenter(PertemuanPresenter pertemuanPresenter) {
-        this.pertemuanPresenter = pertemuanPresenter;
     }
 
     public void getAllUser(UserContract.View ui){

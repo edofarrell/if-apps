@@ -64,13 +64,15 @@ public interface PertemuanContract {
             void onErrorAddTimeSlot(String msg);
         }
 
-        interface GetInvitesOnSuccessListener{
+        interface GetInvitesOnSuccessListener {
             void onSuccessGetInvites(InviteList invites);
+
             void onErrorGetInvites(String msg);
         }
 
-        interface ChangeInvitesOnSuccessListener{
+        interface ChangeInvitesOnSuccessListener {
             void onSuccessChangeInvites();
+
             void onErrorChangeInvites(String msg);
         }
     }

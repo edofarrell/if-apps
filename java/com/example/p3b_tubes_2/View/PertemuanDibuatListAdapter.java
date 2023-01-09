@@ -2,7 +2,6 @@ package com.example.p3b_tubes_2.View;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +25,6 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
         protected TextView tvDate;
         protected TextView tvStartTime;
         protected TextView tvEndTime;
-        protected TextView tvDescription;
-        protected TextView tvOrganizer;
         protected Button btnSeeDetails;
         protected Button btnDelete;
 
@@ -69,13 +66,10 @@ public class PertemuanDibuatListAdapter extends BaseAdapter {
         private void openDetail(View view) {
             PertemuanList.Pertemuan pertemuan = pertemuanList.getPertemuan(i);
             if(APIClient.loggedInId.equals(pertemuan.getOrganizer_id())){
-                Log.d("DEBUG", "oragnizer");
                 presenter.getPartisipanDibuat(pertemuan);
             }else{
-                Log.d("DEBUG", "not organizer");
                 presenter.openDetail(pertemuan);
             }
-
         }
 
         private void updateView(int i) {

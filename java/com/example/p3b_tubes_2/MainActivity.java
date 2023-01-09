@@ -1,7 +1,6 @@
 package com.example.p3b_tubes_2;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -42,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
         this.fragments = new HashMap<>();
 
-        this.fragments.put("pengumuman", PengumumanFragment.newInstance(mainPresenter, this, this.binding.fragmentContainer));
-        this.fragments.put("pertemuan", PertemuanFragment.newInstance(mainPresenter, this, this.binding.fragmentContainer));
-        this.fragments.put("frs", FRSFragment.newInstance(mainPresenter, this));
+        this.fragments.put("pengumuman", PengumumanFragment.newInstance(mainPresenter, this));
+        this.fragments.put("pertemuan", PertemuanFragment.newInstance(mainPresenter, this));
+        this.fragments.put("frs", FRSFragment.newInstance(this));
         this.fragments.put("profil", ProfilFragment.newInstance());
         this.fragments.put("login", LoginFragment.newInstance(mainPresenter, this, (ProfilFragment) this.fragments.get("profil")));
         this.fm = getSupportFragmentManager();

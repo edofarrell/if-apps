@@ -81,8 +81,6 @@ public class FRSDetailListAdapterView extends BaseAdapter {
     }
 
     public void update(MataKuliahList.MataKuliah mataKuliah){
-//        Log.d("DEBUG",mataKuliah.get(0).getName());
-//        Log.d("DEBUG",mataKuliah.get(1).getName());
         if(!listMataKuliah.contains(mataKuliah)){
             listMataKuliah.add(mataKuliah);
         }
