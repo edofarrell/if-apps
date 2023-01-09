@@ -27,7 +27,7 @@ public interface FRSContract {
         }
 
         interface GetMataKuliahEnrolmentOnSuccessListener {
-            void OnSuccessGetMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul);
+            void OnSuccessGetMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul,boolean thisYear);
 
             void OnErrorGetMataKuliahEnrolment();
         }
@@ -48,7 +48,7 @@ public interface FRSContract {
 
         void addToSelectedMataKuliah(MataKuliahList.MataKuliah matkul);
 
-        void updateMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul);
+        void updateMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul,boolean thisYear);
 
         void showErrorMataKuliahEnrol(String nama, String kode);
 

@@ -32,6 +32,7 @@ public class FRSDetailFragment extends DialogFragment{
     private FRSDetailListAdapterSearch adapterSearch;
     private FRSDetailListAdapterView adapterView;
     private FRSPresenter presenter;
+    private MataKuliahList.MataKuliah selectedMatkul;
     private FRSTambahFragment frsTambahFragmentfragment;
     private String searchText;
     private LayoutInflater inflater;
@@ -71,8 +72,9 @@ public class FRSDetailFragment extends DialogFragment{
             binding.tvMatkulTerpilih.setVisibility(View.GONE);
             binding.tvLvMatkuldipilih.setVisibility(View.GONE);
             binding.tvInfoPenting.setVisibility(View.GONE);
-            getMataKuliahEnrolment();
+            getMataKuliahEnrolment(false);
         }
+        getMataKuliahEnrolment(true);
         return binding.getRoot();
     }
 
@@ -95,20 +97,22 @@ public class FRSDetailFragment extends DialogFragment{
         searchView.setOnClickListener(this::onClickSearch);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(String newText) {
+                getMataKuliah(newText);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                getMataKuliah(newText);
                 return false;
             }
         });
     }
 
     public void showErrorMataKuliahEnrolment(String nama, String kode){
-        this.binding.tvTitleError.setVisibility(View.VISIBLE);
+        if(!nama.equals("")){
+            this.binding.tvTitleError.setVisibility(View.VISIBLE);
+        }
         this.binding.tvNamaMatkulError.setText(nama);
         this.binding.tvKodeMatkulError.setText(kode);
     }
@@ -131,16 +135,23 @@ public class FRSDetailFragment extends DialogFragment{
     }
 
     public void setSelectedMataKuliah(MataKuliahList.MataKuliah matkul){
-        this.adapterView.update(matkul);
+        this.selectedMatkul = matkul;
+        this.binding.tvMatakuliahTerpilih.setText("Mata Kuliah yang akan ditambah: "+matkul.getName());
     }
 
-    public void setMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul){
-        this.adapterSearch.update(listNamaMatkul);
+    public void setMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul,boolean thisYear){
+        if(thisYear){
+            this.binding.tvTitleError.setVisibility(View.GONE);
+            this.adapterView.update(listNamaMatkul);
+        }
+        else{
+            this.adapterSearch.update(listNamaMatkul);
+        }
     }
 
-    public void getMataKuliahEnrolment(){
+    public void getMataKuliahEnrolment(boolean thisYear){
         try {
-            presenter.getMataKuliahEnrolment(this.tahunAjar.toStringFormatAPI());
+            presenter.getMataKuliahEnrolment(this.tahunAjar.toStringFormatAPI(),thisYear);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -165,13 +176,18 @@ public class FRSDetailFragment extends DialogFragment{
     }
 
     private void onClickAddMatkul(View view) {
-        for(int i = 0;i<this.adapterView.getCount();i++){
+        try {
+            this.presenter.enrolStudent(selectedMatkul.getId(), this.tahunAjar.toStringFormatAPI());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        /*for(int i = 0;i<this.adapterView.getCount();i++){
             try {
                 this.presenter.enrolStudent(this.adapterView.getMataKuliahEnrol(i).getId(),this.tahunAjar.toStringFormatAPI());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
 }

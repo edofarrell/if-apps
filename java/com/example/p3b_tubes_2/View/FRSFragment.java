@@ -71,8 +71,8 @@ public class FRSFragment extends Fragment implements FRSContract.View {
     }
 
     @Override
-    public void updateMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul) {
-        detailFragment.setMataKuliahEnrolment(listNamaMatkul);
+    public void updateMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul,boolean thisYear) {
+        detailFragment.setMataKuliahEnrolment(listNamaMatkul,thisYear);
     }
 
     @Override

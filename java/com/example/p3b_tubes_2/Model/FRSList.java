@@ -31,6 +31,7 @@ public class  FRSList {
     private FRSPresenter presenter;
     private Gson gson;
     private RequestQueue queue;
+    private boolean activeYear;
     private static APIFRSEnrolStudent apiEnrolStudent;
     private static APIFRSGetEnrolmentStudent apiEnrolmentStudent;
 
@@ -80,6 +81,9 @@ public class  FRSList {
                     String name = JSON.getJSONArray("reason").getJSONObject(0).getString("name");
                     presenter.OnErrorEnrolStudent(name,code);
                 }
+                else if(errorCode.equals("E_EXIST")){
+                    presenter.OnErrorEnrolStudent("","Mata Kuliah sudah pernah di enroll");
+                }
             } catch (UnsupportedEncodingException | JSONException e) {
                 Log.d("DEBUG", "APIFRSEnrolmentStudent: onErrorResponse() catch UnsupportedEncodingException");
             }
@@ -93,9 +97,9 @@ public class  FRSList {
 
     private class APIFRSGetEnrolmentStudent implements Response.Listener<JSONArray>, Response.ErrorListener{
 
-        public void getEnrolmentStudent(String academicYear) throws JSONException {
+        public void getEnrolmentStudent(String academicYear,boolean thisYear) throws JSONException {
             String url = APIClient.BASE_URL+"/enrolments/academic-years/"+academicYear;
-
+            activeYear = thisYear;
             CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET,url,null,
                     this::onResponse,this::onErrorResponse){
                 @Override
@@ -124,7 +128,7 @@ public class  FRSList {
             String res = response.toString();
             Type listType = new TypeToken<ArrayList<MataKuliahList.MataKuliah>>() {}.getType();
             listdata = gson.fromJson(res, listType);
-            presenter.OnSuccessGetMataKuliahEnrolment(listdata);
+            presenter.OnSuccessGetMataKuliahEnrolment(listdata,activeYear);
         }
     }
 
@@ -132,7 +136,7 @@ public class  FRSList {
         apiEnrolStudent.enrolStudent(id,academicYear);
     }
 
-    public static void getEnrollmentStudent(String academicYear) throws JSONException {
-        apiEnrolmentStudent.getEnrolmentStudent(academicYear);
+    public static void getEnrollmentStudent(String academicYear,boolean thisYear) throws JSONException {
+        apiEnrolmentStudent.getEnrolmentStudent(academicYear,thisYear);
     }
 }

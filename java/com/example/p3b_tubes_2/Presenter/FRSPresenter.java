@@ -48,8 +48,8 @@ public class FRSPresenter implements
         FRSList.enrollStudent(id,academicYear);
     }
 
-    public void getMataKuliahEnrolment(String academicYear) throws JSONException {
-        FRSList.getEnrollmentStudent(academicYear);
+    public void getMataKuliahEnrolment(String academicYear,boolean thisYear) throws JSONException {
+        FRSList.getEnrollmentStudent(academicYear,thisYear);
     }
 
     public void getAcademicYears(){
@@ -87,8 +87,8 @@ public class FRSPresenter implements
     }
 
     @Override
-    public void OnSuccessGetMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul) {
-        this.ui.updateMataKuliahEnrolment(listNamaMatkul);
+    public void OnSuccessGetMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul,boolean thisYear) {
+        this.ui.updateMataKuliahEnrolment(listNamaMatkul,thisYear);
     }
 
     @Override
