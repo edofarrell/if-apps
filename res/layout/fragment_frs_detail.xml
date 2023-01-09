@@ -43,16 +43,8 @@
                 android:id="@+id/search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-<<<<<<< HEAD
-                android:layout_marginStart="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_10dp"
-                android:layout_marginEnd="@dimen/_10dp"
-                android:layout_marginBottom="@dimen/_10dp"
-                android:background="@drawable/custom_kotak_filter_pengumuman"
-=======
                 android:layout_marginBottom="@dimen/_16dp"
                 android:background="@color/white"
->>>>>>> origin/Vito
                 app:queryHint="@string/hintMatkul" />
 
             <TextView
