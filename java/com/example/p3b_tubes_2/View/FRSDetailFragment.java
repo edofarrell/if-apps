@@ -81,7 +81,9 @@ public class FRSDetailFragment extends DialogFragment{
     }
 
     private void deleteSelectedMatkul(View view) {
-        this.binding.tvKodeMatkulError.setVisibility(View.GONE);
+        this.binding.tvTitleError.setVisibility(View.GONE);
+        this.binding.tvKodeMatkulError.setText("");
+        this.binding.tvNamaMatkulError.setText("");
         this.binding.llSelectedMatkul.setVisibility(View.GONE);
         this.binding.searchBar.setVisibility(View.VISIBLE);
         this.binding.tvHasilPencarianMatkul.setVisibility(View.VISIBLE);
@@ -128,10 +130,14 @@ public class FRSDetailFragment extends DialogFragment{
     }
 
     public void showToastSuccessStudentEnrolment(){
+        this.binding.tvTitleError.setVisibility(View.GONE);
+        this.binding.tvKodeMatkulError.setText("");
+        this.binding.tvNamaMatkulError.setText("");
         this.binding.llSelectedMatkul.setVisibility(View.GONE);
         this.binding.searchBar.setVisibility(View.VISIBLE);
         this.binding.tvHasilPencarianMatkul.setVisibility(View.VISIBLE);
         this.binding.tvLvMatkul.setVisibility(View.VISIBLE);
+        getMataKuliahEnrolment(true);
         Toast.makeText(getActivity(),"Enrolment Berhasil",Toast.LENGTH_SHORT).show();
     }
 

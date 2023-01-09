@@ -80,8 +80,8 @@
                 android:id="@+id/ll_selected_matkul"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignBottom="@id/tv_lv_matkul">
+                android:layout_alignBottom="@id/tv_lv_matkul"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_matakuliah_terpilih"
@@ -92,7 +92,7 @@
                     android:id="@+id/btn_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_delete_24"/>
+                    android:src="@drawable/ic_baseline_delete_24" />
 
             </LinearLayout>
 
