@@ -71,7 +71,7 @@ public class FRSDetailFragment extends DialogFragment{
             binding.tvHasilPencarianMatkul.setText("Mata Kuliah yang dipilih");
             binding.tvMatkulTerpilih.setVisibility(View.GONE);
             binding.tvLvMatkuldipilih.setVisibility(View.GONE);
-            binding.tvInfoPenting.setVisibility(View.GONE);
+
             getMataKuliahEnrolment(false);
         }
         getMataKuliahEnrolment(true);
@@ -155,6 +155,10 @@ public class FRSDetailFragment extends DialogFragment{
         this.binding.tvHasilPencarianMatkul.setVisibility(View.GONE);
         this.binding.tvLvMatkul.setVisibility(View.GONE);
         this.binding.llSelectedMatkul.setVisibility(View.VISIBLE);
+        ViewGroup.LayoutParams params = this.binding.tvLvMatkuldipilih.getLayoutParams();
+        params.height = 1000;
+        this.binding.tvLvMatkuldipilih.setLayoutParams(params);
+        this.binding.tvLvMatkuldipilih.requestLayout();
     }
 
     public void setMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul,boolean thisYear){
