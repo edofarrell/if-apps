@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <ListView
+        android:id="@+id/lv_daftar_semester"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lv_daftar_semester"
-        android:layout_marginTop="@dimen/_20sp"
-        android:padding="@dimen/_15sp"
-        android:divider="@color/white"
-        android:dividerHeight="@dimen/_20sp">
-
-    </ListView>
-
-
+        android:clipToPadding="false"
+        android:divider="@color/background"
+        android:dividerHeight="@dimen/_16dp"
+        android:paddingHorizontal="@dimen/_16dp"
+        android:paddingTop="@dimen/_16dp"
+        android:paddingBottom="@dimen/_32dp"
+        android:scrollbarStyle="outsideOverlay" />
 </RelativeLayout>

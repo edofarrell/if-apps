@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/background">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:elevation="@dimen/_4dp"
-        >
+        app:elevation="@dimen/_4dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/appbar"
@@ -18,122 +18,93 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_baseline_close_24"
             app:title="@string/judulTambahFRS"
-            app:titleCentered="true"
-            />
+            app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/divider"
         android:layout_below="@id/appbar_layout"
-        android:paddingLeft="@dimen/_16dp"
-        android:paddingRight="@dimen/_16dp">
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_16dp"
+        android:paddingTop="@dimen/_16dp">
 
-
-        <RelativeLayout
+        <TextView
+            android:id="@+id/tv_semester"
+            style="@style/TextAppearance.MdcTypographyStyles.Headline5"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_20sp"
-            android:paddingLeft="@dimen/_10sp"
-            android:paddingRight="@dimen/_10sp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_16dp"
+            android:text="Semester Ganjil 2022/2023"
+            android:textStyle="bold" />
 
-            <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dropdown"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_semester"
+            android:layout_marginBottom="@dimen/_16dp"
+            android:hint="@string/mataKuliah"
+            app:startIconDrawable="@drawable/ic_matkul">
+
+            <AutoCompleteTextView
+                android:id="@+id/matkul"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_above="@id/ll_btn">
-
-                <TextView
-                    android:id="@+id/tv_semester"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Semester Ganjil 2022/2023"
-                    android:textSize="@dimen/_20sp"
-                    android:textColor="@color/black"></TextView>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/dropdown"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_semester"
-                    android:layout_marginTop="@dimen/_10sp"
-                    android:hint="@string/mataKuliah"
-                    app:startIconDrawable="@drawable/ic_matkul">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/matkul"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="none"></AutoCompleteTextView>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:id="@+id/tv_prasyarat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/dropdown"
-                    android:layout_marginTop="@dimen/_15sp"
-                    android:text="@string/prasyarat"
-                    android:textColor="@color/black">
-
-                </TextView>
-
-                <ListView
-                    android:id="@+id/lv_matkul_prasyarat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_prasyarat"
-
-                    android:layout_marginTop="@dimen/_10sp"></ListView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_btn"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="@dimen/_20sp">
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
-                    android:id="@+id/btn_batal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/batal"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_marginRight="@dimen/_10sp"
-                    >
+        <TextView
+            android:id="@+id/tv_prasyarat"
+            style="@style/TextAppearance.MdcTypographyStyles.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dropdown"
+            android:layout_marginBottom="@dimen/_8dp"
+            android:text="@string/prasyarat" />
 
-                </Button>
-
-
-                <Button
-                    android:id="@+id/btn_ambil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ambil"></Button>
-
-            </LinearLayout>
-
-
-
-
-        </RelativeLayout>
-
-
+        <ListView
+            android:id="@+id/lv_matkul_prasyarat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_prasyarat"
+            android:divider="@color/background"
+            android:dividerHeight="@dimen/_16dp" />
     </LinearLayout>
 
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_buttons"
+        android:layout_marginBottom="@dimen/_16dp" />
 
+    <LinearLayout
+        android:id="@+id/ll_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_16dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_16dp">
 
+        <Button
+            android:id="@+id/btn_batal"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/_16dp"
+            android:layout_weight="1"
+            android:text="@string/batal" />
 
-
-
-
-
-
-
+        <Button
+            android:id="@+id/btn_ambil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/ambil" />
+    </LinearLayout>
 </RelativeLayout>
