@@ -27,6 +27,5 @@
         android:layout_below="@id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/_16dp"
         />
 </RelativeLayout>

@@ -24,20 +24,28 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class FRSDetailFragment extends DialogFragment{
+public class FRSDetailFragment extends DialogFragment {
     private FragmentFrsDetailBinding binding;
     private TahunAjaran.TahunAjar tahunAjar;
     private TahunAjaran.TahunAjar activeYear;
+    private ArrayList<MataKuliahList.MataKuliah> listMataKuliah;
     private FRSDetailListAdapterSearch adapterSearch;
     private FRSDetailListAdapterView adapterView;
     private FRSPresenter presenter;
     private MataKuliahList.MataKuliah selectedMatkul;
+    private FRSTambahFragment frsTambahFragmentfragment;
+    private String searchText;
+    private LayoutInflater inflater;
 
     public static FRSDetailFragment newInstance(FragmentManager fm,
                                                 FRSPresenter presenter,
                                                 TahunAjaran.TahunAjar tahunAjar,
                                                 TahunAjaran.TahunAjar activeYear) {
+
+        Bundle args = new Bundle();
+
         FRSDetailFragment fragment = new FRSDetailFragment();
+        fragment.setArguments(args);
         fragment.show(fm, "detailFRS");
         fragment.presenter = presenter;
         fragment.adapterSearch = new FRSDetailListAdapterSearch(presenter);
@@ -54,9 +62,10 @@ public class FRSDetailFragment extends DialogFragment{
         this.binding.appbar.setTitle(tahunAjar.toString());
         this.binding.tvLvMatkul.setAdapter(adapterSearch);
         this.binding.tvLvMatkuldipilih.setAdapter(adapterView);
+        this.inflater = inflater;
         this.binding.btnAddMatkul.setOnClickListener(this::onClickAddMatkul);
         this.binding.tvTitleError.setVisibility(View.GONE);
-        if(!this.tahunAjar.toStringFormatAPI().equals(this.activeYear.toStringFormatAPI())){
+        if (!this.tahunAjar.toStringFormatAPI().equals(this.activeYear.toStringFormatAPI())) {
             binding.searchBar.setVisibility(View.GONE);
             binding.btnAddMatkul.setVisibility(View.GONE);
             binding.tvHasilPencarianMatkul.setText("Mata Kuliah yang dipilih");
@@ -67,18 +76,19 @@ public class FRSDetailFragment extends DialogFragment{
         }
         getMataKuliahEnrolment(true);
         this.binding.llSelectedMatkul.setVisibility(View.GONE);
+        this.binding.tvMatkulYangAkanDienroll.setVisibility(View.GONE);
+        this.binding.btnAddMatkul.setEnabled(false);
         this.binding.btnDelete.setOnClickListener(this::deleteSelectedMatkul);
         return binding.getRoot();
     }
 
     private void deleteSelectedMatkul(View view) {
-        this.binding.tvTitleError.setVisibility(View.GONE);
-        this.binding.tvKodeMatkulError.setText("");
-        this.binding.tvNamaMatkulError.setText("");
+        this.binding.tvKodeMatkulError.setVisibility(View.GONE);
         this.binding.llSelectedMatkul.setVisibility(View.GONE);
         this.binding.searchBar.setVisibility(View.VISIBLE);
         this.binding.tvHasilPencarianMatkul.setVisibility(View.VISIBLE);
         this.binding.tvLvMatkul.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -112,27 +122,23 @@ public class FRSDetailFragment extends DialogFragment{
         });
     }
 
-    public void showErrorMataKuliahEnrolment(String nama, String kode){
-        if(!nama.equals("")){
+    public void showErrorMataKuliahEnrolment(String nama, String kode) {
+        if (!nama.equals("")) {
             this.binding.tvTitleError.setVisibility(View.VISIBLE);
         }
         this.binding.tvNamaMatkulError.setText(nama);
         this.binding.tvKodeMatkulError.setText(kode);
     }
 
-    public void showToastSuccessStudentEnrolment(){
-        this.binding.tvTitleError.setVisibility(View.GONE);
-        this.binding.tvKodeMatkulError.setText("");
-        this.binding.tvNamaMatkulError.setText("");
+    public void showToastSuccessStudentEnrolment() {
         this.binding.llSelectedMatkul.setVisibility(View.GONE);
         this.binding.searchBar.setVisibility(View.VISIBLE);
         this.binding.tvHasilPencarianMatkul.setVisibility(View.VISIBLE);
         this.binding.tvLvMatkul.setVisibility(View.VISIBLE);
-        getMataKuliahEnrolment(true);
-        Toast.makeText(getActivity(),"Enrolment Berhasil",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Enrolment Berhasil", Toast.LENGTH_SHORT).show();
     }
 
-    public void getMataKuliah(String text){
+    public void getMataKuliah(String text) {
         this.presenter.getMataKuliah(text);
     }
 
@@ -141,35 +147,33 @@ public class FRSDetailFragment extends DialogFragment{
     }
 
     public void setListMataKuliah(ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
+        this.listMataKuliah = listMataKuliah;
         this.adapterSearch.update(listMataKuliah);
     }
 
-    public void setSelectedMataKuliah(MataKuliahList.MataKuliah matkul){
+    public void setSelectedMataKuliah(MataKuliahList.MataKuliah matkul) {
         this.selectedMatkul = matkul;
         this.binding.tvMatakuliahTerpilih.setText(matkul.getName());
         this.binding.searchBar.setVisibility(View.GONE);
         this.binding.tvHasilPencarianMatkul.setVisibility(View.GONE);
         this.binding.tvLvMatkul.setVisibility(View.GONE);
         this.binding.llSelectedMatkul.setVisibility(View.VISIBLE);
-        ViewGroup.LayoutParams params = this.binding.tvLvMatkuldipilih.getLayoutParams();
-        params.height = 1000;
-        this.binding.tvLvMatkuldipilih.setLayoutParams(params);
-        this.binding.tvLvMatkuldipilih.requestLayout();
+        this.binding.tvMatkulYangAkanDienroll.setVisibility(View.VISIBLE);
+        this.binding.btnAddMatkul.setEnabled(true);
     }
 
-    public void setMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul,boolean thisYear){
-        if(thisYear){
+    public void setMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul, boolean thisYear) {
+        if (thisYear) {
             this.binding.tvTitleError.setVisibility(View.GONE);
             this.adapterView.update(listNamaMatkul);
-        }
-        else{
+        } else {
             this.adapterSearch.update(listNamaMatkul);
         }
     }
 
-    public void getMataKuliahEnrolment(boolean thisYear){
+    public void getMataKuliahEnrolment(boolean thisYear) {
         try {
-            presenter.getMataKuliahEnrolment(this.tahunAjar.toStringFormatAPI(),thisYear);
+            presenter.getMataKuliahEnrolment(this.tahunAjar.toStringFormatAPI(), thisYear);
         } catch (JSONException e) {
             e.printStackTrace();
         }

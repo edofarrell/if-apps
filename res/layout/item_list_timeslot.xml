@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_container"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/_16dp"
     android:orientation="vertical"
-    android:background="@drawable/border_grey"
-    >
+    android:padding="@dimen/_16dp">
+
     <TextView
         android:id="@+id/tv_day"
+        style="@style/TextAppearance.MdcTypographyStyles.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8dp"
         android:text="Hari"
-        android:textSize="@dimen/_16sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/tv_time_slots"
+        style="@style/TextAppearance.MdcTypographyStyles.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="09.00-10.00"
-        android:textSize="14dp"
-        android:textColor="@color/black"
-        />
+        android:text="09.00-10.00" />
 </LinearLayout>

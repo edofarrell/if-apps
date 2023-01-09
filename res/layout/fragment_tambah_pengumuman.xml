@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    >
+    android:background="@color/background">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
@@ -26,14 +25,17 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/divider"
         android:layout_below="@id/appbar_layout"
+        android:fillViewport="true"
         android:paddingLeft="@dimen/_16dp"
-        android:paddingRight="@dimen/_16dp">
+        android:paddingTop="@dimen/_16dp"
+        android:paddingRight="@dimen/_16dp"
+        android:paddingBottom="@dimen/_32dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_16dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -43,11 +45,11 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/judul"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -62,15 +64,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
-                app:counterMaxLength="256"
-                >
+                app:counterMaxLength="256">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_judul"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="256"
-                    android:hint="@string/judul" />
+                    android:hint="@string/judul"
+                    android:maxLength="256" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
@@ -80,12 +81,12 @@
 
                 <TextView
                     android:id="@+id/title_participant"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Tag"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -113,19 +114,18 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="56dp"
-                app:strokeColor="#9e9e9e"
-                app:strokeWidth="1dp"
                 android:layout_marginBottom="@dimen/_16dp"
+                android:minHeight="56dp"
                 app:cardBackgroundColor="@color/background"
-                >
+                app:strokeColor="#9e9e9e"
+                app:strokeWidth="1dp">
+
                 <com.google.android.material.chip.ChipGroup
-                    android:padding="@dimen/_16dp"
                     android:id="@+id/chip_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:singleLine="false"
-                    />
+                    android:padding="@dimen/_16dp"
+                    app:singleLine="false" />
             </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
@@ -135,11 +135,11 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/deskripsi"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -155,49 +155,62 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_16dp"
                 app:counterEnabled="true"
-                app:counterMaxLength="5000"
-                >
+                app:counterMaxLength="5000">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_deskripsi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
                     android:hint="@string/deskripsi"
-                    android:maxLength="5000"
-                    />
+                    android:inputType="textMultiLine"
+                    android:maxLength="5000" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="48dp"
-
-                android:gravity="right">
-
-                <Button
-                    android:id="@+id/btn_cancel"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="@dimen/_120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/_16dp"
-                    android:text="@string/batal" />
-
-                <Button
-                    android:id="@+id/btn_simpan"
-                    android:layout_width="@dimen/_120dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tambah" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_error"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_marginTop="@dimen/_10sp"
-                android:textColor="@color/red"
-                android:textSize="@dimen/_20sp"/>
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_buttons"
+        android:layout_marginBottom="@dimen/_16dp" />
+
+    <LinearLayout
+        android:id="@+id/ll_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_16dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_16dp">
+
+        <TextView
+            android:id="@+id/tv_error"
+            style="@style/TextAppearance.MdcTypographyStyles.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_16dp"
+                android:layout_weight="1"
+                android:text="@string/batal" />
+
+            <Button
+                android:id="@+id/btn_simpan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tambah" />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

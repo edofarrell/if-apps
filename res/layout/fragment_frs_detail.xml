@@ -34,134 +34,205 @@
         android:paddingBottom="@dimen/_32dp"
         android:scrollbarStyle="outsideOverlay">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-<<<<<<< HEAD
-                android:layout_marginStart="@dimen/_10dp"
-                android:layout_marginTop="@dimen/_10dp"
-                android:layout_marginEnd="@dimen/_10dp"
-                android:layout_marginBottom="@dimen/_10dp"
-                android:background="@drawable/custom_kotak_filter_pengumuman"
-=======
-                android:layout_marginBottom="@dimen/_16dp"
-                android:background="@color/white"
->>>>>>> origin/Vito
-                app:queryHint="@string/hintMatkul" />
-
-            <TextView
-                android:id="@+id/tv_hasil_pencarian_matkul"
-                style="@style/TextAppearance.MdcTypographyStyles.Body1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/search_bar"
-                android:layout_marginBottom="@dimen/_8dp"
-                android:text="@string/hasilPencarianMatkul"
-                android:textStyle="bold" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_16dp"
-                android:elevation="0dp"
-                app:cardBackgroundColor="@color/background"
-                app:strokeColor="@color/grey"
-                app:strokeWidth="1dp">
-
-                <ListView
-                    android:id="@+id/tv_lv_matkul"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_200dp"
-                    android:layout_below="@id/tv_hasil_pencarian_matkul"
-                    android:clipToPadding="false"
-                    android:divider="@color/background"
-                    android:dividerHeight="@dimen/_16dp"
-                    android:scrollbarStyle="insideOverlay" />
-            </com.google.android.material.card.MaterialCardView>
-
-            <TextView
-                android:id="@+id/tv_matkul_terpilih"
-                style="@style/TextAppearance.MdcTypographyStyles.Body1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_lv_matkul"
-                android:layout_marginBottom="@dimen/_4dp"
-                android:text="@string/matkulTerpilih"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_info_penting"
-                style="@style/TextAppearance.MdcTypographyStyles.Caption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_8dp"
-                android:text="@string/infoPentingFRS"
-                android:textColor="@color/red" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_info_penting"
-                android:layout_marginBottom="@dimen/_16dp"
-                android:elevation="0dp"
-                app:cardBackgroundColor="@color/background"
-                app:strokeColor="@color/grey"
-                app:strokeWidth="1dp">
-
-                <ListView
-                    android:id="@+id/tv_lv_matkuldipilih"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_100dp"
-                    android:clipToPadding="false"
-                    android:divider="@color/background"
-                    android:dividerHeight="@dimen/_16dp" />
-            </com.google.android.material.card.MaterialCardView>
-
             <LinearLayout
-                android:id="@+id/ll_error"
+                android:id="@+id/ll_container_matakuliah_terpilih"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/card_view"
+                android:layout_marginBottom="@dimen/_16dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_title_error"
-                    style="@style/TextAppearance.MdcTypographyStyles.Body2"
+                    android:id="@+id/tv_matkul_terpilih"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_lv_matkul"
+                    android:layout_marginBottom="@dimen/_4dp"
+                    android:text="@string/matkulTerpilih"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_info_penting"
+                    style="@style/TextAppearance.MdcTypographyStyles.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_8dp"
-                    android:text="Prasyarat Mata Kuliah yang belum perpenuhi :" />
+                    android:text="@string/infoPentingFRS"
+                    android:textColor="@color/red" />
 
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_below="@id/tv_info_penting"
+                    android:layout_marginBottom="@dimen/_16dp"
+                    android:elevation="0dp"
+                    app:cardBackgroundColor="@color/background"
+                    app:strokeColor="@color/grey"
+                    app:strokeWidth="1dp">
+
+                    <ListView
+                        android:id="@+id/tv_lv_matkuldipilih"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_150dp"
+                        android:clipToPadding="false"
+                        android:divider="@color/background"
+                        android:dividerHeight="@dimen/_16dp" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:id="@+id/ll_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/card_view"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_kode_matkul_error"
+                        android:id="@+id/tv_title_error"
                         style="@style/TextAppearance.MdcTypographyStyles.Body2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_8dp"
-                        android:text="" />
+                        android:layout_marginBottom="@dimen/_8dp"
+                        android:text="Prasyarat Mata Kuliah yang belum perpenuhi:" />
 
-                    <TextView
-                        android:id="@+id/tv_nama_matkul_error"
-                        style="@style/TextAppearance.MdcTypographyStyles.Body2"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_4dp"
-                        android:text="" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_kode_matkul_error"
+                            style="@style/TextAppearance.MdcTypographyStyles.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_8dp"
+                            android:text="" />
+
+                        <TextView
+                            android:id="@+id/tv_nama_matkul_error"
+                            style="@style/TextAppearance.MdcTypographyStyles.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_4dp"
+                            android:text="" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_container_matakuliah_akan_enroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_container_matakuliah_terpilih"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_matkul_yang_akan_dienroll"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8dp"
+                    android:text="@string/mataKuliahYangAkanDiEnroll"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/ll_selected_matkul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_16dp"
+                    app:cardBackgroundColor="@color/background"
+                    app:strokeColor="@color/grey"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_matkul_yang_akan_dienroll"
+                        android:layout_alignBottom="@id/tv_lv_matkul"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_16dp">
+
+                        <TextView
+                            android:id="@+id/tv_matakuliah_terpilih"
+                            style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:id="@+id/btn_delete"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginStart="@dimen/_16dp"
+                            android:layout_weight="9"
+                            android:src="@drawable/ic_baseline_delete_24" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_container_matakuliah_cari"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_container_matakuliah_terpilih"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8dp"
+                    android:text="Cari Mata Kuliah"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginBottom="@dimen/_16dp"
+                    android:background="@color/white"
+                    app:queryHint="@string/hintMatkul" />
+
+                <TextView
+                    android:id="@+id/tv_hasil_pencarian_matkul"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/search_bar"
+                    android:layout_marginBottom="@dimen/_8dp"
+                    android:text="@string/hasilPencarianMatkul" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_16dp"
+                    android:elevation="0dp"
+                    app:cardBackgroundColor="@color/background"
+                    app:strokeColor="@color/grey"
+                    app:strokeWidth="1dp">
+
+                    <ListView
+                        android:id="@+id/tv_lv_matkul"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_200dp"
+                        android:layout_below="@id/tv_hasil_pencarian_matkul"
+                        android:clipToPadding="false"
+                        android:divider="@color/background"
+                        android:dividerHeight="@dimen/_16dp"
+                        android:scrollbarStyle="insideOverlay" />
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 
     <com.google.android.material.divider.MaterialDivider

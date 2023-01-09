@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="@dimen/_40dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:background="@drawable/border_black"
-    android:padding="@dimen/_15dp">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_16dp">
 
     <TextView
         android:id="@+id/tv_tag"
+        style="@style/TextAppearance.MdcTypographyStyles.Body1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"/>
-
+        android:layout_height="wrap_content" />
 </LinearLayout>
