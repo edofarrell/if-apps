@@ -42,6 +42,14 @@ public class FRSFragment extends Fragment implements FRSContract.View {
         return binding.getRoot();
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            this.presenter.getAcademicYears();
+        }
+    }
+
     private void test(View view) {
         this.presenter.getAcademicYears();
     }
