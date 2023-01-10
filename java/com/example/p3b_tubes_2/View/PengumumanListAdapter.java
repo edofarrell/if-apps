@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +47,9 @@ public class PengumumanListAdapter extends BaseAdapter {
             binding.btnDetail.setOnClickListener(this::openDetail);
             binding.btnDelete.setOnClickListener(this::onClickDelete);
 
-            if(!APIClient.role.equals("admin")){
+            if (!APIClient.role.equals("admin")) {
                 binding.btnDelete.setVisibility(View.GONE);
-            }else{
+            } else {
                 binding.btnDelete.setVisibility(View.VISIBLE);
             }
         }
@@ -78,7 +79,7 @@ public class PengumumanListAdapter extends BaseAdapter {
 
         private void openDetail(View view) {
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
-            if(!sp.getBoolean(pengumuman.getId(), false)){
+            if (!sp.getBoolean(pengumuman.getId(), false)) {
                 editor.putBoolean(pengumuman.getId(), true);
                 editor.commit();
 
@@ -86,6 +87,7 @@ public class PengumumanListAdapter extends BaseAdapter {
                 this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));*/
                 this.llPengumuman.setCardBackgroundColor(this.context.getColor(R.color.white));
                 this.tvLihatDetail.setTextColor(this.context.getColor(R.color.primary));
+                this.tvJudul.setTypeface(Typeface.DEFAULT);
             }
             presenter.getPengumumanDetail(pengumuman);
         }
@@ -93,17 +95,18 @@ public class PengumumanListAdapter extends BaseAdapter {
         private void updateView(int i) {
             this.i = i;
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
-            if(sp.getBoolean(pengumuman.getId(), false)){
+            if (sp.getBoolean(pengumuman.getId(), false)) {
                 /*this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_grey));
                 this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));*/
                 this.llPengumuman.setCardBackgroundColor(this.context.getColor(R.color.white));
                 this.tvLihatDetail.setTextColor(this.context.getColor(R.color.primary));
-            }
-            else{
+                this.tvJudul.setTypeface(Typeface.DEFAULT);
+            } else {
                 /*this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.rounded_pengumuman));
                 this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.white));*/
                 this.llPengumuman.setCardBackgroundColor(this.context.getColor(R.color.bluePengumuman));
                 this.tvLihatDetail.setTextColor(this.context.getColor(R.color.white));
+                this.tvJudul.setTypeface(this.tvJudul.getTypeface(), Typeface.BOLD);
             }
 
             this.tvJudul.setText(pengumuman.getTitle());

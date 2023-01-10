@@ -52,24 +52,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_lv_matkul"
-                    android:layout_marginBottom="@dimen/_4dp"
+                    android:layout_marginBottom="@dimen/_8dp"
                     android:text="@string/matkulTerpilih"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_info_penting"
-                    style="@style/TextAppearance.MdcTypographyStyles.Caption"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_8dp"
-                    android:text="@string/infoPentingFRS"
-                    android:textColor="@color/red" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_info_penting"
+                    android:layout_below="@id/tv_matkul_terpilih"
                     android:layout_marginBottom="@dimen/_16dp">
 
                     <ListView
@@ -80,6 +71,7 @@
                         android:divider="@color/background"
                         android:dividerHeight="1dp"
                         android:fadeScrollbars="false"
+                        android:nestedScrollingEnabled="true"
                         android:scrollbarSize="@dimen/_16dp" />
                 </com.google.android.material.card.MaterialCardView>
 
@@ -226,6 +218,7 @@
                         android:divider="@color/background"
                         android:dividerHeight="1dp"
                         android:fadeScrollbars="false"
+                        android:nestedScrollingEnabled="true"
                         android:scrollbarSize="@dimen/_16dp"
                         android:scrollbarStyle="insideOverlay" />
                 </com.google.android.material.card.MaterialCardView>

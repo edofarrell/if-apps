@@ -29,7 +29,7 @@
             android:layout_marginBottom="@dimen/_16dp"
 
             android:text="@string/tv_title_masuk"
-            android:textAlignment="center"></TextView>
+            android:textAlignment="center" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,7 +95,7 @@
             style="@style/TextAppearance.MdcTypographyStyles.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:textAlignment="center"
             android:textColor="@color/red" />
 
     </LinearLayout>
