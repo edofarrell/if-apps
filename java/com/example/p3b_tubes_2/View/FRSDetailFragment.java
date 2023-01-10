@@ -33,7 +33,6 @@ public class FRSDetailFragment extends DialogFragment {
     private FRSDetailListAdapterView adapterView;
     private FRSPresenter presenter;
     private MataKuliahList.MataKuliah selectedMatkul;
-    private FRSTambahFragment frsTambahFragmentfragment;
     private String searchText;
     private LayoutInflater inflater;
 
