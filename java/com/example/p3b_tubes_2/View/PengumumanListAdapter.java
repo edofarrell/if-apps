@@ -10,10 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.core.content.ContextCompat;
 
 import com.example.p3b_tubes_2.APIClient;
 import com.example.p3b_tubes_2.Model.PengumumanList;
@@ -82,9 +79,6 @@ public class PengumumanListAdapter extends BaseAdapter {
             if (!sp.getBoolean(pengumuman.getId(), false)) {
                 editor.putBoolean(pengumuman.getId(), true);
                 editor.commit();
-
-                /*this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_grey));
-                this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));*/
                 this.llPengumuman.setCardBackgroundColor(this.context.getColor(R.color.white));
                 this.tvLihatDetail.setTextColor(this.context.getColor(R.color.primary));
                 this.tvJudul.setTypeface(Typeface.DEFAULT);
@@ -96,14 +90,10 @@ public class PengumumanListAdapter extends BaseAdapter {
             this.i = i;
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
             if (sp.getBoolean(pengumuman.getId(), false)) {
-                /*this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_grey));
-                this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));*/
                 this.llPengumuman.setCardBackgroundColor(this.context.getColor(R.color.white));
                 this.tvLihatDetail.setTextColor(this.context.getColor(R.color.primary));
                 this.tvJudul.setTypeface(Typeface.DEFAULT);
             } else {
-                /*this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.rounded_pengumuman));
-                this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.white));*/
                 this.llPengumuman.setCardBackgroundColor(this.context.getColor(R.color.bluePengumuman));
                 this.tvLihatDetail.setTextColor(this.context.getColor(R.color.white));
                 this.tvJudul.setTypeface(this.tvJudul.getTypeface(), Typeface.BOLD);

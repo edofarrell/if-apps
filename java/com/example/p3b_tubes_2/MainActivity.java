@@ -1,7 +1,6 @@
 package com.example.p3b_tubes_2;
 
 import android.os.Bundle;
-import android.transition.Fade;
 import android.view.MenuItem;
 import android.view.View;
 

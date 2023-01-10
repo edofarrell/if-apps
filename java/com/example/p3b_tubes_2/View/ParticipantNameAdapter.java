@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.example.p3b_tubes_2.Model.User;
 import com.example.p3b_tubes_2.Presenter.MainPresenter;
 import com.example.p3b_tubes_2.databinding.ItemListNamaBinding;
-import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.List;
