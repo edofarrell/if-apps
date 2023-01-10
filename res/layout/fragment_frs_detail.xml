@@ -70,19 +70,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_info_penting"
-                    android:layout_marginBottom="@dimen/_16dp"
-                    android:elevation="0dp"
-                    app:cardBackgroundColor="@color/background"
-                    app:strokeColor="@color/grey"
-                    app:strokeWidth="1dp">
+                    android:layout_marginBottom="@dimen/_16dp">
 
                     <ListView
                         android:id="@+id/tv_lv_matkuldipilih"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_150dp"
+                        android:layout_height="@dimen/_160dp"
                         android:clipToPadding="false"
                         android:divider="@color/background"
-                        android:dividerHeight="@dimen/_16dp" />
+                        android:dividerHeight="1dp"
+                        android:fadeScrollbars="false"
+                        android:scrollbarSize="@dimen/_16dp" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
@@ -201,6 +199,8 @@
 
                     android:layout_marginBottom="@dimen/_16dp"
                     android:background="@color/white"
+                    app:iconifiedByDefault="false"
+                    app:queryBackground="@android:color/transparent"
                     app:queryHint="@string/hintMatkul" />
 
                 <TextView
@@ -215,11 +215,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_16dp"
-                    android:elevation="0dp"
-                    app:cardBackgroundColor="@color/background"
-                    app:strokeColor="@color/grey"
-                    app:strokeWidth="1dp">
+                    android:layout_marginBottom="@dimen/_16dp">
 
                     <ListView
                         android:id="@+id/tv_lv_matkul"
@@ -228,7 +224,9 @@
                         android:layout_below="@id/tv_hasil_pencarian_matkul"
                         android:clipToPadding="false"
                         android:divider="@color/background"
-                        android:dividerHeight="@dimen/_16dp"
+                        android:dividerHeight="1dp"
+                        android:fadeScrollbars="false"
+                        android:scrollbarSize="@dimen/_16dp"
                         android:scrollbarStyle="insideOverlay" />
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>

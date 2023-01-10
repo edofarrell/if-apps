@@ -75,8 +75,7 @@ public class FRSDetailFragment extends DialogFragment {
             getMataKuliahEnrolment(false);
         }
         getMataKuliahEnrolment(true);
-        this.binding.llSelectedMatkul.setVisibility(View.GONE);
-        this.binding.tvMatkulYangAkanDienroll.setVisibility(View.GONE);
+        this.binding.llContainerMatakuliahAkanEnroll.setVisibility(View.GONE);
         this.binding.btnAddMatkul.setEnabled(false);
         this.binding.btnDelete.setOnClickListener(this::deleteSelectedMatkul);
         return binding.getRoot();
@@ -84,11 +83,12 @@ public class FRSDetailFragment extends DialogFragment {
 
     private void deleteSelectedMatkul(View view) {
         this.binding.tvKodeMatkulError.setVisibility(View.GONE);
-        this.binding.llSelectedMatkul.setVisibility(View.GONE);
+        /*this.binding.llSelectedMatkul.setVisibility(View.GONE);
         this.binding.searchBar.setVisibility(View.VISIBLE);
         this.binding.tvHasilPencarianMatkul.setVisibility(View.VISIBLE);
-        this.binding.tvLvMatkul.setVisibility(View.VISIBLE);
-
+        this.binding.tvLvMatkul.setVisibility(View.VISIBLE);*/
+        this.binding.llContainerMatakuliahAkanEnroll.setVisibility(View.GONE);
+        this.binding.llContainerMatakuliahCari.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -154,11 +154,13 @@ public class FRSDetailFragment extends DialogFragment {
     public void setSelectedMataKuliah(MataKuliahList.MataKuliah matkul) {
         this.selectedMatkul = matkul;
         this.binding.tvMatakuliahTerpilih.setText(matkul.getName());
-        this.binding.searchBar.setVisibility(View.GONE);
+        /*this.binding.searchBar.setVisibility(View.GONE);
         this.binding.tvHasilPencarianMatkul.setVisibility(View.GONE);
         this.binding.tvLvMatkul.setVisibility(View.GONE);
         this.binding.llSelectedMatkul.setVisibility(View.VISIBLE);
-        this.binding.tvMatkulYangAkanDienroll.setVisibility(View.VISIBLE);
+        this.binding.tvMatkulYangAkanDienroll.setVisibility(View.VISIBLE);*/
+        this.binding.llContainerMatakuliahCari.setVisibility(View.GONE);
+        this.binding.llContainerMatakuliahAkanEnroll.setVisibility(View.VISIBLE);
         this.binding.btnAddMatkul.setEnabled(true);
     }
 

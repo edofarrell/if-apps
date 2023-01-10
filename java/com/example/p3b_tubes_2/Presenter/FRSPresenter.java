@@ -13,11 +13,10 @@ import java.util.ArrayList;
 
 public class FRSPresenter implements
         FRSContract.Model.GetOnSuccessListener,
-    FRSContract.Model.GetDetailOnSuccessListener,
-    FRSContract.Model.GetSearchMataKuliahOnSuccessListener,
-    FRSContract.Model.GetMataKuliahEnrolmentOnSuccessListener,
-    FRSContract.Model.EnrolStudentOnSuccessListener
-{
+        FRSContract.Model.GetDetailOnSuccessListener,
+        FRSContract.Model.GetSearchMataKuliahOnSuccessListener,
+        FRSContract.Model.GetMataKuliahEnrolmentOnSuccessListener,
+        FRSContract.Model.EnrolStudentOnSuccessListener {
 
     private FRSContract.View ui;
     private MataKuliahList mataKuliahList;
@@ -25,34 +24,34 @@ public class FRSPresenter implements
     private FRSList frs;
     //TahunAjaran tahunAjaranList;
 
-    public FRSPresenter(FRSContract.View ui, Context context){
+    public FRSPresenter(FRSContract.View ui, Context context) {
         this.ui = ui;
-        this.tahunAjaran = new TahunAjaran(this,context);
-        this.mataKuliahList = new MataKuliahList(this,context);
-        this.frs = new FRSList(this,context);
+        this.tahunAjaran = new TahunAjaran(this, context);
+        this.mataKuliahList = new MataKuliahList(this, context);
+        this.frs = new FRSList(this, context);
     }
 
-    public void getMataKuliah(String text){
+    public void getMataKuliah(String text) {
         this.mataKuliahList.getMataKuliah(text);
     }
 
-    public void openFragment(TahunAjaran.TahunAjar tahunAjar){
+    public void openFragment(TahunAjaran.TahunAjar tahunAjar) {
         this.ui.openDetail(tahunAjar);
     }
 
-    public void addToSelectedMataKuliah(MataKuliahList.MataKuliah matkul){
+    public void addToSelectedMataKuliah(MataKuliahList.MataKuliah matkul) {
         this.ui.addToSelectedMataKuliah(matkul);
     }
 
     public void enrolStudent(String id, String academicYear) throws JSONException {
-        FRSList.enrollStudent(id,academicYear);
+        FRSList.enrollStudent(id, academicYear);
     }
 
-    public void getMataKuliahEnrolment(String academicYear,boolean thisYear) throws JSONException {
-        FRSList.getEnrollmentStudent(academicYear,thisYear);
+    public void getMataKuliahEnrolment(String academicYear, boolean thisYear) throws JSONException {
+        FRSList.getEnrollmentStudent(academicYear, thisYear);
     }
 
-    public void getAcademicYears(){
+    public void getAcademicYears() {
         this.tahunAjaran.getAcademicYears();
     }
 
@@ -87,8 +86,8 @@ public class FRSPresenter implements
     }
 
     @Override
-    public void OnSuccessGetMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul,boolean thisYear) {
-        this.ui.updateMataKuliahEnrolment(listNamaMatkul,thisYear);
+    public void OnSuccessGetMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul, boolean thisYear) {
+        this.ui.updateMataKuliahEnrolment(listNamaMatkul, thisYear);
     }
 
     @Override
@@ -103,6 +102,6 @@ public class FRSPresenter implements
 
     @Override
     public void OnErrorEnrolStudent(String nama, String kode) {
-        this.ui.showErrorMataKuliahEnrol(nama,kode);
+        this.ui.showErrorMataKuliahEnrol(nama, kode);
     }
 }
