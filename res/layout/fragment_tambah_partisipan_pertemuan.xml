@@ -12,7 +12,8 @@
         android:layout_above="@+id/divider"
         android:clipToPadding="false"
         android:paddingHorizontal="@dimen/_16dp"
-        android:paddingTop="@dimen/_16dp">
+        android:paddingTop="@dimen/_16dp"
+        android:scrollbarStyle="outsideOverlay">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.example.p3b_tubes_2.Model.PengumumanList;
 import com.example.p3b_tubes_2.Presenter.PengumumanPresenter;
 import com.example.p3b_tubes_2.R;
 import com.example.p3b_tubes_2.databinding.ItemListPengumumanBinding;
+import com.google.android.material.card.MaterialCardView;
 
 public class PengumumanListAdapter extends BaseAdapter {
     private PengumumanList pengumumanList;
@@ -29,8 +31,8 @@ public class PengumumanListAdapter extends BaseAdapter {
         protected int i;
         protected TextView tvJudul;
         protected TextView tvTag;
-        protected LinearLayout llPengumuman;
-        protected TextView tvLihatDetail;
+        protected MaterialCardView llPengumuman;
+        protected Button tvLihatDetail;
         protected Context context;
 
         public ViewHolder(ItemListPengumumanBinding binding, int i, ViewGroup parent) {
@@ -80,8 +82,10 @@ public class PengumumanListAdapter extends BaseAdapter {
                 editor.putBoolean(pengumuman.getId(), true);
                 editor.commit();
 
-                this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_grey));
-                this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));
+                /*this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_grey));
+                this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));*/
+                this.llPengumuman.setCardBackgroundColor(this.context.getColor(R.color.white));
+                this.tvLihatDetail.setTextColor(this.context.getColor(R.color.primary));
             }
             presenter.getPengumumanDetail(pengumuman);
         }
@@ -90,12 +94,16 @@ public class PengumumanListAdapter extends BaseAdapter {
             this.i = i;
             PengumumanList.Pengumuman pengumuman = pengumumanList.getPengumuman(i);
             if(sp.getBoolean(pengumuman.getId(), false)){
-                this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_grey));
-                this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));
+                /*this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.border_grey));
+                this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.primary));*/
+                this.llPengumuman.setCardBackgroundColor(this.context.getColor(R.color.white));
+                this.tvLihatDetail.setTextColor(this.context.getColor(R.color.primary));
             }
             else{
-                this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.rounded_pengumuman));
-                this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.white));
+                /*this.llPengumuman.setBackground(ContextCompat.getDrawable(context, R.drawable.rounded_pengumuman));
+                this.tvLihatDetail.setTextColor(ContextCompat.getColor(this.context, R.color.white));*/
+                this.llPengumuman.setCardBackgroundColor(this.context.getColor(R.color.bluePengumuman));
+                this.tvLihatDetail.setTextColor(this.context.getColor(R.color.white));
             }
 
             this.tvJudul.setText(pengumuman.getTitle());
