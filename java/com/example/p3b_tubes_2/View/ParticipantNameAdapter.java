@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.p3b_tubes_2.Model.User;
@@ -20,7 +21,7 @@ public class ParticipantNameAdapter extends BaseAdapter {
 
     private class ViewHolder {
         private int i;
-        private MaterialCardView cardLayout;
+        private LinearLayout cardLayout;
         private TextView tvNama;
 
         public ViewHolder(int i, ItemListNamaBinding binding) {

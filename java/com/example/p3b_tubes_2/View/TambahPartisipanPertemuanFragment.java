@@ -74,7 +74,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
         binding.actvChooseParticipant.setOnQueryTextListener(onQueryTextListener());
         this.binding.btnAddParticipant.setOnClickListener(this::simpanPartisipan);
         this.binding.btnSimpan.setOnClickListener(this::saveAll);
-        this. binding.actvChooseParticipant.setOnClickListener(this::onClickSearch);
+        this.binding.actvChooseParticipant.setOnClickListener(this::onClickSearch);
     }
 
     private androidx.appcompat.widget.SearchView.OnQueryTextListener onQueryTextListener() {
@@ -87,10 +87,10 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
             @Override
             public boolean onQueryTextChange(String newText) {
                 mainPresenter.getFilteredUser(newText);
-                if(binding.llJadwalDosen.isShown()){
+                if (binding.llJadwalDosen.isShown()) {
                     binding.llJadwalDosen.setVisibility(View.GONE);
                 }
-                binding.lstNames.setVisibility(View.VISIBLE);
+                binding.llHasilPencarian.setVisibility(View.VISIBLE);
                 return false;
             }
         };
@@ -174,7 +174,7 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
     public void selectUser(User user) {
         this.selectedUser = user;
         this.binding.actvChooseParticipant.setQuery(user.getName(), true);
-        this.binding.lstNames.setVisibility(View.GONE);
+        this.binding.llHasilPencarian.setVisibility(View.GONE);
         if (user.isDosen()) {
             binding.llJadwalDosen.setVisibility(View.VISIBLE);
             pertemuanPresenter.getTimeSlot(selectedUser.getId());

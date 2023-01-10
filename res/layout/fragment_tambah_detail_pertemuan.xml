@@ -8,7 +8,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_16dp">
+        android:paddingHorizontal="@dimen/_16dp"
+        android:paddingTop="@dimen/_16dp"
+        android:scrollbarStyle="outsideOverlay">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,19 +24,19 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/judul"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="*"
-                    android:textColor="@color/design_default_color_error"
-                    android:textSize="@dimen/_16sp" />
+                    android:textColor="@color/design_default_color_error" />
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -65,19 +67,18 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        style="@style/TextAppearance.MdcTypographyStyles.Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tanggal"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_16sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        style="@style/TextAppearance.MdcTypographyStyles.Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="*"
-                        android:textColor="@color/design_default_color_error"
-                        android:textSize="@dimen/_16sp" />
+                        android:textColor="@color/design_default_color_error" />
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -94,7 +95,7 @@
                         android:drawableEnd="@drawable/ic_round_calendar_month_24"
                         android:focusable="false"
                         android:hint="@string/tanggal"
-                        android:inputType="date" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -118,19 +119,18 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/TextAppearance.MdcTypographyStyles.Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/waktu_mulai"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_16sp"
                             android:textStyle="bold" />
 
                         <TextView
+                            style="@style/TextAppearance.MdcTypographyStyles.Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="*"
-                            android:textColor="@color/design_default_color_error"
-                            android:textSize="@dimen/_16sp" />
+                            android:textColor="@color/design_default_color_error" />
                     </LinearLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -145,7 +145,7 @@
                             android:drawableEnd="@drawable/ic_baseline_access_time_24"
                             android:focusable="false"
                             android:hint="@string/waktu_mulai"
-                            android:inputType="time" />
+                            android:inputType="none" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -163,11 +163,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/TextAppearance.MdcTypographyStyles.Body1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/waktu_selesai"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_16sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -202,11 +201,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/deskripsi"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -237,7 +235,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_15dp"
+                android:layout_marginBottom="@dimen/_8dp"
 
                 android:gravity="right">
 
@@ -252,12 +250,10 @@
 
             <TextView
                 android:id="@+id/tv_error"
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="@color/red"
-                android:textSize="@dimen/_16sp"
-                />
+                android:textColor="@color/red" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

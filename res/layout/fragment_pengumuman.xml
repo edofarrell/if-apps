@@ -6,17 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:clipToPadding="false"
-    android:paddingHorizontal="@dimen/_16dp"
     android:paddingTop="@dimen/_16dp">
 
     <LinearLayout
         android:id="@+id/ll_header_pengumuman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sp"
-        android:layout_marginBottom="@dimen/_16dp"
+        android:layout_marginBottom="@dimen/_8dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_16dp">
 
         <ImageView
             android:id="@+id/iv_filter"
@@ -30,36 +29,37 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            app:queryHint="@string/hintPengumuman" />
+            app:defaultQueryHint="@string/hintPengumuman"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@android:color/transparent" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <HorizontalScrollView
         android:id="@+id/ll_chip"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ll_header_pengumuman"
-        android:layout_marginBottom="@dimen/_16dp"
-        android:clipToPadding="false">
+        android:layout_marginBottom="@dimen/_8dp"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/_16dp">
 
-        <HorizontalScrollView
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_grup"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_grup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </HorizontalScrollView>
-    </LinearLayout>
+            android:layout_height="wrap_content" />
+    </HorizontalScrollView>
 
     <ListView
         android:id="@+id/lv_pengumuman"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/ll_chip"
+        android:clipToPadding="false"
         android:divider="@color/background"
         android:dividerHeight="@dimen/_16dp"
+        android:paddingHorizontal="@dimen/_16dp"
+        android:paddingBottom="@dimen/_32dp"
         android:scrollbarStyle="outsideOverlay" />
 
     <RelativeLayout
@@ -74,7 +74,7 @@
             android:layout_alignParentEnd="true"
             android:gravity="right"
             android:orientation="vertical"
-            android:paddingEnd="@dimen/_4dp">
+            android:paddingEnd="@dimen/_20dp">
 
             <LinearLayout
                 android:id="@+id/ll_add_invitasi_pertemuan"
@@ -84,6 +84,7 @@
                 android:clipToPadding="false"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
+
                 android:paddingBottom="@dimen/_16dp">
 
                 <com.google.android.material.card.MaterialCardView
@@ -154,6 +155,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/_16dp"
             android:layout_marginBottom="@dimen/_32dp"
             android:src="@android:drawable/ic_input_add" />
     </RelativeLayout>

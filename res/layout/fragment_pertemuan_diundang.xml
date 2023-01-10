@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ListView
         android:id="@+id/lst_appointments"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:clipToPadding="false"
+        android:divider="@color/background"
+        android:dividerHeight="@dimen/_16dp"
+        android:paddingHorizontal="@dimen/_16dp"
+        android:paddingTop="@dimen/_16dp"
+        android:paddingBottom="@dimen/_32dp"
+        android:scrollbarStyle="outsideOverlay" />
 </RelativeLayout>

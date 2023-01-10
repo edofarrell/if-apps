@@ -1,94 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/border_grey"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingTop="@dimen/_16dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="4dp">
-
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_16dp"
-        android:text="Judul Pertemuan"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"></TextView>
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="4dp">
 
         <TextView
-            android:id="@+id/tv_date"
+            android:id="@+id/tv_title"
+            style="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_8dp"
-            android:drawableLeft="@drawable/ic_round_calendar_month_24"
-            android:gravity="center"
-            android:text="1 Desember 2022"
+            android:layout_marginBottom="@dimen/_16dp"
+            android:text="Judul Pertemuan"
             android:textColor="@color/black"
-            android:textSize="14sp"></TextView>
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_start_time"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_4dp"
-            android:drawableLeft="@drawable/ic_baseline_access_time_24"
-            android:gravity="center"
-            android:text="09.00"
-            android:textColor="@color/black"
-            android:textSize="14sp"></TextView>
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_4dp"
-            android:gravity="center"
-            android:text="-"
-            android:textColor="@color/black"
-            android:textSize="14sp"></TextView>
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_8dp"
+                android:drawableLeft="@drawable/ic_round_calendar_month_24"
+                android:drawablePadding="@dimen/_4dp"
+                android:gravity="center"
+                android:text="1 Desember 2022" />
 
-        <TextView
-            android:id="@+id/tv_end_time"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tv_start_time"
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_access_time_24"
+                android:drawablePadding="@dimen/_4dp"
+                android:gravity="center"
+                android:text="09.00" />
+
+            <TextView
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_4dp"
+                android:gravity="center"
+                android:text="-" />
+
+            <TextView
+                android:id="@+id/tv_end_time"
+                style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_8dp"
+                android:gravity="center"
+                android:text="10.00" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_8dp"
-            android:gravity="center"
-            android:text="10.00"
-            android:textColor="@color/black"
-            android:textSize="14sp"></TextView>
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_see_details"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/terima" />
+
+            <Button
+                android:id="@+id/tv_accepted"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="@string/telahDiterima"
+                android:textColor="@color/grey"
+                android:visibility="gone" />
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_see_details"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/terima" />
-
-        <Button
-            android:id="@+id/tv_accepted"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:text="@string/telahDiterima"
-            android:textColor="@color/grey"
-            android:visibility="gone" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

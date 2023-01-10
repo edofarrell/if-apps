@@ -29,8 +29,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tab"
-        android:paddingTop="@dimen/_16dp"
-        android:paddingLeft="@dimen/_16dp"
-        android:paddingRight="@dimen/_16dp"
         />
 </RelativeLayout>

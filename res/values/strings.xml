@@ -24,7 +24,7 @@
     <string name="waktu_mulai">Waktu Mulai</string>
     <string name="waktu_selesai">Waktu Selesai</string>
     <string name="partisipan">Partisipan</string>
-    <string name="pilih_partisipan">Pilih partisipan</string>
+    <string name="pilih_partisipan">Pilih Partisipan</string>
     <string name="deskripsi">Deskripsi</string>
     <string name="description">Description:</string>
     <string name="tambah">Tambah</string>
@@ -36,7 +36,7 @@
     </string-array>
     <string name="openDrawer">Open Drawer</string>
     <string name="closeDrawer">Close Drawer</string>
-    <string name="hintPengumuman">Masukkan filter disini</string>
+    <string name="hintPengumuman">Cari berdasarkan judul</string>
     <string name="tambahPengumuman"> Tambah Pengumuman</string>
     <string name="tags">Tags</string>
     <string name="simpan">Simpan</string>
@@ -80,4 +80,6 @@
     </string-array>
     <string name="namaMatakuliah">Nama Mata Kuliah</string>
     <string name="mataKuliahYangAkanDiEnroll">Mata kuliah yang akan di-enroll</string>
+    <string name="infoPentingFRS">Penting! Hanya dapat enroll satu mata kuliah per satu kali enroll!</string>
+    <string name="partisipan_default_hint">Cari berdasarkan nama</string>
 </resources>

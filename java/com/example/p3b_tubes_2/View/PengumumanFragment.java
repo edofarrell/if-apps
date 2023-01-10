@@ -72,6 +72,8 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
 
         if (!APIClient.role.equals("admin")) {
             this.binding.btnAddPengumuman.setVisibility(View.GONE);
+        } else {
+            this.binding.btnAddPengumuman.setVisibility(View.VISIBLE);
         }
 
         ListView lv = this.binding.lvPengumuman;
