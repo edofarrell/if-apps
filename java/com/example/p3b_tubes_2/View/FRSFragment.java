@@ -24,17 +24,14 @@ public class FRSFragment extends Fragment implements FRSContract.View {
     private TahunAjaran.TahunAjar activeYear;
     private FRSFragment(){}
     public static FRSFragment newInstance(Context context) {
-        Bundle args = new Bundle();
         FRSFragment fragment = new FRSFragment();
         fragment.presenter = new FRSPresenter(fragment,context);
         fragment.adapter = new FRSListAdapter(fragment.presenter);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.binding = FragmentFrsBinding.inflate(inflater);
         binding.lvDaftarSemester.setAdapter(this.adapter);
         this.presenter.getAcademicYears();

@@ -233,7 +233,7 @@ public class PertemuanPresenter implements
 
     //Get Invites
     public void getInvites() {
-        this.inviteList.getInvites();
+        InviteList.getInvites();
     }
 
     @Override

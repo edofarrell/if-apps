@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MataKuliahList implements Response.Listener<JSONArray>, Response.ErrorListener{
+public class MataKuliahList{
 
     public class MataKuliah{
         private String id;//uuidv4
@@ -55,50 +55,57 @@ public class MataKuliahList implements Response.Listener<JSONArray>, Response.Er
     private FRSPresenter presenter;
     private RequestQueue queue;
     private Gson gson;
+    private static GetMatKul apiGetCourse;
 
     public MataKuliahList(FRSPresenter presenter, Context context){
         this.presenter = presenter;
         this.gson = new Gson();
         this.listMataKuliah = new ArrayList<>();
         this.queue = Volley.newRequestQueue(context);
+        this.apiGetCourse = new GetMatKul();
     }
 
     public MataKuliahList(){
         this.listMataKuliah = new ArrayList<>();
     }
 
-    public void getMataKuliah(String text){
-        listMataKuliah.clear();
-        String url = APIClient.BASE_URL+"/courses?filter[name]="+text+"&limit=10";
-        CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET,url,null,
-                this::onResponse,this::onErrorResponse){
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> params = new HashMap<>();
-                params.put("Authorization", APIClient.token);
-                return params;
-            }
-        };
-        queue.add(request);
-    }
+    private class GetMatKul implements Response.Listener<JSONArray>, Response.ErrorListener {
+        public void getMataKuliah(String text) {
+            listMataKuliah.clear();
+            String url = APIClient.BASE_URL + "/courses?filter[name]=" + text + "&limit=10";
+            CustomJsonRequest request = new CustomJsonRequest(Request.Method.GET, url, null,
+                    this::onResponse, this::onErrorResponse) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
+                }
+            };
+            queue.add(request);
+        }
 
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        try {
-            String responseBody = new String(error.networkResponse.data, "utf-8");
-            Log.d("DEBUG", "MataKuliahList: onErrorResponse(), Error=" + responseBody);
-        } catch (UnsupportedEncodingException e) {
-            Log.d("DEBUG", "MataKuliahList: onErrorResponse() catch UnsupportedEncodingException");
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "MataKuliahList: onErrorResponse(), Error=" + responseBody);
+            } catch (UnsupportedEncodingException e) {
+                Log.d("DEBUG", "MataKuliahList: onErrorResponse() catch UnsupportedEncodingException");
+            }
+        }
+
+        @Override
+        public void onResponse(JSONArray response) {
+            ArrayList<MataKuliah> listdata = new ArrayList<>();
+            String res = response.toString();
+            Type listType = new TypeToken<ArrayList<MataKuliah>>() {}.getType();
+            listdata = gson.fromJson(res, listType);
+            presenter.OnSuccessGetSearchMataKuliah(listdata);
         }
     }
 
-    @Override
-    public void onResponse(JSONArray response) {
-        ArrayList<MataKuliah> listdata = new ArrayList<>();
-        String res = response.toString();
-        Type listType = new TypeToken<ArrayList<MataKuliah>>() {}.getType();
-        listdata = this.gson.fromJson(res, listType);
-        this.presenter.OnSuccessGetSearchMataKuliah(listdata);
+    public static void getCourse(String text){
+        apiGetCourse.getMataKuliah(text);
     }
-
 }

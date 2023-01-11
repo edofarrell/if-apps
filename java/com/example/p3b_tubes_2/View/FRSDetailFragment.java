@@ -28,23 +28,16 @@ public class FRSDetailFragment extends DialogFragment {
     private FragmentFrsDetailBinding binding;
     private TahunAjaran.TahunAjar tahunAjar;
     private TahunAjaran.TahunAjar activeYear;
-    private ArrayList<MataKuliahList.MataKuliah> listMataKuliah;
     private FRSDetailListAdapterSearch adapterSearch;
     private FRSDetailListAdapterView adapterView;
     private FRSPresenter presenter;
     private MataKuliahList.MataKuliah selectedMatkul;
-    private String searchText;
-    private LayoutInflater inflater;
 
     public static FRSDetailFragment newInstance(FragmentManager fm,
                                                 FRSPresenter presenter,
                                                 TahunAjaran.TahunAjar tahunAjar,
                                                 TahunAjaran.TahunAjar activeYear) {
-
-        Bundle args = new Bundle();
-
         FRSDetailFragment fragment = new FRSDetailFragment();
-        fragment.setArguments(args);
         fragment.show(fm, "detailFRS");
         fragment.presenter = presenter;
         fragment.adapterSearch = new FRSDetailListAdapterSearch(presenter);
@@ -61,10 +54,10 @@ public class FRSDetailFragment extends DialogFragment {
         this.binding.appbar.setTitle(tahunAjar.toString());
         this.binding.tvLvMatkul.setAdapter(adapterSearch);
         this.binding.tvLvMatkuldipilih.setAdapter(adapterView);
-        this.inflater = inflater;
         this.binding.btnAddMatkul.setOnClickListener(this::onClickAddMatkul);
         this.binding.tvTitleError.setVisibility(View.GONE);
         if (!this.tahunAjar.toStringFormatAPI().equals(this.activeYear.toStringFormatAPI())) {
+            binding.tvCariMatakuliah.setVisibility(View.GONE);
             binding.searchBar.setVisibility(View.GONE);
             binding.btnAddMatkul.setVisibility(View.GONE);
             binding.tvHasilPencarianMatkul.setText("Mata Kuliah yang dipilih");
@@ -82,10 +75,6 @@ public class FRSDetailFragment extends DialogFragment {
 
     private void deleteSelectedMatkul(View view) {
         this.binding.tvKodeMatkulError.setVisibility(View.GONE);
-        /*this.binding.llSelectedMatkul.setVisibility(View.GONE);
-        this.binding.searchBar.setVisibility(View.VISIBLE);
-        this.binding.tvHasilPencarianMatkul.setVisibility(View.VISIBLE);
-        this.binding.tvLvMatkul.setVisibility(View.VISIBLE);*/
         this.binding.llContainerMatakuliahAkanEnroll.setVisibility(View.GONE);
         this.binding.llContainerMatakuliahCari.setVisibility(View.VISIBLE);
     }
@@ -125,6 +114,11 @@ public class FRSDetailFragment extends DialogFragment {
         if (!nama.equals("")) {
             this.binding.tvTitleError.setVisibility(View.VISIBLE);
         }
+        else{
+            this.binding.tvTitleError.setVisibility(View.GONE);
+        }
+        this.binding.tvKodeMatkulError.setVisibility(View.VISIBLE);
+        this.binding.tvNamaMatkulError.setVisibility(View.VISIBLE);
         this.binding.tvNamaMatkulError.setText(nama);
         this.binding.tvKodeMatkulError.setText(kode);
     }
@@ -146,18 +140,12 @@ public class FRSDetailFragment extends DialogFragment {
     }
 
     public void setListMataKuliah(ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
-        this.listMataKuliah = listMataKuliah;
         this.adapterSearch.update(listMataKuliah);
     }
 
     public void setSelectedMataKuliah(MataKuliahList.MataKuliah matkul) {
         this.selectedMatkul = matkul;
         this.binding.tvMatakuliahTerpilih.setText(matkul.getName());
-        /*this.binding.searchBar.setVisibility(View.GONE);
-        this.binding.tvHasilPencarianMatkul.setVisibility(View.GONE);
-        this.binding.tvLvMatkul.setVisibility(View.GONE);
-        this.binding.llSelectedMatkul.setVisibility(View.VISIBLE);
-        this.binding.tvMatkulYangAkanDienroll.setVisibility(View.VISIBLE);*/
         this.binding.llContainerMatakuliahCari.setVisibility(View.GONE);
         this.binding.llContainerMatakuliahAkanEnroll.setVisibility(View.VISIBLE);
         this.binding.btnAddMatkul.setEnabled(true);
@@ -200,17 +188,12 @@ public class FRSDetailFragment extends DialogFragment {
 
     private void onClickAddMatkul(View view) {
         try {
-            this.presenter.enrolStudent(selectedMatkul.getId(), this.tahunAjar.toStringFormatAPI());
+            if(this.selectedMatkul!=null){
+                this.presenter.enrolStudent(selectedMatkul.getId(), this.tahunAjar.toStringFormatAPI());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        /*for(int i = 0;i<this.adapterView.getCount();i++){
-            try {
-                this.presenter.enrolStudent(this.adapterView.getMataKuliahEnrol(i).getId(),this.tahunAjar.toStringFormatAPI());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }*/
     }
 
 }
