@@ -32,16 +32,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/partisipan"
+                    android:text="Partisipan Terpilih"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/title_participant"
-                    android:text="*"
-                    android:textColor="@color/design_default_color_error" />
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView

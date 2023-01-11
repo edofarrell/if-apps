@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_baseline_close_24"
-            app:title="@string/detail_pertemuan"
+            app:title="@string/detail_invitasi"
             app:titleCentered="true" />
     </com.google.android.material.appbar.AppBarLayout>
 

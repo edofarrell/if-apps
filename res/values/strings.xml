@@ -83,4 +83,5 @@
     <string name="infoPentingFRS">Penting! Hanya dapat enroll satu mata kuliah per satu kali enroll!</string>
     <string name="partisipan_default_hint">Cari berdasarkan nama</string>
     <string name="lihat_invitasi">Lihat Invitasi</string>
+    <string name="detail_invitasi">Detail Invitasi</string>
 </resources>
