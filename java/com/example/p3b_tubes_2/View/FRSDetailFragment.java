@@ -126,6 +126,11 @@ public class FRSDetailFragment extends DialogFragment {
         if (!nama.equals("")) {
             this.binding.tvTitleError.setVisibility(View.VISIBLE);
         }
+        else{
+            this.binding.tvTitleError.setVisibility(View.GONE);
+        }
+        this.binding.tvKodeMatkulError.setVisibility(View.VISIBLE);
+        this.binding.tvNamaMatkulError.setVisibility(View.VISIBLE);
         this.binding.tvNamaMatkulError.setText(nama);
         this.binding.tvKodeMatkulError.setText(kode);
     }

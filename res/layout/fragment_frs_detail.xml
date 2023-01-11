@@ -88,7 +88,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_8dp"
-                        android:text="Prasyarat Mata Kuliah yang belum perpenuhi:" />
+                        android:text="Prasyarat Mata Kuliah yang belum terpenuhi:" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
