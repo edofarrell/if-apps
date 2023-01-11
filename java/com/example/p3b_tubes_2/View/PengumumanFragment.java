@@ -109,6 +109,12 @@ public class PengumumanFragment extends Fragment implements PengumumanContract.V
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if(!hidden){
+            if (!APIClient.role.equals("admin")) {
+                this.hideExpandableFAB();
+                this.binding.btnAddPengumuman.setVisibility(View.GONE);
+            } else {
+                this.binding.btnAddPengumuman.setVisibility(View.VISIBLE);
+            }
             this.presenter.getPengumuman();
         }
     }

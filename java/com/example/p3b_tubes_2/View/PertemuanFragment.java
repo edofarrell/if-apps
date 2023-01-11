@@ -92,9 +92,7 @@ public class PertemuanFragment extends Fragment implements
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden){
-            this.presenter.getPertemuanDibuat();
-        }
+        this.fragments.get("pertemuanDibuat").onHiddenChanged(hidden);
     }
 
     private void changePage(String page) {
