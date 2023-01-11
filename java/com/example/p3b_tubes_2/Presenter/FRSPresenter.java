@@ -102,9 +102,10 @@ public class FRSPresenter implements
     }
 
 
+    //Get detail mata kuliah (belum diimplementasi)
     @Override
     public void OnSuccessGetDetail(ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
-        //belum diimplementasi
+
     }
 
     @Override
