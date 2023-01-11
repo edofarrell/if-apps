@@ -21,16 +21,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TahunAjaran implements Response.Listener<JSONObject>, Response.ErrorListener{
+public class TahunAjaran{
     private TahunAjar activeYear;
     private ArrayList<TahunAjar> listAcademicYears;
     private FRSPresenter presenter;
     private RequestQueue queue;
+    private static GetTahunAjar apiGetTahunAjar;
 
     public TahunAjaran(FRSPresenter presenter, Context context){
         this.presenter = presenter;
         this.listAcademicYears = new ArrayList<>();
         this.queue = Volley.newRequestQueue(context);
+        this.apiGetTahunAjar = new GetTahunAjar();
+    }
+
+    public static void getTahunAjar(){
+        apiGetTahunAjar.getAcademicYears();
     }
 
     public TahunAjar getActiveYear() {
@@ -53,68 +59,71 @@ public class TahunAjaran implements Response.Listener<JSONObject>, Response.Erro
         return this.listAcademicYears.get(i);
     }
 
-    public void getAcademicYears(){
-        String url = APIClient.BASE_URL+"/academic-years";
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                this::onResponse,
-                this::onErrorResponse
-        ){
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> params = new HashMap<>();
-                params.put("Authorization", APIClient.token);
-                return params;
-            }
-        };
-        queue.add(request);
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        try {
-            String responseBody = new String(error.networkResponse.data, "utf-8");
-            Log.d("DEBUG", "TahunAjaran: onErrorResponse(), Error=" + responseBody);
-        } catch (UnsupportedEncodingException e) {
-            Log.d("DEBUG", "TahunAjaran: onErrorResponse() catch UnsupportedEncodingException");
-        }
-    }
-
-    @Override
-    public void onResponse(JSONObject response) {
-        try {
-            String tempSem = response.getString("active_year").substring(4);
-            if(tempSem.equals("1")){
-                tempSem = "Ganjil";
-            }
-            else if(tempSem.equals("2")){
-                tempSem = "Genap";
-            }
-            else{
-                tempSem = "Pendek";
-            }
-            this.activeYear = new TahunAjar(response.getString("active_year").substring(0,4),
-                    tempSem);
-            JSONArray array = response.getJSONArray("academic_years");
-            for(int i = 0;i<array.length();i++){
-                String tahun = array.getString(i).substring(0,4);
-                String sem = array.getString(i).substring(4);
-                if(sem.equals("1")){
-                    sem = "Ganjil";
+    private class GetTahunAjar implements  Response.Listener<JSONObject>, Response.ErrorListener {
+        public void getAcademicYears() {
+            String url = APIClient.BASE_URL + "/academic-years";
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    this::onResponse,
+                    this::onErrorResponse
+            ) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("Authorization", APIClient.token);
+                    return params;
                 }
-                else if(sem.equals("2")){
-                    sem = "Genap";
+            };
+            queue.add(request);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            try {
+                String responseBody = new String(error.networkResponse.data, "utf-8");
+                Log.d("DEBUG", "TahunAjaran: onErrorResponse(), Error=" + responseBody);
+            } catch (UnsupportedEncodingException e) {
+                Log.d("DEBUG", "TahunAjaran: onErrorResponse() catch UnsupportedEncodingException");
+            }
+        }
+
+        @Override
+        public void onResponse(JSONObject response) {
+            try {
+                String tempSem = response.getString("active_year").substring(4);
+                if(tempSem.equals("1")){
+                    tempSem = "Ganjil";
+                }
+                else if(tempSem.equals("2")){
+                    tempSem = "Genap";
                 }
                 else{
-                    sem = "Pendek";
+                    tempSem = "Pendek";
                 }
-                listAcademicYears.add(new TahunAjar(tahun,sem));
+                activeYear = new TahunAjar(response.getString("active_year").substring(0,4),
+                        tempSem);
+                JSONArray array = response.getJSONArray("academic_years");
+                for(int i = 0;i<array.length();i++){
+                    String tahun = array.getString(i).substring(0,4);
+                    String sem = array.getString(i).substring(4);
+                    if(sem.equals("1")){
+                        sem = "Ganjil";
+                    }
+                    else if(sem.equals("2")){
+                        sem = "Genap";
+                    }
+                    else{
+                        sem = "Pendek";
+                    }
+                    listAcademicYears.add(new TahunAjar(tahun,sem));
+                }
+                presenter.OnSuccessGet(TahunAjaran.this);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            presenter.OnSuccessGet(this);
-        } catch (JSONException e) {
-            e.printStackTrace();
+
         }
 
     }

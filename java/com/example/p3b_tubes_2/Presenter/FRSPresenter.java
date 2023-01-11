@@ -30,19 +30,22 @@ public class FRSPresenter implements
         this.frs = new FRSList(this, context);
     }
 
+    //Get Mata Kuliah Search
     public void getMataKuliah(String text) {
-        this.mataKuliahList.getMataKuliah(text);
+        MataKuliahList.getCourse(text);
     }
 
-    public void openFragment(TahunAjaran.TahunAjar tahunAjar) {
-        this.ui.openDetail(tahunAjar);
+    @Override
+    public void OnSuccessGetSearchMataKuliah(ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
+        this.ui.updateSearch(listMataKuliah);
     }
 
-    public void addToSelectedMataKuliah(MataKuliahList.MataKuliah matkul) {
-        this.ui.addToSelectedMataKuliah(matkul);
+    @Override
+    public void OnErrorGetSearchMataKuliah() {
+
     }
 
-    //Enroll
+    //Enroll Student
     public void enrolStudent(String id, String academicYear) throws JSONException {
         FRSList.enrollStudent(id, academicYear);
     }
@@ -57,7 +60,8 @@ public class FRSPresenter implements
         this.ui.showErrorMataKuliahEnrol(nama, kode);
     }
 
-    //Get mata kuliah yang sudah di enroll
+
+    //Get Mata Kuliah yang sudah di enroll oleh student
     public void getMataKuliahEnrolment(String academicYear, boolean thisYear) throws JSONException {
         FRSList.getEnrollmentStudent(academicYear, thisYear);
     }
@@ -72,9 +76,10 @@ public class FRSPresenter implements
 
     }
 
-    //Get academic years
+
+    //Get Tahun Ajaran
     public void getAcademicYears() {
-        this.tahunAjaran.getAcademicYears();
+        TahunAjaran.getTahunAjar();
     }
 
     @Override
@@ -88,24 +93,22 @@ public class FRSPresenter implements
     }
 
 
+    public void openFragment(TahunAjaran.TahunAjar tahunAjar) {
+        this.ui.openDetail(tahunAjar);
+    }
+
+    public void addToSelectedMataKuliah(MataKuliahList.MataKuliah matkul) {
+        this.ui.addToSelectedMataKuliah(matkul);
+    }
+
+
     @Override
     public void OnSuccessGetDetail(ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
-        //this.ui.openDetail(listMataKuliah);
+        //belum diimplementasi
     }
 
     @Override
     public void OnErrorGetDetail() {
-
-    }
-
-
-    @Override
-    public void OnSuccessGetSearchMataKuliah(ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
-        this.ui.updateSearch(listMataKuliah);
-    }
-
-    @Override
-    public void OnErrorGetSearchMataKuliah() {
 
     }
 }

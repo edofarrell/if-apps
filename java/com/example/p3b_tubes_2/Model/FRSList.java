@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class  FRSList {
+public class FRSList {
     private FRSPresenter presenter;
     private Gson gson;
     private RequestQueue queue;
