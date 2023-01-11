@@ -59,7 +59,7 @@
                         android:id="@+id/lst_tag"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_360dp"
-                        android:divider="@color/grey"
+                        android:divider="@color/background"
                         android:dividerHeight="1dp"
                         android:fadeScrollbars="false"
                         android:nestedScrollingEnabled="true"
