@@ -66,6 +66,7 @@ public class FRSDetailFragment extends DialogFragment {
         this.binding.btnAddMatkul.setOnClickListener(this::onClickAddMatkul);
         this.binding.tvTitleError.setVisibility(View.GONE);
         if (!this.tahunAjar.toStringFormatAPI().equals(this.activeYear.toStringFormatAPI())) {
+            binding.tvCariMatakuliah.setVisibility(View.GONE);
             binding.searchBar.setVisibility(View.GONE);
             binding.btnAddMatkul.setVisibility(View.GONE);
             binding.tvHasilPencarianMatkul.setText("Mata Kuliah yang dipilih");
