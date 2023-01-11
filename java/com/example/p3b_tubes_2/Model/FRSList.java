@@ -84,6 +84,9 @@ public class  FRSList {
                 else if(errorCode.equals("E_EXIST")){
                     presenter.OnErrorEnrolStudent("","Mata Kuliah sudah pernah di enroll");
                 }
+                else if(errorCode.equals("E_LOCKED")){
+                    presenter.OnErrorEnrolStudent("","Dosen wali sudah melakukan penguncian, anda tidak bisa menambah mata kuliah");
+                }
             } catch (UnsupportedEncodingException | JSONException e) {
                 Log.d("DEBUG", "APIFRSEnrolmentStudent: onErrorResponse() catch UnsupportedEncodingException");
             }

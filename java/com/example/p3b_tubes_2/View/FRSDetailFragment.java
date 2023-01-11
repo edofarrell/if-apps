@@ -201,7 +201,9 @@ public class FRSDetailFragment extends DialogFragment {
 
     private void onClickAddMatkul(View view) {
         try {
-            this.presenter.enrolStudent(selectedMatkul.getId(), this.tahunAjar.toStringFormatAPI());
+            if(this.selectedMatkul!=null){
+                this.presenter.enrolStudent(selectedMatkul.getId(), this.tahunAjar.toStringFormatAPI());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
