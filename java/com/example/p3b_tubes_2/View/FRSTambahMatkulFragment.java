@@ -24,8 +24,7 @@ public class FRSTambahMatkulFragment extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.binding = FragmentFrsTambahMatkulBinding.inflate(inflater);
         return binding.getRoot();
     }

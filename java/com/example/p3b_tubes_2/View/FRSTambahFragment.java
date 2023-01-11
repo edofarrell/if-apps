@@ -23,12 +23,10 @@ public class FRSTambahFragment extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.binding = FragmentFrsTambahBinding.inflate(inflater);
         return binding.getRoot();
     }
-
 
     @Override
     public void onStart() {

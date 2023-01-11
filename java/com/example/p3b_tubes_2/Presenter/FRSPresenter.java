@@ -22,7 +22,6 @@ public class FRSPresenter implements
     private MataKuliahList mataKuliahList;
     private TahunAjaran tahunAjaran;
     private FRSList frs;
-    //TahunAjaran tahunAjaranList;
 
     public FRSPresenter(FRSContract.View ui, Context context) {
         this.ui = ui;
@@ -43,14 +42,37 @@ public class FRSPresenter implements
         this.ui.addToSelectedMataKuliah(matkul);
     }
 
+    //Enroll
     public void enrolStudent(String id, String academicYear) throws JSONException {
         FRSList.enrollStudent(id, academicYear);
     }
 
+    @Override
+    public void OnSuccessEnrolStudent() {
+        this.ui.showSuccessMataKuliahEnrol();
+    }
+
+    @Override
+    public void OnErrorEnrolStudent(String nama, String kode) {
+        this.ui.showErrorMataKuliahEnrol(nama, kode);
+    }
+
+    //Get mata kuliah yang sudah di enroll
     public void getMataKuliahEnrolment(String academicYear, boolean thisYear) throws JSONException {
         FRSList.getEnrollmentStudent(academicYear, thisYear);
     }
 
+    @Override
+    public void OnSuccessGetMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul, boolean thisYear) {
+        this.ui.updateMataKuliahEnrolment(listNamaMatkul, thisYear);
+    }
+
+    @Override
+    public void OnErrorGetMataKuliahEnrolment() {
+
+    }
+
+    //Get academic years
     public void getAcademicYears() {
         this.tahunAjaran.getAcademicYears();
     }
@@ -65,6 +87,7 @@ public class FRSPresenter implements
 
     }
 
+
     @Override
     public void OnSuccessGetDetail(ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
         //this.ui.openDetail(listMataKuliah);
@@ -75,6 +98,7 @@ public class FRSPresenter implements
 
     }
 
+
     @Override
     public void OnSuccessGetSearchMataKuliah(ArrayList<MataKuliahList.MataKuliah> listMataKuliah) {
         this.ui.updateSearch(listMataKuliah);
@@ -83,25 +107,5 @@ public class FRSPresenter implements
     @Override
     public void OnErrorGetSearchMataKuliah() {
 
-    }
-
-    @Override
-    public void OnSuccessGetMataKuliahEnrolment(ArrayList<MataKuliahList.MataKuliah> listNamaMatkul, boolean thisYear) {
-        this.ui.updateMataKuliahEnrolment(listNamaMatkul, thisYear);
-    }
-
-    @Override
-    public void OnErrorGetMataKuliahEnrolment() {
-
-    }
-
-    @Override
-    public void OnSuccessEnrolStudent() {
-        this.ui.showSuccessMataKuliahEnrol();
-    }
-
-    @Override
-    public void OnErrorEnrolStudent(String nama, String kode) {
-        this.ui.showErrorMataKuliahEnrol(nama, kode);
     }
 }

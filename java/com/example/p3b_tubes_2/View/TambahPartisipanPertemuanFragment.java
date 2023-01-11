@@ -1,7 +1,6 @@
 package com.example.p3b_tubes_2.View;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,7 +101,6 @@ public class TambahPartisipanPertemuanFragment extends Fragment implements UserC
 
     private void saveAll(View view) {
         this.pertemuanPresenter.getPertemuanDibuat();
-        Log.d("DEBUG", "masuk onclose");
         this.getParentFragmentManager().setFragmentResult("closeDialog", null);
     }
 

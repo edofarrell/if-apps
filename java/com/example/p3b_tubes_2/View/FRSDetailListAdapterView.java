@@ -22,21 +22,10 @@ public class FRSDetailListAdapterView extends BaseAdapter {
         public ViewHolder(ItemListDetailFrsViewBinding binding, int i){
             this.i = i;
             this.matkul = binding.tvMatkul;
-            binding.llMatkulView.setOnClickListener(this::onClick);
-
-        }
-
-        private void delete(View view) {
-            listMataKuliah.remove(i);
-            notifyDataSetChanged();
         }
 
         private void updateView(int i) {
             this.matkul.setText(listMataKuliah.get(i).getName());
-        }
-
-        private void onClick(View view){
-
         }
     }
 
@@ -74,10 +63,6 @@ public class FRSDetailListAdapterView extends BaseAdapter {
         }
         viewHolder.updateView(i);
         return view;
-    }
-
-    public MataKuliahList.MataKuliah getMataKuliahEnrol(int i){
-        return this.listMataKuliah.get(i);
     }
 
     public void update(ArrayList<MataKuliahList.MataKuliah> listMataKuliah){
