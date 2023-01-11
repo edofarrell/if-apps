@@ -52,6 +52,9 @@ public class PertemuanDiundangListAdapter extends BaseAdapter {
             if(invite.isAttending()){
                 tvAccepted.setVisibility(View.VISIBLE);
                 btnSeeDetails.setVisibility(View.GONE);
+            }else{
+                tvAccepted.setVisibility(View.GONE);
+                btnSeeDetails.setVisibility(View.VISIBLE);
             }
         }
     }
