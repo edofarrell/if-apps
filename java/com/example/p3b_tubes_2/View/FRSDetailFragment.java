@@ -129,6 +129,7 @@ public class FRSDetailFragment extends DialogFragment {
         this.binding.tvHasilPencarianMatkul.setVisibility(View.VISIBLE);
         this.binding.tvLvMatkul.setVisibility(View.VISIBLE);
         Toast.makeText(getActivity(), "Enrolment Berhasil", Toast.LENGTH_SHORT).show();
+        getMataKuliahEnrolment(true);
     }
 
     public void getMataKuliah(String text) {
