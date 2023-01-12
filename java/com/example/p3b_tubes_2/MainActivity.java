@@ -159,8 +159,4 @@ public class MainActivity extends AppCompatActivity {
         this.moveTaskToBack(true);
         this.finish();
     }
-
-    public void changeSelectedBottomNav() {
-        this.binding.bottomNavigation.setSelectedItemId(R.id.item_pengumuman);
-    }
 }
