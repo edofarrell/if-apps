@@ -113,8 +113,7 @@ public class FRSDetailFragment extends DialogFragment {
     public void showErrorMataKuliahEnrolment(String nama, String kode) {
         if (!nama.equals("")) {
             this.binding.tvTitleError.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             this.binding.tvTitleError.setVisibility(View.GONE);
         }
         this.binding.tvKodeMatkulError.setVisibility(View.VISIBLE);
@@ -128,6 +127,11 @@ public class FRSDetailFragment extends DialogFragment {
         this.binding.searchBar.setVisibility(View.VISIBLE);
         this.binding.tvHasilPencarianMatkul.setVisibility(View.VISIBLE);
         this.binding.tvLvMatkul.setVisibility(View.VISIBLE);
+
+        this.binding.tvKodeMatkulError.setVisibility(View.GONE);
+        this.binding.llContainerMatakuliahAkanEnroll.setVisibility(View.GONE);
+        this.binding.llContainerMatakuliahCari.setVisibility(View.VISIBLE);
+
         Toast.makeText(getActivity(), "Enrolment Berhasil", Toast.LENGTH_SHORT).show();
         getMataKuliahEnrolment(true);
     }
@@ -189,7 +193,7 @@ public class FRSDetailFragment extends DialogFragment {
 
     private void onClickAddMatkul(View view) {
         try {
-            if(this.selectedMatkul!=null){
+            if (this.selectedMatkul != null) {
                 this.presenter.enrolStudent(selectedMatkul.getId(), this.tahunAjar.toStringFormatAPI());
             }
         } catch (JSONException e) {
