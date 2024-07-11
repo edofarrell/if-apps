@@ -22,7 +22,7 @@ Java, Volley, Model-View-Presenter(architecture)
 
 ## Contributors
 The project was completed by a team of four people:
-- Alexander Bluevito Fevrier (https://github.com/bleuvito)
+- Alexander Bleuvito Fevrier (https://github.com/bleuvito)
 - Dearen Hippy (https://github.com/DearenHippy)
 - Edo Farrell Haryanto (https://github.com/edofarrell)
 - William Nehemia (https://github.com/WilliamNehem21)
